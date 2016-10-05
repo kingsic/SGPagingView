@@ -1,0 +1,2 @@
+# SGSegmentedControl
+a simple segmentedControl
