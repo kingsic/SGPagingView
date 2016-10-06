@@ -88,13 +88,13 @@
 ```Objective-C
 - (void)SGSegmentedControl:(SGSegmentedControl *)segmentedControl didSelectBtnAtIndex:(NSInteger)index;
 ```
-   * - (void)titleBtnSelectedWithScrollView:(UIScrollView *)scrollView; // 标题选中颜色改变以及指示器位置变化
+    * - (void)titleBtnSelectedWithScrollView:(UIScrollView *)scrollView; // 标题选中颜色改变以及指示器位置变化
    
-   * @property (nonatomic, assign) BOOL titleColorGradualChange; // 标题文字渐变效果(默认为NO), 与titleBtnColorGradualChangeScrollViewDidScroll方法，一起才会生效
+    * @property (nonatomic, assign) BOOL titleColorGradualChange; // 标题文字渐变效果(默认为NO), 与titleBtnColorGradualChangeScrollViewDidScroll方法，一起才会生效
    
-   * @property (nonatomic, assign) BOOL titleFondGradualChange; // 标题文字缩放效果(默认为NO), 与titleBtnColorGradualChangeScrollViewDidScroll方法，一起才会生效
+    * @property (nonatomic, assign) BOOL titleFondGradualChange; // 标题文字缩放效果(默认为NO), 与titleBtnColorGradualChangeScrollViewDidScroll方法，一起才会生效
    
-   * - (void)titleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView; // 给外界scrollViewDidScroll方法提供文字渐显效果
+    * - (void)titleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView; // 给外界scrollViewDidScroll方法提供文字渐显效果
 
 * 提示信息文字，根据内容自动调节
 ```Objective-C
