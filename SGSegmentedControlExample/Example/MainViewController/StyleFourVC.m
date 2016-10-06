@@ -59,7 +59,7 @@
     [self.mainScrollView addSubview:oneVC.view];
     [self addChildViewController:oneVC];
     
-    self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:nil segmentedControlType:(SGSegmentedControlTypeScroll) titleArr:title_arr];
+    self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self segmentedControlType:(SGSegmentedControlTypeScroll) titleArr:title_arr];
     _SG.indicatorColor = [UIColor blueColor];
     _SG.segmentedControlIndicatorType = SGSegmentedControlIndicatorTypeCenter;
     [self.view addSubview:_SG];

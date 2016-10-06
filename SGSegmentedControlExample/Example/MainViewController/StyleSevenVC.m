@@ -55,7 +55,7 @@
     _mainScrollView.delegate = self;
     [self.view addSubview:_mainScrollView];
     
-    self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:nil segmentedControlType:(SGSegmentedControlTypeScroll) titleArr:title_arr];
+    self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self segmentedControlType:(SGSegmentedControlTypeScroll) titleArr:title_arr];
     _SG.segmentedControlIndicatorType = SGSegmentedControlIndicatorTypeBankground;
     [self.view addSubview:_SG];
     

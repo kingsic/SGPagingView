@@ -14,6 +14,8 @@
 #import "StyleFiveVC.h"
 #import "StyleSixVC.h"
 #import "StyleSevenVC.h"
+#import "StyleEightVC.h"
+#import "StyleNineVC.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -26,32 +28,38 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    self.tableView.scrollEnabled = NO;
     // 注册
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.row == 0) {
-        cell.textLabel.text = @"静止状态下标题按钮的创建";
+        cell.textLabel.text = @"静止状态下标题按钮";
     } else if (indexPath.row == 1) {
-        cell.textLabel.text = @"滚动状态下标题按钮的创建";
+        cell.textLabel.text = @"滚动状态下标题按钮";
     } else if (indexPath.row == 2) {
-        cell.textLabel.text = @"静态状态下带有图片的标题按钮样式";
-    }else if (indexPath.row == 3){
-        cell.textLabel.text = @"滚动状态下带有图片的标题按钮样式";
-    }else if (indexPath.row == 4){
-        cell.textLabel.text = @"标题按钮指示器样式";
-    }else if (indexPath.row == 5){
-        cell.textLabel.text = @"标题按钮指示器样式二";
-    }else {
+        cell.textLabel.text = @"静态状态下带有图片的标题按钮";
+    } else if (indexPath.row == 3){
+        cell.textLabel.text = @"滚动状态下带有图片的标题按钮";
+    } else if (indexPath.row == 4){
+        cell.textLabel.text = @"指示器样式";
+    } else if (indexPath.row == 5){
+        cell.textLabel.text = @"指示器样式二";
+    } else if (indexPath.row == 6){
+        cell.textLabel.text = @"标题按钮文字渐显效果";
+    } else if (indexPath.row == 7){
+        cell.textLabel.text = @"标题按钮文字缩放效果";
+    } else {
         cell.textLabel.text = @"导航栏标题按钮的创建";
     }
 
@@ -76,6 +84,12 @@
         [self.navigationController pushViewController:VC animated:YES];
     } else if (indexPath.row == 5){
         StyleSevenVC *VC = [[StyleSevenVC alloc] init];
+        [self.navigationController pushViewController:VC animated:YES];
+    } else if (indexPath.row == 6){
+        StyleEightVC *VC = [[StyleEightVC alloc] init];
+        [self.navigationController pushViewController:VC animated:YES];
+    } else if (indexPath.row == 7){
+        StyleNineVC *VC = [[StyleNineVC alloc] init];
         [self.navigationController pushViewController:VC animated:YES];
     } else {
         StyleThreeVC *VC = [[StyleThreeVC alloc] init];

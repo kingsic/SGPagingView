@@ -1,25 +1,29 @@
 //
-//  StyleFiveVC.m
+//  StyleEightVC.m
 //  SGSegmentedControlExample
 //
-//  Created by Sorgle on 2016/10/6.
+//  Created by Sorgle on 2016/10/7.
 //  Copyright © 2016年 Sorgle. All rights reserved.
 //
 
-#import "StyleFiveVC.h"
+#import "StyleEightVC.h"
 #import "SGSegmentedControl.h"
 #import "TestOneVC.h"
 #import "TestTwoVC.h"
 #import "TestThreeVC.h"
 #import "TestFourVC.h"
+#import "TestFiveVC.h"
+#import "TestSixVC.h"
+#import "TestSevenVC.h"
+#import "TestEightVC.h"
+#import "TestNineVC.h"
 
-@interface StyleFiveVC ()<UIScrollViewDelegate, SGSegmentedControlDelegate>
+@interface StyleEightVC ()<UIScrollViewDelegate, SGSegmentedControlDelegate>
 @property (nonatomic, strong) SGSegmentedControl *SG;
 @property (nonatomic, strong) UIScrollView *mainScrollView;
-
 @end
 
-@implementation StyleFiveVC
+@implementation StyleEightVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,17 +31,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    
     // 1.添加所有子控制器
     [self setupChildViewController];
-
+    
     [self setupSegmentedControl];
 }
 
 - (void)setupSegmentedControl {
-    NSArray *nomal_image_arr = @[@"1", @"2", @"3", @"4"];
-    NSArray *selected_image_arr = @[@"1-selected", @"2-selected", @"3-selected", @"4-selected"];
-    NSArray *title_arr = @[@"精选", @"电视剧", @"电影", @"综艺"];
+    
+    NSArray *title_arr = @[@"精选", @"电视剧", @"电影", @"综艺", @"NBA", @"新闻", @"娱乐", @"音乐", @"网络电影"];
     
     // 创建底部滚动视图
     self.mainScrollView = [[UIScrollView alloc] init];
@@ -54,14 +56,16 @@
     _mainScrollView.delegate = self;
     [self.view addSubview:_mainScrollView];
     
-    self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 74) delegate:self segmentedControlType:(SGSegmentedControlTypeStatic) nomalImageArr:nomal_image_arr selectedImageArr:selected_image_arr titleArr:title_arr];
-    _SG.showsBottomScrollIndicator = NO;
-    [self.view addSubview:_SG];
-    
     TestOneVC *oneVC = [[TestOneVC alloc] init];
     [self.mainScrollView addSubview:oneVC.view];
     [self addChildViewController:oneVC];
+    
+    
+    self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self segmentedControlType:(SGSegmentedControlTypeScroll) titleArr:title_arr];
+    _SG.titleColorGradualChange = YES;
+    [self.view addSubview:_SG];
 }
+
 
 - (void)SGSegmentedControl:(SGSegmentedControl *)segmentedControl didSelectBtnAtIndex:(NSInteger)index {
     // 1 计算滚动的位置
@@ -89,6 +93,26 @@
     // 综艺
     TestFourVC *fourVC = [[TestFourVC alloc] init];
     [self addChildViewController:fourVC];
+    
+    // NBA
+    TestFiveVC *fiveVC = [[TestFiveVC alloc] init];
+    [self addChildViewController:fiveVC];
+    
+    // 新闻
+    TestSixVC *sixVC = [[TestSixVC alloc] init];
+    [self addChildViewController:sixVC];
+    
+    // 娱乐
+    TestSevenVC *sevenVC = [[TestSevenVC alloc] init];
+    [self addChildViewController:sevenVC];
+    
+    // 音乐
+    TestEightVC *eightVC = [[TestEightVC alloc] init];
+    [self addChildViewController:eightVC];
+    
+    // 网络电视
+    TestNineVC *nineVC = [[TestNineVC alloc] init];
+    [self addChildViewController:nineVC];
 }
 
 // 显示控制器的view
@@ -118,6 +142,8 @@
     [self.SG titleBtnSelectedWithScrollView:scrollView];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.SG titleBtnColorGradualChangeScrollViewDidScroll:scrollView];
+}
+
 @end
-
-

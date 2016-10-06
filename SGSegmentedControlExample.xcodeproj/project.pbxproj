@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		964BEEE31DA6C8B800D15AEF /* StyleEightVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 964BEEE21DA6C8B800D15AEF /* StyleEightVC.m */; };
+		964BEEE61DA6C8CD00D15AEF /* StyleNineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 964BEEE51DA6C8CD00D15AEF /* StyleNineVC.m */; };
 		968406551DA5F997004BDFEB /* StyleTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 968406541DA5F997004BDFEB /* StyleTwoVC.m */; };
 		968406581DA6139D004BDFEB /* StyleThreeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 968406571DA6139D004BDFEB /* StyleThreeVC.m */; };
 		9684065B1DA613BC004BDFEB /* StyleFourVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9684065A1DA613BC004BDFEB /* StyleFourVC.m */; };
@@ -55,6 +57,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		964BEEE11DA6C8B800D15AEF /* StyleEightVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleEightVC.h; sourceTree = "<group>"; };
+		964BEEE21DA6C8B800D15AEF /* StyleEightVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleEightVC.m; sourceTree = "<group>"; };
+		964BEEE41DA6C8CD00D15AEF /* StyleNineVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleNineVC.h; sourceTree = "<group>"; };
+		964BEEE51DA6C8CD00D15AEF /* StyleNineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleNineVC.m; sourceTree = "<group>"; };
 		968406531DA5F997004BDFEB /* StyleTwoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleTwoVC.h; sourceTree = "<group>"; };
 		968406541DA5F997004BDFEB /* StyleTwoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleTwoVC.m; sourceTree = "<group>"; };
 		968406561DA6139D004BDFEB /* StyleThreeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleThreeVC.h; sourceTree = "<group>"; };
@@ -276,6 +282,10 @@
 				968406A21DA65330004BDFEB /* StyleSixVC.m */,
 				968406A41DA654FF004BDFEB /* StyleSevenVC.h */,
 				968406A51DA654FF004BDFEB /* StyleSevenVC.m */,
+				964BEEE11DA6C8B800D15AEF /* StyleEightVC.h */,
+				964BEEE21DA6C8B800D15AEF /* StyleEightVC.m */,
+				964BEEE41DA6C8CD00D15AEF /* StyleNineVC.h */,
+				964BEEE51DA6C8CD00D15AEF /* StyleNineVC.m */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -414,6 +424,7 @@
 				96EEE32E1DA5B6C400DF2AAB /* AppDelegate.m in Sources */,
 				96EEE3831DA5C20E00DF2AAB /* SGNavigationItemTitleView.m in Sources */,
 				96EEE3871DA5C31700DF2AAB /* StyleOneVC.m in Sources */,
+				964BEEE31DA6C8B800D15AEF /* StyleEightVC.m in Sources */,
 				9684065B1DA613BC004BDFEB /* StyleFourVC.m in Sources */,
 				96EEE37B1DA5C20E00DF2AAB /* TestFiveVC.m in Sources */,
 				96EEE35F1DA5B6F300DF2AAB /* UIView+SGExtension.m in Sources */,
@@ -421,6 +432,7 @@
 				96EEE32B1DA5B6C400DF2AAB /* main.m in Sources */,
 				968406A31DA65330004BDFEB /* StyleSixVC.m in Sources */,
 				96EEE37A1DA5C20E00DF2AAB /* TestEightVC.m in Sources */,
+				964BEEE61DA6C8CD00D15AEF /* StyleNineVC.m in Sources */,
 				968406A61DA654FF004BDFEB /* StyleSevenVC.m in Sources */,
 				968406581DA6139D004BDFEB /* StyleThreeVC.m in Sources */,
 				9684069D1DA63793004BDFEB /* SGImageButton.m in Sources */,

@@ -55,7 +55,6 @@
     self.SG = [SGSegmentedControl segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self segmentedControlType:(SGSegmentedControlTypeStatic) titleArr:title_arr];
     _SG.titleColorStateSelected = [UIColor purpleColor];
     _SG.indicatorColor = [UIColor purpleColor];
-    _SG.segmentedControlIndicatorType = SGSegmentedControlIndicatorTypeCenter;
     [self.view addSubview:_SG];
     
     TestOneVC *oneVC = [[TestOneVC alloc] init];

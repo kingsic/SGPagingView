@@ -53,7 +53,7 @@ static CGFloat const btn_fondOfSize = 17;
 /** 指示器的高度 */
 static CGFloat const indicatorViewHeight = 2;
 /** 点击按钮时, 指示器的动画移动时间 */
-static CGFloat const indicatorViewTimeOfAnimation = 0.5;
+static CGFloat const indicatorViewTimeOfAnimation = 0.4;
 
 - (NSMutableArray *)titleBtn_mArr {
     if (!_titleBtn_mArr) {
@@ -95,6 +95,7 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
     }
     return self;
 }
+
 + (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDelegate>)delegate segmentedControlType:(SGSegmentedControlType)segmentedControlType nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr titleArr:(NSArray *)titleArr {
     return [[self alloc] initWithFrame:frame delegate:delegate segmentedControlType:segmentedControlType nomalImageArr:nomalImageArr selectedImageArr:selectedImageArr titleArr:titleArr];
 }
@@ -111,8 +112,11 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
     return [text boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
 }
 
+/** 创建标题按钮 */
 - (void)setupTitleArr {
+    
     if (self.segmentedControlType == SGSegmentedControlTypeScroll) {
+        
         CGFloat button_X = 0;
         CGFloat button_Y = 0;
         CGFloat button_H = self.frame.size.height;
@@ -165,13 +169,14 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
         _indicatorView.SG_y = self.frame.size.height - 2 * indicatorViewHeight;
         [self addSubview:_indicatorView];
         
-        
         // 指示器默认在第一个选中位置
         // 计算TitleLabel内容的Size
         CGSize buttonSize = [self sizeWithText:firstButton.titleLabel.text font:[UIFont systemFontOfSize:btn_fondOfSize] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
         _indicatorView.SG_width = buttonSize.width;
         _indicatorView.SG_centerX = firstButton.SG_centerX;
+        
     } else {
+        
         // 计算scrollView的宽度
         CGFloat scrollViewWidth = self.frame.size.width;
         CGFloat button_X = 0;
@@ -223,11 +228,13 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
         _indicatorView.SG_width = buttonSize.width;
         _indicatorView.SG_centerX = firstButton.SG_centerX;
     }
-
 }
 
+/** 创建带有图片的标题按钮 */
 - (void)setupImageAndTitleArr {
+    
     if (self.segmentedControlType == SGSegmentedControlTypeScroll) {
+        
         CGFloat button_X = 0;
         CGFloat button_Y = 0;
         CGFloat button_H = self.frame.size.height;
@@ -288,7 +295,9 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
         CGSize buttonSize = [self sizeWithText:firstButton.titleLabel.text font:[UIFont systemFontOfSize:btn_fondOfSize] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
         _indicatorView.SG_width = buttonSize.width;
         _indicatorView.SG_centerX = firstButton.SG_centerX;
+        
     } else {
+        
         // 计算scrollView的宽度
         CGFloat scrollViewWidth = self.frame.size.width;
         CGFloat button_X = 0;
@@ -342,25 +351,23 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
         _indicatorView.SG_width = buttonSize.width;
         _indicatorView.SG_centerX = firstButton.SG_centerX;
     }
-
 }
-
 
 #pragma mark - - - 按钮的点击事件
 - (void)buttonAction:(UIButton *)sender {
     
-    // 2、让选中的标题居中
+    // 1、让选中的标题居中
     if (self.segmentedControlType == SGSegmentedControlTypeScroll) {
         [self titleBtnSelectededCenter:sender];
     }
     
-    // 3、代理方法实现
+    // 2、代理方法实现
     NSInteger index = sender.tag;
     if ([self.delegate_SG respondsToSelector:@selector(SGSegmentedControl:didSelectBtnAtIndex:)]) {
         [self.delegate_SG SGSegmentedControl:self didSelectBtnAtIndex:index];
     }
     
-    // 4、改变指示器位置
+    // 3、改变指示器位置
     [self titleBtnSelected:sender];
 }
 
@@ -401,7 +408,9 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
         
         // 2、让选中的标题居中
         [self titleBtnSelectededCenter:button];
+        
     } else {
+        
         // 改变指示器位置
         if (self.segmentedControlIndicatorType == SGSegmentedControlIndicatorTypeCenter) {
             // 改变指示器位置
@@ -411,7 +420,9 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
                 self.indicatorView.SG_width = buttonSize.width + btn_Margin;
                 self.indicatorView.SG_centerX = button.SG_centerX;
             }];
+            
         } else if (self.segmentedControlIndicatorType == SGSegmentedControlIndicatorTypeBankground){
+            
             // 改变指示器位置
             [UIView animateWithDuration:indicatorViewTimeOfAnimation animations:^{
                 // 计算内容的Size
@@ -419,7 +430,9 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
                 self.indicatorView.SG_width = self.SG_width / _title_Arr.count;
                 self.indicatorView.SG_centerX = button.SG_centerX;
             }];
+            
         } else {
+            
             // 改变指示器位置
             [UIView animateWithDuration:indicatorViewTimeOfAnimation animations:^{
                 // 计算内容的Size
@@ -429,19 +442,57 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
             }];
         }
     }
-    
 }
 
 /** 标题选中颜色改变以及指示器位置变化 */
 - (void)titleBtnSelectedWithScrollView:(UIScrollView *)scrollView {
-    // 计算滚动到哪一页
+    // 1、计算滚动到哪一页
     NSInteger index = scrollView.contentOffset.x / scrollView.frame.size.width;
     
-    // 2.把对应的标题选中
+    // 2、把对应的标题选中
     UIButton *selectedBtn = self.titleBtn_mArr[index];
     
-    // 3.滚动时，改变标题选中
+    // 3、滚动时，改变标题选中
     [self titleBtnSelected:selectedBtn];
+}
+
+/** 给外界scrollViewDidScroll方法提供文字渐显效果 */
+- (void)titleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    CGFloat curPage = scrollView.contentOffset.x / scrollView.bounds.size.width;
+    
+    // 左边label角标
+    NSInteger leftIndex = curPage;
+    // 右边的label角标
+    NSInteger rightIndex = leftIndex + 1;
+    
+    // 获取左边的label
+    UIButton *left_btn = self.titleBtn_mArr[leftIndex];
+    
+    // 获取右边的label
+    UIButton *right_btn;
+    if (rightIndex < self.titleBtn_mArr.count - 1) {
+        right_btn = self.titleBtn_mArr[rightIndex];
+    }
+    
+    // 计算下右边缩放比例
+    CGFloat rightScale = curPage - leftIndex;
+    
+    // 计算下左边缩放比例
+    CGFloat leftScale = 1 - rightScale;
+    
+    if (self.titleFondGradualChange == YES) {
+        // 左边缩放
+        left_btn.transform = CGAffineTransformMakeScale(leftScale * 0.1 + 1, leftScale * 0.1 + 1);
+        // 右边缩放
+        right_btn.transform = CGAffineTransformMakeScale(rightScale * 0.1 + 1, rightScale * 0.1 + 1);
+    }
+
+    if (self.titleColorGradualChange == YES) {
+        // 设置文字颜色渐变
+        left_btn.titleLabel.textColor = [UIColor colorWithRed:leftScale green:0 blue:0 alpha:1];
+        right_btn.titleLabel.textColor = [UIColor colorWithRed:rightScale green:0 blue:0 alpha:1];
+    }
 }
 
 /** 滚动标题选中居中 */
@@ -459,7 +510,6 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
     // 滚动标题滚动条
     [self setContentOffset:CGPointMake(offsetX, 0) animated:YES];
 }
-
 
 
 #pragma mark - - - setter 方法设置属性
@@ -514,7 +564,9 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
         self.indicatorView.alpha = 0.3;
         self.indicatorView.layer.cornerRadius = 7;
         self.indicatorView.layer.masksToBounds = YES;
+        
     } else if (self.segmentedControlIndicatorType == SGSegmentedControlIndicatorTypeBankground){
+        
         // 取出第一个子控件
         UIButton *firstButton = self.subviews.firstObject;
         
@@ -535,9 +587,10 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
         
         self.indicatorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
         
-        //
+        // 指示器底部的小指示器
         self.bgIndicatorView = [[UIView alloc] init];
         _bgIndicatorView.backgroundColor = [UIColor redColor];
+        
         if (self.segmentedControlType == SGSegmentedControlTypeScroll) {
             _bgIndicatorView.SG_x = firstButton.SG_x;
             _bgIndicatorView.SG_width = buttonSize.width + 2 * btn_Margin;
@@ -552,10 +605,6 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.5;
         [self.indicatorView addSubview:_bgIndicatorView];
     }
 }
-
-
-
-
 
 
 @end
