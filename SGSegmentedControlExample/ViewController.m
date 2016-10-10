@@ -19,6 +19,8 @@
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *title_arr;
+@property (nonatomic, strong) NSArray *VC_arr;
 
 @end
 
@@ -28,13 +30,27 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    self.title_arr = @[@"静止状态下标题按钮", @"滚动状态下标题按钮", @"静态状态下带有图片的标题按钮", @"滚动状态下带有图片的标题按钮", @"指示器样式", @"指示器样式二", @"标题按钮文字渐显效果", @"标题按钮文字缩放效果", @"导航栏标题按钮的创建"];
+    
+    StyleOneVC *oneVC = [[StyleOneVC alloc] init];
+    StyleTwoVC *twoVC = [[StyleTwoVC alloc] init];
+    StyleFiveVC *fiveVC = [[StyleFiveVC alloc] init];
+    StyleSixVC *sixVC = [[StyleSixVC alloc] init];
+    StyleFourVC *fourVC = [[StyleFourVC alloc] init];
+    StyleSevenVC *sevenVC = [[StyleSevenVC alloc] init];
+    StyleEightVC *eightVC = [[StyleEightVC alloc] init];
+    StyleNineVC *nineVC = [[StyleNineVC alloc] init];
+    StyleThreeVC *threeVC = [[StyleThreeVC alloc] init];
+
+    self.VC_arr = @[oneVC, twoVC, fiveVC, sixVC, fourVC, sevenVC, eightVC, nineVC, threeVC];
+    
     self.tableView.scrollEnabled = NO;
     // 注册
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 9;
+    return self.title_arr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -43,60 +59,20 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (indexPath.row == 0) {
-        cell.textLabel.text = @"静止状态下标题按钮";
-    } else if (indexPath.row == 1) {
-        cell.textLabel.text = @"滚动状态下标题按钮";
-    } else if (indexPath.row == 2) {
-        cell.textLabel.text = @"静态状态下带有图片的标题按钮";
-    } else if (indexPath.row == 3){
-        cell.textLabel.text = @"滚动状态下带有图片的标题按钮";
-    } else if (indexPath.row == 4){
-        cell.textLabel.text = @"指示器样式";
-    } else if (indexPath.row == 5){
-        cell.textLabel.text = @"指示器样式二";
-    } else if (indexPath.row == 6){
-        cell.textLabel.text = @"标题按钮文字渐显效果";
-    } else if (indexPath.row == 7){
-        cell.textLabel.text = @"标题按钮文字缩放效果";
-    } else {
-        cell.textLabel.text = @"导航栏标题按钮的创建";
-    }
+
+    cell.textLabel.text = self.title_arr[indexPath.row];
 
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        StyleOneVC *VC = [[StyleOneVC alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
-    } else if (indexPath.row == 1) {
-        StyleTwoVC *VC = [[StyleTwoVC alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
-    } else if (indexPath.row == 2) {
-        StyleFiveVC *VC = [[StyleFiveVC alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
-    } else if (indexPath.row == 3){
-        StyleSixVC *VC = [[StyleSixVC alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
-    } else if (indexPath.row == 4){
-        StyleFourVC *VC = [[StyleFourVC alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
-    } else if (indexPath.row == 5){
-        StyleSevenVC *VC = [[StyleSevenVC alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
-    } else if (indexPath.row == 6){
-        StyleEightVC *VC = [[StyleEightVC alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
-    } else if (indexPath.row == 7){
-        StyleNineVC *VC = [[StyleNineVC alloc] init];
-        [self.navigationController pushViewController:VC animated:YES];
+
+    if (indexPath.row < self.VC_arr.count - 1) {
+        [self.navigationController pushViewController:self.VC_arr[indexPath.row] animated:YES];
     } else {
-        StyleThreeVC *VC = [[StyleThreeVC alloc] init];
-        UINavigationController *nvc = [[UINavigationController alloc]initWithRootViewController:VC];
+        UINavigationController *nvc = [[UINavigationController alloc]initWithRootViewController:self.VC_arr[indexPath.row]];
         [self presentViewController:nvc animated:YES completion:nil];
     }
-
 }
 
 @end
