@@ -20,7 +20,9 @@
 
 * `滚动状态下带有图片的标题按钮`<br>
 
-* `指示器样式`<br>
+* `指示器样式一`<br>
+
+* `指示器样式二`<br>
 
 * `指示器样式二`<br>
 
@@ -71,8 +73,6 @@
 ```
 
   * 属性设置
-
-   * @property (nonatomic, assign) SGSegmentedControlType segmentedControlType; // 枚举属性, 默认为滚动风格
  
    * @property (nonatomic, strong) UIColor *titleColorStateNormal; // 标题文字颜色(默认为黑色)
 
@@ -84,13 +84,13 @@
 
    * @property (nonatomic, assign) SGSegmentedControlIndicatorType segmentedControlIndicatorType;  // 枚举属性, 指示器样式(默认为底部样式)
 
-   * -(void)titleBtnSelectedWithScrollView:(UIScrollView *)scrollView; // 标题选中颜色改变以及指示器位置变化
+   * -(void)changeThePositionOfTheSelectedBtnWithScrollView:(UIScrollView *)scrollView; // 标题选中颜色改变以及指示器位置变化
    
    * @property (nonatomic, assign) BOOL titleColorGradualChange; // 标题文字渐变效果(默认为NO), 与titleBtnColorGradualChangeScrollViewDidScroll方法，一起才会生效
    
    * @property (nonatomic, assign) BOOL titleFondGradualChange; // 标题文字缩放效果(默认为NO), 与titleBtnColorGradualChangeScrollViewDidScroll方法，一起才会生效
    
-   * -(void)titleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView; // 给外界scrollViewDidScroll方法提供文字渐显效果
+   * -(void)selectedTitleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView; // 给外界scrollViewDidScroll方法提供文字渐显、缩放效果 
     
    * 遵循SGSegmentedControlDelegate协议的delegate_SG方法
 ```Objective-C
@@ -105,8 +105,8 @@
 
 ## 版本介绍
 
-* 2016. 10. 7 --> 初始版本的创建
-
+* 2016. 10. 7  --> 初始版本的创建
+* 2016. 11. 10 --> 全新升级（将静止状态与滚动状态拆开，方便理解）；新增指示器样式三（带有图片的指示器）
 
 ## Concluding remarks
 
