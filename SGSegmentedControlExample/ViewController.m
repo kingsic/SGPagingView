@@ -2,8 +2,8 @@
 //  ViewController.m
 //  SGSegmentedControlExample
 //
-//  Created by Sorgle on 2016/10/6.
-//  Copyright © 2016年 Jason. All rights reserved.
+//  Created by apple on 16/11/9.
+//  Copyright © 2016年 Sorgle. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -30,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.title_arr = @[@"静止状态下标题按钮", @"滚动状态下标题按钮", @"静态状态下带有图片的标题按钮", @"滚动状态下带有图片的标题按钮", @"指示器样式", @"指示器样式二", @"标题按钮文字渐显效果", @"标题按钮文字缩放效果", @"导航栏标题按钮的创建"];
+    self.title_arr = @[@"静止状态下标题按钮", @"滚动状态下标题按钮", @"静态状态下带有图片的标题按钮", @"滚动状态下带有图片的标题按钮", @"指示器样式一", @"指示器样式二", @"指示器样式三", @"标题按钮文字渐显效果", @"标题按钮文字缩放效果"];
     
     StyleOneVC *oneVC = [[StyleOneVC alloc] init];
     StyleTwoVC *twoVC = [[StyleTwoVC alloc] init];
@@ -41,13 +41,13 @@
     StyleEightVC *eightVC = [[StyleEightVC alloc] init];
     StyleNineVC *nineVC = [[StyleNineVC alloc] init];
     StyleThreeVC *threeVC = [[StyleThreeVC alloc] init];
-
-    self.VC_arr = @[oneVC, twoVC, fiveVC, sixVC, fourVC, sevenVC, eightVC, nineVC, threeVC];
     
-    self.tableView.scrollEnabled = NO;
+    self.VC_arr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
+
     // 注册
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.title_arr.count;
@@ -59,21 +59,19 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    
     cell.textLabel.text = self.title_arr[indexPath.row];
-
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    if (indexPath.row < self.VC_arr.count - 1) {
+    if (indexPath.row < self.VC_arr.count) {
         [self.navigationController pushViewController:self.VC_arr[indexPath.row] animated:YES];
-    } else {
-        UINavigationController *nvc = [[UINavigationController alloc]initWithRootViewController:self.VC_arr[indexPath.row]];
-        [self presentViewController:nvc animated:YES completion:nil];
     }
 }
+
+
 
 @end
 

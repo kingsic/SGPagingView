@@ -1,5 +1,5 @@
 //
-//  SGSegmentedControl.h
+//  SGSegmentedControlBottomView.h
 //  SGSegmentedControlExample
 //
 //  Created by apple on 16/11/9.
@@ -16,7 +16,21 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SGSegmentedControlStatic.h"
-#import "SGSegmentedControlDefault.h"
-#import "SGSegmentedControlBottomView.h"
+@interface SGSegmentedControlBottomView : UIScrollView
 
+@property (nonatomic, strong) NSArray *childViewController;
+
+/** 对象方法创建 SGSegmentedControlBottomView */
+- (instancetype)initWithFrame:(CGRect)frame;
+/** 类方法创建 SGSegmentedControlBottomView */
++ (instancetype)segmentedControlBottomViewWithFrame:(CGRect)frame;
+
+/**
+ *  给外界提供的方法（必须实现）
+ *  @param index    外界控制器子控制器View的下表
+ *  @param outsideVC    外界控制器（主控制器、self的父控制器）
+ */
+- (void)showChildVCViewWithIndex:(NSInteger)index outsideVC:(UIViewController *)outsideVC;
+
+
+@end

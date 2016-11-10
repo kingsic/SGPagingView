@@ -2,8 +2,8 @@
 //  SGSegmentedControlExampleUITests.m
 //  SGSegmentedControlExampleUITests
 //
-//  Created by 王腾飞 on 2016/10/6.
-//  Copyright © 2016年 Jason. All rights reserved.
+//  Created by apple on 16/11/9.
+//  Copyright © 2016年 Sorgle. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>

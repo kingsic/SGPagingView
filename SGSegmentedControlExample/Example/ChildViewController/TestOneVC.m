@@ -18,10 +18,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor purpleColor];
+    
+    UIButton *test = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    test.frame = CGRectMake((self.view.frame.size.width - 100) * 0.5, 200, 100, 50);
+    test.backgroundColor = [UIColor brownColor];
+    [test addTarget:self action:@selector(testButton_action) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:test];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)testButton_action {
+    NSLog(@"testButton_action");
     // Dispose of any resources that can be recreated.
 }
 

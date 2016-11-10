@@ -2,7 +2,7 @@
 //  StyleEightVC.h
 //  SGSegmentedControlExample
 //
-//  Created by Sorgle on 2016/10/7.
+//  Created by apple on 16/11/9.
 //  Copyright © 2016年 Sorgle. All rights reserved.
 //
 
