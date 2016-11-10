@@ -41,7 +41,8 @@
 @property (nonatomic, strong) UIView *bgIndicatorView;
 /** 带图片的指示器 */
 @property (nonatomic, strong) UIImageView *indicatorViewWithImage;
-
+/** 标记是否是一个button */
+@property (nonatomic, assign) BOOL isFirstButton;
 @end
 
 @implementation SGSegmentedControlDefault
@@ -152,6 +153,11 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.2;
     
     // 取出第一个子控件
     UIButton *firstButton = self.subviews.firstObject;
+    if (firstButton) {
+        self.isFirstButton = YES;
+    }
+#warning 如果是缩放，请打开这段代码
+    //firstButton.titleLabel.font = [UIFont systemFontOfSize:btn_fondOfSize * btn_scale + btn_fondOfSize];
     
     // 添加指示器
     self.indicatorView = [[UIView alloc] init];
@@ -361,6 +367,12 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.2;
     CGFloat leftScale = 1 - rightScale;
     
     if (self.titleFondGradualChange == YES) {
+        // 取出第一个子控件
+        UIButton *firstButton = self.subviews.firstObject;
+        if (self.isFirstButton) {
+            firstButton.titleLabel.font = [UIFont systemFontOfSize:btn_fondOfSize];
+        }
+        
         // 左边缩放
         left_btn.transform = CGAffineTransformMakeScale(leftScale * btn_scale + 1, leftScale * btn_scale + 1);
         // 右边缩放
