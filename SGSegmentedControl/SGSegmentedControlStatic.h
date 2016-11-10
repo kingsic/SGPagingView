@@ -24,7 +24,6 @@
 @end
 
 @interface SGSegmentedControlStatic : UIScrollView
-
 /** 标题文字颜色(默认为黑色) */
 @property (nonatomic, strong) UIColor *titleColorStateNormal;
 /** 选中时标题文字颜色(默认为红色) */

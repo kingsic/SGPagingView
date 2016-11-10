@@ -19,9 +19,9 @@
 
 typedef enum : NSUInteger {
     segmentedControlIndicatorTypeBottom, // 指示器底部样式
-    segmentedControlIndicatorTypeCenter, // 指示器背景样式
+    segmentedControlIndicatorTypeCenter, // 指示器中心背景样式
     segmentedControlIndicatorTypeBankground, // 指示器背景样式
-    segmentedControlIndicatorTypeBottomWithImage, // 指示器背景样式
+    segmentedControlIndicatorTypeBottomWithImage, // 带有图片的指示器样式
 } segmentedControlIndicatorType;  // SGSegmentedControlIndicatorType 指示器样式，默认为底部样式
 
 @protocol SGSegmentedControlDefaultDelegate <NSObject>
@@ -31,7 +31,6 @@ typedef enum : NSUInteger {
 @end
 
 @interface SGSegmentedControlDefault : UIScrollView
-
 /** 标题文字颜色(默认为黑色) */
 @property (nonatomic, strong) UIColor *titleColorStateNormal;
 /** 选中时标题文字颜色(默认为红色) */

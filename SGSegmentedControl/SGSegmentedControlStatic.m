@@ -42,7 +42,6 @@
 
 @implementation SGSegmentedControlStatic
 
-
 /** 按钮字体的大小(字号) */
 static CGFloat const btn_fondOfSize = 17;
 /** 指示器的高度 */
@@ -77,6 +76,7 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.2;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle {
+    
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.7];
         self.showsHorizontalScrollIndicator = NO;
@@ -224,14 +224,14 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.2;
         [self.delegate_SG SGSegmentedControlStatic:self didSelectTitleAtIndex:index];
     }
     
-    // 2、改变选中的 button 的位置
+    // 2、改变选中的button的位置
     [self selectedBtnLocation:sender];
 }
 
 /** 标题选中颜色改变以及指示器位置变化 */
 - (void)selectedBtnLocation:(UIButton *)button {
     
-    // 1、选中的 button
+    // 1、选中的button
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(indicatorViewTimeOfAnimation * 0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (_temp_btn == nil) {
             button.selected = YES;

@@ -15,8 +15,9 @@
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import <UIKit/UIKit.h>
-
+#import <Foundation/Foundation.h>
 #import "SGSegmentedControlStatic.h"
 #import "SGSegmentedControlDefault.h"
 #import "SGSegmentedControlBottomView.h"
+
 
