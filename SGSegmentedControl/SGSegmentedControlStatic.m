@@ -254,7 +254,7 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.2;
     }];
 }
 
-/** 改变选中button的位置以及指示器位置变化 */
+/** 改变选中button的位置以及指示器位置变化（给外界scrollView提供的方法 -> 必须实现） */
 - (void)changeThePositionOfTheSelectedBtnWithScrollView:(UIScrollView *)scrollView {
     // 1、计算滚动到哪一页
     NSInteger index = scrollView.contentOffset.x / scrollView.frame.size.width;

@@ -314,7 +314,7 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.2;
     [self selectedBtnCenter:button];
 }
 
-/** 改变选中button的位置以及指示器位置变化 */
+/** 改变选中button的位置以及指示器位置变化（给外界scrollView提供的方法 -> 必须实现） */
 - (void)changeThePositionOfTheSelectedBtnWithScrollView:(UIScrollView *)scrollView {
     // 1、计算滚动到哪一页
     NSInteger index = scrollView.contentOffset.x / scrollView.frame.size.width;
@@ -342,7 +342,7 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.2;
     [self setContentOffset:CGPointMake(offsetX, 0) animated:YES];
 }
 
-/** 给外界scrollViewDidScroll方法提供文字渐显、缩放效果 */
+/** 文字渐显、缩放效果的实现（给外界 scrollViewDidScroll 提供的方法 -> 可供选择） */
 - (void)selectedTitleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat curPage = scrollView.contentOffset.x / scrollView.bounds.size.width;
     

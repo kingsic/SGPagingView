@@ -19,6 +19,7 @@
 @implementation SGSegmentedControlBottomView
 
 - (instancetype)initWithFrame:(CGRect)frame {
+    
     if (self = [super initWithFrame:frame]) {
         // 开启分页
         self.pagingEnabled = YES;
@@ -60,3 +61,5 @@
 }
 
 @end
+
+

@@ -39,13 +39,12 @@
 /** 类方法创建 SGSegmentedControlStatic */
 + (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate childVcTitle:(NSArray *)childVcTitle;
 
-/** 对象方法创建，带有图片的SGSegmentedControlStatic */
+/** 对象方法创建，带有图片的 SGSegmentedControlStatic */
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle;
-/** 类方法创建，带有图片的SGSegmentedControlStatic */
+/** 类方法创建，带有图片的 SGSegmentedControlStatic */
 + (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle;
 
-
-/** 改变选中button的位置以及指示器位置变化 */
+/** 改变选中button的位置以及指示器位置变化（给外界scrollView提供的方法 -> 必须实现） */
 - (void)changeThePositionOfTheSelectedBtnWithScrollView:(UIScrollView *)scrollView;
 
 @end
