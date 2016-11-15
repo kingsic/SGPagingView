@@ -7,7 +7,7 @@
 
 * 轻轻的我走了，正如我轻轻的来，我动一动鼠标，就是为了给你 Star (喜欢的朋友别忘了哦 😊 😊）
 
-* 代码后期不断更新维护中（会增加类似贝贝、腾讯视频动态改变指示器的宽度）
+* 代码后期不断更新维护中（会增加类似贝贝、腾讯视频动态改变指示器的宽度以及位置）
 
 
 ## 主要内容的介绍
@@ -30,8 +30,6 @@
 
 * `标题按钮文字缩放效果`<br>
 
-* `导航栏标题按钮的创建`<br>
-
 
 ## 效果图
 
@@ -42,7 +40,7 @@
 
 ### * `SGSegmentedControl的使用`<br>
 
-  * 将项目中SGSegmentedControl文件夹拖入工程
+  * 将项目中SGSegmentedControl文件夹导入工程
 
   * 导入#import "SGSegmentedControl.h"头文件
 
@@ -50,26 +48,44 @@
 ```Objective-C
 普通状态下的对象方法创建
 
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDelegate>)delegate segmentedControlType:(SGSegmentedControlType)segmentedControlType titleArr:(NSArray *)titleArr;
+/** 对象方法创建 SGSegmentedControlStatic （静止状态）*/
+
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate childVcTitle:(NSArray *)childVcTitle;
+
+/** 对象方法创建 SGSegmentedControlDefault（滚动状态） */
+
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle;
 ```
 
 ```Objective-C
 带有图片的对象方法创建
 
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDelegate>)delegate segmentedControlType:(SGSegmentedControlType)segmentedControlType nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr titleArr:(NSArray *)titleArr;
+/** 对象方法创建，带有图片的 SGSegmentedControlStatic */
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle;
+
+/** 对象方法创建，带有图片的 SGSegmentedControlDefault */
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle;
 ```
 
   * 类方法创建
 ```Objective-C
 普通状态下的类方法创建
 
-+ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDelegate>)delegate segmentedControlType:(SGSegmentedControlType)segmentedControlType titleArr:(NSArray *)titleArr;
+/** 类方法创建 SGSegmentedControlStatic */
++ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate childVcTitle:(NSArray *)childVcTitle;
+
+/** 类方法创建 SGSegmentedControlDefault */
++ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle;
 ```
 
 ```Objective-C
 带有图片的类方法创建
 
-+ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDelegate>)delegate segmentedControlType:(SGSegmentedControlType)segmentedControlType nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr titleArr:(NSArray *)titleArr;
+/** 类方法创建，带有图片的 SGSegmentedControlStatic */
++ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle;
+
+/** 类方法创建，带有图片的 SGSegmentedControlDefault */
++ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle;
 ```
 
   * 属性设置
@@ -82,19 +98,25 @@
 
    * @property (nonatomic, assign) BOOL showsBottomScrollIndicator; // 是否显示底部滚动指示器(默认为YES, 显示)
 
-   * @property (nonatomic, assign) SGSegmentedControlIndicatorType segmentedControlIndicatorType;  // 枚举属性, 指示器样式(默认为底部样式)
+   * @property (nonatomic, assign) segmentedControlIndicatorType segmentedControlIndicatorType;  // 枚举属性, 指示器样式(默认为底部样式)
 
-   * -(void)changeThePositionOfTheSelectedBtnWithScrollView:(UIScrollView *)scrollView; // 标题选中颜色改变以及指示器位置变化
+   * - (void)changeThePositionOfTheSelectedBtnWithScrollView:(UIScrollView *)scrollView; // 改变选中button的位置以及指示器位置变化（给外界scrollView提供的方法 -> 必须实现）
    
    * @property (nonatomic, assign) BOOL titleColorGradualChange; // 标题文字渐变效果(默认为NO), 与titleBtnColorGradualChangeScrollViewDidScroll方法，一起才会生效
    
    * @property (nonatomic, assign) BOOL titleFondGradualChange; // 标题文字缩放效果(默认为NO), 与titleBtnColorGradualChangeScrollViewDidScroll方法，一起才会生效
    
-   * -(void)selectedTitleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView; // 给外界scrollViewDidScroll方法提供文字渐显、缩放效果 
+   * - (void)selectedTitleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView; // 文字渐显、缩放效果的实现（给外界 scrollViewDidScroll 提供的方法 -> 可供选择） 
     
    * 遵循SGSegmentedControlDelegate协议的delegate_SG方法
 ```Objective-C
-- (void)SGSegmentedControl:(SGSegmentedControl *)segmentedControl didSelectBtnAtIndex:(NSInteger)index;
+/** SGSegmentedControlStaticDelegate */
+
+- (void)SGSegmentedControlStatic:(SGSegmentedControlStatic *)segmentedControlStatic didSelectTitleAtIndex:(NSInteger)index;
+
+/** SGSegmentedControlDefaultDelegate */
+
+- (void)SGSegmentedControlDefault:(SGSegmentedControlDefault *)segmentedControlDefault didSelectTitleAtIndex:(NSInteger)index;
 ```
 
 * 提示信息文字，根据内容自动调节
