@@ -54,7 +54,7 @@
 
 /** 对象方法创建 SGSegmentedControlDefault（滚动状态） */
 
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle;
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText;
 ```
 
 ```Objective-C
@@ -75,7 +75,7 @@
 + (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate childVcTitle:(NSArray *)childVcTitle;
 
 /** 类方法创建 SGSegmentedControlDefault */
-+ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle;
++ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText;
 ```
 
 ```Objective-C
@@ -129,6 +129,8 @@
 
 * 2016. 10. 7  --> 初始版本的创建
 * 2016. 11. 10 --> 全面升级（为了方便理解，将静态的状态与滚动的状态拆开管理）；新增指示器样式三（带有图片的指示器）；修改scrollViewDidScroll的Bug问题
+* 2016. 11. 17 --> 新增判断是否开启字体缩放功能
+
 
 ## Concluding remarks
 
