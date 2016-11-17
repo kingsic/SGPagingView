@@ -47,7 +47,7 @@ static CGFloat const btn_fondOfSize = 17;
 /** 指示器的高度 */
 static CGFloat const indicatorViewHeight = 2;
 /** 点击按钮时, 指示器的动画移动时间 */
-static CGFloat const indicatorViewTimeOfAnimation = 0.2;
+static CGFloat const indicatorViewTimeOfAnimation = 0.15;
 
 - (NSMutableArray *)storageAlltitleBtn_mArr {
     if (!_storageAlltitleBtn_mArr) {

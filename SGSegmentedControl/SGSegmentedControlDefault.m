@@ -41,6 +41,8 @@
 @property (nonatomic, strong) UIView *bgIndicatorView;
 /** 带图片的指示器 */
 @property (nonatomic, strong) UIImageView *indicatorViewWithImage;
+/** 是否开启缩放字体功能 */
+@property (nonatomic, assign) BOOL isScaleText;
 /** 标记是否是一个button */
 @property (nonatomic, assign) BOOL isFirstButton;
 @end
@@ -48,15 +50,15 @@
 @implementation SGSegmentedControlDefault
 
 /** 按钮字体的大小(字号) */
-static CGFloat const btn_fondOfSize = 17;
+static CGFloat const btn_fondOfSize = 16;
 /** 按钮之间的间距(滚动时按钮之间的间距) */
-static CGFloat const btn_scale = 0.12;
+static CGFloat const btn_scale = 0.14;
 /** 按钮之间的间距(滚动时按钮之间的间距) */
 static CGFloat const btn_Margin = 15;
 /** 指示器的高度(默认指示器) */
 static CGFloat const indicatorViewHeight = 2;
 /** 点击按钮时, 指示器的动画移动时间 */
-static CGFloat const indicatorViewTimeOfAnimation = 0.2;
+static CGFloat const indicatorViewTimeOfAnimation = 0.15;
 
 - (NSMutableArray *)storageAlltitleBtn_mArr {
     if (!_storageAlltitleBtn_mArr) {
@@ -65,7 +67,7 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.2;
     return _storageAlltitleBtn_mArr;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle {
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText {
     
     if (self = [super initWithFrame:frame]) {
         self.showsHorizontalScrollIndicator = NO;
@@ -76,13 +78,15 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.2;
         
         self.title_Arr = childVcTitle;
         
+        self.isScaleText = isScaleText;
+        
         [self setupSubviews];
     }
     return self;
 }
 
-+ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle {
-    return [[self alloc] initWithFrame:frame delegate:delegate childVcTitle:childVcTitle];
++ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText {
+    return [[self alloc] initWithFrame:frame delegate:delegate childVcTitle:childVcTitle isScaleText:isScaleText];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle {
@@ -156,8 +160,11 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.2;
     if (firstButton) {
         self.isFirstButton = YES;
     }
-#warning 如果是缩放，请打开这段代码
-    //firstButton.titleLabel.font = [UIFont systemFontOfSize:btn_fondOfSize * btn_scale + btn_fondOfSize];
+    
+#pragma mark - - - 为字体缩放增加的代码
+    if (self.isScaleText) {
+        firstButton.titleLabel.font = [UIFont systemFontOfSize:btn_fondOfSize * btn_scale + btn_fondOfSize];
+    }
     
     // 添加指示器
     self.indicatorView = [[UIView alloc] init];
@@ -169,7 +176,13 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.2;
     // 指示器默认在第一个选中位置
     // 计算Titlebutton内容的Size
     CGSize buttonSize = [self sizeWithText:firstButton.titleLabel.text font:[UIFont systemFontOfSize:btn_fondOfSize] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
-    _indicatorView.SG_width = buttonSize.width;
+#pragma mark - - - 判断是否开启字体缩放功能
+    if (self.isScaleText) {
+        _indicatorView.SG_width = buttonSize.width + btn_scale * buttonSize.width;
+    } else {
+        _indicatorView.SG_width = buttonSize.width;
+    }
+    
     _indicatorView.SG_centerX = firstButton.SG_centerX;
 }
 

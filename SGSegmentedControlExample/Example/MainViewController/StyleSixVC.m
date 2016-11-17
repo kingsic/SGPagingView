@@ -78,7 +78,7 @@
     //_bottomView.scrollEnabled = NO;
     [self.view addSubview:_bottomSView];
     
-    self.topSView = [SGSegmentedControlDefault segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self childVcTitle:title_arr];
+    self.topSView = [SGSegmentedControlDefault segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self childVcTitle:title_arr isScaleText:NO];
     _topSView.segmentedControlIndicatorType = segmentedControlIndicatorTypeBankground;
     [self.view addSubview:_topSView];
 }

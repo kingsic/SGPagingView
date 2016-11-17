@@ -43,10 +43,24 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) segmentedControlIndicatorType segmentedControlIndicatorType;
 
 @property (nonatomic, weak) id<SGSegmentedControlDefaultDelegate> delegate_SG;
-/** 对象方法创建 SGSegmentedControlDefault */
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle;
-/** 类方法创建 SGSegmentedControlDefault */
-+ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle;
+/**
+ *  对象方法创建 SGSegmentedControlDefault
+ *
+ *  @param frame    frame
+ *  @param delegate     delegate
+ *  @param childVcTitle     子控制器标题数组
+ *  @param isScaleText     是否开启字体缩放功能；默认不开启
+ */
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText;
+/**
+ *  类方法创建 SGSegmentedControlDefault
+ *
+ *  @param frame    frame
+ *  @param delegate     delegate
+ *  @param childVcTitle     子控制器标题数组
+ *  @param isScaleText     是否开启字体缩放功能；默认不开启
+ */
++ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText;
 
 /** 对象方法创建，带有图片的 SGSegmentedControlDefault */
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle;
