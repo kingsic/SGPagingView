@@ -26,6 +26,10 @@
     [self.view addSubview:test];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)testButton_action {
     NSLog(@"testButton_action");
     // Dispose of any resources that can be recreated.

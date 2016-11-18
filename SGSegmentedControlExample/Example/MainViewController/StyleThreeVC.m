@@ -6,6 +6,8 @@
 //  Copyright © 2016年 Sorgle. All rights reserved.
 //
 
+// 带有图片的 SGSegmentControlStatic
+
 #import "StyleThreeVC.h"
 #import "TestOneVC.h"
 #import "TestTwoVC.h"

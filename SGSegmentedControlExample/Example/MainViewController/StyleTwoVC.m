@@ -6,6 +6,8 @@
 //  Copyright © 2016年 Sorgle. All rights reserved.
 //
 
+// 普通状态下的 SGSegmentControlDefault
+
 #import "StyleTwoVC.h"
 #import "TestOneVC.h"
 #import "TestTwoVC.h"

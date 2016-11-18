@@ -21,14 +21,14 @@
 #define indicatorViewColorDefualt [UIColor redColor]
 
 @interface SGSegmentedControlDefault ()
+/** 标题数组 */
+@property (nonatomic, strong) NSArray *title_Arr;
 /** 标题按钮 */
 @property (nonatomic, strong) UIButton *title_btn;
 /** 带有图片的标题按钮 */
 @property (nonatomic, strong) SGImageButton *image_title_btn;
 /** 存入所有标题按钮 */
 @property (nonatomic, strong) NSMutableArray *storageAlltitleBtn_mArr;
-/** 标题数组 */
-@property (nonatomic, strong) NSArray *title_Arr;
 /** 普通状态下的图片数组 */
 @property (nonatomic, strong) NSArray *nomal_image_Arr;
 /** 选中状态下的图片数组 */
@@ -39,9 +39,9 @@
 @property (nonatomic, strong) UIView *indicatorView;
 /** 背景指示器下面的小indicatorView */
 @property (nonatomic, strong) UIView *bgIndicatorView;
-/** 带图片的指示器 */
+/** 带有图片的指示器 */
 @property (nonatomic, strong) UIImageView *indicatorViewWithImage;
-/** 是否开启缩放字体功能 */
+/** 是否开启文字缩放功能 */
 @property (nonatomic, assign) BOOL isScaleText;
 /** 标记是否是一个button */
 @property (nonatomic, assign) BOOL isFirstButton;
@@ -51,7 +51,7 @@
 
 /** 按钮字体的大小(字号) */
 static CGFloat const btn_fondOfSize = 16;
-/** 按钮之间的间距(滚动时按钮之间的间距) */
+/** 标题按钮文字的缩放倍数 */
 static CGFloat const btn_scale = 0.14;
 /** 按钮之间的间距(滚动时按钮之间的间距) */
 static CGFloat const btn_Margin = 15;
@@ -161,7 +161,7 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.15;
         self.isFirstButton = YES;
     }
     
-#pragma mark - - - 为字体缩放增加的代码
+#pragma mark - - - 为文字缩放增加的代码
     if (self.isScaleText) {
         firstButton.titleLabel.font = [UIFont systemFontOfSize:btn_fondOfSize * btn_scale + btn_fondOfSize];
     }
@@ -176,7 +176,7 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.15;
     // 指示器默认在第一个选中位置
     // 计算Titlebutton内容的Size
     CGSize buttonSize = [self sizeWithText:firstButton.titleLabel.text font:[UIFont systemFontOfSize:btn_fondOfSize] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
-#pragma mark - - - 判断是否开启字体缩放功能
+#pragma mark - - - 判断是否开启文字缩放功能
     if (self.isScaleText) {
         _indicatorView.SG_width = buttonSize.width + btn_scale * buttonSize.width;
     } else {

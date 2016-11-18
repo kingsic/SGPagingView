@@ -16,6 +16,7 @@
 #import "StyleSevenVC.h"
 #import "StyleEightVC.h"
 #import "StyleNineVC.h"
+#import "StyleLastVC.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -30,19 +31,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.title_arr = @[@"静止状态下标题按钮", @"滚动状态下标题按钮", @"静态状态下带有图片的标题按钮", @"滚动状态下带有图片的标题按钮", @"指示器样式一", @"指示器样式二", @"指示器样式三", @"标题按钮文字渐显效果", @"标题按钮文字缩放效果"];
+    self.title_arr = @[@"静止状态下标题按钮", @"滚动状态下标题按钮", @"静态状态下带有图片的标题按钮", @"滚动状态下带有图片的标题按钮", @"指示器样式一", @"指示器样式二", @"指示器样式三", @"标题按钮文字渐显效果", @"标题按钮文字缩放效果", @"导航栏上面的标题按钮"];
     
     StyleOneVC *oneVC = [[StyleOneVC alloc] init];
     StyleTwoVC *twoVC = [[StyleTwoVC alloc] init];
+    StyleThreeVC *threeVC = [[StyleThreeVC alloc] init];
+    StyleFourVC *fourVC = [[StyleFourVC alloc] init];
     StyleFiveVC *fiveVC = [[StyleFiveVC alloc] init];
     StyleSixVC *sixVC = [[StyleSixVC alloc] init];
-    StyleFourVC *fourVC = [[StyleFourVC alloc] init];
     StyleSevenVC *sevenVC = [[StyleSevenVC alloc] init];
     StyleEightVC *eightVC = [[StyleEightVC alloc] init];
     StyleNineVC *nineVC = [[StyleNineVC alloc] init];
-    StyleThreeVC *threeVC = [[StyleThreeVC alloc] init];
-    
-    self.VC_arr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
+    StyleLastVC *lastVC = [[StyleLastVC alloc] init];
+
+    self.VC_arr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC, lastVC];
 
     // 注册
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
@@ -66,8 +68,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < self.VC_arr.count) {
+    if (indexPath.row < self.VC_arr.count - 1) {
         [self.navigationController pushViewController:self.VC_arr[indexPath.row] animated:YES];
+    } else {
+        UINavigationController *nvc = [[UINavigationController alloc]initWithRootViewController:self.VC_arr[indexPath.row]];
+        [self presentViewController:nvc animated:YES completion:nil];
     }
 }
 
