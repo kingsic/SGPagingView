@@ -40,11 +40,11 @@
 
 ## 代码介绍
 
-### * `SGSegmentedControl 的使用`<br>
+### * `SGSegmentedControl的使用`<br>
 
   * 将项目中 SGSegmentedControl 文件夹导入工程
 
-  * 导入#import "SGSegmentedControl.h"头文件
+  * 导入 #import "SGSegmentedControl.h" 头文件
 
   * 对象方法创建
 ```Objective-C
