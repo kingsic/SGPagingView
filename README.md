@@ -40,9 +40,9 @@
 
 ## 代码介绍
 
-### * `SGSegmentedControl的使用`<br>
+### * `SGSegmentedControl 的使用`<br>
 
-  * 将项目中SGSegmentedControl文件夹导入工程
+  * 将项目中 SGSegmentedControl 文件夹导入工程
 
   * 导入#import "SGSegmentedControl.h"头文件
 
@@ -110,7 +110,7 @@
    
    * -(void)selectedTitleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView; // 文字渐显、缩放效果的实现（给外界 scrollViewDidScroll 提供的方法 -> 可供选择） (附言：先设置属性，再实现方法) 
     
-   * 遵循SGSegmentedControlDelegate协议的delegate_SG方法
+   * 遵循 SGSegmentedControlDelegate 协议的 delegate_SG 方法
 ```Objective-C
 /** SGSegmentedControlStaticDelegate */
 
@@ -130,7 +130,8 @@
 ## 版本介绍
 
 * 2016. 10. 7  --> 初始版本的创建
-* 2016. 11. 10 --> 全面升级（为了方便理解，将静态的状态与滚动的状态拆开管理）；新增指示器样式三（带有图片的指示器）；修改scrollViewDidScroll的Bug问题
+* 2016. 11. 10 --> 全面升级（为了方便理解和使用，将静态状态下的 SGSegmentControl 与滚动状态下的 SGSegmentControl 拆分管理）
+* 2016. 11. 11 --> 新增指示器样式三（UIImageView样式的指示器）；解决 scrollViewDidScroll 的 Bug 问题
 * 2016. 11. 17 --> 新增判断是否开启字体缩放功能
 * 2016. 11. 18 --> 新增导航栏样式
 
