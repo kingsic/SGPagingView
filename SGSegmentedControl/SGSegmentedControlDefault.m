@@ -332,6 +332,11 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.15;
     // 1、计算滚动到哪一页
     NSInteger index = scrollView.contentOffset.x / scrollView.frame.size.width;
     
+    // 防止下标越界引起程序崩溃
+    if (index >= self.storageAlltitleBtn_mArr.count) {
+        return;
+    }
+    
     // 2、把对应的标题选中
     UIButton *selectedBtn = self.storageAlltitleBtn_mArr[index];
     

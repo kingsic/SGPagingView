@@ -34,44 +34,40 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    // 精选
+    // 地球
     TestOneVC *oneVC = [[TestOneVC alloc] init];
     [self addChildViewController:oneVC];
-    // 电视剧
+    // 学士帽
     TestTwoVC *twoVC = [[TestTwoVC alloc] init];
     [self addChildViewController:twoVC];
-    // 电影
+    // 书籍
     TestThreeVC *threeVC = [[TestThreeVC alloc] init];
     [self addChildViewController:threeVC];
-    // 综艺
+    // 电视
     TestFourVC *fourVC = [[TestFourVC alloc] init];
     [self addChildViewController:fourVC];
-    
-    // NBA
+    // 游泳
     TestFiveVC *fiveVC = [[TestFiveVC alloc] init];
     [self addChildViewController:fiveVC];
-    
-    // 新闻
+    // 皇冠
     TestSixVC *sixVC = [[TestSixVC alloc] init];
     [self addChildViewController:sixVC];
-    
-    // 娱乐
+    // 金钱
     TestSevenVC *sevenVC = [[TestSevenVC alloc] init];
     [self addChildViewController:sevenVC];
-    
-    // 音乐
+    // 购物
     TestEightVC *eightVC = [[TestEightVC alloc] init];
     [self addChildViewController:eightVC];
-    
-    // 网络电视
+    // 银行
     TestNineVC *nineVC = [[TestNineVC alloc] init];
-    //[self addChildViewController:nineVC];
+    [self addChildViewController:nineVC];
     
     NSArray *childVC = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
     
-    NSArray *title_arr = @[@"精选", @"电视剧", @"电影", @"综艺", @"NBA", @"新闻", @"娱乐", @"音乐"];
-    NSArray *nomal_image_arr = @[@"1", @"2", @"3", @"4", @"1", @"2", @"3", @"4"];
-    NSArray *selected_image_arr = @[@"1-selected", @"2-selected", @"3-selected", @"4-selected", @"1-selected", @"2-selected", @"3-selected", @"4-selected"];
+    NSArray *nomal_image_arr = @[@"one_icon", @"two_icon", @"three_icon", @"four_icon", @"five_icon", @"six_icon", @"seven_icon", @"eight_icon", @"nine_icon"];
+    NSArray *selected_image_arr = @[@"one_selected_icon", @"two_selected_icon", @"three_selected_icon", @"four_selected_icon", @"five_selected_icon", @"six_selected_icon", @"seven_selected_icon", @"eight_selected_icon", @"nine_selected_icon"];
+    NSArray *title_arr = @[@"地球", @"学士帽", @"书籍", @"电视", @"游泳", @"皇冠", @"金钱", @"购物", @"银行"];
+    
     self.bottomSView = [[SGSegmentedControlBottomView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _bottomSView.childViewController = childVC;
     _bottomSView.backgroundColor = [UIColor clearColor];
@@ -79,7 +75,7 @@
     //_bottomView.scrollEnabled = NO;
     [self.view addSubview:_bottomSView];
     
-    self.topSView = [SGSegmentedControlDefault segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 74) delegate:self nomalImageArr:nomal_image_arr selectedImageArr:selected_image_arr childVcTitle:title_arr];
+    self.topSView = [SGSegmentedControlDefault segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 64) delegate:self nomalImageArr:nomal_image_arr selectedImageArr:selected_image_arr childVcTitle:title_arr];
     [self.view addSubview:_topSView];
 }
 

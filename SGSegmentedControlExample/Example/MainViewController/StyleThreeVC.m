@@ -28,26 +28,27 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    // 精选
+    // 地球
     TestOneVC *oneVC = [[TestOneVC alloc] init];
     [self addChildViewController:oneVC];
     
-    // 电视剧
+    // 学士帽
     TestTwoVC *twoVC = [[TestTwoVC alloc] init];
     [self addChildViewController:twoVC];
     
-    // 电影
+    // 书籍
     TestThreeVC *threeVC = [[TestThreeVC alloc] init];
     [self addChildViewController:threeVC];
     
+    // 电视
     TestFourVC *fourVC = [[TestFourVC alloc] init];
     [self addChildViewController:fourVC];
     
     NSArray *childVC = @[oneVC, twoVC, threeVC, fourVC];
     
-    NSArray *nomal_image_arr = @[@"1", @"2", @"3", @"4"];
-    NSArray *selected_image_arr = @[@"1-selected", @"2-selected", @"3-selected", @"4-selected"];
-    NSArray *title_arr = @[@"精选", @"电视剧", @"电影", @"综艺"];
+    NSArray *nomal_image_arr = @[@"one_icon", @"two_icon", @"three_icon", @"four_icon"];
+    NSArray *selected_image_arr = @[@"one_selected_icon", @"two_selected_icon", @"three_selected_icon", @"four_selected_icon"];
+    NSArray *title_arr = @[@"地球", @"学士帽", @"书籍", @"电视"];
     
     self.bottomSView = [[SGSegmentedControlBottomView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _bottomSView.childViewController = childVC;
@@ -56,7 +57,7 @@
     //_bottomView.scrollEnabled = NO;
     [self.view addSubview:_bottomSView];
     
-    self.topSView = [SGSegmentedControlStatic segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 74) delegate:self nomalImageArr:nomal_image_arr selectedImageArr:selected_image_arr childVcTitle:title_arr];
+    self.topSView = [SGSegmentedControlStatic segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 64) delegate:self nomalImageArr:nomal_image_arr selectedImageArr:selected_image_arr childVcTitle:title_arr];
     //_topSView.showsBottomScrollIndicator = NO;
     [self.view addSubview:_topSView];
 }
