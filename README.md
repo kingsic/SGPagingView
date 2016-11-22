@@ -91,6 +91,7 @@
 ```
 
   * 属性设置
+```Objective-C
  
    * @property (nonatomic, strong) UIColor *titleColorStateNormal; // 标题文字颜色(默认为黑色)
 
@@ -109,7 +110,8 @@
    * @property (nonatomic, assign) BOOL titleFondGradualChange; // 标题文字缩放效果(默认为NO), 与-(void)selectedTitleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView方法，一起才会生效 (附言：先设置属性，再实现方法)
    
    * -(void)selectedTitleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView; // 文字渐显、缩放效果的实现（给外界 scrollViewDidScroll 提供的方法 -> 可供选择） (附言：先设置属性，再实现方法) 
-    
+```
+
    * 遵循 SGSegmentedControlDelegate 协议的 delegate_SG 方法
 ```Objective-C
 /** SGSegmentedControlStaticDelegate */
