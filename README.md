@@ -93,23 +93,23 @@
   * 属性设置
 ```Objective-C
  
- @property (nonatomic, strong) UIColor *titleColorStateNormal; // 标题文字颜色(默认为黑色)
+@property (nonatomic, strong) UIColor *titleColorStateNormal; // 标题文字颜色(默认为黑色)
 
- @property (nonatomic, strong) UIColor *titleColorStateSelected; // 选中时标题文字颜色(默认为红色) 
+@property (nonatomic, strong) UIColor *titleColorStateSelected; // 选中时标题文字颜色(默认为红色) 
 
- @property (nonatomic, strong) UIColor *indicatorColor;  // 指示器的颜色(默认为红色) 
+@property (nonatomic, strong) UIColor *indicatorColor;  // 指示器的颜色(默认为红色) 
 
- @property (nonatomic, assign) BOOL showsBottomScrollIndicator; // 是否显示底部滚动指示器(默认为YES, 显示)
+@property (nonatomic, assign) BOOL showsBottomScrollIndicator; // 是否显示底部滚动指示器(默认为YES, 显示)
 
- @property (nonatomic, assign) segmentedControlIndicatorType segmentedControlIndicatorType;  // 枚举属性, 指示器样式(默认为底部样式)
+@property (nonatomic, assign) segmentedControlIndicatorType segmentedControlIndicatorType;  // 枚举属性, 指示器样式(默认为底部样式)
 
-  - (void)changeThePositionOfTheSelectedBtnWithScrollView:(UIScrollView *)scrollView; // 改变选中button的位置以及指示器位置变化（给外界scrollView提供的方法 -> 必须实现）
+- (void)changeThePositionOfTheSelectedBtnWithScrollView:(UIScrollView *)scrollView; // 改变选中button的位置以及指示器位置变化（给外界scrollView提供的方法 -> 必须实现）
    
- @property (nonatomic, assign) BOOL titleColorGradualChange; // 标题文字渐变效果(默认为NO), 与- (void)selectedTitleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView方法，一起才会生效 (附言：先设置属性，再实现方法)
+@property (nonatomic, assign) BOOL titleColorGradualChange; // 标题文字渐变效果(默认为NO), 与- (void)selectedTitleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView方法，一起才会生效 (附言：先设置属性，再实现方法)
    
- @property (nonatomic, assign) BOOL titleFondGradualChange; // 标题文字缩放效果(默认为NO), 与- (void)selectedTitleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView方法，一起才会生效 (附言：先设置属性，再实现方法)
+@property (nonatomic, assign) BOOL titleFondGradualChange; // 标题文字缩放效果(默认为NO), 与- (void)selectedTitleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView方法，一起才会生效 (附言：先设置属性，再实现方法)
    
- - (void)selectedTitleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView; // 文字渐显、缩放效果的实现（给外界 scrollViewDidScroll 提供的方法 -> 可供选择） (附言：先设置属性，再实现方法) 
+- (void)selectedTitleBtnColorGradualChangeScrollViewDidScroll:(UIScrollView *)scrollView; // 文字渐显、缩放效果的实现（给外界 scrollViewDidScroll 提供的方法 -> 可供选择） (附言：先设置属性，再实现方法) 
 ```
 
    * 遵循 SGSegmentedControlDelegate 协议的 delegate_SG 方法
