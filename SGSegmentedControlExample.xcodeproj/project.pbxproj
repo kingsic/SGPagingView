@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18146F6B1DE6DFEC004E32DB /* StyleBlockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18146F6A1DE6DFEC004E32DB /* StyleBlockVC.m */; };
 		18A5DF6E1DD328CE00FAC54F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5DF6D1DD328CE00FAC54F /* main.m */; };
 		18A5DF711DD328CE00FAC54F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5DF701DD328CE00FAC54F /* AppDelegate.m */; };
 		18A5DF741DD328CE00FAC54F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5DF731DD328CE00FAC54F /* ViewController.m */; };
@@ -60,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18146F691DE6DFEC004E32DB /* StyleBlockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleBlockVC.h; sourceTree = "<group>"; };
+		18146F6A1DE6DFEC004E32DB /* StyleBlockVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleBlockVC.m; sourceTree = "<group>"; };
 		18A5DF691DD328CE00FAC54F /* SGSegmentedControlExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SGSegmentedControlExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A5DF6D1DD328CE00FAC54F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18A5DF6F1DD328CE00FAC54F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -268,6 +271,8 @@
 				18A5DFE71DD34B3400FAC54F /* StyleEightVC.m */,
 				18A5DFE91DD34B4700FAC54F /* StyleNineVC.h */,
 				18A5DFEA1DD34B4700FAC54F /* StyleNineVC.m */,
+				18146F691DE6DFEC004E32DB /* StyleBlockVC.h */,
+				18146F6A1DE6DFEC004E32DB /* StyleBlockVC.m */,
 				18E629FE1DDE936300454A12 /* StyleLastVC.h */,
 				18E629FF1DDE936300454A12 /* StyleLastVC.m */,
 			);
@@ -451,6 +456,7 @@
 				18A5DF711DD328CE00FAC54F /* AppDelegate.m in Sources */,
 				18A5DFCC1DD32C7D00FAC54F /* TestThreeVC.m in Sources */,
 				18E629FD1DDE932B00454A12 /* SGNavigationItemTitleView.m in Sources */,
+				18146F6B1DE6DFEC004E32DB /* StyleBlockVC.m in Sources */,
 				18A5DFC91DD32C7D00FAC54F /* TestOneVC.m in Sources */,
 				18A5DFDF1DD34AED00FAC54F /* StyleFiveVC.m in Sources */,
 				18A5DFCB1DD32C7D00FAC54F /* TestSixVC.m in Sources */,

@@ -16,6 +16,7 @@
 #import "StyleSevenVC.h"
 #import "StyleEightVC.h"
 #import "StyleNineVC.h"
+#import "StyleBlockVC.h"
 #import "StyleLastVC.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -31,7 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.title_arr = @[@"静止状态下标题按钮", @"滚动状态下标题按钮", @"静态状态下带有图片的标题按钮", @"滚动状态下带有图片的标题按钮", @"指示器样式一", @"指示器样式二", @"指示器样式三", @"标题按钮文字渐显效果", @"标题按钮文字缩放效果", @"导航栏上面的标题按钮"];
+    self.title_arr = @[@"静止状态下标题按钮", @"滚动状态下标题按钮", @"静态状态下带有图片的标题按钮", @"滚动状态下带有图片的标题按钮", @"指示器样式一", @"指示器样式二", @"指示器样式三", @"标题按钮文字渐显效果", @"标题按钮文字缩放效果", @"Block创建滚动状态下标题按钮", @"导航栏上面的标题按钮"];
     
     StyleOneVC *oneVC = [[StyleOneVC alloc] init];
     StyleTwoVC *twoVC = [[StyleTwoVC alloc] init];
@@ -42,9 +43,10 @@
     StyleSevenVC *sevenVC = [[StyleSevenVC alloc] init];
     StyleEightVC *eightVC = [[StyleEightVC alloc] init];
     StyleNineVC *nineVC = [[StyleNineVC alloc] init];
+    StyleBlockVC *blockVC = [[StyleBlockVC alloc] init];
     StyleLastVC *lastVC = [[StyleLastVC alloc] init];
 
-    self.VC_arr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC, lastVC];
+    self.VC_arr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC, blockVC, lastVC];
 
     // 注册
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];

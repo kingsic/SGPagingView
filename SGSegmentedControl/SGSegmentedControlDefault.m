@@ -66,6 +66,7 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.15;
     return _storageAlltitleBtn_mArr;
 }
 
+#pragma mark - - - delegate
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText {
     
     if (self = [super initWithFrame:frame]) {
@@ -88,6 +89,28 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.15;
     return [[self alloc] initWithFrame:frame delegate:delegate childVcTitle:childVcTitle isScaleText:isScaleText];
 }
 
+#pragma mark - - - Block
+- (instancetype)initWithFrame:(CGRect)frame didSelectedBtn:(SGSegmentedControlDefaultBlock)didSelectedBtn childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText {
+    if (self = [super initWithFrame:frame]) {
+        self.showsHorizontalScrollIndicator = NO;
+        self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.7];
+        self.bounces = NO;
+        
+        self.block_SG = didSelectedBtn;
+        
+        self.title_Arr = childVcTitle;
+        
+        self.isScaleText = isScaleText;
+        
+        [self setupSubviews];
+    }
+    return self;
+}
++ (instancetype)segmentedControlWithFrame:(CGRect)frame didSelectedBtn:(SGSegmentedControlDefaultBlock)didSelectedBtn childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText {
+    return [[self alloc] initWithFrame:frame didSelectedBtn:didSelectedBtn childVcTitle:childVcTitle isScaleText:isScaleText];
+}
+
+#pragma mark - - - 带有图片的 SGSegmentedControlDefault
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle {
     
     if (self = [super initWithFrame:frame]) {
@@ -270,6 +293,11 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.15;
     
     // 2、改变选中的button的位置
     [self selectedBtnLocation:sender];
+    
+    // 3、Block
+    if (self.block_SG) {
+        self.block_SG(self, index);
+    }
 }
 
 /** 标题选中颜色改变以及指示器位置变化 */

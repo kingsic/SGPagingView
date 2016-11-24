@@ -16,6 +16,8 @@
 #import <UIKit/UIKit.h>
 @class SGSegmentedControlDefault;
 
+typedef void(^SGSegmentedControlDefaultBlock)(SGSegmentedControlDefault *segmentedControlDefault, NSInteger selectedIndex);
+
 typedef enum : NSUInteger {
     segmentedControlIndicatorTypeBottom, // 指示器底部样式
     segmentedControlIndicatorTypeCenter, // 指示器中心背景样式
@@ -41,6 +43,9 @@ typedef enum : NSUInteger {
 /** 指示器样式(默认为底部样式) */
 @property (nonatomic, assign) segmentedControlIndicatorType segmentedControlIndicatorType;
 
+/** Block */
+@property (nonatomic, copy) SGSegmentedControlDefaultBlock block_SG;
+/** Delegate */
 @property (nonatomic, weak) id<SGSegmentedControlDefaultDelegate> delegate_SG;
 /**
  *  对象方法创建 SGSegmentedControlDefault
@@ -60,6 +65,11 @@ typedef enum : NSUInteger {
  *  @param isScaleText     是否开启文字缩放功能；默认不开启
  */
 + (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText;
+
+/** 对象方法创建 (Block 创建SGSegmentedControlDefault) */
+- (instancetype)initWithFrame:(CGRect)frame didSelectedBtn:(SGSegmentedControlDefaultBlock)didSelectedBtn childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText;
+/** 类方法创建 (Block 创建SGSegmentedControlDefault) */
++ (instancetype)segmentedControlWithFrame:(CGRect)frame didSelectedBtn:(SGSegmentedControlDefaultBlock)didSelectedBtn childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText;
 
 /** 对象方法创建，带有图片的 SGSegmentedControlDefault */
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle;
