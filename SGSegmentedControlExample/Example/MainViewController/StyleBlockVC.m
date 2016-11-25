@@ -77,13 +77,15 @@
     //_bottomView.scrollEnabled = NO;
     [self.view addSubview:_bottomSView];
     
-    self.topSView = [SGSegmentedControlDefault segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) didSelectedBtn:^(SGSegmentedControlDefault *segmentedControlDefault, NSInteger selectedIndex) {
-        NSLog(@"index - - %ld", (long)selectedIndex);
+    __weak StyleBlockVC *weakSelf = self;
+    self.topSView = [SGSegmentedControlDefault segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) childVcTitle:title_arr isScaleText:NO didSelectedTitleIndex:^(SGSegmentedControlDefault *segmentedControlDefault, NSInteger selectedIndex) {
+        
         // 计算滚动的位置
         CGFloat offsetX = selectedIndex * self.view.frame.size.width;
-        self.bottomSView.contentOffset = CGPointMake(offsetX, 0);
-        [self.bottomSView showChildVCViewWithIndex:selectedIndex outsideVC:self];
-    } childVcTitle:title_arr isScaleText:NO];
+        weakSelf.bottomSView.contentOffset = CGPointMake(offsetX, 0);
+        [weakSelf.bottomSView showChildVCViewWithIndex:selectedIndex outsideVC:self];
+        
+    }];
     
     _topSView.bounces = YES;
     [self.view addSubview:_topSView];

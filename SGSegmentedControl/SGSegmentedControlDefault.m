@@ -90,13 +90,13 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.15;
 }
 
 #pragma mark - - - Block
-- (instancetype)initWithFrame:(CGRect)frame didSelectedBtn:(SGSegmentedControlDefaultBlock)didSelectedBtn childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText {
+- (instancetype)initWithFrame:(CGRect)frame childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText didSelectedTitleIndex:(SGSegmentedControlDefaultBlock)didSelectedTitleIndex {
     if (self = [super initWithFrame:frame]) {
         self.showsHorizontalScrollIndicator = NO;
         self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.7];
         self.bounces = NO;
         
-        self.block_SG = didSelectedBtn;
+        self.block_SG = didSelectedTitleIndex;
         
         self.title_Arr = childVcTitle;
         
@@ -106,8 +106,8 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.15;
     }
     return self;
 }
-+ (instancetype)segmentedControlWithFrame:(CGRect)frame didSelectedBtn:(SGSegmentedControlDefaultBlock)didSelectedBtn childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText {
-    return [[self alloc] initWithFrame:frame didSelectedBtn:didSelectedBtn childVcTitle:childVcTitle isScaleText:isScaleText];
++ (instancetype)segmentedControlWithFrame:(CGRect)frame childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText didSelectedTitleIndex:(SGSegmentedControlDefaultBlock)didSelectedTitleIndex {
+    return [[self alloc] initWithFrame:frame childVcTitle:childVcTitle isScaleText:isScaleText didSelectedTitleIndex:didSelectedTitleIndex];
 }
 
 #pragma mark - - - 带有图片的 SGSegmentedControlDefault
@@ -132,7 +132,7 @@ static CGFloat const indicatorViewTimeOfAnimation = 0.15;
     return [[self alloc] initWithFrame:frame delegate:delegate nomalImageArr:nomalImageArr selectedImageArr:selectedImageArr childVcTitle:childVcTitle];
 }
 
-
+/** 创建子控制器 */
 - (void)setupSubviews {
     // 计算scrollView的宽度
     CGFloat button_X = 0;
