@@ -35,7 +35,6 @@
 		18A5DFCD1DD32C7D00FAC54F /* TestTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5DFC41DD32C7D00FAC54F /* TestTwoVC.m */; };
 		18A5DFD31DD33DA400FAC54F /* UIView+SGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5DFD21DD33DA400FAC54F /* UIView+SGExtension.m */; };
 		18A5DFD61DD33EC300FAC54F /* StyleTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5DFD51DD33EC300FAC54F /* StyleTwoVC.m */; };
-		18A5DFD91DD34AB600FAC54F /* StyleThreeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5DFD81DD34AB600FAC54F /* StyleThreeVC.m */; };
 		18A5DFDC1DD34AD700FAC54F /* StyleFourVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5DFDB1DD34AD700FAC54F /* StyleFourVC.m */; };
 		18A5DFDF1DD34AED00FAC54F /* StyleFiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5DFDE1DD34AED00FAC54F /* StyleFiveVC.m */; };
 		18A5DFE21DD34B0700FAC54F /* StyleSixVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5DFE11DD34B0700FAC54F /* StyleSixVC.m */; };
@@ -123,8 +122,6 @@
 		18A5DFD21DD33DA400FAC54F /* UIView+SGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SGExtension.m"; sourceTree = "<group>"; };
 		18A5DFD41DD33EC300FAC54F /* StyleTwoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleTwoVC.h; sourceTree = "<group>"; };
 		18A5DFD51DD33EC300FAC54F /* StyleTwoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleTwoVC.m; sourceTree = "<group>"; };
-		18A5DFD71DD34AB600FAC54F /* StyleThreeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleThreeVC.h; sourceTree = "<group>"; };
-		18A5DFD81DD34AB600FAC54F /* StyleThreeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleThreeVC.m; sourceTree = "<group>"; };
 		18A5DFDA1DD34AD700FAC54F /* StyleFourVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleFourVC.h; sourceTree = "<group>"; };
 		18A5DFDB1DD34AD700FAC54F /* StyleFourVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleFourVC.m; sourceTree = "<group>"; };
 		18A5DFDD1DD34AED00FAC54F /* StyleFiveVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleFiveVC.h; sourceTree = "<group>"; };
@@ -279,8 +276,6 @@
 				183758EE1E0275C40059A524 /* NewStyleThreeVC.m */,
 				18A5DFD41DD33EC300FAC54F /* StyleTwoVC.h */,
 				18A5DFD51DD33EC300FAC54F /* StyleTwoVC.m */,
-				18A5DFD71DD34AB600FAC54F /* StyleThreeVC.h */,
-				18A5DFD81DD34AB600FAC54F /* StyleThreeVC.m */,
 				18A5DFDA1DD34AD700FAC54F /* StyleFourVC.h */,
 				18A5DFDB1DD34AD700FAC54F /* StyleFourVC.m */,
 				18A5DFDD1DD34AED00FAC54F /* StyleFiveVC.h */,
@@ -486,7 +481,6 @@
 				18A5DFDF1DD34AED00FAC54F /* StyleFiveVC.m in Sources */,
 				183758EC1E0275B00059A524 /* NewStyleTwoVC.m in Sources */,
 				18A5DFCB1DD32C7D00FAC54F /* TestSixVC.m in Sources */,
-				18A5DFD91DD34AB600FAC54F /* StyleThreeVC.m in Sources */,
 				18A5DFD61DD33EC300FAC54F /* StyleTwoVC.m in Sources */,
 				18A5DFD31DD33DA400FAC54F /* UIView+SGExtension.m in Sources */,
 				18A5DF6E1DD328CE00FAC54F /* main.m in Sources */,
