@@ -16,6 +16,12 @@
 #import <UIKit/UIKit.h>
 @class SGSegmentedControlStatic;
 
+typedef enum : NSUInteger {
+    SGSegmentedControlStaticTypeDefault,
+    SGSegmentedControlStaticTypeHorizontal,
+    SGSegmentedControlStaticTypeVertical,
+} SGSegmentedControlStaticType;
+
 @protocol SGSegmentedControlStaticDelegate <NSObject>
 // delegate 方法
 - (void)SGSegmentedControlStatic:(SGSegmentedControlStatic *)segmentedControlStatic didSelectTitleAtIndex:(NSInteger)index;
@@ -23,25 +29,37 @@
 @end
 
 @interface SGSegmentedControlStatic : UIScrollView
-/** 标题文字颜色(默认为黑色) */
-@property (nonatomic, strong) UIColor *titleColorStateNormal;
-/** 选中时标题文字颜色(默认为红色) */
-@property (nonatomic, strong) UIColor *titleColorStateSelected;
-/** 指示器的颜色(默认为红色) */
-@property (nonatomic, strong) UIColor *indicatorColor;
-/** 是否显示底部滚动指示器(默认为YES, 显示) */
-@property (nonatomic, assign) BOOL showsBottomScrollIndicator;
+/** 根据下标，选中对应的控制器 */
+@property (nonatomic, assign) NSInteger selectedIndex;
 
 @property (nonatomic, weak) id<SGSegmentedControlStaticDelegate> delegate_SG;
-/** 对象方法创建 SGSegmentedControlStatic */
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate childVcTitle:(NSArray *)childVcTitle;
-/** 类方法创建 SGSegmentedControlStatic */
-+ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate childVcTitle:(NSArray *)childVcTitle;
 
-/** 对象方法创建，带有图片的 SGSegmentedControlStatic */
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle;
-/** 类方法创建，带有图片的 SGSegmentedControlStatic */
-+ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle;
+/**
+ *  对象方法创建 SGSegmentedControlStatic
+ *
+ *  frame       frame
+ *  delegate      delegate
+ *  childVcTitle      childVcTitle
+ *  indicatorColor      指示器颜色, 默认红色
+ *  isFull       YES，指示器的宽度等于按钮的宽度，NO，指示器的宽度等于文字的宽度
+ */
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate childVcTitle:(NSArray *)childVcTitle indicatorIsFull:(BOOL)isFull;
+/** 类方法创建 SGSegmentedControlStatic */
++ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlStaticDelegate>)delegate childVcTitle:(NSArray *)childVcTitle indicatorIsFull:(BOOL)isFull;
+
+#pragma mark - - - 设置标题样式的方法（必须实现）
+- (void)SG_setUpSegmentedControlType:(void(^)(SGSegmentedControlStaticType *segmentedControlStaticType, NSArray **nomalImageArr, NSArray **selectedImageArr))segmentedControlTypeBlock;
+
+/**
+ *  设置SGSegmentedControlStatic风格
+ *
+ *  segmentedControlColor       SGSegmentedControlStatic背景颜色设置
+ *  titleColor      普通状态下标题颜色，默认黑色
+ *  selectedTitleColor      选中标题时的颜色，默认红色
+ *  indicatorColor      指示器颜色, 默认红色
+ *  isShowIndicor       是否显示指示器，默认显示
+ */
+- (void)SG_setUpSegmentedControlStyle:(void(^)(UIColor **segmentedControlColor, UIColor **titleColor, UIColor **selectedTitleColor, UIColor **indicatorColor, BOOL *isShowIndicor))segmentedControlStyleBlock;
 
 /** 改变选中button的位置以及指示器位置变化（给外界scrollView提供的方法 -> 必须实现） */
 - (void)changeThePositionOfTheSelectedBtnWithScrollView:(UIScrollView *)scrollView;

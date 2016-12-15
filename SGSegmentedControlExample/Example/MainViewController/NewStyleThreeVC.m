@@ -1,26 +1,25 @@
 //
-//  StyleThreeVC.m
+//  NewStyleThreeVC.m
 //  SGSegmentedControlExample
 //
-//  Created by apple on 16/11/9.
+//  Created by apple on 16/12/15.
 //  Copyright © 2016年 Sorgle. All rights reserved.
 //
+//  带有图片的 SGSegmentedControlStatic，且图片在下面
 
-// 带有图片的 SGSegmentControlStatic
-
-#import "StyleThreeVC.h"
+#import "NewStyleThreeVC.h"
 #import "TestOneVC.h"
 #import "TestTwoVC.h"
 #import "TestThreeVC.h"
 #import "TestFourVC.h"
 #import "SGSegmentedControl.h"
 
-@interface StyleThreeVC ()<SGSegmentedControlStaticDelegate, UIScrollViewDelegate>
+@interface NewStyleThreeVC () <SGSegmentedControlStaticDelegate, UIScrollViewDelegate>
 @property (nonatomic, strong) SGSegmentedControlStatic *topSView;
 @property (nonatomic, strong) SGSegmentedControlBottomView *bottomSView;
 @end
 
-@implementation StyleThreeVC
+@implementation NewStyleThreeVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,19 +27,18 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    // 地球
+    // 精选
     TestOneVC *oneVC = [[TestOneVC alloc] init];
     [self addChildViewController:oneVC];
     
-    // 学士帽
+    // 电视剧
     TestTwoVC *twoVC = [[TestTwoVC alloc] init];
     [self addChildViewController:twoVC];
     
-    // 书籍
+    // 电影
     TestThreeVC *threeVC = [[TestThreeVC alloc] init];
     [self addChildViewController:threeVC];
     
-    // 电视
     TestFourVC *fourVC = [[TestFourVC alloc] init];
     [self addChildViewController:fourVC];
     
@@ -57,8 +55,14 @@
     //_bottomView.scrollEnabled = NO;
     [self.view addSubview:_bottomSView];
     
-    //self.topSView = [SGSegmentedControlStatic segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 64) delegate:self nomalImageArr:nomal_image_arr selectedImageArr:selected_image_arr childVcTitle:title_arr];
-    //_topSView.showsBottomScrollIndicator = NO;
+    self.topSView = [SGSegmentedControlStatic segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 60) delegate:self childVcTitle:title_arr indicatorIsFull:YES];
+    
+    // 必须实现的方法
+    [self.topSView SG_setUpSegmentedControlType:^(SGSegmentedControlStaticType *segmentedControlStaticType, NSArray *__autoreleasing *nomalImageArr, NSArray *__autoreleasing *selectedImageArr) {
+        *segmentedControlStaticType = SGSegmentedControlStaticTypeVertical;
+        *nomalImageArr = nomal_image_arr;
+        *selectedImageArr = selected_image_arr;
+    }];
     [self.view addSubview:_topSView];
 }
 
@@ -82,5 +86,6 @@
     // 2.把对应的标题选中
     [self.topSView changeThePositionOfTheSelectedBtnWithScrollView:scrollView];
 }
+
 
 @end

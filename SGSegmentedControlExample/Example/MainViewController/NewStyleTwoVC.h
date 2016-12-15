@@ -1,13 +1,13 @@
 //
-//  StyleOneVC.h
+//  NewStyleTwoVC.h
 //  SGSegmentedControlExample
 //
-//  Created by apple on 16/11/9.
+//  Created by apple on 16/12/15.
 //  Copyright © 2016年 Sorgle. All rights reserved.
-//
+//  
 
 #import <UIKit/UIKit.h>
 
-@interface StyleOneVC : UIViewController
+@interface NewStyleTwoVC : UIViewController
 
 @end

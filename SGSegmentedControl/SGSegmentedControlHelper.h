@@ -1,0 +1,37 @@
+
+//
+//  SGSegmentedControlHelper.h
+//  SGSegmentedControlExample
+//
+//  Created by Sorgle on 16/12/7.
+//  Copyright © 2015年 Sorgle. All rights reserved.
+//
+
+#ifndef SGSegmentedControlHelper_h
+#define SGSegmentedControlHelper_h
+
+#import "UIView+SGExtension.h"
+
+/** 指示器默认颜色 */
+#define SG_indicatorColor [UIColor redColor]
+/** 指示器默认标题颜色 */
+#define SG_titleColor [UIColor blackColor]
+/** 指示器默认标题选中时的颜色 */
+#define SG_selectedTitleColor [UIColor redColor]
+
+/** 指示器的高度 */
+static CGFloat SG_indicatorHeight = 2;
+/** 指示器的动画移动时间 */
+static CGFloat SG_indicatorAnimationTime = 0.1;
+/** 默认标题字体大小 */
+static CGFloat SG_defaultTitleFont = 15;
+
+/** 默认SGImageButton_Horizontal图片的宽度 */
+static CGFloat SG_defaultHorizontalImageWidth = 20;
+
+
+
+
+#endif /* SGSegmentedControlHelper_h */
+
+

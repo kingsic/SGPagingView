@@ -1,26 +1,24 @@
 //
-//  StyleOneVC.m
+//  NewStyleTwoVC.m
 //  SGSegmentedControlExample
 //
-//  Created by apple on 16/11/9.
+//  Created by apple on 16/12/15.
 //  Copyright © 2016年 Sorgle. All rights reserved.
 //
+//  带有图片的 SGSegmentedControlStatic，且图片在左边
 
-// 普通状态下的 SGSegmentControlStatic
-
-#import "StyleOneVC.h"
+#import "NewStyleTwoVC.h"
 #import "TestOneVC.h"
 #import "TestTwoVC.h"
 #import "TestThreeVC.h"
-#import "TestFourVC.h"
 #import "SGSegmentedControl.h"
 
-@interface StyleOneVC ()<SGSegmentedControlStaticDelegate, UIScrollViewDelegate>
+@interface NewStyleTwoVC () <SGSegmentedControlStaticDelegate, UIScrollViewDelegate>
 @property (nonatomic, strong) SGSegmentedControlStatic *topSView;
 @property (nonatomic, strong) SGSegmentedControlBottomView *bottomSView;
 @end
 
-@implementation StyleOneVC
+@implementation NewStyleTwoVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,12 +38,11 @@
     TestThreeVC *threeVC = [[TestThreeVC alloc] init];
     [self addChildViewController:threeVC];
     
-    TestFourVC *fourVC = [[TestFourVC alloc] init];
-    [self addChildViewController:fourVC];
+    NSArray *childVC = @[oneVC, twoVC, threeVC];
     
-    NSArray *childVC = @[oneVC, twoVC, threeVC, fourVC];
-
-    NSArray *title_arr = @[@"精选", @"电视剧", @"电影", @"综艺"];
+    NSArray *nomal_image_arr = @[@"one_icon", @"two_icon", @"three_icon"];
+    NSArray *selected_image_arr = @[@"one_selected_icon", @"two_selected_icon", @"three_selected_icon"];
+    NSArray *title_arr = @[@"地球", @"学士帽", @"书籍"];
     
     self.bottomSView = [[SGSegmentedControlBottomView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _bottomSView.childViewController = childVC;
@@ -54,8 +51,14 @@
     //_bottomView.scrollEnabled = NO;
     [self.view addSubview:_bottomSView];
     
-    self.topSView = [SGSegmentedControlStatic segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self childVcTitle:title_arr];
-    //_topSView.showsBottomScrollIndicator = NO;
+    self.topSView = [SGSegmentedControlStatic segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self childVcTitle:title_arr indicatorIsFull:YES];
+    
+    // 必须实现的方法
+    [self.topSView SG_setUpSegmentedControlType:^(SGSegmentedControlStaticType *segmentedControlStaticType, NSArray *__autoreleasing *nomalImageArr, NSArray *__autoreleasing *selectedImageArr) {
+        *segmentedControlStaticType = SGSegmentedControlStaticTypeHorizontal;
+        *nomalImageArr = nomal_image_arr;
+        *selectedImageArr = selected_image_arr;
+    }];
     [self.view addSubview:_topSView];
 }
 
@@ -81,11 +84,4 @@
 }
 
 
-
-
-
-
 @end
-
-
-
