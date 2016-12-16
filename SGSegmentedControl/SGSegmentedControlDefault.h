@@ -17,10 +17,9 @@
 @class SGSegmentedControlDefault;
 
 typedef enum : NSUInteger {
-    segmentedControlIndicatorTypeBottom, // 指示器底部样式
-    segmentedControlIndicatorTypeCenter, // 指示器中心背景样式
-    segmentedControlIndicatorTypeBankground, // 指示器背景样式
-    segmentedControlIndicatorTypeBottomWithImage, // 带有图片的指示器样式
+    segmentedControlIndicatorTypeDefault, // 指示器底部样式
+    segmentedControlIndicatorTypeCover, // 指示器中心背景样式
+    segmentedControlIndicatorTypeImageView, // 带有图片的指示器样式
 } segmentedControlIndicatorType;  // SGSegmentedControlIndicatorType 指示器样式，默认为底部样式
 
 // Block 方法
@@ -75,12 +74,6 @@ typedef void(^SGSegmentedControlDefaultBlock)(SGSegmentedControlDefault *segment
 - (instancetype)initWithFrame:(CGRect)frame childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText didSelectedTitleIndex:(SGSegmentedControlDefaultBlock)didSelectedTitleIndex;
 /** 类方法创建 (Block 创建SGSegmentedControlDefault) */
 + (instancetype)segmentedControlWithFrame:(CGRect)frame childVcTitle:(NSArray *)childVcTitle isScaleText:(BOOL)isScaleText didSelectedTitleIndex:(SGSegmentedControlDefaultBlock)didSelectedTitleIndex;
-
-#pragma mark - - - 创建带有图片的 SGSegmentedControlDefault
-/** 对象方法创建，带有图片的 SGSegmentedControlDefault */
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle;
-/** 类方法创建，带有图片的 SGSegmentedControlDefault */
-+ (instancetype)segmentedControlWithFrame:(CGRect)frame delegate:(id<SGSegmentedControlDefaultDelegate>)delegate nomalImageArr:(NSArray *)nomalImageArr selectedImageArr:(NSArray *)selectedImageArr childVcTitle:(NSArray *)childVcTitle;
 
 #pragma mark - - - 给外界scrollViewDidEndDecelerating:scrollView提供的方法
 /** 改变选中button的位置以及指示器位置变化（给外界scrollView提供的方法 -> 必须实现） */

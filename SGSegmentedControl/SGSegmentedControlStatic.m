@@ -114,7 +114,7 @@
 
     if (segmentedControlStyleBlock) {
         segmentedControlStyleBlock(&segmentedControl_color, &title_color, &selectedTitle_color, &indicator_color, &isShowIndicor);
-        self.backgroundColor = segmentedControl_color;
+        self.segmentControlColor = segmentedControl_color;
         self.titleColorStateNormal = title_color;
         self.titleColorStateSelected = selectedTitle_color;
         self.indicatorColor = indicator_color;

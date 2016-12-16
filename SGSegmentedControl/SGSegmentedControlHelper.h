@@ -25,7 +25,10 @@ static CGFloat SG_indicatorHeight = 2;
 static CGFloat SG_indicatorAnimationTime = 0.1;
 /** 默认标题字体大小 */
 static CGFloat SG_defaultTitleFont = 15;
-
+/** 按钮之间的间距(滚动时按钮之间的间距) */
+static CGFloat SG_btnMargin = 15;
+/** 标题按钮文字的缩放倍数 */
+static CGFloat SG_btnScale = 0.14;
 /** 默认SGImageButton_Horizontal图片的宽度 */
 static CGFloat SG_defaultHorizontalImageWidth = 20;
 

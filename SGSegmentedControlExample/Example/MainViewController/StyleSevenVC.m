@@ -80,7 +80,7 @@
     
     self.topSView = [SGSegmentedControlDefault segmentedControlWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self childVcTitle:title_arr isScaleText:NO];
     _topSView.backgroundColor = [UIColor lightGrayColor];
-    _topSView.segmentedControlIndicatorType = segmentedControlIndicatorTypeBottomWithImage;
+    _topSView.segmentedControlIndicatorType = segmentedControlIndicatorTypeImageView;
     [self.view addSubview:_topSView];
 }
 
