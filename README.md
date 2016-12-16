@@ -138,7 +138,7 @@
 * 2016. 11. 18 --> 新增导航栏样式
 * 2016. 11. 22 --> 解决因下标越界而引起程序崩溃的问题（手速快速滑动才会出现问题，在此感谢 ShenZhenChenlin 这位朋友提出的问题）
 * 2016. 11. 24 --> 新增 Block 创建 SGSegmentControlDefault 方法
-* 2016. 11. 24 --> 完善 SGSegmentedControlStatic，并添加指定下标属性
+* 2016. 12. 15 --> 完善 SGSegmentedControlStatic，并添加指定下标属性
 
 
 ## Concluding remarks
