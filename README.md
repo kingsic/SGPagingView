@@ -21,7 +21,7 @@
 
 ## 效果图
 
-![](https://github.com/kingsic/SGSegmentedControl/raw/master/Gif/sorgle.gif) 
+![](https://github.com/kingsic/SGPageView/raw/master/Gif/sorgle.gif) 
 
 
 ## 代码介绍
