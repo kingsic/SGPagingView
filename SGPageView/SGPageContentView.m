@@ -5,6 +5,13 @@
 //  Created by apple on 17/4/10.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
+//  - - - - - - - - - - - - - - 交流QQ：1357127436 - - - - - - - - - - - - - - //
+//
+//  - - 如在使用中, 遇到什么问题或者有更好建议者, 请于 kingsic@126.com 邮箱联系 - - - //
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//  - - GitHub下载地址 https://github.com/kingsic/SGSegmentedControl.git - - - //
+//
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import "SGPageContentView.h"
 #import "UIView+SGFrame.h"
@@ -131,8 +138,8 @@
         }
     }
     // 3、pageContentViewDelegare; 将 progress／sourceIndex／targetIndex 传递给 SGPageTitleView
-    if (self.pageContentViewDelegare && [self.pageContentViewDelegare respondsToSelector:@selector(SGPageContentView:progress:originalIndex:targetIndex:)]) {
-        [self.pageContentViewDelegare SGPageContentView:self progress:progress originalIndex:originalIndex targetIndex:targetIndex];
+    if (self.delegarePageContentView && [self.delegarePageContentView respondsToSelector:@selector(SGPageContentView:progress:originalIndex:targetIndex:)]) {
+        [self.delegarePageContentView SGPageContentView:self progress:progress originalIndex:originalIndex targetIndex:targetIndex];
     }
 }
 

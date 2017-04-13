@@ -44,12 +44,12 @@
     }
     CGFloat contentViewHeight = self.view.frame.size.height - 64;
     self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childMArr];
-    _pageContentView.pageContentViewDelegare = self;
+    _pageContentView.delegarePageContentView = self;
     [self.view addSubview:_pageContentView];
     
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44) titleNames:titleArr];
-    _pageTitleView.pageTitleViewDelegate = self;
+    _pageTitleView.delegatePageTitleView = self;
     _pageTitleView.isShowIndicator = NO;
     
     // 对navigationItem.titleView的包装，为的是让View占据整个视图宽度

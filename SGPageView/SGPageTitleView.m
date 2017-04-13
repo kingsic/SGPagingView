@@ -5,6 +5,13 @@
 //  Created by apple on 17/4/10.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
+//  - - - - - - - - - - - - - - 交流QQ：1357127436 - - - - - - - - - - - - - - //
+//
+//  - - 如在使用中, 遇到什么问题或者有更好建议者, 请于 kingsic@126.com 邮箱联系 - - - //
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//  - - GitHub下载地址 https://github.com/kingsic/SGSegmentedControl.git - - - //
+//
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import "SGPageTitleView.h"
 #import "UIView+SGFrame.h"
@@ -221,8 +228,8 @@
 
     
     // 4、pageTitleViewDelegate
-    if (self.pageTitleViewDelegate && [self.pageTitleViewDelegate respondsToSelector:@selector(SGPageTitleView:selectedIndex:)]) {
-        [self.pageTitleViewDelegate SGPageTitleView:self selectedIndex:self.currentIndex];
+    if (self.delegatePageTitleView && [self.delegatePageTitleView respondsToSelector:@selector(SGPageTitleView:selectedIndex:)]) {
+        [self.delegatePageTitleView SGPageTitleView:self selectedIndex:self.currentIndex];
     }
     
     // 5、滚动标题选中居中

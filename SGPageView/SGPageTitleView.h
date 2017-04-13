@@ -5,6 +5,13 @@
 //  Created by apple on 17/4/10.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
+//  - - - - - - - - - - - - - - 交流QQ：1357127436 - - - - - - - - - - - - - - //
+//
+//  - - 如在使用中, 遇到什么问题或者有更好建议者, 请于 kingsic@126.com 邮箱联系 - - - //
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//  - - GitHub下载地址 https://github.com/kingsic/SGSegmentedControl.git - - - //
+//
+//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import <UIKit/UIKit.h>
 @class SGPageTitleView;
@@ -37,7 +44,7 @@ typedef enum : NSUInteger {
 + (instancetype)pageTitleViewWithFrame:(CGRect)frame titleNames:(NSArray *)titleNames;
 
 /** pageTitleViewDelegate */
-@property (nonatomic, weak) id<SGPageTitleViewDelegate> pageTitleViewDelegate;
+@property (nonatomic, weak) id<SGPageTitleViewDelegate> delegatePageTitleView;
 
 /** 选中的按钮下标, 如果这个属性和 indicatorStyle 属性同时存在，则此属性在前 */
 @property (nonatomic, assign) NSInteger selectedIndex;
