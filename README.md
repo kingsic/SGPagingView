@@ -26,7 +26,7 @@
 
 ## 代码介绍
 
-### * `SGSegmentedControl的使用`<br>
+### * `SGPageView的使用（具体使用请参考 Demo）`<br>
 
   * 将项目中 SGPageView 文件夹导入工程
 
