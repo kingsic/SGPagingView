@@ -267,7 +267,7 @@
 }
 
 /// 给外界提供的方法
-- (void)setSegmentedControlWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
+- (void)setPageTitleViewWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     // 1、取出 originalBtn／targetBtn
     UIButton *originalBtn = self.btnMArr[originalIndex];
     UIButton *targetBtn = self.btnMArr[targetIndex];

@@ -60,6 +60,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) BOOL isNeedBounces;
 
 /** 给外界提供的方法，获取 SGContentView 的 progress／originalIndex／targetIndex, 必须实现 */
-- (void)setSegmentedControlWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
+- (void)setPageTitleViewWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
 
 @end
