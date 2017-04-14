@@ -35,6 +35,7 @@
 @property (nonatomic, assign) CGFloat allBtnTextWidth;
 /// 记录所有子控件的宽度
 @property (nonatomic, assign) CGFloat allBtnWidth;
+
 @end
 
 @implementation SGPageTitleView
@@ -225,7 +226,6 @@
             }
         }];
     }
-
     
     // 4、pageTitleViewDelegate
     if (self.delegatePageTitleView && [self.delegatePageTitleView respondsToSelector:@selector(SGPageTitleView:selectedIndex:)]) {
@@ -234,6 +234,20 @@
     
     // 5、滚动标题选中居中
     [self selectedBtnCenter:button];
+}
+
+/// 改变按钮的选择状态
+- (void)changeSelectedButton:(UIButton *)button {
+    if (_tempBtn == nil) {
+        button.selected = YES;
+        _tempBtn = button;
+    } else if (_tempBtn != nil && _tempBtn == button){
+        button.selected = YES;
+    } else if (_tempBtn != button && _tempBtn != nil){
+        _tempBtn.selected = NO;
+        button.selected = YES;
+        _tempBtn = button;
+    }
 }
 
 /// 滚动标题选中居中
@@ -250,20 +264,6 @@
     
     // 滚动标题滚动条
     [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
-}
-
-/// 改变按钮的选择状态
-- (void)changeSelectedButton:(UIButton *)button {
-    if (_tempBtn == nil) {
-        button.selected = YES;
-        _tempBtn = button;
-    } else if (_tempBtn != nil && _tempBtn == button){
-        button.selected = YES;
-    } else if (_tempBtn != button && _tempBtn != nil){
-        _tempBtn.selected = NO;
-        button.selected = YES;
-        _tempBtn = button;
-    }
 }
 
 /// 给外界提供的方法
@@ -324,7 +324,7 @@
             }
         }
 
-    } else {
+    } else { /// SGPageTitleView 可滚动
         if (self.isIndicatorScroll) {
             /// 计算 targetBtn／originalBtn 之间的距离
             CGFloat totalOffsetX = targetBtn.SG_origin.x - originalBtn.SG_origin.x;
@@ -368,10 +368,10 @@
         targetBtn.titleLabel.textColor = [UIColor colorWithRed:progress green:0 blue:0 alpha:1];
     }
 
-
     // 6、记录最新的 index
     self.currentIndex = targetIndex;
 }
+
 #pragma mark - - - set
 /// selectedIndex
 - (void)setSelectedIndex:(NSInteger)selectedIndex {

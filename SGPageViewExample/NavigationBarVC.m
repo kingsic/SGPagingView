@@ -44,7 +44,7 @@
     }
     CGFloat contentViewHeight = self.view.frame.size.height - 64;
     self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childMArr];
-    _pageContentView.delegarePageContentView = self;
+    _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
     
     /// pageTitleView
@@ -52,7 +52,7 @@
     _pageTitleView.delegatePageTitleView = self;
     _pageTitleView.isShowIndicator = NO;
     
-    // 对navigationItem.titleView的包装，为的是让View占据整个视图宽度
+    // 对 navigationItem.titleView 的包装，为的是 让View 占据整个视图宽度
     NavigationBarTitleView *view = [[NavigationBarTitleView alloc] init];
     view.backgroundColor = [UIColor yellowColor];
     self.navigationItem.titleView = view;
@@ -66,7 +66,6 @@
 - (void)SGPageContentView:(SGPageContentView *)SGPageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setSegmentedControlWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
-
 
 
 @end

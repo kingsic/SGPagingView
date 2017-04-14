@@ -34,16 +34,13 @@
     }
     CGFloat contentViewHeight = self.view.frame.size.height - 108;
     self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 108, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childMArr];
-    _pageContentView.delegarePageContentView = self;
+    _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
     
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) titleNames:titleArr];
     _pageTitleView.delegatePageTitleView = self;
     [self.view addSubview:_pageTitleView];
-    _pageTitleView.selectedIndex = 1;
-    //_pageTitleView.indicatorStyle = SGIndicatorTypeEqual;
-    //_pageTitleView.isIndicatorScroll = NO;
 }
 
 - (void)SGPageTitleView:(SGPageTitleView *)SGPageTitleView selectedIndex:(NSInteger)selectedIndex {

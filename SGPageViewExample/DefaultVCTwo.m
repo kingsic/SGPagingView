@@ -34,7 +34,7 @@
     }
     CGFloat contentViewHeight = self.view.frame.size.height - 108;
     self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 108, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childMArr];
-    _pageContentView.delegarePageContentView = self;
+    _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
     
     /// pageTitleView
