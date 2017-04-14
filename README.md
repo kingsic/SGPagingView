@@ -62,7 +62,7 @@
 
 ```Objective-C
 - (void)SGPageContentView:(SGPageContentView *)SGPageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
-    [self.pageTitleView setSegmentedControlWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
+    [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 ```
 
@@ -77,7 +77,7 @@
 
 ```Objective-C
 - (void)SGPageTitleView:(SGPageTitleView *)SGPageTitleView selectedIndex:(NSInteger)selectedIndex {
-    [self.pageContentView setSGPageCententViewCurrentIndex:selectedIndex];
+    [self.pageContentView setPageCententViewCurrentIndex:selectedIndex];
 }
 ```
 
