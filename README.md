@@ -5,7 +5,7 @@
 
 * 这里的 SegmentedControl 采取的是腾讯新闻、网易新闻、礼物说等布局样式
 
-* 版本升级（合并了静止状态与滚动状态样式，根据标题内容自动选取静止或滚动）
+* 版本升级（根据标题内容自动适配 SGPageTitleView 是静止还是滚动）
 
 
 ## 主要内容的介绍
@@ -46,7 +46,7 @@
     }
     CGFloat contentViewHeight = self.view.frame.size.height - 108;
     self.pageContentView = [SGPageContentView pageContentViewWithFrame:CGRectMake(0, 108, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childMArr];
-    _pageContentView.pageContentViewDelegare = self;
+    _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
 ```
 
@@ -62,7 +62,7 @@
 
 ```Objective-C
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) titleNames:titleArr];
-    _pageTitleView.pageTitleViewDelegate = self;
+    _pageTitleView.delegatePageTitleView = self;
     [self.view addSubview:_pageTitleView];
 ```
 
