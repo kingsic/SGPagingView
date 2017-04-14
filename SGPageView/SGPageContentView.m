@@ -144,7 +144,7 @@
 }
 
 /// 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
-- (void)setSGPageCententViewCurrentIndex:(NSInteger)currentIndex {
+- (void)setPageCententViewCurrentIndex:(NSInteger)currentIndex {
     self.isClickBtn = YES;
     CGFloat offsetX = currentIndex * self.collectionView.SG_width;
     self.collectionView.contentOffset = CGPointMake(offsetX, 0);

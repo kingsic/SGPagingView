@@ -44,6 +44,6 @@
 @property (nonatomic, weak) id<SGPageContentViewDelegare> delegatePageContentView;
 
 /** 给外界提供的方法，获取 SGSegmentedControl 选中按钮的下标, 必须实现 */
-- (void)setSGPageCententViewCurrentIndex:(NSInteger)currentIndex;
+- (void)setPageCententViewCurrentIndex:(NSInteger)currentIndex;
 
 @end
