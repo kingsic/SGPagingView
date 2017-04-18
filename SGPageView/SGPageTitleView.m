@@ -14,8 +14,8 @@
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import "SGPageTitleView.h"
-#import "UIView+SGFrame.h"
 #import "SGPageViewHelper.h"
+#import "UIView+SGFrame.h"
 #import "SGHelperTool.h"
 
 @interface SGPageTitleView ()
@@ -162,7 +162,6 @@
             }
         }
         
-        // 计算scrollView的宽度
         CGFloat scrollViewWidth = CGRectGetMaxX(self.scrollView.subviews.lastObject.frame);
         self.scrollView.contentSize = CGSizeMake(scrollViewWidth, self.frame.size.height);
     }
@@ -200,9 +199,9 @@
 
     // 1、改变按钮的选择状态
     [self changeSelectedButton:button];
-
-    // 2、记录选中按钮的下标
-    self.currentIndex = button.tag;
+    
+    // 2、滚动标题选中居中
+    [self selectedBtnCenter:button];
     
     // 3、指示器位置发生改变
     if (self.allBtnWidth <= self.bounds.size.width) { /// SGPageTitleView 不可滚动
@@ -227,13 +226,13 @@
         }];
     }
     
-    // 4、pageTitleViewDelegate
+    // 4、记录选中按钮的下标
+    self.currentIndex = button.tag;
+    
+    // 5、pageTitleViewDelegate
     if (self.delegatePageTitleView && [self.delegatePageTitleView respondsToSelector:@selector(SGPageTitleView:selectedIndex:)]) {
         [self.delegatePageTitleView SGPageTitleView:self selectedIndex:self.currentIndex];
     }
-    
-    // 5、滚动标题选中居中
-    [self selectedBtnCenter:button];
 }
 
 /// 改变按钮的选择状态
@@ -373,6 +372,30 @@
 }
 
 #pragma mark - - - set
+/// titleColorStateNormal
+- (void)setTitleColorStateNormal:(UIColor *)titleColorStateNormal {
+    _titleColorStateNormal = titleColorStateNormal;
+    [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIButton *btn = obj;
+        [btn setTitleColor:titleColorStateNormal forState:(UIControlStateNormal)];
+    }];
+}
+
+/// titleColorStateSelected
+- (void)setTitleColorStateSelected:(UIColor *)titleColorStateSelected {
+    _titleColorStateSelected = titleColorStateSelected;
+    [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIButton *btn = obj;
+        [btn setTitleColor:titleColorStateSelected forState:(UIControlStateSelected)];
+    }];
+}
+
+/// indicatorColor
+- (void)setIndicatorColor:(UIColor *)indicatorColor {
+    _indicatorColor = indicatorColor;
+    self.indicatorView.backgroundColor = indicatorColor;
+}
+
 /// selectedIndex
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
     _selectedIndex = selectedIndex;

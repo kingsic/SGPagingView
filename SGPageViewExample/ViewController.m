@@ -32,6 +32,9 @@
     CGFloat pageTitleViewW = SGScreenWidth - 2 * pageTitleViewX;
     CGFloat pageTitleViewH = 44;
     SGPageTitleView *pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(pageTitleViewX, pageTitleViewY, pageTitleViewW, pageTitleViewH) titleNames:titleArr];
+    pageTitleView.titleColorStateNormal = [UIColor brownColor];
+    pageTitleView.titleColorStateSelected = [UIColor purpleColor];
+    pageTitleView.indicatorColor = [UIColor purpleColor];
     [self.view addSubview:pageTitleView];
 
     /// 例二

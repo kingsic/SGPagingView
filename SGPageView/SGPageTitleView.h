@@ -22,7 +22,7 @@ typedef enum : NSUInteger {
 } SGIndicatorType;
 
 @protocol SGPageTitleViewDelegate <NSObject>
-/// pageTitleViewDelegate
+/// delegatePageTitleView
 - (void)SGPageTitleView:(SGPageTitleView *)SGPageTitleView selectedIndex:(NSInteger)selectedIndex;
 
 @end
@@ -43,9 +43,15 @@ typedef enum : NSUInteger {
  */
 + (instancetype)pageTitleViewWithFrame:(CGRect)frame titleNames:(NSArray *)titleNames;
 
-/** pageTitleViewDelegate */
+/** delegatePageTitleView */
 @property (nonatomic, weak) id<SGPageTitleViewDelegate> delegatePageTitleView;
 
+/** 普通状态标题文字颜色，默认黑色 */
+@property (nonatomic, strong) UIColor *titleColorStateNormal;
+/** 选中状态标题文字颜色，默认红色 */
+@property (nonatomic, strong) UIColor *titleColorStateSelected;
+/** 指示器颜色，默认红色 */
+@property (nonatomic, strong) UIColor *indicatorColor;
 /** 选中的按钮下标, 如果这个属性和 indicatorStyle 属性同时存在，则此属性在前 */
 @property (nonatomic, assign) NSInteger selectedIndex;
 /** 指示器样式 */
