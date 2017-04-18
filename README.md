@@ -8,7 +8,7 @@
 * 版本升级（根据标题内容自动适配 SGPageTitleView 是静止还是滚动）
 
 
-## 为什么版本升级 ？为什么要用 SGPageView ？
+### 为什么版本升级 ？为什么要用 SGPageView ？
 
 * 1、这种控件大部分采用 UILabel 或 UIButton 进行的封装，您可以根据项目需求搜索选取很多第三方去使用，但大部分的这种控件都是静止或滚动状态，只有封装很好的才会有静止滚动同时存在
 
@@ -33,9 +33,7 @@
 ![](https://github.com/kingsic/SGPageView/raw/master/Gif/sorgle.gif) 
 
 
-## 代码介绍
-
-### * `SGPageView 的使用（详细使用请参考 Demo）`<br>
+## 代码介绍（详细使用请参考 Demo）
 
   * 将项目中 SGPageView 文件夹拖入工程
 
@@ -84,8 +82,9 @@
 
 ## 版本介绍
 
-* 2016-10-7  --> 初始版本的创建
+* 2016-10-7 --> 初始版本的创建
 * 2017-4-13 --> 版本升级（根据标题内容自动适配 SGPageTitleView 是静止还是滚动）
+* 2017-4-18 --> 新增标题文字颜色属性以及指示器颜色属性
 
 
 ## Concluding remarks
