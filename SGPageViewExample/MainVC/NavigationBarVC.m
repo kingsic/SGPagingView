@@ -33,33 +33,25 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
-    
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
-    
     ChildVCThree *threeVC = [[ChildVCThree alloc] init];
-    
     ChildVCFour *fourVC = [[ChildVCFour alloc] init];
-    
     ChildVCFive *fiveVC = [[ChildVCFive alloc] init];
-    
     ChildVCSix *sixVC = [[ChildVCSix alloc] init];
-    
     ChildVCSeven *sevenVC = [[ChildVCSeven alloc] init];
-    
     ChildVCEight *eightVC = [[ChildVCEight alloc] init];
-    
     ChildVCNine *nineVC = [[ChildVCNine alloc] init];
     
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
-    
+    /// pageContentView
     CGFloat contentViewHeight = self.view.frame.size.height - 64;
     self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
     _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
     
+    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
     _pageTitleView.isShowIndicator = NO;
