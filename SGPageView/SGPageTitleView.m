@@ -38,6 +38,15 @@
 /// 记录所有子控件的宽度
 @property (nonatomic, assign) CGFloat allBtnWidth;
 
+/// 开始颜色, 取值范围 0~1
+@property (nonatomic, assign) CGFloat startR;
+@property (nonatomic, assign) CGFloat startG;
+@property (nonatomic, assign) CGFloat startB;
+/// 完成颜色, 取值范围 0~1
+@property (nonatomic, assign) CGFloat endR;
+@property (nonatomic, assign) CGFloat endG;
+@property (nonatomic, assign) CGFloat endB;
+
 @end
 
 @implementation SGPageTitleView
@@ -368,10 +377,28 @@
     
     // 5、颜色的渐变(复杂)
     if (self.isTitleGradientEffect) {
-        originalBtn.titleLabel.textColor = [UIColor colorWithRed:1 - progress green:0 blue:0 alpha:1];
-        targetBtn.titleLabel.textColor = [UIColor colorWithRed:progress green:0 blue:0 alpha:1];
+        if (self.titleColorStateSelected) {
+            // 获取 targetProgress
+            CGFloat targetProgress = progress;
+            // 获取 originalProgress
+            CGFloat originalProgress = 1 - targetProgress;
+            
+            CGFloat r = self.endR - self.startR;
+            CGFloat g = self.endG - self.startG;
+            CGFloat b = self.endB - self.startB;
+            UIColor *originalColor = [UIColor colorWithRed:self.startR +  r * originalProgress  green:self.startG +  g * originalProgress  blue:self.startB +  b * originalProgress alpha:1];
+            UIColor *targetColor = [UIColor colorWithRed:self.startR + r * targetProgress green:self.startG + g * targetProgress blue:self.startB + b * targetProgress alpha:1];
+            
+            // 设置文字颜色渐变
+            originalBtn.titleLabel.textColor = originalColor;
+            targetBtn.titleLabel.textColor = targetColor;
+            
+        } else {
+            
+            originalBtn.titleLabel.textColor = [UIColor colorWithRed:1 - progress green:0 blue:0 alpha:1];
+            targetBtn.titleLabel.textColor = [UIColor colorWithRed:progress green:0 blue:0 alpha:1];
+        }
     }
-
 }
 
 #pragma mark - - - set
@@ -382,6 +409,8 @@
         UIButton *btn = obj;
         [btn setTitleColor:titleColorStateNormal forState:(UIControlStateNormal)];
     }];
+    
+    [self setupStartColor:titleColorStateNormal];
 }
 
 /// titleColorStateSelected
@@ -391,6 +420,8 @@
         UIButton *btn = obj;
         [btn setTitleColor:titleColorStateSelected forState:(UIControlStateSelected)];
     }];
+    
+    [self setupEndColor:titleColorStateSelected];
 }
 
 /// indicatorColor
@@ -450,6 +481,44 @@
     _isNeedBounces = isNeedBounces;
     if (isNeedBounces == NO) {
         self.scrollView.bounces = NO;
+    }
+}
+
+#pragma mark - - - 颜色设置的计算
+/// 开始颜色设置
+- (void)setupStartColor:(UIColor *)color {
+    CGFloat components[3];
+    [self getRGBComponents:components forColor:color];
+    self.startR = components[0];
+    self.startG = components[1];
+    self.startB = components[2];
+}
+
+/// 结束颜色设置
+- (void)setupEndColor:(UIColor *)color {
+    CGFloat components[3];
+    [self getRGBComponents:components forColor:color];
+    self.endR = components[0];
+    self.endG = components[1];
+    self.endB = components[2];
+}
+
+/**
+ *  指定颜色，获取颜色的RGB值
+ *
+ *  @param components RGB数组
+ *  @param color      颜色
+ */
+- (void)getRGBComponents:(CGFloat [3])components forColor:(UIColor *)color {
+    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
+    unsigned char resultingPixel[4];
+    CGContextRef context = CGBitmapContextCreate(&resultingPixel, 1, 1, 8, 4, rgbColorSpace, 1);
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, CGRectMake(0, 0, 1, 1));
+    CGContextRelease(context);
+    CGColorSpaceRelease(rgbColorSpace);
+    for (int component = 0; component < 3; component++) {
+        components[component] = resultingPixel[component] / 255.0f;
     }
 }
 

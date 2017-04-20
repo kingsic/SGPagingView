@@ -54,6 +54,9 @@
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
     [self.view addSubview:_pageTitleView];
     _pageTitleView.selectedIndex = 1;
+    _pageTitleView.titleColorStateNormal = [UIColor lightGrayColor];
+    _pageTitleView.titleColorStateSelected = [UIColor blackColor];
+    _pageTitleView.indicatorColor = [UIColor blackColor];
     _pageTitleView.indicatorStyle = SGIndicatorTypeEqual;
 }
 
