@@ -43,15 +43,25 @@
 
 ```Objective-C
     /// 创建子控制器
+    
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
+    
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
+    
     ChildVCThree *threeVC = [[ChildVCThree alloc] init];
+    
     ChildVCFour *fourVC = [[ChildVCFour alloc] init];
+    
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
+    
     /// pageContentView
+    
     CGFloat contentViewHeight = self.view.frame.size.height - 108;
+    
     self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 108, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
+    
     _pageContentView.delegatePageContentView = self;
+    
     [self.view addSubview:_pageContentView];
 ```
 
@@ -59,7 +69,9 @@
 
 ```Objective-C
 - (void)SGPageContentView:(SGPageContentView *)SGPageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
+    
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
+
 }
 ```
 
@@ -67,10 +79,15 @@
 
 ```Objective-C
     /// 子标题数组
-    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
+    
+    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
+    
     /// pageTitleView
+    
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
-    _pageTitleView.selectedIndex = 0;
+    
+    _pageTitleView.selectedIndex = 1;
+    
     [self.view addSubview:_pageTitleView];
 ```
 
@@ -78,7 +95,9 @@
 
 ```Objective-C
 - (void)SGPageTitleView:(SGPageTitleView *)SGPageTitleView selectedIndex:(NSInteger)selectedIndex {
+    
     [self.pageContentView setPageCententViewCurrentIndex:selectedIndex];
+    
 }
 ```
 
@@ -88,6 +107,7 @@
 * 2016-10-7 --> 初始版本的创建
 * 2017-4-13 --> 版本升级（根据标题内容自动适配 SGPageTitleView 是静止还是滚动）
 * 2017-4-18 --> 新增标题文字颜色属性以及指示器颜色属性
+* 2017-4-20 --> 修复标题选中 Bug
 
 
 ## Concluding remarks
