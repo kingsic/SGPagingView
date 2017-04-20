@@ -84,9 +84,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    for (UIView *subView in cell.contentView.subviews) {
-        [subView removeFromSuperview];
-    }
+    [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     // 设置内容
     UIViewController *childVC = self.childViewControllers[indexPath.item];
     childVC.view.frame = cell.contentView.bounds;
@@ -119,7 +117,8 @@
         // 3、计算 targetIndex
         targetIndex = originalIndex + 1;
         if (targetIndex >= self.childViewControllers.count) {
-            targetIndex = self.childViewControllers.count - 1;
+            progress = 1;
+            targetIndex = originalIndex;
         }
         // 4、如果完全划过去
         if (currentOffsetX - self.startOffsetX == scrollViewW) {

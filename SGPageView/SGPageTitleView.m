@@ -19,6 +19,8 @@
 #import "SGHelperTool.h"
 
 @interface SGPageTitleView ()
+/** delegatePageTitleView */
+@property (nonatomic, weak) id<SGPageTitleViewDelegate> delegatePageTitleView;
 /// 保存外界传递过来的标题数组
 @property (nonatomic, strong) NSArray *titleArr;
 /// scrollView
@@ -40,17 +42,47 @@
 
 @implementation SGPageTitleView
 
-- (instancetype)initWithFrame:(CGRect)frame titleNames:(NSArray *)titleNames {
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.72];
+        self.delegatePageTitleView = delegate;
         self.titleArr = titleNames;
-        [self setup];
+        [self initialization];
+        [self setupSubviews];
     }
     return self;
 }
 
-+ (instancetype)pageTitleViewWithFrame:(CGRect)frame titleNames:(NSArray *)titleNames {
-    return [[self alloc] initWithFrame:frame titleNames:titleNames];
++ (instancetype)pageTitleViewWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames {
+    return [[self alloc] initWithFrame:frame delegate:delegate titleNames:titleNames];
+}
+
+- (void)initialization {
+    self.indicatorStyle = SGIndicatorTypeDefault;
+    self.isTitleGradientEffect = YES;
+    self.isIndicatorScroll = YES;
+    self.isShowIndicator = YES;
+    self.isNeedBounces = YES;
+}
+
+- (void)setupSubviews {
+    // 1、添加 UIScrollView
+    [self addSubview:self.scrollView];
+    
+    // 2、添加标题按钮
+    [self setupTitleButtons];
+    
+    // 3、添加指示器
+    [self setupIndicatorView];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    // 默认选中下标
+    if (self.selectedIndex == 0) {
+        self.selectedIndex = 0;
+    }
 }
 
 - (NSArray *)titleArr {
@@ -86,25 +118,7 @@
     return _indicatorView;
 }
 
-- (void)setup {
-    // 初始化属性
-    self.indicatorStyle = SGIndicatorTypeDefault;
-    self.isTitleGradientEffect = YES;
-    self.isIndicatorScroll = YES;
-    self.isShowIndicator = YES;
-    self.isNeedBounces = YES;
-    
-    // 1、添加UIScrollView
-    [self addSubview:self.scrollView];
-    
-    // 2、添加标题对应的按钮
-    [self setupTitleButtons];
-    
-    // 3、添加指示器
-    [self setupIndicatorView];
-}
-
-/// 添加标题对应的按钮
+/// 添加标题按钮
 - (void)setupTitleButtons {
     // 计算所有按钮的文字宽度
     [self.titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -131,11 +145,6 @@
             [btn addTarget:self action:@selector(btnAction:) forControlEvents:(UIControlEventTouchUpInside)];
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
-            btn.alpha = 1;
-            // 默认选中第 0 个按钮
-            if (index == 0) {
-                [self btnAction:btn];
-            }
         }
         self.scrollView.contentSize = CGSizeMake(self.bounds.size.width, 0);
     } else { /// SGPageTitleView 可滚动
@@ -156,10 +165,6 @@
             [btn addTarget:self action:@selector(btnAction:) forControlEvents:(UIControlEventTouchUpInside)];
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
-            // 默认选中第 0 个按钮
-            if (index == 0) {
-                [self btnAction:btn];
-            }
         }
         
         CGFloat scrollViewWidth = CGRectGetMaxX(self.scrollView.subviews.lastObject.frame);
@@ -200,6 +205,9 @@
     // 1、改变按钮的选择状态
     [self changeSelectedButton:button];
     
+    // 0、记录选中按钮的下标
+    self.currentIndex = button.tag;
+    
     // 2、滚动标题选中居中
     [self selectedBtnCenter:button];
     
@@ -225,27 +233,24 @@
             }
         }];
     }
-    
-    // 4、记录选中按钮的下标
-    self.currentIndex = button.tag;
-    
-    // 5、pageTitleViewDelegate
-    if (self.delegatePageTitleView && [self.delegatePageTitleView respondsToSelector:@selector(SGPageTitleView:selectedIndex:)]) {
+
+    // 4、pageTitleViewDelegate
+    if ([self.delegatePageTitleView respondsToSelector:@selector(SGPageTitleView:selectedIndex:)]) {
         [self.delegatePageTitleView SGPageTitleView:self selectedIndex:self.currentIndex];
     }
 }
 
 /// 改变按钮的选择状态
 - (void)changeSelectedButton:(UIButton *)button {
-    if (_tempBtn == nil) {
+    if (self.tempBtn == nil) {
         button.selected = YES;
-        _tempBtn = button;
-    } else if (_tempBtn != nil && _tempBtn == button){
+        self.tempBtn = button;
+    } else if (self.tempBtn != nil && self.tempBtn == button){
         button.selected = YES;
-    } else if (_tempBtn != button && _tempBtn != nil){
-        _tempBtn.selected = NO;
+    } else if (self.tempBtn != button && self.tempBtn != nil){
+        self.tempBtn.selected = NO;
         button.selected = YES;
-        _tempBtn = button;
+        self.tempBtn = button;
     }
 }
 
@@ -272,7 +277,7 @@
     UIButton *targetBtn = self.btnMArr[targetIndex];
 
     // 2、改变按钮的选择状态
-    if (progress == 1.0) {
+    if (progress >= 0.8) {
         [self changeSelectedButton:targetBtn];
     }
     
@@ -367,8 +372,6 @@
         targetBtn.titleLabel.textColor = [UIColor colorWithRed:progress green:0 blue:0 alpha:1];
     }
 
-    // 6、记录最新的 index
-    self.currentIndex = targetIndex;
 }
 
 #pragma mark - - - set
@@ -399,8 +402,11 @@
 /// selectedIndex
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
     _selectedIndex = selectedIndex;
-    
-    [self btnAction:self.btnMArr[selectedIndex]];
+    if (selectedIndex) {
+        [self btnAction:self.btnMArr[self.selectedIndex]];
+    } else { // 默认选择选中第一个按钮
+        [self btnAction:self.btnMArr[self.selectedIndex]];
+    }
 }
 
 /// indicatorStyle

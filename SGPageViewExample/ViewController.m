@@ -31,20 +31,20 @@
     CGFloat pageTitleViewY = 74;
     CGFloat pageTitleViewW = SGScreenWidth - 2 * pageTitleViewX;
     CGFloat pageTitleViewH = 44;
-    SGPageTitleView *pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(pageTitleViewX, pageTitleViewY, pageTitleViewW, pageTitleViewH) titleNames:titleArr];
+    SGPageTitleView *pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(pageTitleViewX, pageTitleViewY, pageTitleViewW, pageTitleViewH) delegate:nil titleNames:titleArr];
     pageTitleView.titleColorStateNormal = [UIColor brownColor];
     pageTitleView.titleColorStateSelected = [UIColor purpleColor];
     pageTitleView.indicatorColor = [UIColor purpleColor];
     [self.view addSubview:pageTitleView];
-
+    
     /// 例二
-    SGPageTitleView *pageTitleView2 = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, CGRectGetMaxY(pageTitleView.frame) + 20, SGScreenWidth, pageTitleViewH) titleNames:titleArr];
+    SGPageTitleView *pageTitleView2 = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, CGRectGetMaxY(pageTitleView.frame) + 20, SGScreenWidth, pageTitleViewH) delegate:nil titleNames:titleArr];
     pageTitleView2.selectedIndex = 1;
     [self.view addSubview:pageTitleView2];
     
     /// 例三
     NSArray *titleArr3 = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会"];
-    SGPageTitleView *pageTitleView3 = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, CGRectGetMaxY(pageTitleView2.frame) + 20, SGScreenWidth, pageTitleViewH) titleNames:titleArr3];
+    SGPageTitleView *pageTitleView3 = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, CGRectGetMaxY(pageTitleView2.frame) + 20, SGScreenWidth, pageTitleViewH) delegate:nil titleNames:titleArr3];
     [self.view addSubview:pageTitleView3];
     
     /// 例四

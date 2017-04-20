@@ -9,7 +9,15 @@
 #import "NavigationBarVC.h"
 #import "SGPageView.h"
 #import "NavigationBarTitleView.h"
-#import "SubviewVC.h"
+#import "ChildVCOne.h"
+#import "ChildVCTwo.h"
+#import "ChildVCThree.h"
+#import "ChildVCFour.h"
+#import "ChildVCFive.h"
+#import "ChildVCSix.h"
+#import "ChildVCSeven.h"
+#import "ChildVCEight.h"
+#import "ChildVCNine.h"
 
 @interface NavigationBarVC () <SGPageTitleViewDelegate, SGPageContentViewDelegare>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
@@ -25,36 +33,39 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会"];
-    NSMutableArray *childMArr = [NSMutableArray array];
-    for (int i = 0; i < titleArr.count; i++) {
-        if (i == 0) {
-            SubviewVC *vcs;
-            vcs = [[SubviewVC alloc] init];
-            vcs.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(255) / 255.0 green:arc4random_uniform(255) / 255.0 blue:arc4random_uniform(255) / 255.0 alpha:1.0];
-            [self addChildViewController:vcs];
-            [childMArr addObject:vcs];
-        } else {
-            UIViewController *vcs;
-            vcs = [[UIViewController alloc] init];
-            vcs.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(255) / 255.0 green:arc4random_uniform(255) / 255.0 blue:arc4random_uniform(255) / 255.0 alpha:1.0];
-            [self addChildViewController:vcs];
-            [childMArr addObject:vcs];
-        }
-    }
+    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
+    
+    ChildVCOne *oneVC = [[ChildVCOne alloc] init];
+    
+    ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
+    
+    ChildVCThree *threeVC = [[ChildVCThree alloc] init];
+    
+    ChildVCFour *fourVC = [[ChildVCFour alloc] init];
+    
+    ChildVCFive *fiveVC = [[ChildVCFive alloc] init];
+    
+    ChildVCSix *sixVC = [[ChildVCSix alloc] init];
+    
+    ChildVCSeven *sevenVC = [[ChildVCSeven alloc] init];
+    
+    ChildVCEight *eightVC = [[ChildVCEight alloc] init];
+    
+    ChildVCNine *nineVC = [[ChildVCNine alloc] init];
+    
+    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
+    
     CGFloat contentViewHeight = self.view.frame.size.height - 64;
-    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childMArr];
+    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
     _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
     
     /// pageTitleView
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44) titleNames:titleArr];
-    _pageTitleView.delegatePageTitleView = self;
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
     _pageTitleView.isShowIndicator = NO;
-    
+    _pageTitleView.selectedIndex = 2;
     // 对 navigationItem.titleView 的包装，为的是 让View 占据整个视图宽度
     NavigationBarTitleView *view = [[NavigationBarTitleView alloc] init];
-    view.backgroundColor = [UIColor yellowColor];
     self.navigationItem.titleView = view;
     [view addSubview:_pageTitleView];
 }

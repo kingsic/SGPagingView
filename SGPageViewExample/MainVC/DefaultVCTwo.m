@@ -8,6 +8,15 @@
 
 #import "DefaultVCTwo.h"
 #import "SGPageView.h"
+#import "ChildVCOne.h"
+#import "ChildVCTwo.h"
+#import "ChildVCThree.h"
+#import "ChildVCFour.h"
+#import "ChildVCFive.h"
+#import "ChildVCSix.h"
+#import "ChildVCSeven.h"
+#import "ChildVCEight.h"
+#import "ChildVCNine.h"
 
 @interface DefaultVCTwo () <SGPageTitleViewDelegate, SGPageContentViewDelegare>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
@@ -23,23 +32,35 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会"];
-    NSMutableArray *childMArr = [NSMutableArray array];
-    UIViewController *vcs;
-    for (int i = 0; i < titleArr.count; i++) {
-        vcs = [[UIViewController alloc] init];
-        vcs.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(255) / 255.0 green:arc4random_uniform(255) / 255.0 blue:arc4random_uniform(255) / 255.0 alpha:1.0];
-        [self addChildViewController:vcs];
-        [childMArr addObject:vcs];
-    }
+    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
+    
+    ChildVCOne *oneVC = [[ChildVCOne alloc] init];
+    
+    ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
+    
+    ChildVCThree *threeVC = [[ChildVCThree alloc] init];
+    
+    ChildVCFour *fourVC = [[ChildVCFour alloc] init];
+    
+    ChildVCFive *fiveVC = [[ChildVCFive alloc] init];
+    
+    ChildVCSix *sixVC = [[ChildVCSix alloc] init];
+    
+    ChildVCSeven *sevenVC = [[ChildVCSeven alloc] init];
+    
+    ChildVCEight *eightVC = [[ChildVCEight alloc] init];
+    
+    ChildVCNine *nineVC = [[ChildVCNine alloc] init];
+    
+    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
+    
     CGFloat contentViewHeight = self.view.frame.size.height - 108;
-    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 108, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childMArr];
+    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 108, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
     _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
     
     /// pageTitleView
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) titleNames:titleArr];
-    _pageTitleView.delegatePageTitleView = self;
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
     [self.view addSubview:_pageTitleView];
     _pageTitleView.selectedIndex = 1;
     _pageTitleView.indicatorStyle = SGIndicatorTypeEqual;
@@ -52,6 +73,7 @@
 - (void)SGPageContentView:(SGPageContentView *)SGPageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
+
 
 
 @end

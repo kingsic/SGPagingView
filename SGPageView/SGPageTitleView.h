@@ -32,19 +32,19 @@ typedef enum : NSUInteger {
  *  对象方法创建 SGPageTitleView
  *
  *  @param frame     frame
+ *  @param delegate     delegate
  *  @param titleNames     标题数组
  */
-- (instancetype)initWithFrame:(CGRect)frame titleNames:(NSArray *)titleNames;
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames;
 /**
  *  类方法创建 SGPageTitleView
  *
  *  @param frame     frame
+ *  @param delegate     delegate
  *  @param titleNames     标题数组
  */
-+ (instancetype)pageTitleViewWithFrame:(CGRect)frame titleNames:(NSArray *)titleNames;
++ (instancetype)pageTitleViewWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames;
 
-/** delegatePageTitleView */
-@property (nonatomic, weak) id<SGPageTitleViewDelegate> delegatePageTitleView;
 
 /** 普通状态标题文字颜色，默认黑色 */
 @property (nonatomic, strong) UIColor *titleColorStateNormal;
