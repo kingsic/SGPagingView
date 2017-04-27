@@ -57,6 +57,7 @@
     _pageTitleView.titleColorStateNormal = [UIColor lightGrayColor];
     _pageTitleView.titleColorStateSelected = [UIColor blackColor];
     _pageTitleView.indicatorColor = [UIColor blackColor];
+    //_pageTitleView.isIndicatorScroll = NO;
     _pageTitleView.indicatorStyle = SGIndicatorTypeEqual;
 }
 

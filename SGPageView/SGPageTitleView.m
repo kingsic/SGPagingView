@@ -324,7 +324,7 @@
             }
 
         } else {
-            if (progress > 0.5) {
+            if (progress >= 0.5) {
                 [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
                     if (self.indicatorStyle == SGIndicatorTypeEqual) {
                         self.indicatorView.SG_width = [SGHelperTool SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
@@ -332,6 +332,16 @@
                     } else {
                         self.indicatorView.SG_width = targetBtn.SG_width;
                         self.indicatorView.SG_centerX = targetBtn.SG_centerX;
+                    }
+                }];
+            } else {
+                [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
+                    if (self.indicatorStyle == SGIndicatorTypeEqual) {
+                        self.indicatorView.SG_width = [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
+                        self.indicatorView.SG_centerX = originalBtn.SG_centerX;
+                    } else {
+                        self.indicatorView.SG_width = originalBtn.SG_width;
+                        self.indicatorView.SG_centerX = originalBtn.SG_centerX;
                     }
                 }];
             }
@@ -361,7 +371,7 @@
             temp.size.width = originalBtn.SG_width + distance;
             self.indicatorView.frame = temp;
         } else {
-            if (progress > 0.5) {
+            if (progress >= 0.5) {
                 [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
                     if (self.indicatorStyle == SGIndicatorTypeEqual) {
                         self.indicatorView.SG_width = targetBtn.SG_width - SGPageTitleViewBtnMargin;
@@ -369,6 +379,16 @@
                     } else {
                         self.indicatorView.SG_width = targetBtn.SG_width;
                         self.indicatorView.SG_centerX = targetBtn.SG_centerX;
+                    }
+                }];
+            } else {
+                [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
+                    if (self.indicatorStyle == SGIndicatorTypeEqual) {
+                        self.indicatorView.SG_width = originalBtn.SG_width - SGPageTitleViewBtnMargin;
+                        self.indicatorView.SG_centerX = originalBtn.SG_centerX;
+                    } else {
+                        self.indicatorView.SG_width = originalBtn.SG_width;
+                        self.indicatorView.SG_centerX = originalBtn.SG_centerX;
                     }
                 }];
             }
