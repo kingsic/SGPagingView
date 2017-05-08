@@ -43,8 +43,8 @@
     NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
-    _pageTitleView.selectedIndex = 0;
     [self.view addSubview:_pageTitleView];
+    _pageTitleView.selectedIndex = 1;
 }
 
 - (void)SGPageTitleView:(SGPageTitleView *)SGPageTitleView selectedIndex:(NSInteger)selectedIndex {

@@ -67,11 +67,12 @@
 }
 
 - (void)initialization {
-    self.indicatorStyle = SGIndicatorTypeDefault;
+    self.indicatorLengthStyle = SGIndicatorLengthTypeDefault;
     self.isTitleGradientEffect = YES;
     self.isIndicatorScroll = YES;
     self.isShowIndicator = YES;
     self.isNeedBounces = YES;
+    self.isOpenTitleTextZoom = NO;
 }
 
 - (void)setupSubviews {
@@ -90,7 +91,9 @@
     
     // 默认选中下标
     if (self.selectedIndex == 0) {
-        self.selectedIndex = 0;
+        [self btnAction:self.btnMArr[0]];
+    } else {
+        [self btnAction:self.btnMArr[self.selectedIndex]];
     }
 }
 
@@ -210,40 +213,44 @@
 
 /// 标题按钮的点击事件
 - (void)btnAction:(UIButton *)button {
-
-    // 1、改变按钮的选择状态
-    [self changeSelectedButton:button];
-    
     // 0、记录选中按钮的下标
     self.currentIndex = button.tag;
+    
+    // 1、改变按钮的选择状态
+    [self changeSelectedButton:button];
     
     // 2、滚动标题选中居中
     [self selectedBtnCenter:button];
     
-    // 3、指示器位置发生改变
+    // 3、标题文字缩放属性
+    if (self.isOpenTitleTextZoom) {
+        button.transform = CGAffineTransformMakeScale(1 + SGPageTitleViewTextZoom, 1 + SGPageTitleViewTextZoom);
+    }
+    
+    // 4、指示器位置发生改变
     if (self.allBtnWidth <= self.bounds.size.width) { /// SGPageTitleView 不可滚动
         [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
-            if (self.indicatorStyle == SGIndicatorTypeEqual) {
+            if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
                 self.indicatorView.SG_width = [SGHelperTool SG_widthWithString:button.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
-                self.indicatorView.SG_centerX = button.SG_centerX;
+            } else if (self.indicatorLengthStyle == SGIndicatorLengthTypeSpecial) {
+                self.indicatorView.SG_width = [SGHelperTool SG_widthWithString:button.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
             } else {
                 self.indicatorView.SG_width = button.SG_width;
-                self.indicatorView.SG_centerX = button.SG_centerX;
             }
+            self.indicatorView.SG_centerX = button.SG_centerX;
         }];
     } else {
         [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
-            if (self.indicatorStyle == SGIndicatorTypeEqual) {
+            if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
                 self.indicatorView.SG_width = button.SG_width - SGPageTitleViewBtnMargin;
-                self.indicatorView.SG_centerX = button.SG_centerX;
             } else {
                 self.indicatorView.SG_width = button.SG_width;
-                self.indicatorView.SG_centerX = button.SG_centerX;
             }
+            self.indicatorView.SG_centerX = button.SG_centerX;
         }];
     }
 
-    // 4、pageTitleViewDelegate
+    // 5、pageTitleViewDelegate
     if ([self.delegatePageTitleView respondsToSelector:@selector(SGPageTitleView:selectedIndex:)]) {
         [self.delegatePageTitleView SGPageTitleView:self selectedIndex:self.currentIndex];
     }
@@ -296,128 +303,181 @@
     // 4、处理指示器的逻辑
     if (self.allBtnWidth <= self.bounds.size.width) { /// SGPageTitleView 不可滚动
         if (self.isIndicatorScroll) {
-            /// 计算 targetBtn／originalBtn 之间的距离
-            CGFloat targetBtnX = CGRectGetMaxX(targetBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [SGHelperTool SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]) - [SGHelperTool SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
-            CGFloat originalBtnX = CGRectGetMaxX(originalBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]) - [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
-            CGFloat totalOffsetX = targetBtnX - originalBtnX;
-            /// 计算 indicatorView 滚动时 X 的偏移量
-            CGFloat offsetX;
-            /// 计算 targetBtn／originalBtn 宽度的差值
-            CGFloat targetBtnDistance = (CGRectGetMaxX(targetBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [SGHelperTool SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]));
-            CGFloat originalBtnDistance = (CGRectGetMaxX(originalBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]));
-            CGFloat totalDistance = targetBtnDistance - originalBtnDistance;
-            /// 计算 indicatorView 滚动时宽度的偏移量
-            CGFloat distance;
-            if (self.indicatorStyle == SGIndicatorTypeEqual) {
-                offsetX = totalOffsetX * progress;
-                distance = progress * (totalDistance - totalOffsetX);
-                /// 计算 indicatorView 新的 frame
-                CGRect temp = self.indicatorView.frame;
-                temp.origin.x = originalBtnX + offsetX;
-                temp.size.width = [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + distance;
-                self.indicatorView.frame = temp;
-            } else {
-                // 3、处理指示器的逻辑
-                CGFloat moveTotalX = targetBtn.SG_origin.x - originalBtn.SG_origin.x;
-                CGFloat moveX = moveTotalX * progress;
-                self.indicatorView.SG_centerX = originalBtn.SG_centerX + moveX;
-            }
-
+            [self smallisIndicatorScrollWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
         } else {
-            if (progress >= 0.5) {
-                [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
-                    if (self.indicatorStyle == SGIndicatorTypeEqual) {
-                        self.indicatorView.SG_width = [SGHelperTool SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
-                        self.indicatorView.SG_centerX = targetBtn.SG_centerX;
-                    } else {
-                        self.indicatorView.SG_width = targetBtn.SG_width;
-                        self.indicatorView.SG_centerX = targetBtn.SG_centerX;
-                    }
-                }];
-            } else {
-                [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
-                    if (self.indicatorStyle == SGIndicatorTypeEqual) {
-                        self.indicatorView.SG_width = [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
-                        self.indicatorView.SG_centerX = originalBtn.SG_centerX;
-                    } else {
-                        self.indicatorView.SG_width = originalBtn.SG_width;
-                        self.indicatorView.SG_centerX = originalBtn.SG_centerX;
-                    }
-                }];
-            }
+            [self smallIndicatorScrollWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
         }
-
     } else { /// SGPageTitleView 可滚动
         if (self.isIndicatorScroll) {
-            /// 计算 targetBtn／originalBtn 之间的距离
-            CGFloat totalOffsetX = targetBtn.SG_origin.x - originalBtn.SG_origin.x;
-            /// 计算 indicatorView 滚动时 X 的偏移量
-            CGFloat offsetX;
-            /// 计算 targetBtn／originalBtn 宽度的差值
-            CGFloat totalDistance = CGRectGetMaxX(targetBtn.frame) - CGRectGetMaxX(originalBtn.frame);
-            /// 计算 indicatorView 滚动时宽度的偏移量
-            CGFloat distance;
-            if (self.indicatorStyle == SGIndicatorTypeEqual) {
-                offsetX = totalOffsetX * progress + 0.5 * SGPageTitleViewBtnMargin;
-                distance = progress * (totalDistance - totalOffsetX) - SGPageTitleViewBtnMargin;
-            } else {
-                offsetX = totalOffsetX * progress;
-                distance = progress * (totalDistance - totalOffsetX);
-            }
-            
-            /// 计算 indicatorView 新的 frame
-            CGRect temp = self.indicatorView.frame;
-            temp.origin.x = originalBtn.SG_origin.x + offsetX;
-            temp.size.width = originalBtn.SG_width + distance;
-            self.indicatorView.frame = temp;
+            [self isIndicatorScrollWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
         } else {
-            if (progress >= 0.5) {
-                [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
-                    if (self.indicatorStyle == SGIndicatorTypeEqual) {
-                        self.indicatorView.SG_width = targetBtn.SG_width - SGPageTitleViewBtnMargin;
-                        self.indicatorView.SG_centerX = targetBtn.SG_centerX;
-                    } else {
-                        self.indicatorView.SG_width = targetBtn.SG_width;
-                        self.indicatorView.SG_centerX = targetBtn.SG_centerX;
-                    }
-                }];
-            } else {
-                [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
-                    if (self.indicatorStyle == SGIndicatorTypeEqual) {
-                        self.indicatorView.SG_width = originalBtn.SG_width - SGPageTitleViewBtnMargin;
-                        self.indicatorView.SG_centerX = originalBtn.SG_centerX;
-                    } else {
-                        self.indicatorView.SG_width = originalBtn.SG_width;
-                        self.indicatorView.SG_centerX = originalBtn.SG_centerX;
-                    }
-                }];
-            }
+            [self indicatorScrollWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
         }
     }
     
     // 5、颜色的渐变(复杂)
     if (self.isTitleGradientEffect) {
-        if (self.titleColorStateSelected) {
-            // 获取 targetProgress
-            CGFloat targetProgress = progress;
-            // 获取 originalProgress
-            CGFloat originalProgress = 1 - targetProgress;
-            
-            CGFloat r = self.endR - self.startR;
-            CGFloat g = self.endG - self.startG;
-            CGFloat b = self.endB - self.startB;
-            UIColor *originalColor = [UIColor colorWithRed:self.startR +  r * originalProgress  green:self.startG +  g * originalProgress  blue:self.startB +  b * originalProgress alpha:1];
-            UIColor *targetColor = [UIColor colorWithRed:self.startR + r * targetProgress green:self.startG + g * targetProgress blue:self.startB + b * targetProgress alpha:1];
-            
-            // 设置文字颜色渐变
-            originalBtn.titleLabel.textColor = originalColor;
-            targetBtn.titleLabel.textColor = targetColor;
-            
-        } else {
-            
-            originalBtn.titleLabel.textColor = [UIColor colorWithRed:1 - progress green:0 blue:0 alpha:1];
-            targetBtn.titleLabel.textColor = [UIColor colorWithRed:progress green:0 blue:0 alpha:1];
-        }
+        [self isTitleGradientEffectWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
+    }
+    
+    // 6 、标题文字缩放属性
+    if (self.isOpenTitleTextZoom) {
+        // 左边缩放
+        originalBtn.transform = CGAffineTransformMakeScale((1 - progress) * SGPageTitleViewTextZoom + 1, (1 - progress) * SGPageTitleViewTextZoom + 1);
+        // 右边缩放
+        targetBtn.transform = CGAffineTransformMakeScale(progress * SGPageTitleViewTextZoom + 1, progress * SGPageTitleViewTextZoom + 1);
+    }
+}
+
+#pragma mark - - - 指示器不随内容滚动而滚动方法抽取
+/// SGPageTitleView 不可滚动
+- (void)smallisIndicatorScrollWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
+    if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
+        /// 计算 targetBtn／originalBtn 之间的距离
+        CGFloat targetBtnX = CGRectGetMaxX(targetBtn.frame) - [SGHelperTool SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] - 0.5 * (self.SG_width / self.titleArr.count - [SGHelperTool SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]);
+        CGFloat originalBtnX = CGRectGetMaxX(originalBtn.frame) - [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] - 0.5 * (self.SG_width / self.titleArr.count - [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]);
+        CGFloat totalOffsetX = targetBtnX - originalBtnX;
+        
+        /// 计算 targetBtn／originalBtn 宽度的差值
+        CGFloat targetBtnDistance = (CGRectGetMaxX(targetBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [SGHelperTool SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]));
+        CGFloat originalBtnDistance = (CGRectGetMaxX(originalBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]));
+        CGFloat totalDistance = targetBtnDistance - originalBtnDistance;
+        
+        /// 计算 indicatorView 滚动时 X 的偏移量
+        CGFloat offsetX;
+        /// 计算 indicatorView 滚动时宽度的偏移量
+        CGFloat distance;
+        offsetX = totalOffsetX * progress;
+        distance = progress * (totalDistance - totalOffsetX);
+        
+        /// 计算 indicatorView 新的 frame
+        CGRect temp = self.indicatorView.frame;
+        temp.origin.x = originalBtnX + offsetX;
+        temp.size.width = [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + distance;
+        self.indicatorView.frame = temp;
+        
+    } else if (self.indicatorLengthStyle == SGIndicatorLengthTypeSpecial) {
+        CGFloat targetBtnX = CGRectGetMaxX(targetBtn.frame) - [SGHelperTool SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] - 0.5 * (self.SG_width / self.titleArr.count - [SGHelperTool SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength);
+        CGFloat originalBtnX = CGRectGetMaxX(originalBtn.frame) - [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] - 0.5 * (self.SG_width / self.titleArr.count - [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength);
+        CGFloat totalOffsetX = targetBtnX - originalBtnX;
+        
+        /// 计算 targetBtn／originalBtn 宽度的差值
+        CGFloat targetBtnDistance = (CGRectGetMaxX(targetBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [SGHelperTool SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]));
+        CGFloat originalBtnDistance = (CGRectGetMaxX(originalBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]));
+        CGFloat totalDistance = targetBtnDistance - originalBtnDistance;
+        
+        /// 计算 indicatorView 滚动时 X 的偏移量
+        CGFloat offsetX;
+        /// 计算 indicatorView 滚动时宽度的偏移量
+        CGFloat distance;
+        offsetX = totalOffsetX * progress;
+        distance = progress * (totalDistance - totalOffsetX);
+        
+        /// 计算 indicatorView 新的 frame
+        CGRect temp = self.indicatorView.frame;
+        temp.origin.x = originalBtnX + offsetX;
+        temp.size.width = [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + distance + SGIndicatorTypeSpecialMultipleLength;
+        self.indicatorView.frame = temp;
+        
+    } else {
+        // 3、处理指示器的逻辑
+        CGFloat moveTotalX = targetBtn.SG_origin.x - originalBtn.SG_origin.x;
+        CGFloat moveX = moveTotalX * progress;
+        self.indicatorView.SG_centerX = originalBtn.SG_centerX + moveX;
+    }
+}
+- (void)smallIndicatorScrollWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
+    if (progress >= 0.5) {
+        [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
+            if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
+                self.indicatorView.SG_width = [SGHelperTool SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
+            } else if (self.indicatorLengthStyle == SGIndicatorLengthTypeSpecial) {
+                self.indicatorView.SG_width = [SGHelperTool SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
+            } else {
+                self.indicatorView.SG_width = targetBtn.SG_width;
+            }
+            self.indicatorView.SG_centerX = targetBtn.SG_centerX;
+        }];
+    } else {
+        [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
+            if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
+                self.indicatorView.SG_width = [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
+            } else if (self.indicatorLengthStyle == SGIndicatorLengthTypeSpecial) {
+                self.indicatorView.SG_width = [SGHelperTool SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
+            } else {
+                self.indicatorView.SG_width = originalBtn.SG_width;
+            }
+            self.indicatorView.SG_centerX = originalBtn.SG_centerX;
+        }];
+    }
+}
+
+/// SGPageTitleView 可滚动
+- (void)isIndicatorScrollWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
+    /// 计算 targetBtn／originalBtn 之间的距离
+    CGFloat totalOffsetX = targetBtn.SG_origin.x - originalBtn.SG_origin.x;
+    /// 计算 targetBtn／originalBtn 宽度的差值
+    CGFloat totalDistance = CGRectGetMaxX(targetBtn.frame) - CGRectGetMaxX(originalBtn.frame);
+    /// 计算 indicatorView 滚动时 X 的偏移量
+    CGFloat offsetX;
+    /// 计算 indicatorView 滚动时宽度的偏移量
+    CGFloat distance;
+    if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
+        offsetX = totalOffsetX * progress + 0.5 * SGPageTitleViewBtnMargin;
+        distance = progress * (totalDistance - totalOffsetX) - SGPageTitleViewBtnMargin;
+    } else {
+        offsetX = totalOffsetX * progress;
+        distance = progress * (totalDistance - totalOffsetX);
+    }
+    /// 计算 indicatorView 新的 frame
+    CGRect temp = self.indicatorView.frame;
+    temp.origin.x = originalBtn.SG_origin.x + offsetX;
+    temp.size.width = originalBtn.SG_width + distance;
+    self.indicatorView.frame = temp;
+}
+- (void)indicatorScrollWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
+    if (progress >= 0.5) {
+        [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
+            if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
+                self.indicatorView.SG_width = targetBtn.SG_width - SGPageTitleViewBtnMargin;
+            } else {
+                self.indicatorView.SG_width = targetBtn.SG_width;
+            }
+            self.indicatorView.SG_centerX = targetBtn.SG_centerX;
+        }];
+    } else {
+        [UIView animateWithDuration:SGIndicatorAnimationTime animations:^{
+            if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
+                self.indicatorView.SG_width = originalBtn.SG_width - SGPageTitleViewBtnMargin;
+            } else {
+                self.indicatorView.SG_width = originalBtn.SG_width;
+            }
+            self.indicatorView.SG_centerX = originalBtn.SG_centerX;
+        }];
+    }
+}
+
+/// 颜色渐变方法抽取
+- (void)isTitleGradientEffectWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
+    if (self.titleColorStateSelected) {
+        // 获取 targetProgress
+        CGFloat targetProgress = progress;
+        // 获取 originalProgress
+        CGFloat originalProgress = 1 - targetProgress;
+        
+        CGFloat r = self.endR - self.startR;
+        CGFloat g = self.endG - self.startG;
+        CGFloat b = self.endB - self.startB;
+        UIColor *originalColor = [UIColor colorWithRed:self.startR +  r * originalProgress  green:self.startG +  g * originalProgress  blue:self.startB +  b * originalProgress alpha:1];
+        UIColor *targetColor = [UIColor colorWithRed:self.startR + r * targetProgress green:self.startG + g * targetProgress blue:self.startB + b * targetProgress alpha:1];
+        
+        // 设置文字颜色渐变
+        originalBtn.titleLabel.textColor = originalColor;
+        targetBtn.titleLabel.textColor = targetColor;
+        
+    } else {
+        originalBtn.titleLabel.textColor = [UIColor colorWithRed:1 - progress green:0 blue:0 alpha:1];
+        targetBtn.titleLabel.textColor = [UIColor colorWithRed:progress green:0 blue:0 alpha:1];
     }
 }
 
@@ -453,28 +513,11 @@
 /// selectedIndex
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
     _selectedIndex = selectedIndex;
-    if (selectedIndex) {
-        [self btnAction:self.btnMArr[self.selectedIndex]];
-    } else { // 默认选择选中第一个按钮
-        [self btnAction:self.btnMArr[self.selectedIndex]];
-    }
 }
 
-/// indicatorStyle
-- (void)setIndicatorStyle:(SGIndicatorType)indicatorStyle {
-    _indicatorStyle = indicatorStyle;
-    
-    if (indicatorStyle == SGIndicatorTypeEqual) {
-        if (self.selectedIndex) {
-            UIButton *selectedBtn = self.btnMArr[self.selectedIndex];
-            self.indicatorView.SG_width = [SGHelperTool SG_widthWithString:self.titleArr[self.selectedIndex] font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
-            self.indicatorView.SG_centerX = selectedBtn.SG_centerX;
-        } else {
-            UIButton *selectedBtn = self.btnMArr.firstObject;
-            self.indicatorView.SG_width = [SGHelperTool SG_widthWithString:self.titleArr[self.selectedIndex] font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
-            self.indicatorView.SG_centerX = selectedBtn.SG_centerX;
-        }
-    }
+/// indicatorLengthStyle
+- (void)setIndicatorLengthStyle:(SGIndicatorLengthType)indicatorLengthStyle {
+    _indicatorLengthStyle = indicatorLengthStyle;
 }
 
 /// isTitleGradientEffect
@@ -502,6 +545,11 @@
     if (isNeedBounces == NO) {
         self.scrollView.bounces = NO;
     }
+}
+
+/// isOpenTitleTextZoom
+- (void)setIsOpenTitleTextZoom:(BOOL)isOpenTitleTextZoom {
+    _isOpenTitleTextZoom = isOpenTitleTextZoom;
 }
 
 #pragma mark - - - 颜色设置的计算

@@ -55,7 +55,7 @@
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
     _pageTitleView.isShowIndicator = NO;
-    _pageTitleView.selectedIndex = 2;
+    _pageTitleView.selectedIndex = 3;
     // 对 navigationItem.titleView 的包装，为的是 让View 占据整个视图宽度
     NavigationBarTitleView *view = [[NavigationBarTitleView alloc] init];
     self.navigationItem.titleView = view;

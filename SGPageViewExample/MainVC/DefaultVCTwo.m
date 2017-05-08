@@ -57,8 +57,8 @@
     _pageTitleView.titleColorStateNormal = [UIColor lightGrayColor];
     _pageTitleView.titleColorStateSelected = [UIColor blackColor];
     _pageTitleView.indicatorColor = [UIColor blackColor];
-    //_pageTitleView.isIndicatorScroll = NO;
-    _pageTitleView.indicatorStyle = SGIndicatorTypeEqual;
+    _pageTitleView.isOpenTitleTextZoom = YES;
+    _pageTitleView.indicatorLengthStyle = SGIndicatorLengthTypeEqual;
 }
 
 - (void)SGPageTitleView:(SGPageTitleView *)SGPageTitleView selectedIndex:(NSInteger)selectedIndex {

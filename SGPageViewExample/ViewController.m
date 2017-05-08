@@ -35,11 +35,13 @@
     pageTitleView.titleColorStateNormal = [UIColor brownColor];
     pageTitleView.titleColorStateSelected = [UIColor purpleColor];
     pageTitleView.indicatorColor = [UIColor purpleColor];
+    pageTitleView.indicatorLengthStyle = SGIndicatorLengthTypeEqual;
     [self.view addSubview:pageTitleView];
     
     /// 例二
     SGPageTitleView *pageTitleView2 = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, CGRectGetMaxY(pageTitleView.frame) + 20, SGScreenWidth, pageTitleViewH) delegate:nil titleNames:titleArr];
     pageTitleView2.selectedIndex = 1;
+    pageTitleView2.indicatorLengthStyle = SGIndicatorLengthTypeSpecial;
     [self.view addSubview:pageTitleView2];
     
     /// 例三

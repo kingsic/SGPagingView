@@ -18,11 +18,15 @@
 
 /** 按钮之间的间距 */
 static CGFloat SGPageTitleViewBtnMargin = 20;
+/** 指示器样式为 SGIndicatorTypeSpecial 时, 指示器长度多于按钮文字宽度的值 */
+static CGFloat SGIndicatorTypeSpecialMultipleLength = 20;
 /** 指示器的高度 */
 static CGFloat SGIndicatorHeight = 2;
 /** 指示器的动画移动时间 */
 static CGFloat SGIndicatorAnimationTime = 0.1;
 /** 标题文字大小 */
 static CGFloat SGPageTitleViewTextFont = 16;
+/** 标题文字缩放比 */
+static CGFloat SGPageTitleViewTextZoom = 0.1;
 
 #endif /* SGPageViewHelper_h */
