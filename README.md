@@ -108,13 +108,13 @@
 
 ##### 说明
 
-* 子控制中使用纯代码创建 tableView 时，处在内容显示区域问题
+* 子控制中使用纯代码创建 tableView 时，会处在内容区域显示问题
 
 * 纯代码在 viewDidLoad 方法中创建 tableView 时，高度一定要等于 SGPageContentView 的高度或使用 Masonry 进行约束；
 
 * XIB 创建 tableView 时，不会出现这种问题，是因为 XIB 加载完成之后会调用 viewDidLayoutSubviews 这个方法，所以 XIB 中创建 tableVIew 不会出现约束问题
 
-##### 下面提供三种解决方案，请任选其一
+##### 下面提供三种解决方案（仅供参考）
 
 ```Objective-C
 - (UITableView *)tableView {
