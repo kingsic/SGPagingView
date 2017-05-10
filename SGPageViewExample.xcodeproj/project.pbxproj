@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1819F46B1EC2AE8B00A212B9 /* ChildVCTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1819F46A1EC2AE8B00A212B9 /* ChildVCTwo.xib */; };
+		1819F46D1EC2AEF000A212B9 /* ChildVCThree.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1819F46C1EC2AEF000A212B9 /* ChildVCThree.xib */; };
+		1819F46F1EC2AF6500A212B9 /* ChildVCFour.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1819F46E1EC2AF6500A212B9 /* ChildVCFour.xib */; };
+		1819F4721EC2C3B600A212B9 /* ChildVCOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819F4711EC2C3B600A212B9 /* ChildVCOne.m */; };
 		18347EA11EA8553E00F02F4C /* SGPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347E9E1EA8553E00F02F4C /* SGPageContentView.m */; };
 		18347EA21EA8553E00F02F4C /* SGPageTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EA01EA8553E00F02F4C /* SGPageTitleView.m */; };
 		18347EAA1EA8556900F02F4C /* DefaultVCOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EA51EA8556900F02F4C /* DefaultVCOne.m */; };
@@ -16,13 +20,11 @@
 		18347EC11EA8557000F02F4C /* ChildVCFive.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EB11EA8557000F02F4C /* ChildVCFive.m */; };
 		18347EC21EA8557000F02F4C /* ChildVCFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EB31EA8557000F02F4C /* ChildVCFour.m */; };
 		18347EC31EA8557000F02F4C /* ChildVCNine.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EB51EA8557000F02F4C /* ChildVCNine.m */; };
-		18347EC41EA8557000F02F4C /* ChildVCOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EB71EA8557000F02F4C /* ChildVCOne.m */; };
 		18347EC51EA8557000F02F4C /* ChildVCSeven.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EB91EA8557000F02F4C /* ChildVCSeven.m */; };
 		18347EC61EA8557000F02F4C /* ChildVCSix.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EBB1EA8557000F02F4C /* ChildVCSix.m */; };
 		18347EC71EA8557000F02F4C /* ChildVCThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EBD1EA8557000F02F4C /* ChildVCThree.m */; };
 		18347EC81EA8557000F02F4C /* ChildVCTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EBF1EA8557000F02F4C /* ChildVCTwo.m */; };
 		18347ECB1EA8557A00F02F4C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347ECA1EA8557A00F02F4C /* ViewController.m */; };
-		185A919B1E9F4B1600846BC0 /* SGHelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A919A1E9F4B1600846BC0 /* SGHelperTool.m */; };
 		185A91AD1E9F57E700846BC0 /* NavigationBarTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A91AC1E9F57E700846BC0 /* NavigationBarTitleView.m */; };
 		18E5B1691E9E14E600E28DE1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E5B1681E9E14E600E28DE1 /* main.m */; };
 		18E5B16C1E9E14E600E28DE1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E5B16B1E9E14E600E28DE1 /* AppDelegate.m */; };
@@ -52,6 +54,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1819F46A1EC2AE8B00A212B9 /* ChildVCTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildVCTwo.xib; sourceTree = "<group>"; };
+		1819F46C1EC2AEF000A212B9 /* ChildVCThree.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildVCThree.xib; sourceTree = "<group>"; };
+		1819F46E1EC2AF6500A212B9 /* ChildVCFour.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildVCFour.xib; sourceTree = "<group>"; };
+		1819F4701EC2C3B600A212B9 /* ChildVCOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildVCOne.h; sourceTree = "<group>"; };
+		1819F4711EC2C3B600A212B9 /* ChildVCOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildVCOne.m; sourceTree = "<group>"; };
 		18347E9D1EA8553E00F02F4C /* SGPageContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageContentView.h; sourceTree = "<group>"; };
 		18347E9E1EA8553E00F02F4C /* SGPageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageContentView.m; sourceTree = "<group>"; };
 		18347E9F1EA8553E00F02F4C /* SGPageTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageTitleView.h; sourceTree = "<group>"; };
@@ -70,8 +77,6 @@
 		18347EB31EA8557000F02F4C /* ChildVCFour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildVCFour.m; sourceTree = "<group>"; };
 		18347EB41EA8557000F02F4C /* ChildVCNine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildVCNine.h; sourceTree = "<group>"; };
 		18347EB51EA8557000F02F4C /* ChildVCNine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildVCNine.m; sourceTree = "<group>"; };
-		18347EB61EA8557000F02F4C /* ChildVCOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildVCOne.h; sourceTree = "<group>"; };
-		18347EB71EA8557000F02F4C /* ChildVCOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildVCOne.m; sourceTree = "<group>"; };
 		18347EB81EA8557000F02F4C /* ChildVCSeven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildVCSeven.h; sourceTree = "<group>"; };
 		18347EB91EA8557000F02F4C /* ChildVCSeven.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildVCSeven.m; sourceTree = "<group>"; };
 		18347EBA1EA8557000F02F4C /* ChildVCSix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildVCSix.h; sourceTree = "<group>"; };
@@ -82,9 +87,6 @@
 		18347EBF1EA8557000F02F4C /* ChildVCTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildVCTwo.m; sourceTree = "<group>"; };
 		18347EC91EA8557A00F02F4C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		18347ECA1EA8557A00F02F4C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		185A91921E9E25EB00846BC0 /* SGPageViewHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGPageViewHelper.h; sourceTree = "<group>"; };
-		185A91991E9F4B1600846BC0 /* SGHelperTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGHelperTool.h; sourceTree = "<group>"; };
-		185A919A1E9F4B1600846BC0 /* SGHelperTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGHelperTool.m; sourceTree = "<group>"; };
 		185A91AB1E9F57E700846BC0 /* NavigationBarTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarTitleView.h; sourceTree = "<group>"; };
 		185A91AC1E9F57E700846BC0 /* NavigationBarTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarTitleView.m; sourceTree = "<group>"; };
 		18E5B1641E9E14E600E28DE1 /* SGPageViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SGPageViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,14 +149,17 @@
 		18347EAD1EA8557000F02F4C /* ChildVC */ = {
 			isa = PBXGroup;
 			children = (
-				18347EB61EA8557000F02F4C /* ChildVCOne.h */,
-				18347EB71EA8557000F02F4C /* ChildVCOne.m */,
+				1819F4701EC2C3B600A212B9 /* ChildVCOne.h */,
+				1819F4711EC2C3B600A212B9 /* ChildVCOne.m */,
 				18347EBE1EA8557000F02F4C /* ChildVCTwo.h */,
 				18347EBF1EA8557000F02F4C /* ChildVCTwo.m */,
+				1819F46A1EC2AE8B00A212B9 /* ChildVCTwo.xib */,
 				18347EBC1EA8557000F02F4C /* ChildVCThree.h */,
 				18347EBD1EA8557000F02F4C /* ChildVCThree.m */,
+				1819F46C1EC2AEF000A212B9 /* ChildVCThree.xib */,
 				18347EB21EA8557000F02F4C /* ChildVCFour.h */,
 				18347EB31EA8557000F02F4C /* ChildVCFour.m */,
+				1819F46E1EC2AF6500A212B9 /* ChildVCFour.xib */,
 				18347EB01EA8557000F02F4C /* ChildVCFive.h */,
 				18347EB11EA8557000F02F4C /* ChildVCFive.m */,
 				18347EBA1EA8557000F02F4C /* ChildVCSix.h */,
@@ -240,15 +245,12 @@
 			isa = PBXGroup;
 			children = (
 				18E5B19E1E9E153600E28DE1 /* SGPageView.h */,
-				185A91921E9E25EB00846BC0 /* SGPageViewHelper.h */,
 				18347E9F1EA8553E00F02F4C /* SGPageTitleView.h */,
 				18347EA01EA8553E00F02F4C /* SGPageTitleView.m */,
 				18347E9D1EA8553E00F02F4C /* SGPageContentView.h */,
 				18347E9E1EA8553E00F02F4C /* SGPageContentView.m */,
 				18E5B1AB1E9E1D9400E28DE1 /* UIView+SGFrame.h */,
 				18E5B1AC1E9E1D9400E28DE1 /* UIView+SGFrame.m */,
-				185A91991E9F4B1600846BC0 /* SGHelperTool.h */,
-				185A919A1E9F4B1600846BC0 /* SGHelperTool.m */,
 			);
 			path = SGPageView;
 			sourceTree = "<group>";
@@ -360,7 +362,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E5B1771E9E14E600E28DE1 /* LaunchScreen.storyboard in Resources */,
+				1819F46F1EC2AF6500A212B9 /* ChildVCFour.xib in Resources */,
+				1819F46B1EC2AE8B00A212B9 /* ChildVCTwo.xib in Resources */,
 				18E5B1741E9E14E600E28DE1 /* Assets.xcassets in Resources */,
+				1819F46D1EC2AEF000A212B9 /* ChildVCThree.xib in Resources */,
 				18E5B1721E9E14E600E28DE1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,9 +403,8 @@
 				18347EC81EA8557000F02F4C /* ChildVCTwo.m in Sources */,
 				18347EC51EA8557000F02F4C /* ChildVCSeven.m in Sources */,
 				185A91AD1E9F57E700846BC0 /* NavigationBarTitleView.m in Sources */,
-				185A919B1E9F4B1600846BC0 /* SGHelperTool.m in Sources */,
-				18347EC41EA8557000F02F4C /* ChildVCOne.m in Sources */,
 				18347ECB1EA8557A00F02F4C /* ViewController.m in Sources */,
+				1819F4721EC2C3B600A212B9 /* ChildVCOne.m in Sources */,
 				18E5B1AD1E9E1D9400E28DE1 /* UIView+SGFrame.m in Sources */,
 				18E5B16C1E9E14E600E28DE1 /* AppDelegate.m in Sources */,
 				18347EC31EA8557000F02F4C /* ChildVCNine.m in Sources */,

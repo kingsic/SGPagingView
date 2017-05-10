@@ -46,27 +46,34 @@ typedef enum : NSUInteger {
  */
 + (instancetype)pageTitleViewWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames;
 
-
+/** 是否需要弹性效果，默认为 YES */
+@property (nonatomic, assign) BOOL isNeedBounces;
 /** 普通状态标题文字颜色，默认黑色 */
 @property (nonatomic, strong) UIColor *titleColorStateNormal;
 /** 选中状态标题文字颜色，默认红色 */
 @property (nonatomic, strong) UIColor *titleColorStateSelected;
 /** 指示器颜色，默认红色 */
 @property (nonatomic, strong) UIColor *indicatorColor;
-/** 选中的按钮下标, 如果这个属性和 indicatorStyle 属性同时存在，则此属性在前 */
+/** 指示器高度，默认是 2 */
+@property (nonatomic, assign) CGFloat indicatorHeight;
+/** 指示器高度，默认是 2 */
+@property (nonatomic, assign) CGFloat indicatorAnimationTime;
+/** 选中的按钮下标，默认选中 0 */
 @property (nonatomic, assign) NSInteger selectedIndex;
-/** 指示器样式 */
+/** 指示器长度样式，默认 SGIndicatorLengthTypeDefault */
 @property (nonatomic, assign) SGIndicatorLengthType indicatorLengthStyle;
 /** 是否让标题有渐变效果，默认为 YES */
 @property (nonatomic, assign) BOOL isTitleGradientEffect;
-/** 是否让指示器滚动，默认为 YES */
-@property (nonatomic, assign) BOOL isIndicatorScroll;
+/** 是否开启标题文字缩放效果，默认为 NO */
+@property (nonatomic, assign) BOOL isOpenTitleTextZoom;
+/** 标题文字缩放比，默认 0.1，取值范围 0 ～ 0.2 */
+@property (nonatomic, assign) CGFloat titleTextScaling;
 /** 是否显示指示器，默认为 YES */
 @property (nonatomic, assign) BOOL isShowIndicator;
-/** 是否需要弹性效果，默认为 YES */
-@property (nonatomic, assign) BOOL isNeedBounces;
-/** 是否开启标题文字缩放效果，默认为 NO， 不开启 */
-@property (nonatomic, assign) BOOL isOpenTitleTextZoom;
+/** 是否让指示器滚动，默认为 YES */
+@property (nonatomic, assign) BOOL isIndicatorScroll;
+/** 是否显示底部分割线，默认为 YES */
+@property (nonatomic, assign) BOOL isShowBottomSeparator;
 
 /** 给外界提供的方法，获取 SGContentView 的 progress／originalIndex／targetIndex, 必须实现 */
 - (void)setPageTitleViewWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;

@@ -26,7 +26,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    //self.navigationController.navigationBar.translucent = NO;
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];

@@ -49,7 +49,7 @@
     SGPageTitleView *pageTitleView3 = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, CGRectGetMaxY(pageTitleView2.frame) + 20, SGScreenWidth, pageTitleViewH) delegate:nil titleNames:titleArr3];
     [self.view addSubview:pageTitleView3];
     
-    /// 例四
+    /// 普通样式一
     UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
     CGFloat btnW = 100;
     CGFloat btnX = 0.5 * (0.5 * SGScreenWidth - btnW);
@@ -61,7 +61,7 @@
     [btn addTarget:self action:@selector(defaultBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:btn];
     
-    /// 例五
+    /// 普通样式二
     UIButton *btn2 = [UIButton buttonWithType:(UIButtonTypeCustom)];
     CGFloat btn2W = 100;
     CGFloat btn2X = 0.5 * SGScreenWidth + 0.5 * (0.5 * SGScreenWidth - btnW);
@@ -73,6 +73,7 @@
     [btn2 addTarget:self action:@selector(defaultTwoBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:btn2];
     
+    /// 导航栏样式
     UIButton *lastBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
     CGFloat lastBtnW = 100;
     CGFloat lastBtnX = 0.5 * (SGScreenWidth - btnW);
@@ -84,7 +85,6 @@
     [lastBtn addTarget:self action:@selector(navigationBarBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:lastBtn];
 }
-
 
 - (void)defaultBtnAction {
     DefaultVCOne *defaultVC = [[DefaultVCOne alloc] init];

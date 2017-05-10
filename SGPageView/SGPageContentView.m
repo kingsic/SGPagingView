@@ -53,7 +53,11 @@
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
+        CGFloat collectionViewX = 0;
+        CGFloat collectionViewY = 0;
+        CGFloat collectionViewW = self.SG_width;
+        CGFloat collectionViewH = self.SG_height;
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(collectionViewX, collectionViewY, collectionViewW, collectionViewH) collectionViewLayout:flowLayout];
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.pagingEnabled = YES;
         _collectionView.bounces = NO;
@@ -87,7 +91,7 @@
     [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     // 设置内容
     UIViewController *childVC = self.childViewControllers[indexPath.item];
-    childVC.view.frame = cell.contentView.bounds;
+    childVC.view.frame = cell.contentView.frame;
     [cell.contentView addSubview:childVC.view];
     return cell;
 }

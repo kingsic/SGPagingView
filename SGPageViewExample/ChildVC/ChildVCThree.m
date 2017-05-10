@@ -8,7 +8,8 @@
 
 #import "ChildVCThree.h"
 
-@interface ChildVCThree ()
+@interface ChildVCThree () <UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -17,27 +18,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.view.backgroundColor = [UIColor redColor];
-    
-    UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    [btn setTitle:@"点击控制器 view - dismiss" forState:(UIControlStateNormal)];
-
-    [btn sizeToFit];
-    CGPoint center = self.view.center;
-    center.y = 150;
-    btn.center = center;
-    
-    [btn addTarget:self action:@selector(btnAction) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:btn];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 25;
 }
 
-- (void)btnAction {
-    NSLog(@"%s", __FUNCTION__);
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"cell"];
+    }
+    cell.textLabel.text = [NSString stringWithFormat:@"SGPageView - ChildVCThree - - %ld", indexPath.row];
+    
+    return cell;
 }
 
 
