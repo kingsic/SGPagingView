@@ -25,6 +25,8 @@
 
 * `标题按钮文字渐显效果`<br>
 
+* `标题按钮文字缩放效果`<br>
+
 * `导航栏样式`<br>
 
 
@@ -102,13 +104,79 @@
 ```
 
 
+## 问题以及解决方案
+
+##### 说明
+
+* 子控制中使用纯代码创建 tableView 时，处在内容显示区域问题
+
+* 纯代码在 viewDidLoad 方法中创建 tableView 时，高度一定要等于 SGPageContentView 的高度或使用 Masonry 进行约束；
+
+* XIB 创建 tableView 时，不会出现这种问题，是因为 XIB 加载完成之后会调用 viewDidLayoutSubviews 这个方法，所以 XIB 中创建 tableVIew 不会出现约束问题
+
+##### 下面提供三种解决方案，请任选其一
+
+```Objective-C
+- (UITableView *)tableView {
+
+    if (!_tableView) {
+    
+        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+        
+        NSLog(@"%@", NSStringFromCGRect(self.view.frame));
+        
+        _tableView.dataSource = self;
+        
+    }
+    
+    return _tableView;
+}
+```
+
+```Objective-C
+- (void)viewDidLayoutSubviews {
+
+    [super viewDidLayoutSubviews];
+
+    /// 解决方案三
+    [self.view addSubview:self.tableView];
+}
+
+- (void)viewDidLoad {
+
+    [super viewDidLoad];
+    
+    /// 解决方案一
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 108) style:UITableViewStylePlain];
+    
+    _tableView.dataSource = self;
+    
+    [self.view addSubview:self.tableView];
+
+    
+    /// 解决方案二
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    
+    _tableView.dataSource = self;
+    
+    [self.view addSubview:self.tableView];
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+         make.edges.equalTo(self.view);
+         
+    }];
+}
+```
+
+
 ## 版本介绍
 
 * 2016-10-7 --> 初始版本的创建
 * 2017-4-13 --> 版本升级（根据标题内容自动适配 SGPageTitleView 是静止还是滚动）
 * 2017-4-18 --> 新增标题文字颜色属性以及指示器颜色属性
 * 2017-4-20 --> 修复标题选中 Bug
-* 2017-5-8 --> 新增标题文字缩放属性以及性能优化
+* 2017-5-10 --> 新增标题文字缩放属性以及性能优化
 
 
 ## Concluding remarks
