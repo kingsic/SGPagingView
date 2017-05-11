@@ -105,10 +105,14 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     
     if (self.titleTextScaling == 0) {
         self.titleTextScaling = 0.1;
+    } else if (self.titleTextScaling >= 0.3) {
+        self.titleTextScaling = 0.3;
     }
     
     if (self.indicatorAnimationTime == 0) {
         self.indicatorAnimationTime = 0.1;
+    } else if (self.indicatorAnimationTime >= 0.3) {
+        self.indicatorAnimationTime = 0.3;
     }
     
     // 默认选中下标
@@ -125,6 +129,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     }
 }
 
+#pragma mark - - - 懒加载
 - (NSArray *)titleArr {
     if (!_titleArr) {
         _titleArr = [NSArray array];
@@ -177,7 +182,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     return [string boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size.width;
 }
 
-/// 添加标题按钮
+#pragma mark - - - 添加标题按钮
 - (void)setupTitleButtons {
     // 计算所有按钮的文字宽度
     [self.titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

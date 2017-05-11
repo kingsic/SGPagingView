@@ -54,9 +54,9 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIColor *titleColorStateSelected;
 /** 指示器颜色，默认红色 */
 @property (nonatomic, strong) UIColor *indicatorColor;
-/** 指示器高度，默认是 2 */
+/** 指示器高度，默认 2 */
 @property (nonatomic, assign) CGFloat indicatorHeight;
-/** 指示器高度，默认是 2 */
+/** 指示器动画时间，默认 0.1，取值范围 0 ～ 0.3 */
 @property (nonatomic, assign) CGFloat indicatorAnimationTime;
 /** 选中的按钮下标，默认选中 0 */
 @property (nonatomic, assign) NSInteger selectedIndex;
@@ -66,7 +66,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) BOOL isTitleGradientEffect;
 /** 是否开启标题文字缩放效果，默认为 NO */
 @property (nonatomic, assign) BOOL isOpenTitleTextZoom;
-/** 标题文字缩放比，默认 0.1，取值范围 0 ～ 0.2 */
+/** 标题文字缩放比，默认 0.1，取值范围 0 ～ 0.3 */
 @property (nonatomic, assign) CGFloat titleTextScaling;
 /** 是否显示指示器，默认为 YES */
 @property (nonatomic, assign) BOOL isShowIndicator;
