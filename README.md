@@ -88,8 +88,6 @@
     
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
     
-    _pageTitleView.selectedIndex = 1;
-    
     [self.view addSubview:_pageTitleView];
 ```
 
@@ -106,7 +104,9 @@
 
 ## 问题以及解决方案
 
-##### 说明
+#### 说明
+
+* 父控制器中一定要加上 self.automaticallyAdjustsScrollViewInsets = NO; 这句代码；否则 pageContentView 会存在偏移量下移问题
 
 * 子控制中使用纯代码创建 tableView 时，会处在内容区域显示问题
 
@@ -114,7 +114,7 @@
 
 * XIB 创建 tableView 时，不会出现这种问题，是因为 XIB 加载完成之后会调用 viewDidLayoutSubviews 这个方法，所以 XIB 中创建 tableVIew 不会出现约束问题
 
-##### 下面提供三种解决方案（仅供参考）
+#### 下面提供三种解决方案（仅供参考）
 
 ```Objective-C
 - (UITableView *)tableView {
