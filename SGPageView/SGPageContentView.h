@@ -42,8 +42,10 @@
 
 /** delegatePageContentView */
 @property (nonatomic, weak) id<SGPageContentViewDelegare> delegatePageContentView;
+/** 是否需要滚动 SGPageContentView，默认为 YES；设为 NO 时，不用设置 SGPageContentView 的代理及代理方法 */
+@property (nonatomic, assign) BOOL isScrollEnabled;
 
-/** 给外界提供的方法，获取 SGSegmentedControl 选中按钮的下标, 必须实现 */
+/** 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标, 必须实现 */
 - (void)setPageCententViewCurrentIndex:(NSInteger)currentIndex;
 
 @end

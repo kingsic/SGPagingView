@@ -153,6 +153,16 @@
     self.collectionView.contentOffset = CGPointMake(offsetX, 0);
 }
 
+#pragma mark - - - set
+- (void)setIsScrollEnabled:(BOOL)isScrollEnabled {
+    _isScrollEnabled = isScrollEnabled;
+    if (isScrollEnabled) {
+        
+    } else {
+        _collectionView.scrollEnabled = NO;
+    }
+}
+
 
 @end
 
