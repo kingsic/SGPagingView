@@ -19,7 +19,7 @@
 
 * 1、将项目中 SGPageView 文件夹拖入工程
 
-* 2、导入 #import "SGPageView.h" 的头文件
+* 2、导入 #import "SGPageView.h" 头文件
   
 * 3、SGPageView 的使用步骤（在父视图的 viewDidLoad 中加入下面代码）
 
@@ -40,6 +40,7 @@
     _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
     
+    
     /// 子标题及 pageTitleView 的创建
     NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
     
@@ -47,7 +48,7 @@
     [self.view addSubview:_pageTitleView];
 ```
 
-* * 滚动内容视图代理方法
+* * 滚动内容视图的代理方法
 
 ```Objective-C
 - (void)SGPageContentView:(SGPageContentView *)SGPageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
@@ -55,7 +56,7 @@
 }
 ```
 
-* * 滚动标题视图代理方法
+* * 滚动标题视图的代理方法
 
 ```Objective-C
 - (void)SGPageTitleView:(SGPageTitleView *)SGPageTitleView selectedIndex:(NSInteger)selectedIndex {
@@ -64,7 +65,7 @@
 ```
 
 
-## 问题以及解决方案
+## 问题及解决方案
 
 #### 说明
 
@@ -125,10 +126,14 @@
 ## 版本介绍
 
 * 2016-10-7 --> 初始版本的创建
+
 * 2017-4-13 --> 版本升级（根据标题内容自动适配 SGPageTitleView 是静止还是滚动）
+
 * 2017-4-18 --> 新增标题文字颜色属性以及指示器颜色属性
-* 2017-4-20 --> 修复标题选中 Bug
-* 2017-5-10 --> 新增标题文字缩放属性以及性能优化
+
+* 2017-4-20 --> 修复标题选中 Bug 
+
+* 2017-5-12 --> SGPageContentView 新增是否需要滚动属性
 
 
 ## Concluding remarks
