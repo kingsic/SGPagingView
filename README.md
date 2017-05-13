@@ -5,99 +5,61 @@
 
 * 这里的 SegmentedControl 采取的是腾讯新闻、网易新闻、礼物说等布局样式
 
-* 版本升级（根据标题内容自动适配 SGPageTitleView 是静止还是滚动）
-
-
-### 为什么版本升级 ？为什么要用 SGPageView ？
-
-* 1、这种控件大部分采用 UILabel 或 UIButton 进行的封装，您可以根据项目需求搜索选取很多第三方去使用，但大部分的这种控件都是静止或滚动状态，只有封装很好的才会有静止滚动同时存在
-
-* 2、之前的版本就是把静止状态与滚动状态进行分开而写，使用者还要自己选取，总感觉很不方便；如若遇到像网易新网、虎牙直播这种用户可以根据自己的需求定制标题个数，这种控件就不能再选取使用了
-
-* 3、 因此，为了让开发者更好的使用，进行了一次版本升级；升级之后的滚动条样式减少了许多，但解决了可根据标题内容设置滚动条的宽度以及根据标题内容自动选取是静止还是滚动样式（例：6P 是静止状态，5s 是滚动状态）
-
 
 ## 主要内容的介绍
 
-* `普通样式一`<br>
-
-* `普通样式二`<br>
+* `多种指示器长度样式`<br>
 
 * `标题按钮文字渐显效果`<br>
 
 * `标题按钮文字缩放效果`<br>
 
-* `导航栏样式`<br>
-
-
-## 效果图
-
-![](https://github.com/kingsic/SGPageView/raw/master/Gif/sorgle.gif) 
-
 
 ## 代码介绍（详细使用请参考 Demo）
 
-  * 将项目中 SGPageView 文件夹拖入工程
+* 1、将项目中 SGPageView 文件夹拖入工程
 
-  * 导入 #import "SGPageView.h" 的头文件
+* 2、导入 #import "SGPageView.h" 的头文件
   
-* 创建滚动内容视图
+* 3、SGPageView 的使用步骤（在父视图的 viewDidLoad 中加入下面代码）
 
 ```Objective-C
-    /// 创建子控制器
-    
+    /// 说明：一定要加上这句代码，否则 pageContentView 会存在偏移量下移问题
+    self.automaticallyAdjustsScrollViewInsets = NO; 
+
+    /// 子控制器及 pageContentView 的创建
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
-    
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
-    
     ChildVCThree *threeVC = [[ChildVCThree alloc] init];
-    
     ChildVCFour *fourVC = [[ChildVCFour alloc] init];
-    
-    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
-    
-    /// pageContentView
+    /// 子控制器数组
+    NSArray *childVCArr = @[oneVC, twoVC, threeVC, fourVC];
     
     CGFloat contentViewHeight = self.view.frame.size.height - 108;
-    
-    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 108, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
-    
+    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 108, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childVCArr];
     _pageContentView.delegatePageContentView = self;
-    
     [self.view addSubview:_pageContentView];
+    
+    /// 子标题及 pageTitleView 的创建
+    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
+    
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
+    [self.view addSubview:_pageTitleView];
 ```
 
 * * 滚动内容视图代理方法
 
 ```Objective-C
 - (void)SGPageContentView:(SGPageContentView *)SGPageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
-    
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
-
 }
-```
-
-* 创建滚动标题视图
-
-```Objective-C
-    /// 子标题数组
-    
-    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
-    
-    /// pageTitleView
-    
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
-    
-    [self.view addSubview:_pageTitleView];
 ```
 
 * * 滚动标题视图代理方法
 
 ```Objective-C
 - (void)SGPageTitleView:(SGPageTitleView *)SGPageTitleView selectedIndex:(NSInteger)selectedIndex {
-    
     [self.pageContentView setPageCententViewCurrentIndex:selectedIndex];
-    
 }
 ```
 
@@ -108,7 +70,7 @@
 
 * 父控制器中一定要加上 self.automaticallyAdjustsScrollViewInsets = NO; 这句代码；否则 pageContentView 会存在偏移量下移问题
 
-* 子控制中使用纯代码创建 tableView 时，会处在内容区域显示问题
+* 子控制中使用纯代码创建 tableView 时，会存在内容区域显示问题
 
 * 纯代码在 viewDidLoad 方法中创建 tableView 时，高度一定要等于 SGPageContentView 的高度或使用 Masonry 进行约束；
 
@@ -117,57 +79,47 @@
 #### 下面提供三种解决方案（仅供参考）
 
 ```Objective-C
-- (UITableView *)tableView {
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    /// 解决方案一
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 108) style:UITableViewStylePlain];
+    _tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
 
-    if (!_tableView) {
-    
-        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-        
-        NSLog(@"%@", NSStringFromCGRect(self.view.frame));
-        
-        _tableView.dataSource = self;
-        
-    }
-    
-    return _tableView;
+    /// 解决方案二
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    _tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+         make.edges.equalTo(self.view);
+    }];
 }
 ```
 
 ```Objective-C
 - (void)viewDidLayoutSubviews {
-
     [super viewDidLayoutSubviews];
 
     /// 解决方案三
     [self.view addSubview:self.tableView];
 }
+```
 
-- (void)viewDidLoad {
-
-    [super viewDidLoad];
-    
-    /// 解决方案一
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 108) style:UITableViewStylePlain];
-    
-    _tableView.dataSource = self;
-    
-    [self.view addSubview:self.tableView];
-
-    
-    /// 解决方案二
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    
-    _tableView.dataSource = self;
-    
-    [self.view addSubview:self.tableView];
-    
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-    
-         make.edges.equalTo(self.view);
-         
-    }];
+```Objective-C
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+        _tableView.dataSource = self;
+    }
+    return _tableView;
 }
 ```
+
+
+## 效果图
+
+![](https://github.com/kingsic/SGPageView/raw/master/Gif/sorgle.gif) 
 
 
 ## 版本介绍
