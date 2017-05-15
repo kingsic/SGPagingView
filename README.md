@@ -6,6 +6,11 @@
 * 这里的 SegmentedControl 采取的是腾讯新闻、网易新闻、礼物说等布局样式
 
 
+## 效果图
+
+![](https://github.com/kingsic/SGPageView/raw/master/Gif/sorgle.gif) 
+
+
 ## 主要内容的介绍
 
 * `多种指示器长度样式`<br>
@@ -116,11 +121,6 @@
     return _tableView;
 }
 ```
-
-
-## 效果图
-
-![](https://github.com/kingsic/SGPageView/raw/master/Gif/sorgle.gif) 
 
 
 ## 版本介绍
