@@ -339,36 +339,31 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     // 1、取出 originalBtn／targetBtn
     UIButton *originalBtn = self.btnMArr[originalIndex];
     UIButton *targetBtn = self.btnMArr[targetIndex];
-
-    // 2、改变按钮的选择状态
-    if (progress >= 0.8) {
-        [self changeSelectedButton:targetBtn];
-    }
     
-    // 3、 滚动标题选中居中
+    // 2、 滚动标题选中居中
     [self selectedBtnCenter:targetBtn];
     
-    // 4、处理指示器的逻辑
+    // 3、处理指示器的逻辑
     if (self.allBtnWidth <= self.bounds.size.width) { /// SGPageTitleView 不可滚动
         if (self.isIndicatorScroll) {
             [self smallisIndicatorScrollWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
-        } else {
+        } else { /// 指示器不随 SGPageContentView 的滚动而滚动
             [self smallIndicatorScrollWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
         }
     } else { /// SGPageTitleView 可滚动
         if (self.isIndicatorScroll) {
             [self isIndicatorScrollWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
-        } else {
+        } else { /// 指示器不随 SGPageContentView 的滚动而滚动
             [self indicatorScrollWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
         }
     }
     
-    // 5、颜色的渐变(复杂)
+    // 4、颜色的渐变(复杂)
     if (self.isTitleGradientEffect) {
         [self isTitleGradientEffectWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
     }
     
-    // 6 、标题文字缩放属性
+    // 5 、标题文字缩放属性
     if (self.isOpenTitleTextZoom) {
         // 左边缩放
         originalBtn.transform = CGAffineTransformMakeScale((1 - progress) * self.titleTextScaling + 1, (1 - progress) * self.titleTextScaling + 1);
@@ -380,6 +375,11 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 #pragma mark - - - 指示器不随内容滚动而滚动方法抽取
 /// SGPageTitleView 不可滚动
 - (void)smallisIndicatorScrollWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
+    // 1、改变按钮的选择状态
+    if (progress >= 0.8) { /// 此处取 >= 0.8 而不是 1.0 为的是防止用户滚动过快而按钮的选中状态并没有改变
+        [self changeSelectedButton:targetBtn];
+    }
+    
     if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
         /// 计算 targetBtn／originalBtn 之间的距离
         CGFloat targetBtnX = CGRectGetMaxX(targetBtn.frame) - [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]);
@@ -447,6 +447,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
             self.indicatorView.SG_centerX = targetBtn.SG_centerX;
         }];
         
+        [self changeSelectedButton:targetBtn];
     } else {
         [UIView animateWithDuration:_indicatorAnimationTime animations:^{
             if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
@@ -458,11 +459,18 @@ static CGFloat const SGPageTitleViewTextFont = 16;
             }
             self.indicatorView.SG_centerX = originalBtn.SG_centerX;
         }];
+        
+        [self changeSelectedButton:originalBtn];
     }
 }
 
 /// SGPageTitleView 可滚动
 - (void)isIndicatorScrollWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
+    // 1、改变按钮的选择状态
+    if (progress >= 0.8) { /// 此处取 >= 0.8 而不是 1.0 为的是防止用户滚动过快而按钮的选中状态并没有改变
+        [self changeSelectedButton:targetBtn];
+    }
+    
     /// 计算 targetBtn／originalBtn 之间的距离
     CGFloat totalOffsetX = targetBtn.SG_origin.x - originalBtn.SG_origin.x;
     /// 计算 targetBtn／originalBtn 宽度的差值
@@ -495,6 +503,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
             self.indicatorView.SG_centerX = targetBtn.SG_centerX;
         }];
         
+        [self changeSelectedButton:targetBtn];
     } else {
         [UIView animateWithDuration:_indicatorAnimationTime animations:^{
             if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
@@ -504,6 +513,8 @@ static CGFloat const SGPageTitleViewTextFont = 16;
             }
             self.indicatorView.SG_centerX = originalBtn.SG_centerX;
         }];
+        
+        [self changeSelectedButton:originalBtn];
     }
 }
 

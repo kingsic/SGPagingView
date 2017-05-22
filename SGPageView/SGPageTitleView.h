@@ -70,7 +70,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat titleTextScaling;
 /** 是否显示指示器，默认为 YES */
 @property (nonatomic, assign) BOOL isShowIndicator;
-/** 是否让指示器滚动，默认为 YES */
+/** 是否让指示器跟随 SGPageContentView 的内容滚动而滚动，默认为 YES，设置为 NO 时，为了用户体验 isTitleGradientEffect 属性应设为 NO */
 @property (nonatomic, assign) BOOL isIndicatorScroll;
 /** 是否显示底部分割线，默认为 YES */
 @property (nonatomic, assign) BOOL isShowBottomSeparator;
