@@ -60,7 +60,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.72];
+        self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.77];
         self.delegatePageTitleView = delegate;
         self.titleArr = titleNames;
         [self initialization];
@@ -103,26 +103,28 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    // 标题缩放初始值
     if (self.titleTextScaling == 0) {
         self.titleTextScaling = 0.1;
     } else if (self.titleTextScaling >= 0.3) {
         self.titleTextScaling = 0.3;
     }
     
+    // 指示器动画初始值
     if (self.indicatorAnimationTime == 0) {
         self.indicatorAnimationTime = 0.1;
     } else if (self.indicatorAnimationTime >= 0.3) {
         self.indicatorAnimationTime = 0.3;
     }
     
-    // 默认选中下标
+    // 选中按钮下标初始值
     if (self.selectedIndex == 0) {
         [self btnAction:self.btnMArr[0]];
     } else {
         [self btnAction:self.btnMArr[self.selectedIndex]];
     }
     
-    // 指示器高度
+    // 指示器高度初始值
     if (self.indicatorHeight) {
         self.indicatorView.SG_height = self.indicatorHeight;
         self.indicatorView.SG_y = self.SG_height - self.indicatorHeight;
@@ -256,19 +258,14 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 
 /// 标题按钮的点击事件
 - (void)btnAction:(UIButton *)button {
-    // 0、记录选中按钮的下标
+    // 1、记录选中按钮的下标
     self.currentIndex = button.tag;
     
-    // 1、改变按钮的选择状态
+    // 2、改变按钮的选择状态
     [self changeSelectedButton:button];
     
-    // 2、滚动标题选中居中
+    // 3、滚动标题选中居中
     [self selectedBtnCenter:button];
-    
-    // 3、标题文字缩放属性
-    if (self.isOpenTitleTextZoom) {
-        button.transform = CGAffineTransformMakeScale(1 + self.titleTextScaling, 1 + self.titleTextScaling);
-    }
     
     // 4、改变指示器的位置
     [self changeIndicatorViewLocationWithButton:button];
@@ -290,6 +287,15 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         self.tempBtn.selected = NO;
         button.selected = YES;
         self.tempBtn = button;
+    }
+    
+    // 标题文字缩放属性
+    if (self.isOpenTitleTextZoom) {
+        [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            UIButton *btn = obj;
+            btn.transform = CGAffineTransformMakeScale(1, 1);
+        }];
+        button.transform = CGAffineTransformMakeScale(1 + self.titleTextScaling, 1 + self.titleTextScaling);
     }
 }
 
@@ -466,7 +472,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 
 /// SGPageTitleView 可滚动
 - (void)isIndicatorScrollWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
-    // 1、改变按钮的选择状态
+    /// 改变按钮的选择状态
     if (progress >= 0.8) { /// 此处取 >= 0.8 而不是 1.0 为的是防止用户滚动过快而按钮的选中状态并没有改变
         [self changeSelectedButton:targetBtn];
     }
