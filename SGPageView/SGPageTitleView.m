@@ -96,7 +96,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     [self addSubview:self.bottomSeparator];
     
     // 4、添加指示器
-    [self setupIndicatorView];
+    [self addSubview:self.indicatorView];
 }
 
 #pragma mark - - - layoutSubviews
@@ -109,6 +109,9 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     } else if (self.titleTextScaling >= 0.3) {
         self.titleTextScaling = 0.3;
     }
+    
+    // 指示器宽度样式设置
+    [self setupIndicatorView];
     
     // 指示器动画初始值
     if (self.indicatorAnimationTime == 0) {
@@ -128,6 +131,24 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     if (self.indicatorHeight) {
         self.indicatorView.SG_height = self.indicatorHeight;
         self.indicatorView.SG_y = self.SG_height - self.indicatorHeight;
+    }
+}
+
+- (void)setupIndicatorView {
+    /// 取出第一个按钮并设置指示器对应样式的宽度
+    UIButton *firstBtn = self.btnMArr.firstObject;
+    if (firstBtn == nil) {
+        return;
+    }
+    if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
+        _indicatorView.SG_width = [self SG_widthWithString:firstBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
+        _indicatorView.SG_centerX = firstBtn.SG_centerX;
+    } else if (self.indicatorLengthStyle == SGIndicatorLengthTypeSpecial) {
+        _indicatorView.SG_width = [self SG_widthWithString:firstBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
+        _indicatorView.SG_centerX = firstBtn.SG_centerX;
+    } else {
+        _indicatorView.SG_width = firstBtn.SG_width;
+        _indicatorView.SG_centerX = firstBtn.SG_centerX;
     }
 }
 
@@ -237,23 +258,6 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         CGFloat scrollViewWidth = CGRectGetMaxX(self.scrollView.subviews.lastObject.frame);
         self.scrollView.contentSize = CGSizeMake(scrollViewWidth, self.frame.size.height);
     }
-}
-
-/// 添加指示器
-- (void)setupIndicatorView {
-    // 获取第一个按钮
-    UIButton *firstBtn = self.btnMArr.firstObject;
-    if (firstBtn == nil) {
-        return;
-    }
-    
-    // 添加指示器
-    [self.scrollView addSubview:self.indicatorView];
-    CGFloat indicatorViewX = firstBtn.frame.origin.x;
-    CGFloat indicatorViewY = self.SG_height - self.indicatorHeight;
-    CGFloat indicatorViewW = firstBtn.SG_width;
-    CGFloat indicatorViewH = self.indicatorHeight;
-    self.indicatorView.frame = CGRectMake(indicatorViewX, indicatorViewY, indicatorViewW, indicatorViewH);
 }
 
 /// 标题按钮的点击事件
