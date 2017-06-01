@@ -73,7 +73,6 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 }
 
 - (void)initialization {
-    _indicatorLengthStyle = SGIndicatorLengthTypeDefault;
     _isTitleGradientEffect = YES;
     _isOpenTitleTextZoom = NO;
     _isIndicatorScroll = YES;
@@ -96,9 +95,9 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     
     // 3、添加底部分割线
     [self addSubview:self.bottomSeparator];
-    
-    // 4、添加指示器
-    [self addSubview:self.indicatorView];
+
+    // 4、添加指示器长度样式
+    self.indicatorLengthStyle = SGIndicatorLengthTypeDefault;
 }
 
 #pragma mark - - - layoutSubviews
@@ -106,9 +105,10 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     [super layoutSubviews];
 
     // 选中按钮下标初始值
-    if (_selectedIndex >= 0) {
+    UIButton *lastBtn = self.btnMArr.lastObject;
+    if (lastBtn.tag >= _selectedIndex && _selectedIndex >= 0) {
         [self btnAction:self.btnMArr[_selectedIndex]];
-        _selectedIndex = -1; // 说明：这里的 -1；随便设，只要不为正数即可
+        _selectedIndex = -1; // 说明：这里的 -1；随便设或者大于 lastBtn 的 tag 值也可
     } else {
         return;
     }
@@ -144,8 +144,6 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     if (!_indicatorView) {
         _indicatorView = [[UIView alloc] init];
         _indicatorView.backgroundColor = [UIColor redColor];
-        _indicatorView.SG_height = _indicatorHeight;
-        _indicatorView.SG_y = self.SG_height - _indicatorHeight;
     }
     return _indicatorView;
 }
@@ -597,18 +595,27 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         return;
     }
     
-    if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
+    [self.scrollView addSubview:self.indicatorView];
+    
+    CGFloat indicatorViewW = 0;
+    CGFloat indicatorViewH = self.indicatorHeight;
+    CGFloat indicatorViewX = 0;
+    CGFloat indicatorViewY = self.SG_height - indicatorViewH;
+    
+    if (indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
         CGFloat firstBtnTextWidth = [self SG_widthWithString:firstBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
-        _indicatorView.SG_width = firstBtnTextWidth;
-        _indicatorView.SG_centerX = firstBtn.SG_centerX;
-    } else if (self.indicatorLengthStyle == SGIndicatorLengthTypeSpecial) {
+        indicatorViewW = firstBtnTextWidth;
+        indicatorViewX = 0.2 * (firstBtn.SG_width - firstBtnTextWidth);
+    } else if (indicatorLengthStyle == SGIndicatorLengthTypeSpecial) {
         CGFloat firstBtnIndicatorWidth = [self SG_widthWithString:firstBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
-        _indicatorView.SG_width = firstBtnIndicatorWidth;
-        _indicatorView.SG_centerX = firstBtn.SG_centerX;
+        indicatorViewW = firstBtnIndicatorWidth;
+        indicatorViewX = 0.2 * (firstBtn.SG_width - firstBtnIndicatorWidth);
     } else {
-        _indicatorView.SG_width = firstBtn.SG_width;
-        _indicatorView.SG_centerX = firstBtn.SG_centerX;
+        indicatorViewW = firstBtn.SG_width;
+        indicatorViewX = firstBtn.SG_x;
     }
+    
+    _indicatorView.frame = CGRectMake(indicatorViewX, indicatorViewY, indicatorViewW, indicatorViewH);
 }
 
 /// isTitleGradientEffect
