@@ -135,6 +135,8 @@
 
 * 2017-5-12 --> SGPageContentView 新增是否需要滚动属性
 
+* 2017-6-1 --> 1.1.0 性能优化以及 Bug 修复（主要解决 SGPageTitleView 不可滚动时，标题中含有中、英文时出现的 Bug 问题）
+
 
 ## Concluding remarks
 
