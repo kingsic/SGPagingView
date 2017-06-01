@@ -31,8 +31,6 @@
 @property (nonatomic, strong) NSMutableArray *btnMArr;
 /// tempBtn
 @property (nonatomic, strong) UIButton *tempBtn;
-/// 选中按钮的下标
-@property (nonatomic, assign) NSInteger currentIndex;
 /// 记录所有按钮文字宽度
 @property (nonatomic, assign) CGFloat allBtnTextWidth;
 /// 记录所有子控件的宽度
@@ -63,6 +61,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.77];
         self.delegatePageTitleView = delegate;
         self.titleArr = titleNames;
+        
         [self initialization];
         [self setupSubviews];
     }
@@ -74,15 +73,18 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 }
 
 - (void)initialization {
-    self.indicatorLengthStyle = SGIndicatorLengthTypeDefault;
-    self.isTitleGradientEffect = YES;
-    self.isOpenTitleTextZoom = NO;
-    self.isIndicatorScroll = YES;
-    self.isShowIndicator = YES;
-    self.isNeedBounces = YES;
-    self.isShowBottomSeparator = YES;
+    _indicatorLengthStyle = SGIndicatorLengthTypeDefault;
+    _isTitleGradientEffect = YES;
+    _isOpenTitleTextZoom = NO;
+    _isIndicatorScroll = YES;
+    _isShowIndicator = YES;
+    _isNeedBounces = YES;
+    _isShowBottomSeparator = YES;
     
-    self.indicatorHeight = 2;
+    _selectedIndex = 0;
+    _titleTextScaling = 0.1;
+    _indicatorAnimationTime = 0.1;
+    _indicatorHeight = 2;
 }
 
 - (void)setupSubviews {
@@ -102,53 +104,13 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 #pragma mark - - - layoutSubviews
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    // 标题缩放初始值
-    if (self.titleTextScaling == 0) {
-        self.titleTextScaling = 0.1;
-    } else if (self.titleTextScaling >= 0.3) {
-        self.titleTextScaling = 0.3;
-    }
-    
-    // 指示器宽度样式设置
-    [self setupIndicatorView];
-    
-    // 指示器动画初始值
-    if (self.indicatorAnimationTime == 0) {
-        self.indicatorAnimationTime = 0.1;
-    } else if (self.indicatorAnimationTime >= 0.3) {
-        self.indicatorAnimationTime = 0.3;
-    }
-    
-    // 选中按钮下标初始值
-    if (self.selectedIndex == 0) {
-        [self btnAction:self.btnMArr[0]];
-    } else {
-        [self btnAction:self.btnMArr[self.selectedIndex]];
-    }
-    
-    // 指示器高度初始值
-    if (self.indicatorHeight) {
-        self.indicatorView.SG_height = self.indicatorHeight;
-        self.indicatorView.SG_y = self.SG_height - self.indicatorHeight;
-    }
-}
 
-- (void)setupIndicatorView {
-    /// 取出第一个按钮并设置指示器对应样式的宽度
-    UIButton *firstBtn = self.btnMArr.firstObject;
-    if (firstBtn == nil) {
-        return;
-    }
-    if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
-        _indicatorView.SG_width = [self SG_widthWithString:firstBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
-        _indicatorView.SG_centerX = firstBtn.SG_centerX;
-    } else if (self.indicatorLengthStyle == SGIndicatorLengthTypeSpecial) {
-        _indicatorView.SG_width = [self SG_widthWithString:firstBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
-        _indicatorView.SG_centerX = firstBtn.SG_centerX;
+    // 选中按钮下标初始值
+    if (_selectedIndex >= 0) {
+        [self btnAction:self.btnMArr[_selectedIndex]];
+        _selectedIndex = -1; // 说明：这里的 -1；随便设，只要不为正数即可
     } else {
-        _indicatorView.SG_width = firstBtn.SG_width;
-        _indicatorView.SG_centerX = firstBtn.SG_centerX;
+        return;
     }
 }
 
@@ -182,6 +144,8 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     if (!_indicatorView) {
         _indicatorView = [[UIView alloc] init];
         _indicatorView.backgroundColor = [UIColor redColor];
+        _indicatorView.SG_height = _indicatorHeight;
+        _indicatorView.SG_y = self.SG_height - _indicatorHeight;
     }
     return _indicatorView;
 }
@@ -214,6 +178,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     }];
     // 所有按钮文字宽度 ＋ 按钮之间的间隔
     self.allBtnWidth = SGPageTitleViewBtnMargin * (self.titleArr.count + 1) + self.allBtnTextWidth;
+    self.allBtnWidth = ceilf(self.allBtnWidth);
     
     if (self.allBtnWidth <= self.bounds.size.width) { /// SGPageTitleView 不可滚动
         CGFloat btnY = 0;
@@ -262,21 +227,21 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 
 /// 标题按钮的点击事件
 - (void)btnAction:(UIButton *)button {
-    // 1、记录选中按钮的下标
-    self.currentIndex = button.tag;
     
-    // 2、改变按钮的选择状态
+    // 1、改变按钮的选择状态
     [self changeSelectedButton:button];
     
-    // 3、滚动标题选中居中
-    [self selectedBtnCenter:button];
+    // 2、滚动标题选中居中
+    if (self.allBtnWidth > self.frame.size.width) {
+        [self selectedBtnCenter:button];
+    }
     
-    // 4、改变指示器的位置
+    // 3、改变指示器的位置
     [self changeIndicatorViewLocationWithButton:button];
 
-    // 5、pageTitleViewDelegate
+    // 4、pageTitleViewDelegate
     if ([self.delegatePageTitleView respondsToSelector:@selector(SGPageTitleView:selectedIndex:)]) {
-        [self.delegatePageTitleView SGPageTitleView:self selectedIndex:self.currentIndex];
+        [self.delegatePageTitleView SGPageTitleView:self selectedIndex:button.tag];
     }
 }
 
@@ -592,21 +557,58 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 /// indicatorHeight
 - (void)setIndicatorHeight:(CGFloat)indicatorHeight {
     _indicatorHeight = indicatorHeight;
+    
+    if (indicatorHeight) {
+        _indicatorHeight = indicatorHeight;
+        self.indicatorView.SG_height = indicatorHeight;
+        self.indicatorView.SG_y = self.SG_height - indicatorHeight;
+    }
 }
 
 /// indicatorAnimationTime
 - (void)setIndicatorAnimationTime:(CGFloat)indicatorAnimationTime {
     _indicatorAnimationTime = indicatorAnimationTime;
+    
+    if (indicatorAnimationTime) {
+        if (indicatorAnimationTime >= 0.3) {
+            _indicatorAnimationTime = 0.3;
+        } else {
+            _indicatorAnimationTime = indicatorAnimationTime;
+        }
+    }
 }
 
 /// selectedIndex
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
     _selectedIndex = selectedIndex;
+    
+    if (selectedIndex) {
+        _selectedIndex = selectedIndex;
+    }
 }
 
 /// indicatorLengthStyle
 - (void)setIndicatorLengthStyle:(SGIndicatorLengthType)indicatorLengthStyle {
     _indicatorLengthStyle = indicatorLengthStyle;
+    
+    // 取出第一个按钮并设置指示器对应样式的宽度
+    UIButton *firstBtn = self.btnMArr.firstObject;
+    if (firstBtn == nil) {
+        return;
+    }
+    
+    if (self.indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
+        CGFloat firstBtnTextWidth = [self SG_widthWithString:firstBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
+        _indicatorView.SG_width = firstBtnTextWidth;
+        _indicatorView.SG_centerX = firstBtn.SG_centerX;
+    } else if (self.indicatorLengthStyle == SGIndicatorLengthTypeSpecial) {
+        CGFloat firstBtnIndicatorWidth = [self SG_widthWithString:firstBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
+        _indicatorView.SG_width = firstBtnIndicatorWidth;
+        _indicatorView.SG_centerX = firstBtn.SG_centerX;
+    } else {
+        _indicatorView.SG_width = firstBtn.SG_width;
+        _indicatorView.SG_centerX = firstBtn.SG_centerX;
+    }
 }
 
 /// isTitleGradientEffect
@@ -621,6 +623,14 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 
 - (void)setTitleTextScaling:(CGFloat)titleTextScaling {
     _titleTextScaling = titleTextScaling;
+    
+    if (titleTextScaling) {
+        if (titleTextScaling >= 0.3) {
+            _titleTextScaling = 0.3;
+        } else {
+            _titleTextScaling = 0.1;
+        }
+    }
 }
 
 /// isIndicatorScroll
