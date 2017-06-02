@@ -16,6 +16,9 @@
 #import "SGPageTitleView.h"
 #import "UIView+SGFrame.h"
 
+#define SGPageTitleViewWidth self.frame.size.width
+#define SGPageTitleViewHeight self.frame.size.height
+
 @interface SGPageTitleView ()
 /** delegatePageTitleView */
 @property (nonatomic, weak) id<SGPageTitleViewDelegate> delegatePageTitleView;
@@ -131,11 +134,10 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+        _scrollView = [[UIScrollView alloc] init];
         _scrollView.showsHorizontalScrollIndicator = NO;
-        _scrollView.showsVerticalScrollIndicator = NO;
-        _scrollView.scrollsToTop = NO;
-        _scrollView.bounces = YES;
+        _scrollView.alwaysBounceHorizontal = YES;
+        _scrollView.frame = CGRectMake(0, 0, SGPageTitleViewWidth, SGPageTitleViewHeight);
     }
     return _scrollView;
 }
@@ -180,8 +182,8 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     
     if (self.allBtnWidth <= self.bounds.size.width) { /// SGPageTitleView 不可滚动
         CGFloat btnY = 0;
-        CGFloat btnW = self.frame.size.width / self.titleArr.count;
-        CGFloat btnH = self.frame.size.height - self.indicatorHeight;
+        CGFloat btnW = SGPageTitleViewWidth / self.titleArr.count;
+        CGFloat btnH = SGPageTitleViewHeight - self.indicatorHeight;
         for (NSInteger index = 0; index < self.titleArr.count; index++) {
             UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
             // 设置 frame
@@ -196,12 +198,12 @@ static CGFloat const SGPageTitleViewTextFont = 16;
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
         }
-        self.scrollView.contentSize = CGSizeMake(self.bounds.size.width, 0);
+        self.scrollView.contentSize = CGSizeMake(SGPageTitleViewWidth, SGPageTitleViewHeight);
         
     } else { /// SGPageTitleView 可滚动
         CGFloat btnX = 0;
         CGFloat btnY = 0;
-        CGFloat btnH = self.frame.size.height - self.indicatorHeight;
+        CGFloat btnH = SGPageTitleViewHeight - self.indicatorHeight;
         for (NSInteger index = 0; index < self.titleArr.count; index++) {
             UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
             // 设置 frame
@@ -219,7 +221,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         }
         
         CGFloat scrollViewWidth = CGRectGetMaxX(self.scrollView.subviews.lastObject.frame);
-        self.scrollView.contentSize = CGSizeMake(scrollViewWidth, self.frame.size.height);
+        self.scrollView.contentSize = CGSizeMake(scrollViewWidth, SGPageTitleViewHeight);
     }
 }
 
@@ -230,7 +232,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     [self changeSelectedButton:button];
     
     // 2、滚动标题选中居中
-    if (self.allBtnWidth > self.frame.size.width) {
+    if (self.allBtnWidth > SGPageTitleViewWidth) {
         [self selectedBtnCenter:button];
     }
     
@@ -269,12 +271,12 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 /// 滚动标题选中居中
 - (void)selectedBtnCenter:(UIButton *)centerBtn {
     // 计算偏移量
-    CGFloat offsetX = centerBtn.center.x - self.frame.size.width * 0.5;
+    CGFloat offsetX = centerBtn.center.x - SGPageTitleViewWidth * 0.5;
     
     if (offsetX < 0) offsetX = 0;
     
     // 获取最大滚动范围
-    CGFloat maxOffsetX = self.scrollView.contentSize.width - self.frame.size.width;
+    CGFloat maxOffsetX = self.scrollView.contentSize.width - SGPageTitleViewWidth;
     
     if (offsetX > maxOffsetX) offsetX = maxOffsetX;
     

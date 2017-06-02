@@ -47,6 +47,7 @@
     _pageTitleView.isTitleGradientEffect = NO;
     _pageTitleView.indicatorLengthStyle = SGIndicatorLengthTypeSpecial;
     _pageTitleView.selectedIndex = 1;
+    _pageTitleView.isNeedBounces = NO;
 }
 
 - (void)SGPageTitleView:(SGPageTitleView *)SGPageTitleView selectedIndex:(NSInteger)selectedIndex {
