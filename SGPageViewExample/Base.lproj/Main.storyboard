@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ns7-vp-eY1">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ns7-vp-eY1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,16 +24,31 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_image" translatesAutoresizingMaskIntoConstraints="NO" id="XAG-km-PYQ">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5kh-Di-8ke">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="6vg-Ra-Sff"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="oee-V6-93V"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="5kh-Di-8ke" secondAttribute="trailing" id="ATI-D9-jRU"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XAG-km-PYQ" secondAttribute="bottom" id="I7q-8C-psl"/>
                             <constraint firstItem="XAG-km-PYQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LMS-qL-ZqE"/>
                             <constraint firstItem="XAG-km-PYQ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="OPW-d7-9Sw"/>
                             <constraint firstAttribute="trailing" secondItem="XAG-km-PYQ" secondAttribute="trailing" id="ceW-mg-Tue"/>
+                            <constraint firstItem="5kh-Di-8ke" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cr3-Qi-t3X"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5kh-Di-8ke" secondAttribute="bottom" id="niB-kr-k9Y"/>
+                            <constraint firstItem="5kh-Di-8ke" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="tUe-JY-E6e"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SGPageView" id="wYF-y2-EHG"/>
+                    <connections>
+                        <outlet property="tableView" destination="5kh-Di-8ke" id="7OI-Yh-1RW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

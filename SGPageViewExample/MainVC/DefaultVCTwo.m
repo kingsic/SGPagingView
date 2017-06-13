@@ -32,6 +32,10 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    [self setupPageView];
+}
+
+- (void)setupPageView {
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
     ChildVCThree *threeVC = [[ChildVCThree alloc] init];
@@ -53,11 +57,6 @@
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
     [self.view addSubview:_pageTitleView];
-    _pageTitleView.selectedIndex = 1;
-    _pageTitleView.titleColorStateNormal = [UIColor lightGrayColor];
-    _pageTitleView.titleColorStateSelected = [UIColor blackColor];
-    _pageTitleView.indicatorColor = [UIColor blackColor];
-    _pageTitleView.isOpenTitleTextZoom = YES;
     _pageTitleView.indicatorLengthStyle = SGIndicatorLengthTypeEqual;
 }
 
@@ -68,7 +67,6 @@
 - (void)SGPageContentView:(SGPageContentView *)SGPageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
-
 
 
 @end

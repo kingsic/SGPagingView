@@ -374,10 +374,8 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         distance = progress * (totalDistance - totalOffsetX);
         
         /// 计算 indicatorView 新的 frame
-        CGRect temp = self.indicatorView.frame;
-        temp.origin.x = originalBtnX + offsetX;
-        temp.size.width = [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + distance;
-        self.indicatorView.frame = temp;
+        self.indicatorView.SG_x = originalBtnX + offsetX;
+        self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + distance;
         
     } else if (self.indicatorLengthStyle == SGIndicatorLengthTypeSpecial) {
         CGFloat targetBtnX = CGRectGetMaxX(targetBtn.frame) - [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength);
@@ -397,11 +395,8 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         distance = progress * (totalDistance - totalOffsetX);
         
         /// 计算 indicatorView 新的 frame
-        CGRect temp = self.indicatorView.frame;
-        temp.origin.x = originalBtnX + offsetX;
-        temp.size.width = [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + distance + SGIndicatorTypeSpecialMultipleLength;
-        self.indicatorView.frame = temp;
-        
+        self.indicatorView.SG_x = originalBtnX + offsetX;
+        self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + distance + SGIndicatorTypeSpecialMultipleLength;
     } else {
         // 3、处理指示器的逻辑
         CGFloat moveTotalX = targetBtn.SG_origin.x - originalBtn.SG_origin.x;
@@ -462,10 +457,8 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         distance = progress * (totalDistance - totalOffsetX);
     }
     /// 计算 indicatorView 新的 frame
-    CGRect temp = self.indicatorView.frame;
-    temp.origin.x = originalBtn.SG_origin.x + offsetX;
-    temp.size.width = originalBtn.SG_width + distance;
-    self.indicatorView.frame = temp;
+    self.indicatorView.SG_x = originalBtn.SG_origin.x + offsetX;
+    self.indicatorView.SG_width = originalBtn.SG_width + distance;
 }
 - (void)indicatorScrollWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
     if (progress >= 0.5) {

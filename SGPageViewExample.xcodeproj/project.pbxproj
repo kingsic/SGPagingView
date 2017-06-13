@@ -25,6 +25,8 @@
 		18347EC71EA8557000F02F4C /* ChildVCThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EBD1EA8557000F02F4C /* ChildVCThree.m */; };
 		18347EC81EA8557000F02F4C /* ChildVCTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EBF1EA8557000F02F4C /* ChildVCTwo.m */; };
 		18347ECB1EA8557A00F02F4C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347ECA1EA8557A00F02F4C /* ViewController.m */; };
+		183C50DB1EEF977600095500 /* DefaultVCThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C50DA1EEF977600095500 /* DefaultVCThree.m */; };
+		183C50DE1EEF977F00095500 /* DefaultVCFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C50DD1EEF977F00095500 /* DefaultVCFour.m */; };
 		185A91AD1E9F57E700846BC0 /* NavigationBarTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A91AC1E9F57E700846BC0 /* NavigationBarTitleView.m */; };
 		18E5B1691E9E14E600E28DE1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E5B1681E9E14E600E28DE1 /* main.m */; };
 		18E5B16C1E9E14E600E28DE1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E5B16B1E9E14E600E28DE1 /* AppDelegate.m */; };
@@ -87,6 +89,10 @@
 		18347EBF1EA8557000F02F4C /* ChildVCTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildVCTwo.m; sourceTree = "<group>"; };
 		18347EC91EA8557A00F02F4C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		18347ECA1EA8557A00F02F4C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		183C50D91EEF977600095500 /* DefaultVCThree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultVCThree.h; sourceTree = "<group>"; };
+		183C50DA1EEF977600095500 /* DefaultVCThree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultVCThree.m; sourceTree = "<group>"; };
+		183C50DC1EEF977F00095500 /* DefaultVCFour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultVCFour.h; sourceTree = "<group>"; };
+		183C50DD1EEF977F00095500 /* DefaultVCFour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultVCFour.m; sourceTree = "<group>"; };
 		185A91AB1E9F57E700846BC0 /* NavigationBarTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarTitleView.h; sourceTree = "<group>"; };
 		185A91AC1E9F57E700846BC0 /* NavigationBarTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarTitleView.m; sourceTree = "<group>"; };
 		18E5B1641E9E14E600E28DE1 /* SGPageViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SGPageViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +146,10 @@
 				18347EA51EA8556900F02F4C /* DefaultVCOne.m */,
 				18347EA61EA8556900F02F4C /* DefaultVCTwo.h */,
 				18347EA71EA8556900F02F4C /* DefaultVCTwo.m */,
+				183C50D91EEF977600095500 /* DefaultVCThree.h */,
+				183C50DA1EEF977600095500 /* DefaultVCThree.m */,
+				183C50DC1EEF977F00095500 /* DefaultVCFour.h */,
+				183C50DD1EEF977F00095500 /* DefaultVCFour.m */,
 				18347EA81EA8556900F02F4C /* NavigationBarVC.h */,
 				18347EA91EA8556900F02F4C /* NavigationBarVC.m */,
 			);
@@ -408,6 +418,8 @@
 				18E5B1AD1E9E1D9400E28DE1 /* UIView+SGFrame.m in Sources */,
 				18E5B16C1E9E14E600E28DE1 /* AppDelegate.m in Sources */,
 				18347EC31EA8557000F02F4C /* ChildVCNine.m in Sources */,
+				183C50DB1EEF977600095500 /* DefaultVCThree.m in Sources */,
+				183C50DE1EEF977F00095500 /* DefaultVCFour.m in Sources */,
 				18347EC21EA8557000F02F4C /* ChildVCFour.m in Sources */,
 				18E5B1691E9E14E600E28DE1 /* main.m in Sources */,
 			);
