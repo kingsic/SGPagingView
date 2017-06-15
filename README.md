@@ -29,8 +29,8 @@
 * 3、SGPageView 的使用步骤（在父视图的 viewDidLoad 中加入下面代码）
 
 ```Objective-C
-    /// 说明：一定要加上这句代码，否则 pageContentView 会存在偏移量下移问题
-    self.automaticallyAdjustsScrollViewInsets = NO; 
+    /// 说明：一定要加上这句代码，否则 pageContentView 会存在偏移量下移问题（v1.1.5之后不需要这句代码）
+    self.automaticallyAdjustsScrollViewInsets = NO; 
 
     /// 子控制器及 pageContentView 的创建
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
@@ -70,7 +70,7 @@
 ```
 
 
-## 问题及解决方案
+## 问题及解决方案（v1.1.5 之后不需要做处理）
 
 #### 说明
 
@@ -136,6 +136,8 @@
 * 2017-5-12 --> SGPageContentView 新增是否需要滚动属性
 
 * 2017-6-1 --> 1.1.0 性能优化以及 Bug 修复（主要解决 SGPageTitleView 不可滚动时，标题中含有中、英文时出现的 Bug 问题）
+
+* 2017-6-15 --> 1.1.5 新增新浪微博模块以及代码的优化
 
 
 ## Concluding remarks
