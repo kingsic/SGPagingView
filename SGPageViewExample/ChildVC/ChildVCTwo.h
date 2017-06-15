@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PersonalCenterChildBaseVC.h"
 
-@interface ChildVCTwo : UIViewController
+@interface ChildVCTwo : PersonalCenterChildBaseVC
 
 @end

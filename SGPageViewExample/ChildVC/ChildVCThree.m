@@ -8,7 +8,7 @@
 
 #import "ChildVCThree.h"
 
-@interface ChildVCThree () <UITableViewDataSource>
+@interface ChildVCThree () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

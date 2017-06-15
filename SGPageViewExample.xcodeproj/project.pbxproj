@@ -15,7 +15,6 @@
 		18347EA21EA8553E00F02F4C /* SGPageTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EA01EA8553E00F02F4C /* SGPageTitleView.m */; };
 		18347EAA1EA8556900F02F4C /* DefaultVCOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EA51EA8556900F02F4C /* DefaultVCOne.m */; };
 		18347EAB1EA8556900F02F4C /* DefaultVCTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EA71EA8556900F02F4C /* DefaultVCTwo.m */; };
-		18347EAC1EA8556900F02F4C /* NavigationBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EA91EA8556900F02F4C /* NavigationBarVC.m */; };
 		18347EC01EA8557000F02F4C /* ChildVCEight.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EAF1EA8557000F02F4C /* ChildVCEight.m */; };
 		18347EC11EA8557000F02F4C /* ChildVCFive.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EB11EA8557000F02F4C /* ChildVCFive.m */; };
 		18347EC21EA8557000F02F4C /* ChildVCFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347EB31EA8557000F02F4C /* ChildVCFour.m */; };
@@ -27,9 +26,15 @@
 		18347ECB1EA8557A00F02F4C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18347ECA1EA8557A00F02F4C /* ViewController.m */; };
 		183C50DB1EEF977600095500 /* DefaultVCThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C50DA1EEF977600095500 /* DefaultVCThree.m */; };
 		183C50DE1EEF977F00095500 /* DefaultVCFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C50DD1EEF977F00095500 /* DefaultVCFour.m */; };
-		185A91AD1E9F57E700846BC0 /* NavigationBarTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A91AC1E9F57E700846BC0 /* NavigationBarTitleView.m */; };
+		18660F5A1EF2A8AD00822A30 /* PersonalCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18660F591EF2A8AD00822A30 /* PersonalCenterVC.m */; };
+		18660F5D1EF2A8B900822A30 /* PersonalCenterChildBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18660F5C1EF2A8B900822A30 /* PersonalCenterChildBaseVC.m */; };
+		18660F631EF2A8EC00822A30 /* PersonalCenterTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18660F5F1EF2A8EC00822A30 /* PersonalCenterTableView.m */; };
+		18660F641EF2A8EC00822A30 /* PersonalCenterTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18660F611EF2A8EC00822A30 /* PersonalCenterTopView.m */; };
+		18660F651EF2A8EC00822A30 /* PersonalCenterTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18660F621EF2A8EC00822A30 /* PersonalCenterTopView.xib */; };
+		18660F6B1EF2A9DA00822A30 /* NavigationBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18660F6A1EF2A9DA00822A30 /* NavigationBarVC.m */; };
+		18660F6E1EF2A9E400822A30 /* NavigationBarTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18660F6D1EF2A9E400822A30 /* NavigationBarTitleView.m */; };
+		18660F751EF2AA8000822A30 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18660F741EF2AA8000822A30 /* AppDelegate.m */; };
 		18E5B1691E9E14E600E28DE1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E5B1681E9E14E600E28DE1 /* main.m */; };
-		18E5B16C1E9E14E600E28DE1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E5B16B1E9E14E600E28DE1 /* AppDelegate.m */; };
 		18E5B1721E9E14E600E28DE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18E5B1701E9E14E600E28DE1 /* Main.storyboard */; };
 		18E5B1741E9E14E600E28DE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18E5B1731E9E14E600E28DE1 /* Assets.xcassets */; };
 		18E5B1771E9E14E600E28DE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18E5B1751E9E14E600E28DE1 /* LaunchScreen.storyboard */; };
@@ -69,8 +74,6 @@
 		18347EA51EA8556900F02F4C /* DefaultVCOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultVCOne.m; sourceTree = "<group>"; };
 		18347EA61EA8556900F02F4C /* DefaultVCTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultVCTwo.h; sourceTree = "<group>"; };
 		18347EA71EA8556900F02F4C /* DefaultVCTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultVCTwo.m; sourceTree = "<group>"; };
-		18347EA81EA8556900F02F4C /* NavigationBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarVC.h; sourceTree = "<group>"; };
-		18347EA91EA8556900F02F4C /* NavigationBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarVC.m; sourceTree = "<group>"; };
 		18347EAE1EA8557000F02F4C /* ChildVCEight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildVCEight.h; sourceTree = "<group>"; };
 		18347EAF1EA8557000F02F4C /* ChildVCEight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildVCEight.m; sourceTree = "<group>"; };
 		18347EB01EA8557000F02F4C /* ChildVCFive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildVCFive.h; sourceTree = "<group>"; };
@@ -93,12 +96,23 @@
 		183C50DA1EEF977600095500 /* DefaultVCThree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultVCThree.m; sourceTree = "<group>"; };
 		183C50DC1EEF977F00095500 /* DefaultVCFour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultVCFour.h; sourceTree = "<group>"; };
 		183C50DD1EEF977F00095500 /* DefaultVCFour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultVCFour.m; sourceTree = "<group>"; };
-		185A91AB1E9F57E700846BC0 /* NavigationBarTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarTitleView.h; sourceTree = "<group>"; };
-		185A91AC1E9F57E700846BC0 /* NavigationBarTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarTitleView.m; sourceTree = "<group>"; };
+		18660F581EF2A8AD00822A30 /* PersonalCenterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterVC.h; sourceTree = "<group>"; };
+		18660F591EF2A8AD00822A30 /* PersonalCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterVC.m; sourceTree = "<group>"; };
+		18660F5B1EF2A8B900822A30 /* PersonalCenterChildBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterChildBaseVC.h; sourceTree = "<group>"; };
+		18660F5C1EF2A8B900822A30 /* PersonalCenterChildBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterChildBaseVC.m; sourceTree = "<group>"; };
+		18660F5E1EF2A8EC00822A30 /* PersonalCenterTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterTableView.h; sourceTree = "<group>"; };
+		18660F5F1EF2A8EC00822A30 /* PersonalCenterTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterTableView.m; sourceTree = "<group>"; };
+		18660F601EF2A8EC00822A30 /* PersonalCenterTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterTopView.h; sourceTree = "<group>"; };
+		18660F611EF2A8EC00822A30 /* PersonalCenterTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterTopView.m; sourceTree = "<group>"; };
+		18660F621EF2A8EC00822A30 /* PersonalCenterTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalCenterTopView.xib; sourceTree = "<group>"; };
+		18660F691EF2A9DA00822A30 /* NavigationBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarVC.h; sourceTree = "<group>"; };
+		18660F6A1EF2A9DA00822A30 /* NavigationBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarVC.m; sourceTree = "<group>"; };
+		18660F6C1EF2A9E400822A30 /* NavigationBarTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarTitleView.h; sourceTree = "<group>"; };
+		18660F6D1EF2A9E400822A30 /* NavigationBarTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarTitleView.m; sourceTree = "<group>"; };
+		18660F731EF2AA8000822A30 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		18660F741EF2AA8000822A30 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		18E5B1641E9E14E600E28DE1 /* SGPageViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SGPageViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E5B1681E9E14E600E28DE1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		18E5B16A1E9E14E600E28DE1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		18E5B16B1E9E14E600E28DE1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		18E5B1711E9E14E600E28DE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18E5B1731E9E14E600E28DE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18E5B1761E9E14E600E28DE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -150,8 +164,6 @@
 				183C50DA1EEF977600095500 /* DefaultVCThree.m */,
 				183C50DC1EEF977F00095500 /* DefaultVCFour.h */,
 				183C50DD1EEF977F00095500 /* DefaultVCFour.m */,
-				18347EA81EA8556900F02F4C /* NavigationBarVC.h */,
-				18347EA91EA8556900F02F4C /* NavigationBarVC.m */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
@@ -184,6 +196,65 @@
 			path = ChildVC;
 			sourceTree = "<group>";
 		};
+		18660F551EF2A89400822A30 /* PersonalCenter */ = {
+			isa = PBXGroup;
+			children = (
+				18660F561EF2A89400822A30 /* Controller */,
+				18660F571EF2A89400822A30 /* View */,
+			);
+			path = PersonalCenter;
+			sourceTree = "<group>";
+		};
+		18660F561EF2A89400822A30 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				18660F581EF2A8AD00822A30 /* PersonalCenterVC.h */,
+				18660F591EF2A8AD00822A30 /* PersonalCenterVC.m */,
+				18660F5B1EF2A8B900822A30 /* PersonalCenterChildBaseVC.h */,
+				18660F5C1EF2A8B900822A30 /* PersonalCenterChildBaseVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		18660F571EF2A89400822A30 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18660F5E1EF2A8EC00822A30 /* PersonalCenterTableView.h */,
+				18660F5F1EF2A8EC00822A30 /* PersonalCenterTableView.m */,
+				18660F601EF2A8EC00822A30 /* PersonalCenterTopView.h */,
+				18660F611EF2A8EC00822A30 /* PersonalCenterTopView.m */,
+				18660F621EF2A8EC00822A30 /* PersonalCenterTopView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		18660F661EF2A98100822A30 /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				18660F671EF2A99500822A30 /* Controller */,
+				18660F681EF2A99D00822A30 /* View */,
+			);
+			path = NavigationBar;
+			sourceTree = "<group>";
+		};
+		18660F671EF2A99500822A30 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				18660F691EF2A9DA00822A30 /* NavigationBarVC.h */,
+				18660F6A1EF2A9DA00822A30 /* NavigationBarVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		18660F681EF2A99D00822A30 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18660F6C1EF2A9E400822A30 /* NavigationBarTitleView.h */,
+				18660F6D1EF2A9E400822A30 /* NavigationBarTitleView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		18E5B15B1E9E14E600E28DE1 = {
 			isa = PBXGroup;
 			children = (
@@ -208,14 +279,14 @@
 		18E5B1661E9E14E600E28DE1 /* SGPageViewExample */ = {
 			isa = PBXGroup;
 			children = (
-				18E5B16A1E9E14E600E28DE1 /* AppDelegate.h */,
-				18E5B16B1E9E14E600E28DE1 /* AppDelegate.m */,
+				18660F731EF2AA8000822A30 /* AppDelegate.h */,
+				18660F741EF2AA8000822A30 /* AppDelegate.m */,
 				18347EC91EA8557A00F02F4C /* ViewController.h */,
 				18347ECA1EA8557A00F02F4C /* ViewController.m */,
 				18347EA31EA8556900F02F4C /* MainVC */,
+				18660F661EF2A98100822A30 /* NavigationBar */,
+				18660F551EF2A89400822A30 /* PersonalCenter */,
 				18347EAD1EA8557000F02F4C /* ChildVC */,
-				185A91AB1E9F57E700846BC0 /* NavigationBarTitleView.h */,
-				185A91AC1E9F57E700846BC0 /* NavigationBarTitleView.m */,
 				18E5B1701E9E14E600E28DE1 /* Main.storyboard */,
 				18E5B1731E9E14E600E28DE1 /* Assets.xcassets */,
 				18E5B1751E9E14E600E28DE1 /* LaunchScreen.storyboard */,
@@ -377,6 +448,7 @@
 				18E5B1741E9E14E600E28DE1 /* Assets.xcassets in Resources */,
 				1819F46D1EC2AEF000A212B9 /* ChildVCThree.xib in Resources */,
 				18E5B1721E9E14E600E28DE1 /* Main.storyboard in Resources */,
+				18660F651EF2A8EC00822A30 /* PersonalCenterTopView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,19 +478,23 @@
 				18347EC71EA8557000F02F4C /* ChildVCThree.m in Sources */,
 				18347EAA1EA8556900F02F4C /* DefaultVCOne.m in Sources */,
 				18347EC11EA8557000F02F4C /* ChildVCFive.m in Sources */,
-				18347EAC1EA8556900F02F4C /* NavigationBarVC.m in Sources */,
 				18347EC61EA8557000F02F4C /* ChildVCSix.m in Sources */,
 				18347EA11EA8553E00F02F4C /* SGPageContentView.m in Sources */,
 				18347EAB1EA8556900F02F4C /* DefaultVCTwo.m in Sources */,
 				18347EC81EA8557000F02F4C /* ChildVCTwo.m in Sources */,
 				18347EC51EA8557000F02F4C /* ChildVCSeven.m in Sources */,
-				185A91AD1E9F57E700846BC0 /* NavigationBarTitleView.m in Sources */,
+				18660F631EF2A8EC00822A30 /* PersonalCenterTableView.m in Sources */,
 				18347ECB1EA8557A00F02F4C /* ViewController.m in Sources */,
+				18660F5A1EF2A8AD00822A30 /* PersonalCenterVC.m in Sources */,
 				1819F4721EC2C3B600A212B9 /* ChildVCOne.m in Sources */,
 				18E5B1AD1E9E1D9400E28DE1 /* UIView+SGFrame.m in Sources */,
-				18E5B16C1E9E14E600E28DE1 /* AppDelegate.m in Sources */,
+				18660F6E1EF2A9E400822A30 /* NavigationBarTitleView.m in Sources */,
+				18660F641EF2A8EC00822A30 /* PersonalCenterTopView.m in Sources */,
 				18347EC31EA8557000F02F4C /* ChildVCNine.m in Sources */,
+				18660F6B1EF2A9DA00822A30 /* NavigationBarVC.m in Sources */,
+				18660F751EF2AA8000822A30 /* AppDelegate.m in Sources */,
 				183C50DB1EEF977600095500 /* DefaultVCThree.m in Sources */,
+				18660F5D1EF2A8B900822A30 /* PersonalCenterChildBaseVC.m in Sources */,
 				183C50DE1EEF977F00095500 /* DefaultVCFour.m in Sources */,
 				18347EC21EA8557000F02F4C /* ChildVCFour.m in Sources */,
 				18E5B1691E9E14E600E28DE1 /* main.m in Sources */,

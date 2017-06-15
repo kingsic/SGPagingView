@@ -78,6 +78,9 @@
         [self.parentViewController addChildViewController:childVC];
     }
     
+    UIView *tempView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self addSubview:tempView];
+    
     // 2、添加UICollectionView, 用于在Cell中存放控制器的View
     [self addSubview:self.collectionView];
 }

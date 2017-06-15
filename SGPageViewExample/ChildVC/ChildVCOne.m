@@ -9,7 +9,7 @@
 #import "ChildVCOne.h"
 //#import "Masonry.h"
 
-@interface ChildVCOne () <UITableViewDataSource>
+@interface ChildVCOne () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
@@ -36,6 +36,7 @@
         _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
         NSLog(@"%@", NSStringFromCGRect(self.view.frame));
         _tableView.dataSource = self;
+        _tableView.delegate = self;
     }
     return _tableView;
 }

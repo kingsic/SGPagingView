@@ -12,6 +12,7 @@
 #import "DefaultVCThree.h"
 #import "DefaultVCFour.h"
 #import "NavigationBarVC.h"
+#import "PersonalCenterVC.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -25,15 +26,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.TitleDataList = @[@"静止样式", @"滚动样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果"];
+    self.TitleDataList = @[@"静止样式", @"滚动样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果", @"微博个人主页"];
     
     DefaultVCOne *oneVC = [[DefaultVCOne alloc] init];
     DefaultVCTwo *twoVC = [[DefaultVCTwo alloc] init];
     NavigationBarVC *navVC = [[NavigationBarVC alloc] init];
     DefaultVCThree *threeVC = [[DefaultVCThree alloc] init];
     DefaultVCFour *fourVC = [[DefaultVCFour alloc] init];
-    
-    self.VCDataList = @[oneVC, twoVC, navVC, threeVC, fourVC];
+    PersonalCenterVC *PCVC = [[PersonalCenterVC alloc] init];
+
+    self.VCDataList = @[oneVC, twoVC, navVC, threeVC, fourVC, PCVC];
     
     [self foundTableView];
 }

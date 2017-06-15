@@ -8,7 +8,7 @@
 
 #import "ChildVCTwo.h"
 
-@interface ChildVCTwo () <UITableViewDataSource>
+@interface ChildVCTwo () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
