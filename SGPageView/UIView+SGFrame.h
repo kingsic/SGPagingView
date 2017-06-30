@@ -1,20 +1,15 @@
 //
+//  如遇到问题或有更好方案，请通过以下方式进行联系
+//      QQ：1357127436
+//      Email：kingsic@126.com
+//      GitHub：https://github.com/kingsic
+//
 //  UIView+SGFrame.h
 //  UIView+SGFrame
 //
 //  Created by Sorgle on 15/7/13.
 //  Copyright © 2015年 Sorgle. All rights reserved.
 //
-//  拓展 UIView 的 frame 属性
-//  在分类中声明@property，只会生成方法的声明，不会生成方法的实现和带有_线成员变量
-//
-//  - - - - - - - - - - - - - - 交流QQ：1357127436 - - - - - - - - - - - - - - //
-//
-//  - - 如在使用中, 遇到什么问题或者有更好建议者, 请于 kingsic@126.com 邮箱联系 - - - //
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//  - - GitHub下载地址 https://github.com/kingsic/SGPageView.git - - - - - - - //
-//
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import <UIKit/UIKit.h>
 
@@ -28,7 +23,7 @@
 @property (nonatomic, assign) CGPoint SG_origin;
 @property (nonatomic, assign) CGSize SG_size;
 
-/** 从 XIB 中加载视图 */
+/// 从 XIB 中加载视图
 + (instancetype)SG_loadViewFromXib;
 
 @end

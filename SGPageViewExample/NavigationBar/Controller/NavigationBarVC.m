@@ -19,7 +19,7 @@
 #import "ChildVCEight.h"
 #import "ChildVCNine.h"
 
-@interface NavigationBarVC () <SGPageTitleViewDelegate, SGPageContentViewDelegare>
+@interface NavigationBarVC () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentView *pageContentView;
 

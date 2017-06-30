@@ -18,7 +18,7 @@
 #import "ChildVCEight.h"
 #import "ChildVCNine.h"
 
-@interface DefaultVCFour () <SGPageTitleViewDelegate, SGPageContentViewDelegare>
+@interface DefaultVCFour () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentView *pageContentView;
 

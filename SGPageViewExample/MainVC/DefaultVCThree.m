@@ -13,7 +13,7 @@
 #import "ChildVCThree.h"
 #import "ChildVCFour.h"
 
-@interface DefaultVCThree () <SGPageTitleViewDelegate, SGPageContentViewDelegare>
+@interface DefaultVCThree () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentView *pageContentView;
 

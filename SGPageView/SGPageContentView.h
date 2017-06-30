@@ -1,22 +1,20 @@
 //
+//  如遇到问题或有更好方案，请通过以下方式进行联系
+//      QQ：1357127436
+//      Email：kingsic@126.com
+//      GitHub：https://github.com/kingsic
+//
 //  SGPageContentView.h
 //  SGPageViewExample
 //
 //  Created by apple on 17/4/10.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
-//  - - - - - - - - - - - - - - 交流QQ：1357127436 - - - - - - - - - - - - - - //
-//
-//  - - 如在使用中, 遇到什么问题或者有更好建议者, 请于 kingsic@126.com 邮箱联系 - - - //
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//  - - GitHub下载地址 https://github.com/kingsic/SGPageView.git - - - - - - - //
-//
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import <UIKit/UIKit.h>
 @class SGPageContentView;
 
-@protocol SGPageContentViewDelegare <NSObject>
+@protocol SGPageContentViewDelegate <NSObject>
 /// delegatePageContentView
 - (void)SGPageContentView:(SGPageContentView *)SGPageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
 
@@ -41,7 +39,7 @@
 + (instancetype)pageContentViewWithFrame:(CGRect)frame parentVC:(UIViewController *)parentVC childVCs:(NSArray *)childVCs;
 
 /** delegatePageContentView */
-@property (nonatomic, weak) id<SGPageContentViewDelegare> delegatePageContentView;
+@property (nonatomic, weak) id<SGPageContentViewDelegate> delegatePageContentView;
 /** 是否需要滚动 SGPageContentView，默认为 YES；设为 NO 时，不用设置 SGPageContentView 的代理及代理方法 */
 @property (nonatomic, assign) BOOL isScrollEnabled;
 

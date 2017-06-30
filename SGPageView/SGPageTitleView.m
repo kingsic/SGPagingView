@@ -1,17 +1,15 @@
 //
+//  如遇到问题或有更好方案，请通过以下方式进行联系
+//      QQ：1357127436
+//      Email：kingsic@126.com
+//      GitHub：https://github.com/kingsic
+//
 //  SGPageTitleView.m
 //  SGPageViewExample
 //
 //  Created by apple on 17/4/10.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
-//  - - - - - - - - - - - - - - 交流QQ：1357127436 - - - - - - - - - - - - - - //
-//
-//  - - 如在使用中, 遇到什么问题或者有更好建议者, 请于 kingsic@126.com 邮箱联系 - - - //
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//  - - GitHub下载地址 https://github.com/kingsic/SGPageView.git - - - - - - - //
-//
-//  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 #import "SGPageTitleView.h"
 #import "UIView+SGFrame.h"
@@ -20,7 +18,7 @@
 #define SGPageTitleViewHeight self.frame.size.height
 
 @interface SGPageTitleView ()
-/** delegatePageTitleView */
+/// delegatePageTitleView
 @property (nonatomic, weak) id<SGPageTitleViewDelegate> delegatePageTitleView;
 /// 保存外界传递过来的标题数组
 @property (nonatomic, strong) NSArray *titleArr;
@@ -52,11 +50,11 @@
 
 @implementation SGPageTitleView
 
-/** 按钮之间的间距 */
+/// 按钮之间的间距
 static CGFloat const SGPageTitleViewBtnMargin = 20;
-/** 指示器样式为 SGIndicatorTypeSpecial 时, 指示器长度多于按钮文字宽度的值 */
+/// 指示器样式为 SGIndicatorTypeSpecial 时, 指示器长度多于按钮文字宽度的值
 static CGFloat const SGIndicatorTypeSpecialMultipleLength = 20;
-/** 标题文字大小 */
+/// 标题文字大小
 static CGFloat const SGPageTitleViewTextFont = 16;
 
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames {

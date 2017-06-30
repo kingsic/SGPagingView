@@ -15,7 +15,7 @@
 #import "ChildVCThree.h"
 #import "UIView+SGFrame.h"
 
-@interface PersonalCenterVC () <UITableViewDelegate, UITableViewDataSource, SGPageTitleViewDelegate, SGPageContentViewDelegare, PersonalCenterChildBaseVCDelegate>
+@interface PersonalCenterVC () <UITableViewDelegate, UITableViewDataSource, SGPageTitleViewDelegate, SGPageContentViewDelegate, PersonalCenterChildBaseVCDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentView *pageContentView;
 @property (nonatomic, strong) PersonalCenterTableView *tableView;
