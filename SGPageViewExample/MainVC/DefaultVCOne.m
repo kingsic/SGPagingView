@@ -21,6 +21,10 @@
 
 @implementation DefaultVCOne
 
+- (void)dealloc {
+    NSLog(@"DefaultVCOne - - dealloc");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

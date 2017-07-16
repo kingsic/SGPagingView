@@ -28,15 +28,6 @@
     
     self.TitleDataList = @[@"静止样式", @"滚动样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果", @"微博个人主页"];
     
-    DefaultVCOne *oneVC = [[DefaultVCOne alloc] init];
-    DefaultVCTwo *twoVC = [[DefaultVCTwo alloc] init];
-    NavigationBarVC *navVC = [[NavigationBarVC alloc] init];
-    DefaultVCThree *threeVC = [[DefaultVCThree alloc] init];
-    DefaultVCFour *fourVC = [[DefaultVCFour alloc] init];
-    PersonalCenterVC *PCVC = [[PersonalCenterVC alloc] init];
-
-    self.VCDataList = @[oneVC, twoVC, navVC, threeVC, fourVC, PCVC];
-    
     [self foundTableView];
 }
 
@@ -62,7 +53,31 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.navigationController pushViewController:self.VCDataList[indexPath.row] animated:YES];
+    if (indexPath.row == 0) {
+        DefaultVCOne *oneVC = [[DefaultVCOne alloc] init];
+        [self.navigationController pushViewController:oneVC animated:YES];
+        
+    } else if (indexPath.row == 1) {
+        DefaultVCTwo *twoVC = [[DefaultVCTwo alloc] init];
+        [self.navigationController pushViewController:twoVC animated:YES];
+        
+    } else if (indexPath.row == 2) {
+        NavigationBarVC *navVC = [[NavigationBarVC alloc] init];
+        [self.navigationController pushViewController:navVC animated:YES];
+        
+    } else if (indexPath.row == 3) {
+        DefaultVCThree *threeVC = [[DefaultVCThree alloc] init];
+        [self.navigationController pushViewController:threeVC animated:YES];
+        
+    } else if (indexPath.row == 4) {
+        DefaultVCFour *fourVC = [[DefaultVCFour alloc] init];
+        [self.navigationController pushViewController:fourVC animated:YES];
+        
+    } else {
+        PersonalCenterVC *PCVC = [[PersonalCenterVC alloc] init];
+        [self.navigationController pushViewController:PCVC animated:YES];
+        
+    }
 }
 
 

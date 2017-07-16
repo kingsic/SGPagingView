@@ -15,6 +15,10 @@
 
 @implementation ChildVCTwo
 
+- (void)dealloc {
+    NSLog(@"ChildVCTwo - - dealloc");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
