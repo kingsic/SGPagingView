@@ -2,13 +2,13 @@
 //  如遇到问题或有更好方案，请通过以下方式进行联系
 //      QQ：1357127436
 //      Email：kingsic@126.com
-//      GitHub：https://github.com/kingsic
+//      GitHub：https://github.com/kingsic/SGPageView.git
 //
 //  UIView+SGFrame.h
 //  UIView+SGFrame
 //
-//  Created by Sorgle on 15/7/13.
-//  Copyright © 2015年 Sorgle. All rights reserved.
+//  Created by kingsic on 15/7/13.
+//  Copyright © 2015年 kingsic. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

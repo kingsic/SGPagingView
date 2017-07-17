@@ -2,8 +2,8 @@
 //  SGPageViewExampleUITests.m
 //  SGPageViewExampleUITests
 //
-//  Created by apple on 17/4/12.
-//  Copyright © 2017年 Sorgle. All rights reserved.
+//  Created by kingsic on 17/4/12.
+//  Copyright © 2017年 kingsic. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
