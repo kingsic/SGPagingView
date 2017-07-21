@@ -3,12 +3,12 @@
 
 * 新闻、电商、视频等 app 经常会看到这种 SegmentedControl 布局样式
 
-* SGPageView 已加入 pods 管理（需要注意是：导入 pod 'SGPagingView' 而不是不是 pod 'SGPageView'）
+* SGPagingView 已加入 pods 管理
 
 
 ## 效果图
 
-![](https://github.com/kingsic/SGPageView/raw/master/Gif/sorgle.gif) 
+![](https://github.com/kingsic/SGPagingView/raw/master/Gif/sorgle.gif) 
 
 
 ## 主要内容的介绍
@@ -20,21 +20,18 @@
 * `标题按钮文字缩放效果`<br>
 
 
-## SGPageView 集成
+## SGPagingView 集成
 
-* 1、下载、拖拽 “SGPagingView” 文件夹到工程中，#import "SGPageView.h" 头文件
+* 1、下载、拖拽 “SGPagingView” 文件夹到工程中，#import "SGPagingView.h" 头文件
 
-* 2、CocoaPods 导入 pod 'SGPagingView'（需要注意是：导入 pod 'SGPagingView' 而不是不是 pod 'SGPageView'）
+* 2、CocoaPods 导入 pod 'SGPagingView'
 
 
 ## 代码介绍（详细使用, 请参考 Demo）
 
-* SGPageView 的使用（在父视图的 viewDidLoad 中加入下面代码）
+* SGPagingView 的使用（在父视图的 viewDidLoad 中加入下面代码）
 
 ```Objective-C
-    /// 说明：一定要加上这句代码，否则 pageContentView 会存在偏移量下移问题（v1.1.5之后不需要这句代码）
-    self.automaticallyAdjustsScrollViewInsets = NO; 
-
     /// 子控制器及 pageContentView 的创建
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
@@ -140,10 +137,10 @@
 
 * 2017-6-15 --> v1.1.5 新增新浪微博模块以及代码的优化
 
-* 2017-7-21 --> v1.1.6 新增 SGPageContentScrollView 类（滚动结束之后加载子视图）以及加入 pods 管理
+* 2017-7-21 --> v1.1.7 新增 SGPageContentScrollView 类（滚动结束之后加载子视图）以及加入 pods 管理
 
 
 ## Concluding remarks
 
-* 如在使用中, 遇到什么问题或有更好建议者, 请记得 [Issues me](https://github.com/kingsic/SGPageView/issues) 或 kingsic@126.com 邮箱联系我
+* 如在使用中, 遇到什么问题或有更好建议者, 请记得 [Issues me](https://github.com/kingsic/SGPagingView/issues) 或 kingsic@126.com 邮箱联系我
 
