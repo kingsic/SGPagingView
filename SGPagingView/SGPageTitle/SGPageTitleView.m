@@ -12,13 +12,14 @@
 //
 
 #import "SGPageTitleView.h"
+#import "SGPageTitleButton.h"
 #import "UIView+SGFrame.h"
 
 #define SGPageTitleViewWidth self.frame.size.width
 #define SGPageTitleViewHeight self.frame.size.height
 
 @interface SGPageTitleView ()
-/// delegatePageTitleView
+/// SGPageTitleViewDelegate
 @property (nonatomic, weak) id<SGPageTitleViewDelegate> delegatePageTitleView;
 /// 保存外界传递过来的标题数组
 @property (nonatomic, strong) NSArray *titleArr;
@@ -183,7 +184,9 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         CGFloat btnW = SGPageTitleViewWidth / self.titleArr.count;
         CGFloat btnH = SGPageTitleViewHeight - self.indicatorHeight;
         for (NSInteger index = 0; index < self.titleArr.count; index++) {
-            UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+            //UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+            
+            SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
             // 设置 frame
             CGFloat btnX = btnW * index;
             btn.frame = CGRectMake(btnX, btnY, btnW, btnH);

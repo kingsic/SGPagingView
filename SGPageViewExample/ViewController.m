@@ -13,6 +13,7 @@
 #import "DefaultVCFour.h"
 #import "NavigationBarVC.h"
 #import "PersonalCenterVC.h"
+#import "DefaultVCFive.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -26,7 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.TitleDataList = @[@"静止样式", @"滚动样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果", @"微博个人主页"];
+    self.TitleDataList = @[@"静止样式", @"滚动样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果", @"微博个人主页", @"滚动结束后加载子视图"];
     
     [self foundTableView];
 }
@@ -73,10 +74,14 @@
         DefaultVCFour *fourVC = [[DefaultVCFour alloc] init];
         [self.navigationController pushViewController:fourVC animated:YES];
         
-    } else {
+    } else if (indexPath.row == 5) {
         PersonalCenterVC *PCVC = [[PersonalCenterVC alloc] init];
         [self.navigationController pushViewController:PCVC animated:YES];
         
+    } else {
+        
+        DefaultVCFive *fiveVC = [[DefaultVCFive alloc] init];
+        [self.navigationController pushViewController:fiveVC animated:YES];
     }
 }
 

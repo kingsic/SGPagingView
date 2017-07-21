@@ -15,7 +15,7 @@
 @class SGPageContentView;
 
 @protocol SGPageContentViewDelegate <NSObject>
-/// delegatePageContentView
+/// SGPageContentViewDelegate 的代理方法
 - (void)SGPageContentView:(SGPageContentView *)SGPageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
 
 @end
@@ -38,7 +38,7 @@
  */
 + (instancetype)pageContentViewWithFrame:(CGRect)frame parentVC:(UIViewController *)parentVC childVCs:(NSArray *)childVCs;
 
-/** delegatePageContentView */
+/** SGPageContentViewDelegate */
 @property (nonatomic, weak) id<SGPageContentViewDelegate> delegatePageContentView;
 /** 是否需要滚动 SGPageContentView，默认为 YES；设为 NO 时，不用设置 SGPageContentView 的代理及代理方法 */
 @property (nonatomic, assign) BOOL isScrollEnabled;

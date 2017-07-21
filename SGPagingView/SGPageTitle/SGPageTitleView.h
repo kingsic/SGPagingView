@@ -21,7 +21,7 @@ typedef enum : NSUInteger {
 } SGIndicatorLengthType;
 
 @protocol SGPageTitleViewDelegate <NSObject>
-/// delegatePageTitleView
+/// SGPageTitleViewDelegate 的代理方法
 - (void)SGPageTitleView:(SGPageTitleView *)SGPageTitleView selectedIndex:(NSInteger)selectedIndex;
 
 @end

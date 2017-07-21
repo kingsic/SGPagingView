@@ -4,13 +4,20 @@
 //      Email：kingsic@126.com
 //      GitHub：https://github.com/kingsic/SGPageView.git
 //
-//  SGPageView.h
+//  SGPageTitleButton.m
 //  SGPageViewExample
 //
-//  Created by kingsic on 17/4/12.
+//  Created by kingsic on 2017/7/21.
 //  Copyright © 2017年 kingsic. All rights reserved.
 //
 
-#import "SGPageTitleView.h"
-#import "SGPageContentView.h"
+#import "SGPageTitleButton.h"
 
+@implementation SGPageTitleButton
+
+- (void)setHighlighted:(BOOL)highlighted {
+    
+}
+
+
+@end
