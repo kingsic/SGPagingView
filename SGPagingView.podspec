@@ -8,6 +8,6 @@ Pod::Spec.new do |s|
     s.authors      = {'kingsic' => 'kingsic@126.com'}
     s.platform     = :ios, '7.0'
     s.source       = {:git => 'https://github.com/kingsic/SGPagingView.git', :tag => s.version}
-    s.source_files = 'SGPagingView'
+    s.source_files = 'SGPagingView/**/*.{h,m}'
     s.requires_arc = true
 end

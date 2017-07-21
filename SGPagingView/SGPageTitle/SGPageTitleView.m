@@ -97,7 +97,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     
     // 3、添加底部分割线
     [self addSubview:self.bottomSeparator];
-
+    
     // 4、添加指示器长度样式
     self.indicatorLengthStyle = SGIndicatorLengthTypeDefault;
 }
@@ -105,7 +105,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 #pragma mark - - - layoutSubviews
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+    
     // 选中按钮下标初始值
     UIButton *lastBtn = self.btnMArr.lastObject;
     if (lastBtn.tag >= _selectedIndex && _selectedIndex >= 0) {
@@ -239,7 +239,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     
     // 3、改变指示器的位置
     [self changeIndicatorViewLocationWithButton:button];
-
+    
     // 4、pageTitleViewDelegate
     if ([self.delegatePageTitleView respondsToSelector:@selector(SGPageTitleView:selectedIndex:)]) {
         [self.delegatePageTitleView SGPageTitleView:self selectedIndex:button.tag];
