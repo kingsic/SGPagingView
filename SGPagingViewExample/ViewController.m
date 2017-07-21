@@ -1,8 +1,8 @@
 //
 //  ViewController.m
-//  SGPageViewExample
+//  SGPagingViewExample
 //
-//  Created by apple on 17/4/12.
+//  Created by apple on 2017/7/21.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
@@ -18,7 +18,6 @@
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *TitleDataList;
-@property (nonatomic, strong) NSArray *VCDataList;
 @end
 
 @implementation ViewController
@@ -87,4 +86,3 @@
 
 
 @end
-

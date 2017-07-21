@@ -9,7 +9,7 @@
 #import "PersonalCenterVC.h"
 #import "PersonalCenterTableView.h"
 #import "PersonalCenterTopView.h"
-#import "SGPageView.h"
+#import "SGPagingView.h"
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"
 #import "ChildVCThree.h"

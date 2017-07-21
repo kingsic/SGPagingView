@@ -7,7 +7,7 @@
 //
 
 #import "NavigationBarVC.h"
-#import "SGPageView.h"
+#import "SGPagingView.h"
 #import "NavigationBarTitleView.h"
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"

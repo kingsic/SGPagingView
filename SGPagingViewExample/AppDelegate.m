@@ -1,8 +1,8 @@
 //
 //  AppDelegate.m
-//  SGPageViewExample
+//  SGPagingViewExample
 //
-//  Created by apple on 17/4/12.
+//  Created by apple on 2017/7/21.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 

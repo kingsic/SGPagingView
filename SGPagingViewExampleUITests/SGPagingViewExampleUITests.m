@@ -1,18 +1,18 @@
 //
-//  SGPageViewExampleUITests.m
-//  SGPageViewExampleUITests
+//  SGPagingViewExampleUITests.m
+//  SGPagingViewExampleUITests
 //
-//  Created by kingsic on 17/4/12.
-//  Copyright © 2017年 kingsic. All rights reserved.
+//  Created by apple on 2017/7/21.
+//  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface SGPageViewExampleUITests : XCTestCase
+@interface SGPagingViewExampleUITests : XCTestCase
 
 @end
 
-@implementation SGPageViewExampleUITests
+@implementation SGPagingViewExampleUITests
 
 - (void)setUp {
     [super setUp];
