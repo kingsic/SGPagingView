@@ -3,7 +3,7 @@
 
 * 新闻、电商、视频等 app 经常会看到这种 SegmentedControl 布局样式
 
-* 很遗憾 SGPageView 不能进行 pods 管理，只能手动添加（已有开发者在 pods 中进行管理 SGPageView）
+* SGPageView 已加入 pods 管理（需要注意是：导入 pod 'SGPagingView' 而不是不是 pod 'SGPageView'）
 
 
 ## 效果图
@@ -20,13 +20,16 @@
 * `标题按钮文字缩放效果`<br>
 
 
+## SGPageView 集成
+
+* 1、下载、拖拽 “SGPagingView” 文件夹到工程中，#import "SGPageView.h" 头文件
+
+* 2、CocoaPods 导入 pod 'SGPagingView'（需要注意是：导入 pod 'SGPagingView' 而不是不是 pod 'SGPageView'）
+
+
 ## 代码介绍（详细使用, 请参考 Demo）
 
-* 1、将项目中 SGPageView 文件夹拖入工程
-
-* 2、导入 #import "SGPageView.h" 头文件
-  
-* 3、SGPageView 的使用步骤（在父视图的 viewDidLoad 中加入下面代码）
+* SGPageView 的使用（在父视图的 viewDidLoad 中加入下面代码）
 
 ```Objective-C
     /// 说明：一定要加上这句代码，否则 pageContentView 会存在偏移量下移问题（v1.1.5之后不需要这句代码）
@@ -136,6 +139,8 @@
 * 2017-6-1 --> v1.1.0 性能优化以及 Bug 修复（主要解决 SGPageTitleView 不可滚动时，标题中含有中、英文时出现的 Bug 问题）
 
 * 2017-6-15 --> v1.1.5 新增新浪微博模块以及代码的优化
+
+* 2017-7-21 --> v1.1.6 新增 SGPageContentScrollView 类（滚动结束之后加载子视图）以及加入 pods 管理
 
 
 ## Concluding remarks
