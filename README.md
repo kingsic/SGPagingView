@@ -22,9 +22,9 @@
 
 ## SGPagingView 集成
 
-* 1、下载、拖拽 “SGPagingView” 文件夹到工程中，#import "SGPagingView.h" 头文件
+* 1、CocoaPods 导入 pod 'SGPagingView'
 
-* 2、CocoaPods 导入 pod 'SGPagingView'
+* 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
 ## 代码介绍（详细使用, 请参考 Demo）
