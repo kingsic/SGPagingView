@@ -56,7 +56,7 @@
 * * 滚动内容视图的代理方法
 
 ```Objective-C
-- (void)SGPageContentView:(SGPageContentView *)SGPageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
+- (void)pageContentView:(SGPageContentView *)pageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 ```
@@ -64,7 +64,7 @@
 * * 滚动标题视图的代理方法
 
 ```Objective-C
-- (void)SGPageTitleView:(SGPageTitleView *)SGPageTitleView selectedIndex:(NSInteger)selectedIndex {
+- (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
     [self.pageContentView setPageCententViewCurrentIndex:selectedIndex];
 }
 ```
@@ -138,6 +138,8 @@
 * 2017-6-15 --> v1.1.5 新增新浪微博模块以及代码的优化
 
 * 2017-7-21 --> v1.1.7 新增 SGPageContentScrollView 类（滚动结束之后加载子视图）以及加入 pods 管理
+
+* 2017-7-21 --> v1.1.8 新增根据下标修改标题文字方法以及修改指示器计算位置方法
 
 
 ## Concluding remarks

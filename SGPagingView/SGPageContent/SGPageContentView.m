@@ -143,8 +143,8 @@
         }
     }
     // 3、pageContentViewDelegare; 将 progress／sourceIndex／targetIndex 传递给 SGPageTitleView
-    if (self.delegatePageContentView && [self.delegatePageContentView respondsToSelector:@selector(SGPageContentView:progress:originalIndex:targetIndex:)]) {
-        [self.delegatePageContentView SGPageContentView:self progress:progress originalIndex:originalIndex targetIndex:targetIndex];
+    if (self.delegatePageContentView && [self.delegatePageContentView respondsToSelector:@selector(pageContentView:progress:originalIndex:targetIndex:)]) {
+        [self.delegatePageContentView pageContentView:self progress:progress originalIndex:originalIndex targetIndex:targetIndex];
     }
 }
 

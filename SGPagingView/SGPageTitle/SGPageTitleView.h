@@ -22,7 +22,7 @@ typedef enum : NSUInteger {
 
 @protocol SGPageTitleViewDelegate <NSObject>
 /// SGPageTitleViewDelegate 的代理方法
-- (void)SGPageTitleView:(SGPageTitleView *)SGPageTitleView selectedIndex:(NSInteger)selectedIndex;
+- (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex;
 
 @end
 
@@ -75,5 +75,8 @@ typedef enum : NSUInteger {
 
 /** 给外界提供的方法，获取 SGPageContentView 的 progress／originalIndex／targetIndex, 必须实现 */
 - (void)setPageTitleViewWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
+
+/** 根据下标修改标题文字（index 标题所对应的下标值、title 新的标题名）*/
+- (void)resetTitleWithIndex:(NSInteger)index newTitle:(NSString *)title;
 
 @end

@@ -16,7 +16,7 @@
 
 @protocol SGPageContentScrollViewDelegate <NSObject>
 /// SGPageContentScrollViewDelegate 的代理方法
-- (void)SGPageContentScrollView:(SGPageContentScrollView *)SGPageContentScrollView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
+- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
 @end
 
 @interface SGPageContentScrollView : UIView

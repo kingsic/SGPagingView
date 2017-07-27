@@ -134,8 +134,8 @@
     }
     
     // 3、pageContentViewDelegare; 将 progress／sourceIndex／targetIndex 传递给 SGPageTitleView
-    if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(SGPageContentScrollView:progress:originalIndex:targetIndex:)]) {
-        [self.delegatePageContentScrollView SGPageContentScrollView:self progress:progress originalIndex:originalIndex targetIndex:targetIndex];
+    if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:progress:originalIndex:targetIndex:)]) {
+        [self.delegatePageContentScrollView pageContentScrollView:self progress:progress originalIndex:originalIndex targetIndex:targetIndex];
     }
 }
 

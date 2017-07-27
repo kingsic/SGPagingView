@@ -241,8 +241,8 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     [self changeIndicatorViewLocationWithButton:button];
     
     // 4、pageTitleViewDelegate
-    if ([self.delegatePageTitleView respondsToSelector:@selector(SGPageTitleView:selectedIndex:)]) {
-        [self.delegatePageTitleView SGPageTitleView:self selectedIndex:button.tag];
+    if ([self.delegatePageTitleView respondsToSelector:@selector(pageTitleView:selectedIndex:)]) {
+        [self.delegatePageTitleView pageTitleView:self selectedIndex:button.tag];
     }
 }
 
@@ -601,11 +601,11 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     if (indicatorLengthStyle == SGIndicatorLengthTypeEqual) {
         CGFloat firstBtnTextWidth = [self SG_widthWithString:firstBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
         indicatorViewW = firstBtnTextWidth;
-        indicatorViewX = 0.2 * (firstBtn.SG_width - firstBtnTextWidth);
+        indicatorViewX = 0.5 * (firstBtn.SG_width - firstBtnTextWidth);
     } else if (indicatorLengthStyle == SGIndicatorLengthTypeSpecial) {
         CGFloat firstBtnIndicatorWidth = [self SG_widthWithString:firstBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
         indicatorViewW = firstBtnIndicatorWidth;
-        indicatorViewX = 0.2 * (firstBtn.SG_width - firstBtnIndicatorWidth);
+        indicatorViewX = 0.5 * (firstBtn.SG_width - firstBtnIndicatorWidth);
     } else {
         indicatorViewW = firstBtn.SG_width;
         indicatorViewX = firstBtn.SG_x;
@@ -658,6 +658,20 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     } else {
         [self.bottomSeparator removeFromSuperview];
         self.bottomSeparator = nil;
+    }
+}
+
+/**
+ *  根据下标修改标题文字
+ *
+ *  @param index 标题所对应的下标
+ *  @param title 新标题名
+ */
+- (void)resetTitleWithIndex:(NSInteger)index newTitle:(NSString *)title {
+    if (index < self.btnMArr.count) {
+        UIButton *button = (UIButton *)self.btnMArr[index];
+        [button setTitle:title forState:UIControlStateNormal];
+        [self setIndicatorLengthStyle:self.indicatorLengthStyle];
     }
 }
 
