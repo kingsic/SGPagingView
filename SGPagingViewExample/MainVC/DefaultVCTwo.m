@@ -28,6 +28,8 @@
 
 - (void)dealloc {
     NSLog(@"DefaultVCTwo - - dealloc");
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad {
@@ -36,7 +38,13 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSelectedIndex:) name:@"changeSelectedIndex" object:nil];
+
     [self setupPageView];
+}
+
+- (void)changeSelectedIndex:(NSNotification *)noti {
+    _pageTitleView.resetSelectedIndex = [noti.object integerValue];
 }
 
 - (void)setupPageView {

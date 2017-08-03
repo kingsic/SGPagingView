@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
     s.name         = 'SGPagingView'
-    s.version      = '1.1.8'
+    s.version      = '1.1.9'
     s.summary      = 'An easy-to-use segmented control'
     s.homepage     = 'https://github.com/kingsic/SGPagingView'
     s.license      = 'MIT'

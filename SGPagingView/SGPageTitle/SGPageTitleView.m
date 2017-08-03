@@ -581,6 +581,13 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     }
 }
 
+/// resetSelectedIndex
+- (void)setResetSelectedIndex:(NSInteger)resetSelectedIndex {
+    _resetSelectedIndex = resetSelectedIndex;
+    
+    [self btnAction:self.btnMArr[resetSelectedIndex]];
+}
+
 /// indicatorLengthStyle
 - (void)setIndicatorLengthStyle:(SGIndicatorLengthType)indicatorLengthStyle {
     _indicatorLengthStyle = indicatorLengthStyle;

@@ -58,6 +58,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat indicatorAnimationTime;
 /** 选中的标题按钮下标，默认选中下标为 0 */
 @property (nonatomic, assign) NSInteger selectedIndex;
+/** 重置选中的标题按钮下标（用于子控制器内的点击事件改变标题的选中下标）*/
+@property (nonatomic, assign) NSInteger resetSelectedIndex;
 /** 指示器长度样式，默认为 SGIndicatorLengthTypeDefault */
 @property (nonatomic, assign) SGIndicatorLengthType indicatorLengthStyle;
 /** 是否让标题按钮文字有渐变效果，默认为 YES */

@@ -33,9 +33,13 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"SGPageView - ChildVCTwo - - %ld", indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"滚动样式 - 点我可改变按钮下标 - %ld", indexPath.row];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeSelectedIndex" object:[NSString stringWithFormat:@"%ld", (long)indexPath.row]];
 }
 
 
