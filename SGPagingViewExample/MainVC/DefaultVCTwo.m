@@ -69,7 +69,7 @@
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
     [self.view addSubview:_pageTitleView];
-    _pageTitleView.indicatorLengthStyle = SGIndicatorLengthTypeEqual;
+    _pageTitleView.indicatorLengthStyle = SGIndicatorLengthStyleEqual;
 }
 
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {

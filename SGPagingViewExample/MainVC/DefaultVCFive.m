@@ -47,8 +47,9 @@
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
     [self.view addSubview:_pageTitleView];
-    _pageTitleView.isTitleGradientEffect = YES;
-    _pageTitleView.indicatorLengthStyle = SGIndicatorLengthTypeSpecial;
+    _pageTitleView.isTitleGradientEffect = NO;
+    _pageTitleView.indicatorLengthStyle = SGIndicatorLengthStyleSpecial;
+    _pageTitleView.indicatorScrollStyle = SGIndicatorScrollStyleEnd;
     _pageTitleView.selectedIndex = 1;
 }
 

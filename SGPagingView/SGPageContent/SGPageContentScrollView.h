@@ -39,7 +39,7 @@
 
 /// SGPageContentScrollViewDelegate
 @property (nonatomic, weak) id<SGPageContentScrollViewDelegate> delegatePageContentScrollView;
-/// 是否需要滚动 SGPageContentScrollView，默认为 YES；设为 NO 时，不用设置 SGPageContentScrollView 的代理及代理方法 */
+/// 是否需要滚动 SGPageContentScrollView 默认为 YES；设为 NO 时，不用设置 SGPageContentScrollView 的代理及代理方法 */
 @property (nonatomic, assign) BOOL isScrollEnabled;
 
 /// 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标, 必须实现

@@ -15,10 +15,22 @@
 @class SGPageTitleView;
 
 typedef enum : NSUInteger {
-    SGIndicatorLengthTypeDefault, /// 指示器默认长度与按钮宽度相等
-    SGIndicatorLengthTypeEqual, /// 指示器宽度等于按钮文字宽度
-    SGIndicatorLengthTypeSpecial /// 当标题内容总长度小于屏幕尺寸时, 指示器样式不想设置 SGIndicatorTypeDefault 或 SGIndicatorTypeEqual 时, 即可使用这种样式，当标题内容总长度大于屏幕尺寸时，不起作用
-} SGIndicatorLengthType;
+    /// 指示器长度等于按钮宽度
+    SGIndicatorLengthStyleDefault,
+    /// 指示器长度等于按钮文字宽度
+    SGIndicatorLengthStyleEqual,
+    /// 标题不可滚动时, 指示器长度样式不想设为 Default、Equal 时, 便可设为 Special 样式；标题可滚动时，不起作用
+    SGIndicatorLengthStyleSpecial
+} SGIndicatorLengthStyle;
+
+typedef enum : NSUInteger {
+    /// 指示器位置跟随内容滚动而改变
+    SGIndicatorScrollStyleDefault,
+    /// 内容滚动一半时指示器位置改变
+    SGIndicatorScrollStyleHalf,
+    /// 内容滚动结束时指示器位置改变
+    SGIndicatorScrollStyleEnd
+} SGIndicatorScrollStyle;
 
 @protocol SGPageTitleViewDelegate <NSObject>
 /// SGPageTitleViewDelegate 的代理方法
@@ -56,22 +68,22 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat indicatorHeight;
 /** 指示器动画时间，默认为 0.1f，取值范围 0 ～ 0.3f */
 @property (nonatomic, assign) CGFloat indicatorAnimationTime;
-/** 选中的标题按钮下标，默认选中下标为 0 */
+/** 选中标题按钮下标，默认为 0 */
 @property (nonatomic, assign) NSInteger selectedIndex;
-/** 重置选中的标题按钮下标（用于子控制器内的点击事件改变标题的选中下标）*/
+/** 重置选中标题按钮下标（用于子控制器内的点击事件改变标题的选中下标）*/
 @property (nonatomic, assign) NSInteger resetSelectedIndex;
 /** 指示器长度样式，默认为 SGIndicatorLengthTypeDefault */
-@property (nonatomic, assign) SGIndicatorLengthType indicatorLengthStyle;
+@property (nonatomic, assign) SGIndicatorLengthStyle indicatorLengthStyle;
+/** 指示器滚动位置改变样式，默认为 SGIndicatorScrollStyleDefault */
+@property (nonatomic, assign) SGIndicatorScrollStyle indicatorScrollStyle;
 /** 是否让标题按钮文字有渐变效果，默认为 YES */
 @property (nonatomic, assign) BOOL isTitleGradientEffect;
 /** 是否开启标题按钮文字缩放效果，默认为 NO */
 @property (nonatomic, assign) BOOL isOpenTitleTextZoom;
-/** 标题文字缩放比，默认 0.1f，取值范围 0 ～ 0.3f */
+/** 标题文字缩放比，默认为 0.1f，取值范围 0 ～ 0.3f */
 @property (nonatomic, assign) CGFloat titleTextScaling;
 /** 是否显示指示器，默认为 YES */
 @property (nonatomic, assign) BOOL isShowIndicator;
-/** 是否让指示器跟随 SGPageContentView 的内容滚动而滚动，默认为 YES，设置为 NO 时，为了用户体验 isTitleGradientEffect 属性应设为 NO */
-@property (nonatomic, assign) BOOL isIndicatorScroll;
 /** 是否显示底部分割线，默认为 YES */
 @property (nonatomic, assign) BOOL isShowBottomSeparator;
 

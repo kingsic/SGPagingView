@@ -75,7 +75,7 @@ static CGFloat const PersonalCenterVCTopViewHeight = 200;
         /// pageTitleView
         _pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, PersonalCenterVCPageTitleViewHeight) delegate:self titleNames:titleArr];
         _pageTitleView.backgroundColor = [UIColor whiteColor];
-        _pageTitleView.indicatorLengthStyle = SGIndicatorLengthTypeEqual;
+        _pageTitleView.indicatorLengthStyle = SGIndicatorLengthStyleEqual;
     }
     return _pageTitleView;
 }
