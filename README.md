@@ -79,7 +79,7 @@
 
 #### 1、CocoaPods 安装 SGPagingView 时，遇到的问题及解决方案
 
-* 若在使用 CocoaPods 安装第三方时，出现 [!] Unable to find a specification for (第三方仓库名) 提示时，打开终端先输入 pod repo remove master；执行完毕后再输入 pod setup 即可 (可能会等待一段时间)
+* 若在使用 CocoaPods 安装 SGPagingView 时，出现 [!] Unable to find a specification for SGPagingView 提示时，打开终端先输入 pod repo remove master；执行完毕后再输入 pod setup 即可 (可能会等待一段时间)
 
 #### 2、SGPageContentView 内容存在偏移量问题及解决方案（v1.1.5 之后不需要做处理）
 
