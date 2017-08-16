@@ -179,15 +179,15 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     self.allBtnWidth = SGPageTitleViewBtnMargin * (self.titleArr.count + 1) + self.allBtnTextWidth;
     self.allBtnWidth = ceilf(self.allBtnWidth);
     
+    NSInteger titleCount = self.titleArr.count;
     if (self.allBtnWidth <= self.bounds.size.width) { /// SGPageTitleView 不可滚动
         CGFloat btnY = 0;
         CGFloat btnW = SGPageTitleViewWidth / self.titleArr.count;
         CGFloat btnH = SGPageTitleViewHeight - self.indicatorHeight;
-        for (NSInteger index = 0; index < self.titleArr.count; index++) {
+        for (NSInteger index = 0; index < titleCount; index++) {
             //UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
             
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
-            // 设置 frame
             CGFloat btnX = btnW * index;
             btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
             btn.tag = index;
@@ -205,9 +205,8 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         CGFloat btnX = 0;
         CGFloat btnY = 0;
         CGFloat btnH = SGPageTitleViewHeight - self.indicatorHeight;
-        for (NSInteger index = 0; index < self.titleArr.count; index++) {
+        for (NSInteger index = 0; index < titleCount; index++) {
             UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-            // 设置 frame
             CGFloat btnW = [self SG_widthWithString:self.titleArr[index] font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGPageTitleViewBtnMargin;
             btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
             btnX = btnX + btnW;
@@ -360,7 +359,6 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         targetBtn.transform = CGAffineTransformMakeScale(progress * self.titleTextScaling + 1, progress * self.titleTextScaling + 1);
     }
 }
-
 
 /// SGPageTitleView 不可滚动
 - (void)smallIndicatorScrollStyleDefaultWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
@@ -586,7 +584,6 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 }
 
 #pragma mark - - - set
-/// isNeedBounces
 - (void)setIsNeedBounces:(BOOL)isNeedBounces {
     _isNeedBounces = isNeedBounces;
     if (isNeedBounces == NO) {
@@ -594,7 +591,6 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     }
 }
 
-/// titleColorStateNormal
 - (void)setTitleColorStateNormal:(UIColor *)titleColorStateNormal {
     _titleColorStateNormal = titleColorStateNormal;
     [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -605,7 +601,6 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     [self setupStartColor:titleColorStateNormal];
 }
 
-/// titleColorStateSelected
 - (void)setTitleColorStateSelected:(UIColor *)titleColorStateSelected {
     _titleColorStateSelected = titleColorStateSelected;
     [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -616,13 +611,11 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     [self setupEndColor:titleColorStateSelected];
 }
 
-/// indicatorColor
 - (void)setIndicatorColor:(UIColor *)indicatorColor {
     _indicatorColor = indicatorColor;
     self.indicatorView.backgroundColor = indicatorColor;
 }
 
-/// indicatorHeight
 - (void)setIndicatorHeight:(CGFloat)indicatorHeight {
     _indicatorHeight = indicatorHeight;
     
@@ -633,7 +626,6 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     }
 }
 
-/// indicatorAnimationTime
 - (void)setIndicatorAnimationTime:(CGFloat)indicatorAnimationTime {
     _indicatorAnimationTime = indicatorAnimationTime;
     
@@ -646,7 +638,6 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     }
 }
 
-/// selectedIndex
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
     _selectedIndex = selectedIndex;
     
@@ -655,14 +646,12 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     }
 }
 
-/// resetSelectedIndex
 - (void)setResetSelectedIndex:(NSInteger)resetSelectedIndex {
     _resetSelectedIndex = resetSelectedIndex;
     
     [self btnAction:self.btnMArr[resetSelectedIndex]];
 }
 
-/// indicatorLengthStyle
 - (void)setIndicatorLengthStyle:(SGIndicatorLengthStyle)indicatorLengthStyle {
     _indicatorLengthStyle = indicatorLengthStyle;
     
@@ -699,12 +688,10 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     _indicatorScrollStyle = indicatorScrollStyle;
 }
 
-/// isTitleGradientEffect
 - (void)setIsTitleGradientEffect:(BOOL)isTitleGradientEffect {
     _isTitleGradientEffect = isTitleGradientEffect;
 }
 
-/// isOpenTitleTextZoom
 - (void)setIsOpenTitleTextZoom:(BOOL)isOpenTitleTextZoom {
     _isOpenTitleTextZoom = isOpenTitleTextZoom;
 }
@@ -721,7 +708,6 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     }
 }
 
-/// isShowIndicator
 - (void)setIsShowIndicator:(BOOL)isShowIndicator {
     _isShowIndicator = isShowIndicator;
     if (isShowIndicator == NO) {
@@ -730,7 +716,6 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     }
 }
 
-/// isShowBottomSeparator
 - (void)setIsShowBottomSeparator:(BOOL)isShowBottomSeparator {
     _isShowBottomSeparator = isShowBottomSeparator;
     if (isShowBottomSeparator) {
