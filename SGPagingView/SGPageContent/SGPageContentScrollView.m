@@ -84,11 +84,12 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     CGFloat offsetX = scrollView.contentOffset.x;
     NSInteger index = offsetX / scrollView.frame.size.width;
-    UIViewController *vc = self.childViewControllers[index];
+    UIViewController *childVC = self.childViewControllers[index];
     // 判断控制器的view有没有加载过,如果已经加载过,就不需要加载
-    if (vc.isViewLoaded) return;
-    [self.scrollView addSubview:vc.view];
-    vc.view.frame = CGRectMake(offsetX, 0, self.SG_width, self.SG_height);
+    if (childVC.isViewLoaded) return;
+    [self.scrollView addSubview:childVC.view];
+    [self.parentViewController addChildViewController:childVC];
+    childVC.view.frame = CGRectMake(offsetX, 0, self.SG_width, self.SG_height);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -142,16 +143,17 @@
 /// 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
 - (void)setPageCententScrollViewCurrentIndex:(NSInteger)currentIndex {
     self.isClickBtn = YES;
-    
+    CGFloat offsetX = currentIndex * self.SG_width;
+
     if (self.isFirstViewLoaded && currentIndex == 0) {
         self.isFirstViewLoaded = NO;
-        
         // 2、默认选中第一个子控制器；self.scrollView.contentOffset ＝ 0
-        UIViewController *vc = self.childViewControllers[0];
-        if (vc.isViewLoaded) return;
-        [self.scrollView addSubview:vc.view];
+        UIViewController *childVC = self.childViewControllers[0];
+        if (childVC.isViewLoaded) return;
+        [self.scrollView addSubview:childVC.view];
+        [self.parentViewController addChildViewController:childVC];
+        childVC.view.frame = CGRectMake(offsetX, 0, self.SG_width, self.SG_height);
     }
-    CGFloat offsetX = currentIndex * self.SG_width;
     self.scrollView.contentOffset = CGPointMake(offsetX, 0);
 }
 
