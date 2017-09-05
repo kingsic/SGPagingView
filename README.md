@@ -148,6 +148,8 @@
 
 * 2017-8-11 ：v1.2.0 新增指示器滚动样式
 
+* 2017-9-5  ：v1.2.2 新增 SGPageTitleView 含有 titleTextFont 的创建方法
+
 
 ## Concluding remarks
 
