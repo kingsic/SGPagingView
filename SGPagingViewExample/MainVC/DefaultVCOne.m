@@ -49,7 +49,9 @@
     
     NSArray *titleArr = @[@"精选", @"电影", @"OC", @"Swift"];
     /// pageTitleView
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
+//    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
+    
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr titleTextFont:[UIFont systemFontOfSize:13]];
     [self.view addSubview:_pageTitleView];
     _pageTitleView.isTitleGradientEffect = NO;
     _pageTitleView.indicatorLengthStyle = SGIndicatorLengthStyleSpecial;

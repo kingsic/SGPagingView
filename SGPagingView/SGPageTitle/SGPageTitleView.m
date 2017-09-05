@@ -12,23 +12,37 @@
 //
 
 #import "SGPageTitleView.h"
-#import "SGPageTitleButton.h"
 #import "UIView+SGFrame.h"
 
 #define SGPageTitleViewWidth self.frame.size.width
 #define SGPageTitleViewHeight self.frame.size.height
 
+@interface SGPageTitleButton : UIButton
+
+@end
+
+@implementation SGPageTitleButton
+
+- (void)setHighlighted:(BOOL)highlighted {
+    
+}
+
+@end
+
+
 @interface SGPageTitleView ()
 /// SGPageTitleViewDelegate
 @property (nonatomic, weak) id<SGPageTitleViewDelegate> delegatePageTitleView;
-/// 保存外界传递过来的标题数组
-@property (nonatomic, strong) NSArray *titleArr;
 /// scrollView
 @property (nonatomic, strong) UIScrollView *scrollView;
 /// 指示器
 @property (nonatomic, strong) UIView *indicatorView;
 /// 底部分割线
 @property (nonatomic, strong) UIView *bottomSeparator;
+/// 保存外界传递过来的标题数组
+@property (nonatomic, strong) NSArray *titleArr;
+/// 标题文字字号大小，默认 15 号字体
+@property (nonatomic, strong) UIFont *titleTextFont;
 /// 存储标题按钮的数组
 @property (nonatomic, strong) NSMutableArray *btnMArr;
 /// tempBtn
@@ -55,14 +69,34 @@
 static CGFloat const SGPageTitleViewBtnMargin = 20;
 /// 指示器样式为 SGIndicatorTypeSpecial 时, 指示器长度多于按钮文字宽度的值
 static CGFloat const SGIndicatorTypeSpecialMultipleLength = 20;
-/// 标题文字大小
-static CGFloat const SGPageTitleViewTextFont = 16;
 
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames {
+    self.titleTextFont = [UIFont systemFontOfSize:15];
+    return [self initWithFrame:frame delegate:delegate titleNames:titleNames titleTextFont:self.titleTextFont];
+}
+
++ (instancetype)pageTitleViewWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames {
+    return [[self alloc] initWithFrame:frame delegate:delegate titleNames:titleNames];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames titleTextFont:(UIFont *)titleTextFont {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.77];
+        if (delegate == nil) {
+            NSException *excp = [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的代理方法必须设置" userInfo:nil];
+            [excp raise];
+        }
         self.delegatePageTitleView = delegate;
+        if (titleNames == nil) {
+            NSException *excp = [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的标题数组必须设置" userInfo:nil];
+            [excp raise];
+        }
         self.titleArr = titleNames;
+        if (titleTextFont == nil) {
+            NSException *excp = [NSException exceptionWithName:@"SGPagingView" reason:@"使用含有 titleTextFont 方法创建 SGPageTitleView 时，titleTextFont 必须设置" userInfo:nil];
+            [excp raise];
+        }
+        self.titleTextFont = titleTextFont;
         
         [self initialization];
         [self setupSubviews];
@@ -70,8 +104,8 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     return self;
 }
 
-+ (instancetype)pageTitleViewWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames {
-    return [[self alloc] initWithFrame:frame delegate:delegate titleNames:titleNames];
++ (instancetype)pageTitleViewWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames titleTextFont:(UIFont *)titleTextFont {
+    return [[self alloc] initWithFrame:frame delegate:delegate titleNames:titleNames titleTextFont:titleTextFont];
 }
 
 - (void)initialization {
@@ -172,7 +206,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
 - (void)setupTitleButtons {
     // 计算所有按钮的文字宽度
     [self.titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        CGFloat tempWidth = [self SG_widthWithString:obj font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
+        CGFloat tempWidth = [self SG_widthWithString:obj font:self.titleTextFont];
         self.allBtnTextWidth += tempWidth;
     }];
     // 所有按钮文字宽度 ＋ 按钮之间的间隔
@@ -185,13 +219,13 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         CGFloat btnW = SGPageTitleViewWidth / self.titleArr.count;
         CGFloat btnH = SGPageTitleViewHeight - self.indicatorHeight;
         for (NSInteger index = 0; index < titleCount; index++) {
-            //UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+//            UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
             
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
             CGFloat btnX = btnW * index;
             btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
             btn.tag = index;
-            btn.titleLabel.font = [UIFont systemFontOfSize:SGPageTitleViewTextFont];
+            btn.titleLabel.font = self.titleTextFont;
             [btn setTitle:self.titleArr[index] forState:(UIControlStateNormal)];
             [btn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
             [btn setTitleColor:[UIColor redColor] forState:(UIControlStateSelected)];
@@ -206,12 +240,14 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         CGFloat btnY = 0;
         CGFloat btnH = SGPageTitleViewHeight - self.indicatorHeight;
         for (NSInteger index = 0; index < titleCount; index++) {
-            UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-            CGFloat btnW = [self SG_widthWithString:self.titleArr[index] font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGPageTitleViewBtnMargin;
+//            UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+            
+            SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
+            CGFloat btnW = [self SG_widthWithString:self.titleArr[index] font:self.titleTextFont] + SGPageTitleViewBtnMargin;
             btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
             btnX = btnX + btnW;
             btn.tag = index;
-            btn.titleLabel.font = [UIFont systemFontOfSize:SGPageTitleViewTextFont];
+            btn.titleLabel.font = self.titleTextFont;
             [btn setTitle:self.titleArr[index] forState:(UIControlStateNormal)];
             [btn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
             [btn setTitleColor:[UIColor redColor] forState:(UIControlStateSelected)];
@@ -289,10 +325,10 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     if (self.allBtnWidth <= self.bounds.size.width) { /// SGPageTitleView 不可滚动
         [UIView animateWithDuration:_indicatorAnimationTime animations:^{
             if (self.indicatorLengthStyle == SGIndicatorLengthStyleEqual) {
-                self.indicatorView.SG_width = [self SG_widthWithString:button.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
+                self.indicatorView.SG_width = [self SG_widthWithString:button.currentTitle font:self.titleTextFont];
                 
             } else if (self.indicatorLengthStyle == SGIndicatorLengthStyleSpecial) {
-                self.indicatorView.SG_width = [self SG_widthWithString:button.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
+                self.indicatorView.SG_width = [self SG_widthWithString:button.currentTitle font:self.titleTextFont] + SGIndicatorTypeSpecialMultipleLength;
                 
             } else {
                 self.indicatorView.SG_width = button.SG_width;
@@ -369,13 +405,13 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     
     if (self.indicatorLengthStyle == SGIndicatorLengthStyleEqual) {
         /// 计算 targetBtn／originalBtn 之间的距离
-        CGFloat targetBtnX = CGRectGetMaxX(targetBtn.frame) - [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]);
-        CGFloat originalBtnX = CGRectGetMaxX(originalBtn.frame) - [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]);
+        CGFloat targetBtnX = CGRectGetMaxX(targetBtn.frame) - [self SG_widthWithString:targetBtn.currentTitle font:self.titleTextFont] - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:targetBtn.currentTitle font:self.titleTextFont]);
+        CGFloat originalBtnX = CGRectGetMaxX(originalBtn.frame) - [self SG_widthWithString:originalBtn.currentTitle font:self.titleTextFont] - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:originalBtn.currentTitle font:self.titleTextFont]);
         CGFloat totalOffsetX = targetBtnX - originalBtnX;
         
         /// 计算 targetBtn／originalBtn 宽度的差值
-        CGFloat targetBtnDistance = (CGRectGetMaxX(targetBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]));
-        CGFloat originalBtnDistance = (CGRectGetMaxX(originalBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]));
+        CGFloat targetBtnDistance = (CGRectGetMaxX(targetBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:targetBtn.currentTitle font:self.titleTextFont]));
+        CGFloat originalBtnDistance = (CGRectGetMaxX(originalBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:originalBtn.currentTitle font:self.titleTextFont]));
         CGFloat totalDistance = targetBtnDistance - originalBtnDistance;
         
         /// 计算 indicatorView 滚动时 X 的偏移量
@@ -387,16 +423,16 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         
         /// 计算 indicatorView 新的 frame
         self.indicatorView.SG_x = originalBtnX + offsetX;
-        self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + distance;
+        self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:self.titleTextFont] + distance;
         
     } else if (self.indicatorLengthStyle == SGIndicatorLengthStyleSpecial) {
-        CGFloat targetBtnX = CGRectGetMaxX(targetBtn.frame) - [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength);
-        CGFloat originalBtnX = CGRectGetMaxX(originalBtn.frame) - [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength);
+        CGFloat targetBtnX = CGRectGetMaxX(targetBtn.frame) - [self SG_widthWithString:targetBtn.currentTitle font:self.titleTextFont] - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:targetBtn.currentTitle font:self.titleTextFont] + SGIndicatorTypeSpecialMultipleLength);
+        CGFloat originalBtnX = CGRectGetMaxX(originalBtn.frame) - [self SG_widthWithString:originalBtn.currentTitle font:self.titleTextFont] - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:originalBtn.currentTitle font:self.titleTextFont] + SGIndicatorTypeSpecialMultipleLength);
         CGFloat totalOffsetX = targetBtnX - originalBtnX;
         
         /// 计算 targetBtn／originalBtn 宽度的差值
-        CGFloat targetBtnDistance = (CGRectGetMaxX(targetBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]));
-        CGFloat originalBtnDistance = (CGRectGetMaxX(originalBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]]));
+        CGFloat targetBtnDistance = (CGRectGetMaxX(targetBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:targetBtn.currentTitle font:self.titleTextFont]));
+        CGFloat originalBtnDistance = (CGRectGetMaxX(originalBtn.frame) - 0.5 * (self.SG_width / self.titleArr.count - [self SG_widthWithString:originalBtn.currentTitle font:self.titleTextFont]));
         CGFloat totalDistance = targetBtnDistance - originalBtnDistance;
         
         /// 计算 indicatorView 滚动时 X 的偏移量
@@ -408,7 +444,7 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         
         /// 计算 indicatorView 新的 frame
         self.indicatorView.SG_x = originalBtnX + offsetX;
-        self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + distance + SGIndicatorTypeSpecialMultipleLength;
+        self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:self.titleTextFont] + distance + SGIndicatorTypeSpecialMultipleLength;
         
     } else {
         // 3、处理指示器的逻辑
@@ -423,9 +459,9 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         if (progress >= 0.5) {
             [UIView animateWithDuration:_indicatorAnimationTime animations:^{
                 if (self.indicatorLengthStyle == SGIndicatorLengthStyleEqual) {
-                    self.indicatorView.SG_width = [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
+                    self.indicatorView.SG_width = [self SG_widthWithString:targetBtn.currentTitle font:self.titleTextFont];
                 } else if (self.indicatorLengthStyle == SGIndicatorLengthStyleSpecial) {
-                    self.indicatorView.SG_width = [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
+                    self.indicatorView.SG_width = [self SG_widthWithString:targetBtn.currentTitle font:self.titleTextFont] + SGIndicatorTypeSpecialMultipleLength;
                 } else {
                     self.indicatorView.SG_width = targetBtn.SG_width;
                 }
@@ -436,9 +472,9 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         } else {
             [UIView animateWithDuration:_indicatorAnimationTime animations:^{
                 if (self.indicatorLengthStyle == SGIndicatorLengthStyleEqual) {
-                    self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
+                    self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:self.titleTextFont];
                 } else if (self.indicatorLengthStyle == SGIndicatorLengthStyleSpecial) {
-                    self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
+                    self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:self.titleTextFont] + SGIndicatorTypeSpecialMultipleLength;
                 } else {
                     self.indicatorView.SG_width = originalBtn.SG_width;
                 }
@@ -452,9 +488,9 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         if (progress == 1.0) {
             [UIView animateWithDuration:_indicatorAnimationTime animations:^{
                 if (self.indicatorLengthStyle == SGIndicatorLengthStyleEqual) {
-                    self.indicatorView.SG_width = [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
+                    self.indicatorView.SG_width = [self SG_widthWithString:targetBtn.currentTitle font:self.titleTextFont];
                 } else if (self.indicatorLengthStyle == SGIndicatorLengthStyleSpecial) {
-                    self.indicatorView.SG_width = [self SG_widthWithString:targetBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
+                    self.indicatorView.SG_width = [self SG_widthWithString:targetBtn.currentTitle font:self.titleTextFont] + SGIndicatorTypeSpecialMultipleLength;
                 } else {
                     self.indicatorView.SG_width = targetBtn.SG_width;
                 }
@@ -465,9 +501,9 @@ static CGFloat const SGPageTitleViewTextFont = 16;
         } else {
             [UIView animateWithDuration:_indicatorAnimationTime animations:^{
                 if (self.indicatorLengthStyle == SGIndicatorLengthStyleEqual) {
-                    self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
+                    self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:self.titleTextFont];
                 } else if (self.indicatorLengthStyle == SGIndicatorLengthStyleSpecial) {
-                    self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
+                    self.indicatorView.SG_width = [self SG_widthWithString:originalBtn.currentTitle font:self.titleTextFont] + SGIndicatorTypeSpecialMultipleLength;
                 } else {
                     self.indicatorView.SG_width = originalBtn.SG_width;
                 }
@@ -669,11 +705,11 @@ static CGFloat const SGPageTitleViewTextFont = 16;
     CGFloat indicatorViewY = self.SG_height - indicatorViewH;
     
     if (indicatorLengthStyle == SGIndicatorLengthStyleEqual) {
-        CGFloat firstBtnTextWidth = [self SG_widthWithString:firstBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]];
+        CGFloat firstBtnTextWidth = [self SG_widthWithString:firstBtn.currentTitle font:self.titleTextFont];
         indicatorViewW = firstBtnTextWidth;
         indicatorViewX = 0.5 * (firstBtn.SG_width - firstBtnTextWidth);
     } else if (indicatorLengthStyle == SGIndicatorLengthStyleSpecial) {
-        CGFloat firstBtnIndicatorWidth = [self SG_widthWithString:firstBtn.currentTitle font:[UIFont systemFontOfSize:SGPageTitleViewTextFont]] + SGIndicatorTypeSpecialMultipleLength;
+        CGFloat firstBtnIndicatorWidth = [self SG_widthWithString:firstBtn.currentTitle font:self.titleTextFont] + SGIndicatorTypeSpecialMultipleLength;
         indicatorViewW = firstBtnIndicatorWidth;
         indicatorViewX = 0.5 * (firstBtn.SG_width - firstBtnIndicatorWidth);
     } else {

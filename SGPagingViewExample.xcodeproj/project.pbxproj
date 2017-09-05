@@ -41,7 +41,6 @@
 		182513D81F21CC340039F4A2 /* PersonalCenterTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182513C01F21CC340039F4A2 /* PersonalCenterTopView.xib */; };
 		182513E91F21D1600039F4A2 /* UIView+SGFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513DD1F21D1600039F4A2 /* UIView+SGFrame.m */; };
 		182513EA1F21D1600039F4A2 /* SGPageContentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */; };
-		182513EC1F21D1600039F4A2 /* SGPageTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513E51F21D1600039F4A2 /* SGPageTitleButton.m */; };
 		18B036D21F21D835004C7DE7 /* SGPageTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B036D11F21D835004C7DE7 /* SGPageTitleView.m */; };
 		18B036D51F21D8B2004C7DE7 /* SGPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B036D41F21D8B2004C7DE7 /* SGPageContentView.m */; };
 /* End PBXBuildFile section */
@@ -128,8 +127,6 @@
 		182513DD1F21D1600039F4A2 /* UIView+SGFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SGFrame.m"; sourceTree = "<group>"; };
 		182513DF1F21D1600039F4A2 /* SGPageContentScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageContentScrollView.h; sourceTree = "<group>"; };
 		182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageContentScrollView.m; sourceTree = "<group>"; };
-		182513E41F21D1600039F4A2 /* SGPageTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageTitleButton.h; sourceTree = "<group>"; };
-		182513E51F21D1600039F4A2 /* SGPageTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageTitleButton.m; sourceTree = "<group>"; };
 		182513EE1F21D2C90039F4A2 /* SGPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPagingView.h; sourceTree = "<group>"; };
 		18B036D01F21D835004C7DE7 /* SGPageTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageTitleView.h; sourceTree = "<group>"; };
 		18B036D11F21D835004C7DE7 /* SGPageTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageTitleView.m; sourceTree = "<group>"; };
@@ -369,8 +366,6 @@
 			children = (
 				18B036D01F21D835004C7DE7 /* SGPageTitleView.h */,
 				18B036D11F21D835004C7DE7 /* SGPageTitleView.m */,
-				182513E41F21D1600039F4A2 /* SGPageTitleButton.h */,
-				182513E51F21D1600039F4A2 /* SGPageTitleButton.m */,
 			);
 			path = SGPageTitle;
 			sourceTree = "<group>";
@@ -532,7 +527,6 @@
 				182513D41F21CC340039F4A2 /* PersonalCenterChildBaseVC.m in Sources */,
 				182513D51F21CC340039F4A2 /* PersonalCenterVC.m in Sources */,
 				182513481F21CAC30039F4A2 /* AppDelegate.m in Sources */,
-				182513EC1F21D1600039F4A2 /* SGPageTitleButton.m in Sources */,
 				182513C71F21CC340039F4A2 /* ChildVCSeven.m in Sources */,
 				182513C31F21CC340039F4A2 /* ChildVCFour.m in Sources */,
 				182513D01F21CC340039F4A2 /* DefaultVCThree.m in Sources */,

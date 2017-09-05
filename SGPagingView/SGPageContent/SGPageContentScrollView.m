@@ -34,7 +34,15 @@
 
 - (instancetype)initWithFrame:(CGRect)frame parentVC:(UIViewController *)parentVC childVCs:(NSArray *)childVCs {
     if (self = [super initWithFrame:frame]) {
+        if (parentVC == nil) {
+            NSException *excp = [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentScrollView 所在控制器必须设置" userInfo:nil];
+            [excp raise];
+        }
         self.parentViewController = parentVC;
+        if (childVCs == nil) {
+            NSException *excp = [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentScrollView 子控制器必须设置" userInfo:nil];
+            [excp raise];
+        }
         self.childViewControllers = childVCs;
         
         [self initialization];
@@ -45,20 +53,6 @@
 
 + (instancetype)pageContentScrollViewWithFrame:(CGRect)frame parentVC:(UIViewController *)parentVC childVCs:(NSArray *)childVCs {
     return [[self alloc] initWithFrame:frame parentVC:parentVC childVCs:childVCs];
-}
-
-- (UIScrollView *)scrollView {
-    if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] init];
-        _scrollView.frame = self.bounds;
-        _scrollView.bounces = NO;
-        _scrollView.delegate = self;
-        _scrollView.pagingEnabled = YES;
-        _scrollView.showsHorizontalScrollIndicator = NO;
-        CGFloat contentWidth = self.childViewControllers.count * _scrollView.SG_width;
-        _scrollView.contentSize = CGSizeMake(contentWidth, 0);
-    }
-    return _scrollView;
 }
 
 - (void)initialization {
@@ -73,6 +67,20 @@
     
     // 1、添加 scrollView
     [self addSubview:self.scrollView];
+}
+
+- (UIScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.frame = self.bounds;
+        _scrollView.bounces = NO;
+        _scrollView.delegate = self;
+        _scrollView.pagingEnabled = YES;
+        _scrollView.showsHorizontalScrollIndicator = NO;
+        CGFloat contentWidth = self.childViewControllers.count * _scrollView.SG_width;
+        _scrollView.contentSize = CGSizeMake(contentWidth, 0);
+    }
+    return _scrollView;
 }
 
 /// UIScrollViewDelegate

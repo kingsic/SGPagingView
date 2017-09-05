@@ -32,16 +32,43 @@
 
 - (instancetype)initWithFrame:(CGRect)frame parentVC:(UIViewController *)parentVC childVCs:(NSArray *)childVCs {
     if (self = [super initWithFrame:frame]) {
+        if (parentVC == nil) {
+            NSException *excp = [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 所在控制器必须设置" userInfo:nil];
+            [excp raise];
+        }
         self.parentViewController = parentVC;
+        if (childVCs == nil) {
+            NSException *excp = [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 子控制器必须设置" userInfo:nil];
+            [excp raise];
+        }
         self.childViewControllers = childVCs;
-        
-        [self setup];
+                
+        [self initialization];
+        [self setupSubviews];
     }
     return self;
 }
 
 + (instancetype)pageContentViewWithFrame:(CGRect)frame parentVC:(UIViewController *)parentVC childVCs:(NSArray *)childVCs {
     return [[self alloc] initWithFrame:frame parentVC:parentVC childVCs:childVCs];
+}
+
+- (void)initialization {
+    self.isClickBtn = NO;
+    self.startOffsetX = 0;
+}
+
+- (void)setupSubviews {
+    // 1、将所有的子控制器添加父控制器中
+    for (UIViewController *childVC in self.childViewControllers) {
+        [self.parentViewController addChildViewController:childVC];
+    }
+    
+    UIView *tempView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self addSubview:tempView];
+    
+    // 2、添加UICollectionView, 用于在Cell中存放控制器的View
+    [self addSubview:self.collectionView];
 }
 
 - (UICollectionView *)collectionView {
@@ -65,22 +92,6 @@
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     }
     return _collectionView;
-}
-
-- (void)setup {
-    self.isClickBtn = NO;
-    self.startOffsetX = 0;
-    
-    // 1、将所有的子控制器添加父控制器中
-    for (UIViewController *childVC in self.childViewControllers) {
-        [self.parentViewController addChildViewController:childVC];
-    }
-    
-    UIView *tempView = [[UIView alloc] initWithFrame:CGRectZero];
-    [self addSubview:tempView];
-    
-    // 2、添加UICollectionView, 用于在Cell中存放控制器的View
-    [self addSubview:self.collectionView];
 }
 
 /// UICollectionViewDataSource

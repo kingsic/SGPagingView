@@ -19,7 +19,7 @@ typedef enum : NSUInteger {
     SGIndicatorLengthStyleDefault,
     /// 指示器长度等于按钮文字宽度
     SGIndicatorLengthStyleEqual,
-    /// 标题不可滚动时, 指示器长度样式不想设为 Default、Equal 时, 便可设为 Special 样式；标题可滚动时，不起作用
+    /// 只针对 SGPageTitleView 不可滚动时，起作用
     SGIndicatorLengthStyleSpecial
 } SGIndicatorLengthStyle;
 
@@ -55,6 +55,24 @@ typedef enum : NSUInteger {
  *  @param titleNames     标题数组
  */
 + (instancetype)pageTitleViewWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames;
+/**
+ *  对象方法创建 SGPageTitleView
+ *
+ *  @param frame     frame
+ *  @param delegate     delegate
+ *  @param titleNames     标题数组
+ *  @param titleTextFont     标题文字字号
+ */
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames titleTextFont:(UIFont *)titleTextFont;
+/**
+ *  类方法创建 SGPageTitleView
+ *
+ *  @param frame     frame
+ *  @param delegate     delegate
+ *  @param titleNames     标题数组
+ *  @param titleTextFont     标题文字字号
+ */
++ (instancetype)pageTitleViewWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames titleTextFont:(UIFont *)titleTextFont;
 
 /** SGPageTitleView 是否需要弹性效果，默认为 YES */
 @property (nonatomic, assign) BOOL isNeedBounces;

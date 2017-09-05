@@ -5,7 +5,7 @@
 //      GitHub：https://github.com/kingsic
 //
 //  SGPagingView.h
-//  Version 1.2.1
+//  Version 1.2.2
 //
 //  Created by apple on 2017/7/21.
 //  Copyright © 2017年 Sorgle. All rights reserved.
