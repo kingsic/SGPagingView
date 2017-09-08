@@ -27,7 +27,7 @@
 
 ## SGPagingView 集成
 
-* 1、CocoaPods 导入 pod 'SGPagingView'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.2.3'
 
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
@@ -148,7 +148,7 @@
 
 * 2017-8-11 ：v1.2.0 新增指示器滚动样式
 
-* 2017-9-5  ：v1.2.2 新增 SGPageTitleView 含有 titleTextFont 的创建方法
+* 2017-9-5  ：v1.2.2 新增 SGPageTitleView 带有 Font 的创建方法
 
 
 ## Concluding remarks

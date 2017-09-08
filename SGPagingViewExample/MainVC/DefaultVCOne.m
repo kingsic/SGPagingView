@@ -51,10 +51,10 @@
     /// pageTitleView
 //    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
     
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr titleTextFont:[UIFont systemFontOfSize:13]];
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr titleFont:[UIFont systemFontOfSize:13]];
     [self.view addSubview:_pageTitleView];
     _pageTitleView.isTitleGradientEffect = NO;
-    _pageTitleView.indicatorLengthStyle = SGIndicatorLengthStyleSpecial;
+//    _pageTitleView.indicatorLengthStyle = SGIndicatorLengthStyleSpecial;
     _pageTitleView.indicatorScrollStyle = SGIndicatorScrollStyleHalf;
     _pageTitleView.selectedIndex = 1;
     _pageTitleView.isNeedBounces = NO;

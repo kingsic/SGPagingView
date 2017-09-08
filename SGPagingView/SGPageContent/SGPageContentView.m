@@ -33,13 +33,11 @@
 - (instancetype)initWithFrame:(CGRect)frame parentVC:(UIViewController *)parentVC childVCs:(NSArray *)childVCs {
     if (self = [super initWithFrame:frame]) {
         if (parentVC == nil) {
-            NSException *excp = [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 所在控制器必须设置" userInfo:nil];
-            [excp raise];
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 所在控制器必须设置" userInfo:nil];
         }
         self.parentViewController = parentVC;
         if (childVCs == nil) {
-            NSException *excp = [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 子控制器必须设置" userInfo:nil];
-            [excp raise];
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 子控制器必须设置" userInfo:nil];
         }
         self.childViewControllers = childVCs;
                 
@@ -159,7 +157,7 @@
     }
 }
 
-/// 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
+#pragma mark - - - 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
 - (void)setPageCententViewCurrentIndex:(NSInteger)currentIndex {
     self.isClickBtn = YES;
     CGFloat offsetX = currentIndex * self.collectionView.SG_width;

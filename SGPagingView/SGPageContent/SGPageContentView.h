@@ -17,7 +17,6 @@
 @protocol SGPageContentViewDelegate <NSObject>
 /// SGPageContentViewDelegate 的代理方法
 - (void)pageContentView:(SGPageContentView *)pageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
-
 @end
 
 @interface SGPageContentView : UIView
@@ -43,7 +42,7 @@
 /** 是否需要滚动 SGPageContentView 默认为 YES；设为 NO 时，不必设置 SGPageContentView 的代理及代理方法 */
 @property (nonatomic, assign) BOOL isScrollEnabled;
 
-/** 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标, 必须实现 */
+/** 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标 */
 - (void)setPageCententViewCurrentIndex:(NSInteger)currentIndex;
 
 @end

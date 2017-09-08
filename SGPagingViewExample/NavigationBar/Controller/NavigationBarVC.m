@@ -65,7 +65,6 @@
     NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
-    _pageTitleView.selectedIndex = 3;
     // 对 navigationItem.titleView 的包装，为的是 让View 占据整个视图宽度
     NavigationBarTitleView *view = [[NavigationBarTitleView alloc] init];
     self.navigationItem.titleView = view;

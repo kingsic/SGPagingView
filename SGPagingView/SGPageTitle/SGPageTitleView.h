@@ -19,7 +19,7 @@ typedef enum : NSUInteger {
     SGIndicatorLengthStyleDefault,
     /// 指示器长度等于按钮文字宽度
     SGIndicatorLengthStyleEqual,
-    /// 只针对 SGPageTitleView 不可滚动时，起作用
+    /// SGPageTitleView 不可滚动时，起作用
     SGIndicatorLengthStyleSpecial
 } SGIndicatorLengthStyle;
 
@@ -61,18 +61,18 @@ typedef enum : NSUInteger {
  *  @param frame     frame
  *  @param delegate     delegate
  *  @param titleNames     标题数组
- *  @param titleTextFont     标题文字字号
+ *  @param titleFont        标题字号
  */
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames titleTextFont:(UIFont *)titleTextFont;
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames titleFont:(UIFont *)titleFont;
 /**
  *  类方法创建 SGPageTitleView
  *
  *  @param frame     frame
  *  @param delegate     delegate
  *  @param titleNames     标题数组
- *  @param titleTextFont     标题文字字号
+ *  @param titleFont        标题字号
  */
-+ (instancetype)pageTitleViewWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames titleTextFont:(UIFont *)titleTextFont;
++ (instancetype)pageTitleViewWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames titleFont:(UIFont *)titleFont;
 
 /** SGPageTitleView 是否需要弹性效果，默认为 YES */
 @property (nonatomic, assign) BOOL isNeedBounces;
@@ -108,7 +108,7 @@ typedef enum : NSUInteger {
 /** 给外界提供的方法，获取 SGPageContentView 的 progress／originalIndex／targetIndex, 必须实现 */
 - (void)setPageTitleViewWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
 
-/** 根据下标修改标题文字（index 标题所对应的下标值、title 新的标题名）*/
+/** 根据下标重置标题文字（index 标题所对应的下标值、title 新的标题名）*/
 - (void)resetTitleWithIndex:(NSInteger)index newTitle:(NSString *)title;
 
 @end
