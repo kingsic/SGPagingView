@@ -81,7 +81,13 @@
 
 * 若在使用 CocoaPods 安装 SGPagingView 时，出现 [!] Unable to find a specification for SGPagingView 提示时，打开终端先输入 pod repo remove master；执行完毕后再输入 pod setup 即可 (可能会等待一段时间)
 
-#### 2、SGPageContentView 内容存在偏移量问题及解决方案（v1.1.5 之后不需要做处理）
+#### 2、关于父子控制器的说明（SGPageContentView 与 SGPageContentScrollView）
+
+* SGPageContentView 使用的是 UICollectionView 的重用机制管理子视图：内部是先添加子视图控制器到父视图控制器上（[self.parentViewController addChildViewController:childVC]），再添加子视图的 view 到父视图的 view 上的（[cell.contentView addSubview:childVC.view]），这时会存在一个问题：即第一次加载第一个子视图时，第一个子视图的 viewWillAppear 方法不会被调用；原因是，先调用 addChildViewController，子视图控制器与父视图控制器的事件同步，即当父视图控制器的 viewDidAppear 调用时，子视图控制器的 viewDidAppear 方法会调用一次，再调用 addSubView 也不会触发viewWillAppear 和 viewDidAppear；所以第一次加载子视图控制器时 viewWillAppear 不会被调用，再去加载其他子视图控制器不会出现这种问题了。说明：针对这种情况网络数据请求建议在 viewDidLoad 或 viewDidAppear 中作处理
+
+* SGPageContentScrollView 使用的是 UIScrollView 拖拽结束后的方法加载子视图：内部是先添加子视图的 view 到父视图的 view 上的（        [self.scrollView addSubview:childVC.view]），再添加子视图控制器到父视图控制器上（[self.parentViewController addChildViewController:childVC]），这时会存在一个问题：即第一次加载第一个子视图时，第一个子视图的 viewDidAppear 方法会调用二次；原因是，先调用 addSubView 时，viewWillAppear 和 viewDidAppear 会各调用一次，再 addChildViewController 时，子视图控制器与父视图控制器的事件同步，即当父视图控制器的 viewDidAppear 调用时，子视图控制器的 viewDidAppear 方法会再调用一次；所以第一次加载的子视图控制器时 viewDidAppear 方法会被调用两次，再去加载其他子视图控制器不会出现这种问题。说明：针对这种情况网络请求数据建议在 viewWillAppear 或 viewDidLoad 中作处理
+
+#### 3、SGPageContentView 内容存在偏移量问题及解决方案（v1.1.5 之后不需要做处理）
 
 * 父控制器中一定要加上 self.automaticallyAdjustsScrollViewInsets = NO; 这句代码；否则 pageContentView 会存在偏移量下移问题
 
