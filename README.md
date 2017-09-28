@@ -2,13 +2,6 @@
 # SGPagingView
 
 
-## 前沿
-
-* 新闻、电商、视频等 app 经常会看到这种 SegmentedControl 布局样式
-
-* SGPagingView 已加入 CocoaPods 管理
-
-
 ## 效果图
 
 ![](https://github.com/kingsic/SGPagingView/raw/master/Gif/sorgle.gif) 
@@ -32,9 +25,9 @@
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
-## 代码介绍（详细使用, 请参考 Demo）
+## 代码介绍
 
-* SGPagingView 的使用（在父视图的 viewDidLoad 中加入下面代码）
+#### SGPagingView 的使用（详细使用, 请参考 Demo）
 
 ```Objective-C
     /// 子控制器及 pageContentView 的创建
@@ -58,7 +51,7 @@
     [self.view addSubview:_pageTitleView];
 ```
 
-* * 滚动内容视图的代理方法
+* 滚动内容视图的代理方法
 
 ```Objective-C
 - (void)pageContentView:(SGPageContentView *)pageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
@@ -66,13 +59,31 @@
 }
 ```
 
-* * 滚动标题视图的代理方法
+* 滚动标题视图的代理方法
 
 ```Objective-C
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
     [self.pageContentView setPageCententViewCurrentIndex:selectedIndex];
 }
 ```
+
+#### SGPagingView 的介绍
+
+* selectedIndex 选中标题下标，用于 SGPageTitleView 初始化设置
+
+* resetSelectedIndex 重置标题下标作用于从一个子控制器跳到另一个子控制器（即一个子控制器的按钮事件点击想要跳转到另一子控制器中），请参考案例二
+
+* indicatorScrollStyle 指示器滚动样式：a.SGIndicatorScrollStyleDefault指示器位置跟随内容的滚动而滚动；b.SGIndicatorScrollStyleHalf当内容滚动到一半时，指示器位置发生改变（QQ 音乐样式）； c.SGIndicatorScrollStyleEnd内容滚动结束时，指示器位置发生改变
+
+* resetTitleWithIndex:newTitle: 这个方法用于更改指定下标的标题
+
+* initWithFrame:delegate:titleNames:titleFont: 这个方法对应的有个类方法创建，可在初始化 SGPageTitleView 的时候设置标题的字号，请参考案例一
+
+* isScrollEnabled 如果你不允许内容滚动，那么设为 NO，且内容的 delegate 及代理方法不用设置
+
+* 内容视图分为 SGPageContentView 样式和 SGPageContentScrollView 样式：SGPageContentView 是使用 UICollectionView 的重用机制加载子视图的；SGPageContentScrollView 是在 UIScrollView 的拖拽结束方法结束后加载子视图的，最后一个案例是 SGPageContentScrollView 与 SGPageTitleView 的 indicatorScrollStyle 属性搭配使用
+
+* 结束语：详细 API 请参考 SGPageTitleView.h、SGPageContentView.h 和 SGPageContentScrollView.h 文件
 
 
 ## 问题及解决方案
