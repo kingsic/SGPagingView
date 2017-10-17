@@ -44,20 +44,15 @@
 ## 代码介绍
 #### SGPagingView 的使用（详细使用, 请参考 Demo）
 ``` 
-    /// 子标题及 pageTitleView 的创建
-    NSArray *titleArr = @[@"精选", @"电影", @"OC", @"Swift"];
+    /// pageTitleView 
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
+    
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:frame delegate:self titleNames:titleNames configure:configure];
     [self.view addSubview:_pageTitleView];
     
-    /// 子控制器及 pageContentView 的创建
-    ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
-    ChildVCThree *threeVC = [[ChildVCThree alloc] init];
-    ChildVCFour *fourVC = [[ChildVCFour alloc] init];
-    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
+    
     /// pageContentView
-    CGFloat contentViewHeight = self.view.frame.size.height - 108;
-    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
+    self.pageContentView = [[SGPageContentView alloc] initWithFrame:frame parentVC:self childVCs:childVCs];
     _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
 ```
