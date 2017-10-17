@@ -45,7 +45,7 @@
 #### SGPagingView 的使用（详细使用, 请参考 Demo）
 ``` 
     /// 子标题及 pageTitleView 的创建
-    NSArray *titleArr = @[@"精选", @"请等待2s", @"OC", @"Swift"];
+    NSArray *titleArr = @[@"精选", @"电影", @"OC", @"Swift"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
@@ -87,7 +87,7 @@
 |**titleSelectedColor**|选中状态下标题按钮文字的颜色，默认为红色|
 |**indicatorColor**|指示器颜色，默认为红色|
 |**indicatorStyle**|指示器样式，默认为下划线样式；下划线、遮盖样式|
-|**indicatorHeight**|指示器高度；下划线样式下默认为 2.f，遮盖样式下，默认为标题的高度，若大于 SGPageTitleView，则高度为 SGPageTitleView 高度，下划线样式未做处理|
+|**indicatorHeight**|指示器高度；下划线样式下默认为 2.f，遮盖样式下，默认为标题文字的高度，若大于 SGPageTitleView，则高度为 SGPageTitleView 高度，下划线样式未做处理|
 |**indicatorCornerRadius**|遮盖样式下圆角属性，默认为 0.f；若圆角大于 1/2 指示器高度，则圆角大小为 1/2 指示器高度|
 |**indicatorAdditionalWidth**|指示器的额外宽度，默认为 0.f，介于按钮文字宽度与按钮宽度之间；若大于按钮的宽度，则为按钮的宽度|
 |**spacingBetweenButtons**|按钮之间的间距，默认 20.f|
@@ -102,11 +102,11 @@
 ***
 
 #### 2、关于父子控制器的说明（SGPageContentView 与 SGPageContentScrollView）
->** SGPageContentView 使用的是 UICollectionView 的重用机制管理子视图
-内部是先添加子视图控制器到父视图控制器上（[self.parentViewController addChildViewController:childVC]），再添加子视图的 view 到父视图的 view 上的（[cell.contentView addSubview:childVC.view]），这时会存在一个问题：即第一次加载第一个子视图时，第一个子视图的 viewWillAppear 方法不会被调用；原因是，先调用 addChildViewController，子视图控制器与父视图控制器的事件同步，即当父视图控制器的 viewDidAppear 调用时，子视图控制器的 viewDidAppear 方法会调用一次，再调用 addSubView 也不会触发viewWillAppear 和 viewDidAppear；所以第一次加载子视图控制器时 viewWillAppear 不会被调用，再去加载其他子视图控制器不会出现这种问题了。说明：针对这种情况网络数据请求建议在 viewDidLoad 或 viewDidAppear 中作处理
+> **SGPageContentView 使用的是 UICollectionView 的重用机制管理子视图
+内部是先添加子视图控制器到父视图控制器上（[self.parentViewController addChildViewController:childVC]），再添加子视图的 view 到父视图的 view 上的（[cell.contentView addSubview:childVC.view]），这时会存在一个问题：即第一次加载第一个子视图时，第一个子视图的 viewWillAppear 方法不会被调用；原因是，先调用 addChildViewController，子视图控制器与父视图控制器的事件同步，即当父视图控制器的 viewDidAppear 调用时，子视图控制器的 viewDidAppear 方法会调用一次，再调用 addSubView 也不会触发viewWillAppear 和 viewDidAppear；所以第一次加载子视图控制器时 viewWillAppear 不会被调用，再去加载其他子视图控制器不会出现这种问题了。说明：针对这种情况网络数据请求建议在 viewDidLoad 或 viewDidAppear 中作处理**
 
->** SGPageContentScrollView 使用的是 UIScrollView 拖拽结束后的方法加载子视图
-内部是先添加子视图的 view 到父视图的 view 上的（[self.scrollView addSubview:childVC.view]），再添加子视图控制器到父视图控制器上（[self.parentViewController addChildViewController:childVC]），这时会存在一个问题：即第一次加载第一个子视图时，第一个子视图的 viewDidAppear 方法会调用二次；原因是，先调用 addSubView 时，viewWillAppear 和 viewDidAppear 会各调用一次，再 addChildViewController 时，子视图控制器与父视图控制器的事件同步，即当父视图控制器的 viewDidAppear 调用时，子视图控制器的 viewDidAppear 方法会再调用一次；所以第一次加载的子视图控制器时 viewDidAppear 方法会被调用两次，再去加载其他子视图控制器不会出现这种问题。说明：针对这种情况网络请求数据建议在 viewWillAppear 或 viewDidLoad 中作处理
+> **SGPageContentScrollView 使用的是 UIScrollView 拖拽结束后的方法加载子视图
+内部是先添加子视图的 view 到父视图的 view 上的（[self.scrollView addSubview:childVC.view]），再添加子视图控制器到父视图控制器上（[self.parentViewController addChildViewController:childVC]），这时会存在一个问题：即第一次加载第一个子视图时，第一个子视图的 viewDidAppear 方法会调用二次；原因是，先调用 addSubView 时，viewWillAppear 和 viewDidAppear 会各调用一次，再 addChildViewController 时，子视图控制器与父视图控制器的事件同步，即当父视图控制器的 viewDidAppear 调用时，子视图控制器的 viewDidAppear 方法会再调用一次；所以第一次加载的子视图控制器时 viewDidAppear 方法会被调用两次，再去加载其他子视图控制器不会出现这种问题。说明：针对这种情况网络请求数据建议在 viewWillAppear 或 viewDidLoad 中作处理**
 ***
 
 #### 3、SGPageContentView 内容存在偏移量问题及解决方案（v1.1.5 之后不需要做处理）
