@@ -4,11 +4,17 @@
 
 ## 目录
 * [效果图](#效果图)
+
 * [主要内容的介绍](#主要内容的介绍)
+
 * [SGPagingView集成](#SGPagingView集成)
+
 * [代码介绍](#代码介绍)
+
 * [问题及解决方案](#问题及解决方案)
+
 * [版本介绍](#版本介绍)
+
 * [Concludingremarks](#Concludingremarks)
 
 
@@ -17,36 +23,43 @@
 
 
 ## 主要内容的介绍
-* `多种指示器长度样式`<br>
+* `指示器长度自定义`<br>
+
+* `指示器遮盖样式`<br>
+
+* `指示器下划线样式`<br>
+
 * `多种指示器滚动样式`<br>
+
 * `标题按钮文字渐显效果`<br>
+
 * `标题按钮文字缩放效果`<br>
 
 
 ## SGPagingView 集成
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.2.3'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.0'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
 ## 代码介绍
 #### SGPagingView 的使用（详细使用, 请参考 Demo）
-```
-    /// 子控制器及 pageContentView 的创建
-    ChildVCOne *oneVC = [[ChildVCOne alloc] init];
+``` 
+    /// 子标题及 pageTitleView 的创建
+    NSArray *titleArr = @[@"精选", @"请等待2s", @"OC", @"Swift"];
+    SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
+    [self.view addSubview:_pageTitleView];
+    
+    /// 子控制器及 pageContentView 的创建
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
     ChildVCThree *threeVC = [[ChildVCThree alloc] init];
     ChildVCFour *fourVC = [[ChildVCFour alloc] init];
-    // 子控制器数组
-    NSArray *childVCArr = @[oneVC, twoVC, threeVC, fourVC];
+    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
+    /// pageContentView
     CGFloat contentViewHeight = self.view.frame.size.height - 108;
-    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 108, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childVCArr];
+    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
     _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
-    
-    /// 子标题及 pageTitleView 的创建
-    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
-    [self.view addSubview:_pageTitleView];
 ```
 
 * 滚动内容视图的代理方法
@@ -69,6 +82,15 @@
 |----|-----|
 |**selectedIndex**|选中标题下标|
 |**resetSelectedIndex**|重置标题下标|
+|**titleFont**|标题文字字号大小，默认 15 号字体|
+|**titleColor**|普通状态下标题按钮文字的颜色，默认为黑色|
+|**titleSelectedColor**|选中状态下标题按钮文字的颜色，默认为红色|
+|**indicatorColor**|指示器颜色，默认为红色|
+|**indicatorStyle**|指示器样式，默认为下划线样式；下划线、遮盖样式|
+|**indicatorHeight**|指示器高度；下划线样式下默认为 2.f，遮盖样式下，默认为标题的高度，若大于 SGPageTitleView，则高度为 SGPageTitleView 高度，下划线样式未做处理|
+|**indicatorCornerRadius**|遮盖样式下圆角属性，默认为 0.f；若圆角大于 1/2 指示器高度，则圆角大小为 1/2 指示器高度|
+|**indicatorAdditionalWidth**|指示器的额外宽度，默认为 0.f，介于按钮文字宽度与按钮宽度之间；若大于按钮的宽度，则为按钮的宽度|
+|**spacingBetweenButtons**|按钮之间的间距，默认 20.f|
 |**indicatorScrollStyle**|指示器滚动样式|
 |**resetTitleWithIndex:newTitle:**|更改指定下标的标题|
 |**initWithFrame:delegate:titleNames:titleFont:**|带有标题字号的初始化方法，与之对应一个类方法|
@@ -80,10 +102,10 @@
 ***
 
 #### 2、关于父子控制器的说明（SGPageContentView 与 SGPageContentScrollView）
->**SGPageContentView 使用的是 UICollectionView 的重用机制管理子视图
+>** SGPageContentView 使用的是 UICollectionView 的重用机制管理子视图
 内部是先添加子视图控制器到父视图控制器上（[self.parentViewController addChildViewController:childVC]），再添加子视图的 view 到父视图的 view 上的（[cell.contentView addSubview:childVC.view]），这时会存在一个问题：即第一次加载第一个子视图时，第一个子视图的 viewWillAppear 方法不会被调用；原因是，先调用 addChildViewController，子视图控制器与父视图控制器的事件同步，即当父视图控制器的 viewDidAppear 调用时，子视图控制器的 viewDidAppear 方法会调用一次，再调用 addSubView 也不会触发viewWillAppear 和 viewDidAppear；所以第一次加载子视图控制器时 viewWillAppear 不会被调用，再去加载其他子视图控制器不会出现这种问题了。说明：针对这种情况网络数据请求建议在 viewDidLoad 或 viewDidAppear 中作处理
 
->**SGPageContentScrollView 使用的是 UIScrollView 拖拽结束后的方法加载子视图
+>** SGPageContentScrollView 使用的是 UIScrollView 拖拽结束后的方法加载子视图
 内部是先添加子视图的 view 到父视图的 view 上的（[self.scrollView addSubview:childVC.view]），再添加子视图控制器到父视图控制器上（[self.parentViewController addChildViewController:childVC]），这时会存在一个问题：即第一次加载第一个子视图时，第一个子视图的 viewDidAppear 方法会调用二次；原因是，先调用 addSubView 时，viewWillAppear 和 viewDidAppear 会各调用一次，再 addChildViewController 时，子视图控制器与父视图控制器的事件同步，即当父视图控制器的 viewDidAppear 调用时，子视图控制器的 viewDidAppear 方法会再调用一次；所以第一次加载的子视图控制器时 viewDidAppear 方法会被调用两次，再去加载其他子视图控制器不会出现这种问题。说明：针对这种情况网络请求数据建议在 viewWillAppear 或 viewDidLoad 中作处理
 ***
 
@@ -147,7 +169,7 @@
 
 * 2017-8-11 ：v1.2.0 新增指示器滚动样式
 
-* 2017-9-5  ：v1.2.2 新增 SGPageTitleView 带有 titleFont 的创建方法
+* 2017-10-17  ：v1.3.0 版本升级（新增 SGPageTitleViewConfigure 类，提供更多的属性设置以及支持指示器遮盖样式）
 
 
 ## Concluding remarks
