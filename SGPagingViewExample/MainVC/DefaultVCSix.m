@@ -1,12 +1,12 @@
 //
-//  DefaultVCFour.m
-//  SGPageViewExample
+//  DefaultVCSix.m
+//  SGPagingViewExample
 //
-//  Created by apple on 2017/6/12.
+//  Created by kingsic on 2017/10/17.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import "DefaultVCFour.h"
+#import "DefaultVCSix.h"
 #import "SGPagingView.h"
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"
@@ -18,13 +18,13 @@
 #import "ChildVCEight.h"
 #import "ChildVCNine.h"
 
-@interface DefaultVCFour () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
+@interface DefaultVCSix () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentView *pageContentView;
 
 @end
 
-@implementation DefaultVCFour
+@implementation DefaultVCSix
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,12 +38,18 @@
 - (void)setupPageView {
     NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
+    configure.titleSelectedColor = [UIColor whiteColor];
+    configure.indicatorStyle = SGIndicatorStyleCover;
+    configure.indicatorColor = [UIColor blackColor];
+    configure.indicatorAdditionalWidth = 10; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
+    configure.indicatorCornerRadius = 30; // 说明：遮盖样式下，指示器的圆角大小，若设置的圆角大于指示器高度的 1/2，则指示器的圆角为指示器高度的 1/2
+    configure.indicatorScrollStyle = SGIndicatorScrollStyleEnd;
+    configure.indicatorHeight = 25; // 说明：不设置，遮盖样式下，默认高度为文字高度 + 5；若设置无限大，则高度为 PageTitleView 高度
     
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
-    _pageTitleView.isShowIndicator = NO;
-    _pageTitleView.isOpenTitleTextZoom = YES;
+    _pageTitleView.isTitleGradientEffect = NO;
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];

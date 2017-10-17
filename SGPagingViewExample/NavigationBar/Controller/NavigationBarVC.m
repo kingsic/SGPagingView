@@ -34,7 +34,6 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 
     [self setupNavigationBar];
-
     [self setupPageView];
 }
 
@@ -45,6 +44,16 @@
 }
 
 - (void)setupPageView {
+    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
+    SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
+    
+    /// pageTitleView
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
+    // 对 navigationItem.titleView 的包装，为的是 让View 占据整个视图宽度
+    NavigationBarTitleView *view = [[NavigationBarTitleView alloc] init];
+    self.navigationItem.titleView = view;
+    [view addSubview:_pageTitleView];
+    
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
     ChildVCThree *threeVC = [[ChildVCThree alloc] init];
@@ -54,21 +63,12 @@
     ChildVCSeven *sevenVC = [[ChildVCSeven alloc] init];
     ChildVCEight *eightVC = [[ChildVCEight alloc] init];
     ChildVCNine *nineVC = [[ChildVCNine alloc] init];
-    
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
     /// pageContentView
     CGFloat contentViewHeight = self.view.frame.size.height - 64;
     self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
     _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
-    
-    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
-    /// pageTitleView
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44) delegate:self titleNames:titleArr];
-    // 对 navigationItem.titleView 的包装，为的是 让View 占据整个视图宽度
-    NavigationBarTitleView *view = [[NavigationBarTitleView alloc] init];
-    self.navigationItem.titleView = view;
-    [view addSubview:_pageTitleView];
 }
 
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {

@@ -43,6 +43,11 @@
 		182513EA1F21D1600039F4A2 /* SGPageContentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */; };
 		18B036D21F21D835004C7DE7 /* SGPageTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B036D11F21D835004C7DE7 /* SGPageTitleView.m */; };
 		18B036D51F21D8B2004C7DE7 /* SGPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B036D41F21D8B2004C7DE7 /* SGPageContentView.m */; };
+		8DCB02AA1F95B0FF00C9598A /* SGPageTitleViewConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB02A91F95B0FF00C9598A /* SGPageTitleViewConfigure.m */; };
+		8DCB02AD1F95B63B00C9598A /* DefaultVCSix.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB02AC1F95B63B00C9598A /* DefaultVCSix.m */; };
+		8DE63C611F95CD4D00B487A9 /* DefaultVCSeven.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE63C601F95CD4D00B487A9 /* DefaultVCSeven.m */; };
+		8DE63C651F95CEC800B487A9 /* ChildVCFull.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE63C631F95CEC800B487A9 /* ChildVCFull.m */; };
+		8DE63C661F95CEC800B487A9 /* ChildVCFull.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE63C641F95CEC800B487A9 /* ChildVCFull.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +137,15 @@
 		18B036D11F21D835004C7DE7 /* SGPageTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageTitleView.m; sourceTree = "<group>"; };
 		18B036D31F21D8B2004C7DE7 /* SGPageContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageContentView.h; sourceTree = "<group>"; };
 		18B036D41F21D8B2004C7DE7 /* SGPageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageContentView.m; sourceTree = "<group>"; };
+		8DCB02A81F95B0FF00C9598A /* SGPageTitleViewConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageTitleViewConfigure.h; sourceTree = "<group>"; };
+		8DCB02A91F95B0FF00C9598A /* SGPageTitleViewConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageTitleViewConfigure.m; sourceTree = "<group>"; };
+		8DCB02AB1F95B63B00C9598A /* DefaultVCSix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultVCSix.h; sourceTree = "<group>"; };
+		8DCB02AC1F95B63B00C9598A /* DefaultVCSix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultVCSix.m; sourceTree = "<group>"; };
+		8DE63C5F1F95CD4D00B487A9 /* DefaultVCSeven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultVCSeven.h; sourceTree = "<group>"; };
+		8DE63C601F95CD4D00B487A9 /* DefaultVCSeven.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultVCSeven.m; sourceTree = "<group>"; };
+		8DE63C621F95CEC800B487A9 /* ChildVCFull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildVCFull.h; sourceTree = "<group>"; };
+		8DE63C631F95CEC800B487A9 /* ChildVCFull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildVCFull.m; sourceTree = "<group>"; };
+		8DE63C641F95CEC800B487A9 /* ChildVCFull.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildVCFull.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +264,9 @@
 				1825138F1F21CC340039F4A2 /* ChildVCEight.m */,
 				182513951F21CC340039F4A2 /* ChildVCNine.h */,
 				182513961F21CC340039F4A2 /* ChildVCNine.m */,
+				8DE63C621F95CEC800B487A9 /* ChildVCFull.h */,
+				8DE63C631F95CEC800B487A9 /* ChildVCFull.m */,
+				8DE63C641F95CEC800B487A9 /* ChildVCFull.xib */,
 			);
 			path = ChildVC;
 			sourceTree = "<group>";
@@ -267,6 +284,10 @@
 				182513A71F21CC340039F4A2 /* DefaultVCFour.m */,
 				182513A41F21CC340039F4A2 /* DefaultVCFive.h */,
 				182513A51F21CC340039F4A2 /* DefaultVCFive.m */,
+				8DCB02AB1F95B63B00C9598A /* DefaultVCSix.h */,
+				8DCB02AC1F95B63B00C9598A /* DefaultVCSix.m */,
+				8DE63C5F1F95CD4D00B487A9 /* DefaultVCSeven.h */,
+				8DE63C601F95CD4D00B487A9 /* DefaultVCSeven.m */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
@@ -364,6 +385,8 @@
 		182513E31F21D1600039F4A2 /* SGPageTitle */ = {
 			isa = PBXGroup;
 			children = (
+				8DCB02A81F95B0FF00C9598A /* SGPageTitleViewConfigure.h */,
+				8DCB02A91F95B0FF00C9598A /* SGPageTitleViewConfigure.m */,
 				18B036D01F21D835004C7DE7 /* SGPageTitleView.h */,
 				18B036D11F21D835004C7DE7 /* SGPageTitleView.m */,
 			);
@@ -476,6 +499,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DE63C661F95CEC800B487A9 /* ChildVCFull.xib in Resources */,
 				182513531F21CAC30039F4A2 /* LaunchScreen.storyboard in Resources */,
 				182513C41F21CC340039F4A2 /* ChildVCFour.xib in Resources */,
 				182513CA1F21CC340039F4A2 /* ChildVCThree.xib in Resources */,
@@ -513,13 +537,16 @@
 				182513CE1F21CC340039F4A2 /* DefaultVCFour.m in Sources */,
 				182513C21F21CC340039F4A2 /* ChildVCFive.m in Sources */,
 				182513C51F21CC340039F4A2 /* ChildVCNine.m in Sources */,
+				8DE63C651F95CEC800B487A9 /* ChildVCFull.m in Sources */,
 				1825134B1F21CAC30039F4A2 /* ViewController.m in Sources */,
 				18B036D21F21D835004C7DE7 /* SGPageTitleView.m in Sources */,
 				182513EA1F21D1600039F4A2 /* SGPageContentScrollView.m in Sources */,
 				182513CB1F21CC340039F4A2 /* ChildVCTwo.m in Sources */,
 				182513D21F21CC340039F4A2 /* NavigationBarVC.m in Sources */,
+				8DCB02AA1F95B0FF00C9598A /* SGPageTitleViewConfigure.m in Sources */,
 				18B036D51F21D8B2004C7DE7 /* SGPageContentView.m in Sources */,
 				182513C81F21CC340039F4A2 /* ChildVCSix.m in Sources */,
+				8DE63C611F95CD4D00B487A9 /* DefaultVCSeven.m in Sources */,
 				182513D61F21CC340039F4A2 /* PersonalCenterTableView.m in Sources */,
 				182513D31F21CC340039F4A2 /* NavigationBarTitleView.m in Sources */,
 				182513C11F21CC340039F4A2 /* ChildVCEight.m in Sources */,
@@ -532,6 +559,7 @@
 				182513D01F21CC340039F4A2 /* DefaultVCThree.m in Sources */,
 				182513E91F21D1600039F4A2 /* UIView+SGFrame.m in Sources */,
 				182513CF1F21CC340039F4A2 /* DefaultVCOne.m in Sources */,
+				8DCB02AD1F95B63B00C9598A /* DefaultVCSix.m in Sources */,
 				182513C91F21CC340039F4A2 /* ChildVCThree.m in Sources */,
 				182513451F21CAC30039F4A2 /* main.m in Sources */,
 			);

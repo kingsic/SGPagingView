@@ -5,12 +5,13 @@
 //      GitHub：https://github.com/kingsic
 //
 //  SGPagingView.h
-//  Version 1.2.3
+//  Version 1.3.0
 //
-//  Created by apple on 2017/7/21.
-//  Copyright © 2017年 Sorgle. All rights reserved.
+//  Created by apple on 2016/10/6.
+//  Copyright © 2016年 Sorgle. All rights reserved.
 //
 
+#import "SGPageTitleViewConfigure.h"
 #import "SGPageTitleView.h"
 #import "SGPageContentView.h"
 #import "SGPageContentScrollView.h"

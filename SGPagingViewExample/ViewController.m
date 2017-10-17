@@ -14,6 +14,8 @@
 #import "NavigationBarVC.h"
 #import "PersonalCenterVC.h"
 #import "DefaultVCFive.h"
+#import "DefaultVCSix.h"
+#import "DefaultVCSeven.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -26,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.TitleDataList = @[@"静止样式", @"滚动样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果", @"微博个人主页", @"滚动结束后加载子视图"];
+    self.TitleDataList = @[@"静止样式", @"滚动样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果", @"微博个人主页", @"滚动结束后加载子视图", @"指示器遮盖样式", @"内容全屏效果"];
     
     [self foundTableView];
 }
@@ -77,10 +79,17 @@
         PersonalCenterVC *PCVC = [[PersonalCenterVC alloc] init];
         [self.navigationController pushViewController:PCVC animated:YES];
         
-    } else {
-        
+    } else if (indexPath.row == 6) {
         DefaultVCFive *fiveVC = [[DefaultVCFive alloc] init];
         [self.navigationController pushViewController:fiveVC animated:YES];
+        
+    } else if (indexPath.row == 7) {
+        DefaultVCSix *sixVC = [[DefaultVCSix alloc] init];
+        [self.navigationController pushViewController:sixVC animated:YES];
+        
+    } else {
+        DefaultVCSeven *sevenVC = [[DefaultVCSeven alloc] init];
+        [self.navigationController pushViewController:sevenVC animated:YES];
     }
 }
 

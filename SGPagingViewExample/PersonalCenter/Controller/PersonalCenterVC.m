@@ -33,11 +33,8 @@ static CGFloat const PersonalCenterVCTopViewHeight = 200;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     [self foundTableView];
 }
@@ -57,7 +54,6 @@ static CGFloat const PersonalCenterVCTopViewHeight = 200;
     _tableView.sectionHeaderHeight = PersonalCenterVCPageTitleViewHeight;
     _tableView.rowHeight = self.view.frame.size.height - PersonalCenterVCPageTitleViewHeight;
     _tableView.showsVerticalScrollIndicator = NO;
-    
     [self.view addSubview:_tableView];
 }
 
@@ -72,10 +68,11 @@ static CGFloat const PersonalCenterVCTopViewHeight = 200;
 - (SGPageTitleView *)pageTitleView {
     if (!_pageTitleView) {
         NSArray *titleArr = @[@"主页", @"微博", @"相册"];
+        SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
+
         /// pageTitleView
-        _pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, PersonalCenterVCPageTitleViewHeight) delegate:self titleNames:titleArr];
+        _pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, PersonalCenterVCPageTitleViewHeight) delegate:self titleNames:titleArr configure:configure];
         _pageTitleView.backgroundColor = [UIColor whiteColor];
-        _pageTitleView.indicatorLengthStyle = SGIndicatorLengthStyleEqual;
     }
     return _pageTitleView;
 }
@@ -133,7 +130,7 @@ static CGFloat const PersonalCenterVCTopViewHeight = 200;
     return self.pageTitleView;
 }
 
-
+#pragma mark - - - SGPageTitleViewDelegate - SGPageContentViewDelegate
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
     [self.pageContentView setPageCententViewCurrentIndex:selectedIndex];
 }
