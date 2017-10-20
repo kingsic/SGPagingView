@@ -39,7 +39,7 @@
 
 
 ## SGPagingView 集成
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.0'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.1'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -105,49 +105,6 @@
 > **SGPageContentScrollView 使用的是 UIScrollView 拖拽结束后的方法加载子视图
 内部是先添加子视图的 view 到父视图的 view 上的（[self.scrollView addSubview:childVC.view]），再添加子视图控制器到父视图控制器上（[self.parentViewController addChildViewController:childVC]），这时会存在一个问题：即第一次加载第一个子视图时，第一个子视图的 viewDidAppear 方法会调用二次；原因是，先调用 addSubView 时，viewWillAppear 和 viewDidAppear 会各调用一次，再 addChildViewController 时，子视图控制器与父视图控制器的事件同步，即当父视图控制器的 viewDidAppear 调用时，子视图控制器的 viewDidAppear 方法会再调用一次；所以第一次加载的子视图控制器时 viewDidAppear 方法会被调用两次，再去加载其他子视图控制器不会出现这种问题。说明：针对这种情况网络请求数据建议在 viewWillAppear 或 viewDidLoad 中作处理**
 ***
-
-#### 3、SGPageContentView 内容存在偏移量问题及解决方案（v1.1.5 之后不需要做处理）
-* 父控制器中一定要加上 self.automaticallyAdjustsScrollViewInsets = NO; 这句代码；否则 pageContentView 会存在偏移量下移问题
-* 子控制中使用纯代码创建 tableView 时，会存在内容区域显示问题
-* 纯代码在 viewDidLoad 方法中创建 tableView 时，高度一定要等于 SGPageContentView 的高度或使用 Masonry 进行约束；
-* XIB 创建 tableView 时，不会出现这种问题，是因为 XIB 加载完成之后会调用 viewDidLayoutSubviews 这个方法，所以 XIB 中创建 tableView 不会出现约束问题
-
-##### 下面提供三种解决方案（仅供参考）
-```
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    /// 解决方案一（tableView 的高度等于 SGPageContentView 的高度）
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 108) style:UITableViewStylePlain];
-    _tableView.dataSource = self;
-    [self.view addSubview:self.tableView];
-
-    /// 解决方案二（使用 Masonry 进行约束）
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    _tableView.dataSource = self;
-    [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-         make.edges.equalTo(self.view);
-    }];
-}
-```
-
-```
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    /// 解决方案三（懒加载 tableView，并在 viewDidLayoutSubviews 方法中调用）
-    [self.view addSubview:self.tableView];
-}
-```
-
-```
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-        _tableView.dataSource = self;
-    }
-    return _tableView;
-}
-```
 
 
 ## 版本介绍

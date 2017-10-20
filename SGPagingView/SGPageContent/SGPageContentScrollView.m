@@ -60,9 +60,9 @@
 }
 
 - (void)setupSubviews {
+    // 0、处理偏移量
     UIView *tempView = [[UIView alloc] initWithFrame:CGRectZero];
     [self addSubview:tempView];
-    
     // 1、添加 scrollView
     [self addSubview:self.scrollView];
 }

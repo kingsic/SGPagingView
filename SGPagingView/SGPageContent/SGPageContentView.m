@@ -57,14 +57,13 @@
 }
 
 - (void)setupSubviews {
+    // 0、处理偏移量
+    UIView *tempView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self addSubview:tempView];
     // 1、将所有的子控制器添加父控制器中
     for (UIViewController *childVC in self.childViewControllers) {
         [self.parentViewController addChildViewController:childVC];
     }
-    
-    UIView *tempView = [[UIView alloc] initWithFrame:CGRectZero];
-    [self addSubview:tempView];
-    
     // 2、添加UICollectionView, 用于在Cell中存放控制器的View
     [self addSubview:self.collectionView];
 }

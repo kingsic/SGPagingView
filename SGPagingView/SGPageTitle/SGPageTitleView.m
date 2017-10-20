@@ -76,7 +76,7 @@
         }
         self.titleArr = titleNames;
         if (configure == nil) {
-            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的 configure 配置必须设置" userInfo:nil];
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的配置属性必须设置" userInfo:nil];
         }
         self.configure = configure;
         
@@ -101,6 +101,9 @@
 }
 
 - (void)setupSubviews {
+    // 0、处理偏移量
+    UIView *tempView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self addSubview:tempView];
     // 1、添加 UIScrollView
     [self addSubview:self.scrollView];
     // 2、添加标题按钮
