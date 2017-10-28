@@ -178,6 +178,10 @@
             } else {
                 _indicatorView.layer.cornerRadius = self.configure.indicatorCornerRadius;
             }
+            
+            // 边框宽度及边框颜色
+            _indicatorView.layer.borderWidth = self.configure.indicatorBorderWidth;
+            _indicatorView.layer.borderColor = self.configure.indicatorBorderColor.CGColor;
         }
         _indicatorView.backgroundColor = self.configure.indicatorColor;
     }

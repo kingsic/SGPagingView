@@ -19,6 +19,13 @@
     return [[self alloc] init];
 }
 
+- (CGFloat)spacingBetweenButtons {
+    if (_spacingBetweenButtons <= 0) {
+        _spacingBetweenButtons = 20;
+    }
+    return _spacingBetweenButtons;
+}
+
 - (UIFont *)titleFont {
     if (!_titleFont) {
         _titleFont = [UIFont systemFontOfSize:15];
@@ -77,11 +84,18 @@
     return _indicatorCornerRadius;
 }
 
-- (CGFloat)spacingBetweenButtons {
-    if (_spacingBetweenButtons <= 0) {
-        _spacingBetweenButtons = 20;
+- (CGFloat)indicatorBorderWidth {
+    if (_indicatorBorderWidth <= 0) {
+        _indicatorBorderWidth = 0;
     }
-    return _spacingBetweenButtons;
+    return _indicatorBorderWidth;
+}
+
+- (UIColor *)indicatorBorderColor {
+    if (!_indicatorBorderColor) {
+        _indicatorBorderColor = [UIColor clearColor];
+    }
+    return _indicatorBorderColor;
 }
 
 

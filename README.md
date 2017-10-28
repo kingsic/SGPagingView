@@ -39,7 +39,7 @@
 
 
 ## SGPagingView 集成
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.1'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.2'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -109,21 +109,23 @@
 
 ## 版本介绍
 
-* 2016-10-7 ：初始版本的创建
+* 2016-10-07 ：初始版本的创建
 
-* 2017-4-13 ：版本升级（根据标题内容自动识别 SGPageTitleView 是静止还是滚动）
+* 2017-04-13 ：版本升级（根据标题内容自动识别 SGPageTitleView 是静止还是滚动）
 
-* 2017-5-12 ：SGPageContentView 新增是否需要滚动属性
+* 2017-05-12 ：SGPageContentView 新增是否需要滚动属性
 
-* 2017-6-1  ：v1.1.0 解决标题中既有中文又有英文存在的 Bug
+* 2017-06-01 ：v1.1.0 解决标题中既有中文又有英文存在的 Bug 以及性能优化
 
-* 2017-6-15 ：v1.1.5 新增新浪微博模块以及代码的优化
+* 2017-06-15 ：v1.1.5 新增新浪微博模块以及代码的优化
 
-* 2017-7-21 ：v1.1.7 新增 SGPageContentScrollView 类（滚动结束之后加载子视图）以及加入 pods 管理
+* 2017-07-21 ：v1.1.7 新增 SGPageContentScrollView 类以及加入 pods 管理
 
-* 2017-8-11 ：v1.2.0 新增指示器滚动样式
+* 2017-08-11 ：v1.2.0 新增指示器滚动样式
 
-* 2017-10-17  ：v1.3.0 版本升级（新增 SGPageTitleViewConfigure 类，提供更多的属性设置以及支持指示器遮盖样式）
+* 2017-10-17 ：v1.3.0 版本升级（新增 SGPageTitleViewConfigure 类，提供更多的属性设置以及支持指示器遮盖样式）
+
+* 2017-10-28 ：v1.3.2 SGPageTitleViewConfigure 类新增指示器遮盖样式下的边框宽度及边框颜色属性
 
 
 ## Concluding remarks

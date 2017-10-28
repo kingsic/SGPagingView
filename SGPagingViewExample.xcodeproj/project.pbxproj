@@ -48,6 +48,7 @@
 		8DE63C611F95CD4D00B487A9 /* DefaultVCSeven.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE63C601F95CD4D00B487A9 /* DefaultVCSeven.m */; };
 		8DE63C651F95CEC800B487A9 /* ChildVCFull.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE63C631F95CEC800B487A9 /* ChildVCFull.m */; };
 		8DE63C661F95CEC800B487A9 /* ChildVCFull.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE63C641F95CEC800B487A9 /* ChildVCFull.xib */; };
+		8DE63CA81FA4604600B487A9 /* DefaultVCEight.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE63CA71FA4604600B487A9 /* DefaultVCEight.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,8 @@
 		8DE63C621F95CEC800B487A9 /* ChildVCFull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildVCFull.h; sourceTree = "<group>"; };
 		8DE63C631F95CEC800B487A9 /* ChildVCFull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildVCFull.m; sourceTree = "<group>"; };
 		8DE63C641F95CEC800B487A9 /* ChildVCFull.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildVCFull.xib; sourceTree = "<group>"; };
+		8DE63CA61FA4604600B487A9 /* DefaultVCEight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultVCEight.h; sourceTree = "<group>"; };
+		8DE63CA71FA4604600B487A9 /* DefaultVCEight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultVCEight.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +291,8 @@
 				8DCB02AC1F95B63B00C9598A /* DefaultVCSix.m */,
 				8DE63C5F1F95CD4D00B487A9 /* DefaultVCSeven.h */,
 				8DE63C601F95CD4D00B487A9 /* DefaultVCSeven.m */,
+				8DE63CA61FA4604600B487A9 /* DefaultVCEight.h */,
+				8DE63CA71FA4604600B487A9 /* DefaultVCEight.m */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
@@ -557,6 +562,7 @@
 				182513C71F21CC340039F4A2 /* ChildVCSeven.m in Sources */,
 				182513C31F21CC340039F4A2 /* ChildVCFour.m in Sources */,
 				182513D01F21CC340039F4A2 /* DefaultVCThree.m in Sources */,
+				8DE63CA81FA4604600B487A9 /* DefaultVCEight.m in Sources */,
 				182513E91F21D1600039F4A2 /* UIView+SGFrame.m in Sources */,
 				182513CF1F21CC340039F4A2 /* DefaultVCOne.m in Sources */,
 				8DCB02AD1F95B63B00C9598A /* DefaultVCSix.m in Sources */,
