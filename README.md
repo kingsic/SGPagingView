@@ -21,7 +21,7 @@
 
 
 ## 效果图
-![](https://github.com/kingsic/SGPagingView/raw/master/Gif/sorgle.gif) 
+![](https://github.com/kingsic/SGPagingView/raw/master/Gif/sorgle.gif)       ![](https://github.com/kingsic/SGPagingView/raw/master/Gif/sorgle2.gif)
 
 
 ## 主要内容的介绍
