@@ -127,8 +127,9 @@
 
 * 2017-10-28 ：v1.3.2 SGPageTitleViewConfigure 类新增指示器遮盖样式下的边框宽度及边框颜色属性
 
+* 2017-11-01 ：适配 iOS 11（如果你是 Xcode 8 的运行环境，请在 releases 中下载 v1.3.2 的代码进行运行）
+
 
 ## Concluding remarks
 
 * 如在使用中, 遇到什么问题或有更好建议者, 请记得 [Issues me](https://github.com/kingsic/SGPagingView/issues) 或 kingsic@126.com 邮箱联系我
-
