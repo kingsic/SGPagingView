@@ -65,8 +65,14 @@
         [self.navigationController pushViewController:twoVC animated:YES];
         
     } else if (indexPath.row == 2) {
-        NavigationBarVC *navVC = [[NavigationBarVC alloc] init];
-        [self.navigationController pushViewController:navVC animated:YES];
+        NavigationBarVC *VC = [[NavigationBarVC alloc] init];
+        UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:VC];
+        // 之前在使用模态的时候并没有遇到这种情况；第一次，因为模态的时候有延迟，而且延迟比较厉害；上网查了一下，网上给出的答案：由于某种原因： presentViewController:animated:completion 里的内容并不会真的马上触发执行，除非有一个主线程事件触发。比如在弹出慢的时候，你随便点击一下屏幕，马上就能弹出来；这个我测试是这种情况
+        // 解决方法：将 presentViewController:animated:completion: 添加到主线程
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self presentViewController:navC animated:YES completion:^{
+            }];
+        }];
         
     } else if (indexPath.row == 3) {
         DefaultVCThree *threeVC = [[DefaultVCThree alloc] init];

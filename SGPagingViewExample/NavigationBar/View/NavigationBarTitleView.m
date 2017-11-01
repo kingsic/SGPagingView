@@ -10,10 +10,9 @@
 
 @implementation NavigationBarTitleView
 
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:CGRectMake(0, 0, self.superview.bounds.size.width, self.superview.bounds.size.height)];
+- (CGSize)intrinsicContentSize {
+    return UILayoutFittingExpandedSize;
 }
-
 
 @end
 

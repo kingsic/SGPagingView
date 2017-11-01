@@ -1,14 +1,14 @@
 //
-//  PersonalCenterTopView.m
-//  SGPageViewExample
+//  NavigationBarTitleView11.m
+//  SGPagingViewExample
 //
-//  Created by apple on 2017/6/15.
+//  Created by kingsic on 2017/11/1.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import "PersonalCenterTopView.h"
+#import "NavigationBarTitleView11.h"
 
-@implementation PersonalCenterTopView
+@implementation NavigationBarTitleView11
 
 /*
 // Only override drawRect: if you perform custom drawing.

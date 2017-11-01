@@ -8,7 +8,7 @@
 
 #import "ChildVCFour.h"
 
-@interface ChildVCFour () <UITableViewDataSource>
+@interface ChildVCFour () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
@@ -29,10 +29,15 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"SGPageView - ChildVCFour - - %ld", indexPath.row];
-    
+    cell.textLabel.text = [NSString stringWithFormat:@"点我可进入下一界面 - - %ld", indexPath.row];
+
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController *VC = [[UIViewController alloc] init];
+    VC.view.backgroundColor = [UIColor greenColor];
+    [self.navigationController pushViewController:VC animated:YES];
+}
 
 @end

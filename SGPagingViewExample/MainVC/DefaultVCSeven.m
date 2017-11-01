@@ -31,6 +31,14 @@
 }
 
 - (void)setupPageView {
+    CGFloat statusHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+    CGFloat pageTitleViewY = 0;
+    if (statusHeight == 20.0) {
+        pageTitleViewY = 64;
+    } else {
+        pageTitleViewY = 88;
+    }
+    
     NSArray *titleArr = @[@"精选", @"电影", @"OC", @"Swift"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configure.titleSelectedColor = [UIColor whiteColor];
@@ -39,7 +47,7 @@
     configure.indicatorAdditionalWidth = 20; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
     configure.indicatorCornerRadius = 30; // 说明：遮盖样式下，指示器的圆角大小，若设置的圆角大于指示器高度的 1/2，则指示器的圆角为指示器高度的 1/2
     
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
     _pageTitleView.isTitleGradientEffect = NO;
     _pageTitleView.selectedIndex = 1;

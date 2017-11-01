@@ -30,6 +30,14 @@
 }
 
 - (void)setupPageView {
+    CGFloat statusHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+    CGFloat pageTitleViewY = 0;
+    if (statusHeight == 20.0) {
+        pageTitleViewY = 64;
+    } else {
+        pageTitleViewY = 88;
+    }
+    
     NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configure.titleSelectedColor = [UIColor lightGrayColor];
@@ -42,7 +50,7 @@
     configure.indicatorHeight = 25;
     
     /// pageTitleView
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];

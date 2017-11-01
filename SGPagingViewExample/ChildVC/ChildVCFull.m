@@ -18,8 +18,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     
-    self.tableView.contentInset = UIEdgeInsetsMake(108, 0, 0, 0);
+    CGFloat statusHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+    CGFloat offsetY = 0;
+    if (statusHeight == 20.0) {
+        offsetY = 108;
+    } else {
+        offsetY = 132;
+    }
+    self.tableView.contentInset = UIEdgeInsetsMake(offsetY, 0, 0, 0);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -31,7 +41,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"SGPageView - ChildVCFull - - %ld", indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"SGPagingView - ChildVCFull - - %ld", indexPath.row];
     return cell;
 }
 

@@ -34,12 +34,20 @@
 }
 
 - (void)setupPageView {
+    CGFloat statusHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+    CGFloat pageTitleViewY = 0;
+    if (statusHeight == 20.0) {
+        pageTitleViewY = 64;
+    } else {
+        pageTitleViewY = 88;
+    }
+    
     NSArray *titleArr = @[@"精选", @"请等待2s", @"OC", @"Swift"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configure.indicatorScrollStyle = SGIndicatorScrollStyleHalf;
     configure.titleFont = [UIFont systemFontOfSize:12];
     
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
     _pageTitleView.isTitleGradientEffect = NO;
     _pageTitleView.selectedIndex = 1;
