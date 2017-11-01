@@ -145,6 +145,7 @@
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
+        _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.alwaysBounceHorizontal = YES;
         _scrollView.frame = CGRectMake(0, 0, SGPageTitleViewWidth, SGPageTitleViewHeight);
