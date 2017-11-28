@@ -15,15 +15,30 @@
 @class SGPageContentView;
 
 @protocol SGPageContentViewDelegate <NSObject>
-/// SGPageContentViewDelegate 的代理方法
+@optional
+/**
+ *  联动 SGPageTitleView 的方法
+ *
+ *  @param pageContentView      SGPageContentView
+ *  @param progress             SGPageContentView 内部视图滚动时的偏移量
+ *  @param originalIndex        原始视图所在下标
+ *  @param targetIndex          目标视图所在下标
+ */
 - (void)pageContentView:(SGPageContentView *)pageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
+/**
+ *  给 SGPageContentView 所在控制器提供的方法（根据偏移量来处理返回手势的问题）
+ *
+ *  @param pageContentView     SGPageContentView
+ *  @param offsetX             SGPageContentView 内部视图的偏移量
+ */
+- (void)pageContentView:(SGPageContentView *)pageContentView offsetX:(CGFloat)offsetX;
 @end
 
 @interface SGPageContentView : UIView
 /**
  *  对象方法创建 SGPageContentView
  *
- *  @param frame     frame
+ *  @param frame        frame
  *  @param parentVC     当前控制器
  *  @param childVCs     子控制器个数
  */
@@ -31,7 +46,7 @@
 /**
  *  类方法创建 SGPageContentView
  *
- *  @param frame     frame
+ *  @param frame        frame
  *  @param parentVC     当前控制器
  *  @param childVCs     子控制器个数
  */

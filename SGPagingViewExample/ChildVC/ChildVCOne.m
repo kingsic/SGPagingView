@@ -8,6 +8,7 @@
 
 #import "ChildVCOne.h"
 //#import "Masonry.h"
+#import "FirstTempVC.h"
 
 @interface ChildVCOne () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -67,8 +68,13 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"SGPagingView - ChildVCOne - - %ld", indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"侧滑返回手势点击进入下一界面 - - %ld", indexPath.row];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    FirstTempVC *VC = [[FirstTempVC alloc] init];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 

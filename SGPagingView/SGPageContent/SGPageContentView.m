@@ -80,6 +80,7 @@
         CGFloat collectionViewW = self.SG_width;
         CGFloat collectionViewH = self.SG_height;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(collectionViewX, collectionViewY, collectionViewW, collectionViewH) collectionViewLayout:flowLayout];
+        _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.pagingEnabled = YES;
         _collectionView.bounces = NO;
@@ -91,7 +92,7 @@
     return _collectionView;
 }
 
-/// UICollectionViewDataSource
+#pragma mark - - - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.childViewControllers.count;
 }
@@ -106,10 +107,18 @@
     return cell;
 }
 
-/// UICollectionViewDelegate
+#pragma mark - - - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     self.isClickBtn = NO;
     self.startOffsetX = scrollView.contentOffset.x;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    CGFloat offsetX = scrollView.contentOffset.x;
+    // pageContentView:offsetX:
+    if (self.delegatePageContentView && [self.delegatePageContentView respondsToSelector:@selector(pageContentView:offsetX:)]) {
+        [self.delegatePageContentView pageContentView:self offsetX:offsetX];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -160,7 +169,12 @@
 - (void)setPageCententViewCurrentIndex:(NSInteger)currentIndex {
     self.isClickBtn = YES;
     CGFloat offsetX = currentIndex * self.collectionView.SG_width;
+    // 1、处理内容偏移
     self.collectionView.contentOffset = CGPointMake(offsetX, 0);
+    // 2、pageContentView:offsetX:
+    if (self.delegatePageContentView && [self.delegatePageContentView respondsToSelector:@selector(pageContentView:offsetX:)]) {
+        [self.delegatePageContentView pageContentView:self offsetX:offsetX];
+    }
 }
 
 #pragma mark - - - set

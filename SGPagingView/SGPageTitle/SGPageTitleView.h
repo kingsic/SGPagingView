@@ -12,13 +12,16 @@
 //
 
 #import <UIKit/UIKit.h>
-@class SGPageTitleViewConfigure;
-@class SGPageTitleView;
+@class SGPageTitleViewConfigure, SGPageTitleView;
 
 @protocol SGPageTitleViewDelegate <NSObject>
-/// SGPageTitleViewDelegate 的代理方法
+/**
+ *  联动 pageContent 的方法
+ *
+ *  @param pageTitleView      SGPageTitleView
+ *  @param selectedIndex      选中按钮的下标
+ */
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex;
-
 @end
 
 @interface SGPageTitleView : UIView

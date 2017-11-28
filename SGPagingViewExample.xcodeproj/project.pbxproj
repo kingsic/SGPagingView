@@ -49,6 +49,11 @@
 		8DE63C651F95CEC800B487A9 /* ChildVCFull.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE63C631F95CEC800B487A9 /* ChildVCFull.m */; };
 		8DE63C661F95CEC800B487A9 /* ChildVCFull.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE63C641F95CEC800B487A9 /* ChildVCFull.xib */; };
 		8DE63CA81FA4604600B487A9 /* DefaultVCEight.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE63CA71FA4604600B487A9 /* DefaultVCEight.m */; };
+		9A72D4821FCD5C3600D2ECD8 /* TempVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A72D47C1FCD5C3400D2ECD8 /* TempVC.m */; };
+		9A72D4831FCD5C3600D2ECD8 /* TempVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A72D47E1FCD5C3500D2ECD8 /* TempVC.xib */; };
+		9A72D4841FCD5C3600D2ECD8 /* FirstTempVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A72D4801FCD5C3500D2ECD8 /* FirstTempVC.m */; };
+		9A72D4851FCD5C3600D2ECD8 /* FirstTempVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A72D4811FCD5C3600D2ECD8 /* FirstTempVC.xib */; };
+		9A72D4881FCD5C6300D2ECD8 /* DefaultVCPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A72D4871FCD5C6300D2ECD8 /* DefaultVCPopGesture.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +154,14 @@
 		8DE63C641F95CEC800B487A9 /* ChildVCFull.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildVCFull.xib; sourceTree = "<group>"; };
 		8DE63CA61FA4604600B487A9 /* DefaultVCEight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultVCEight.h; sourceTree = "<group>"; };
 		8DE63CA71FA4604600B487A9 /* DefaultVCEight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultVCEight.m; sourceTree = "<group>"; };
+		9A72D47C1FCD5C3400D2ECD8 /* TempVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempVC.m; sourceTree = "<group>"; };
+		9A72D47D1FCD5C3400D2ECD8 /* FirstTempVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstTempVC.h; sourceTree = "<group>"; };
+		9A72D47E1FCD5C3500D2ECD8 /* TempVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TempVC.xib; sourceTree = "<group>"; };
+		9A72D47F1FCD5C3500D2ECD8 /* TempVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempVC.h; sourceTree = "<group>"; };
+		9A72D4801FCD5C3500D2ECD8 /* FirstTempVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstTempVC.m; sourceTree = "<group>"; };
+		9A72D4811FCD5C3600D2ECD8 /* FirstTempVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstTempVC.xib; sourceTree = "<group>"; };
+		9A72D4861FCD5C6300D2ECD8 /* DefaultVCPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultVCPopGesture.h; sourceTree = "<group>"; };
+		9A72D4871FCD5C6300D2ECD8 /* DefaultVCPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultVCPopGesture.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +283,12 @@
 				8DE63C621F95CEC800B487A9 /* ChildVCFull.h */,
 				8DE63C631F95CEC800B487A9 /* ChildVCFull.m */,
 				8DE63C641F95CEC800B487A9 /* ChildVCFull.xib */,
+				9A72D47D1FCD5C3400D2ECD8 /* FirstTempVC.h */,
+				9A72D4801FCD5C3500D2ECD8 /* FirstTempVC.m */,
+				9A72D4811FCD5C3600D2ECD8 /* FirstTempVC.xib */,
+				9A72D47F1FCD5C3500D2ECD8 /* TempVC.h */,
+				9A72D47C1FCD5C3400D2ECD8 /* TempVC.m */,
+				9A72D47E1FCD5C3500D2ECD8 /* TempVC.xib */,
 			);
 			path = ChildVC;
 			sourceTree = "<group>";
@@ -293,6 +312,8 @@
 				8DE63C601F95CD4D00B487A9 /* DefaultVCSeven.m */,
 				8DE63CA61FA4604600B487A9 /* DefaultVCEight.h */,
 				8DE63CA71FA4604600B487A9 /* DefaultVCEight.m */,
+				9A72D4861FCD5C6300D2ECD8 /* DefaultVCPopGesture.h */,
+				9A72D4871FCD5C6300D2ECD8 /* DefaultVCPopGesture.m */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
@@ -506,8 +527,10 @@
 			files = (
 				8DE63C661F95CEC800B487A9 /* ChildVCFull.xib in Resources */,
 				182513531F21CAC30039F4A2 /* LaunchScreen.storyboard in Resources */,
+				9A72D4831FCD5C3600D2ECD8 /* TempVC.xib in Resources */,
 				182513C41F21CC340039F4A2 /* ChildVCFour.xib in Resources */,
 				182513CA1F21CC340039F4A2 /* ChildVCThree.xib in Resources */,
+				9A72D4851FCD5C3600D2ECD8 /* FirstTempVC.xib in Resources */,
 				182513501F21CAC30039F4A2 /* Assets.xcassets in Resources */,
 				182513CC1F21CC340039F4A2 /* ChildVCTwo.xib in Resources */,
 				1825134E1F21CAC30039F4A2 /* Main.storyboard in Resources */,
@@ -537,6 +560,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				182513CD1F21CC340039F4A2 /* DefaultVCFive.m in Sources */,
+				9A72D4841FCD5C3600D2ECD8 /* FirstTempVC.m in Sources */,
 				182513D71F21CC340039F4A2 /* PersonalCenterTopView.m in Sources */,
 				182513D11F21CC340039F4A2 /* DefaultVCTwo.m in Sources */,
 				182513CE1F21CC340039F4A2 /* DefaultVCFour.m in Sources */,
@@ -563,6 +587,8 @@
 				182513C31F21CC340039F4A2 /* ChildVCFour.m in Sources */,
 				182513D01F21CC340039F4A2 /* DefaultVCThree.m in Sources */,
 				8DE63CA81FA4604600B487A9 /* DefaultVCEight.m in Sources */,
+				9A72D4881FCD5C6300D2ECD8 /* DefaultVCPopGesture.m in Sources */,
+				9A72D4821FCD5C3600D2ECD8 /* TempVC.m in Sources */,
 				182513E91F21D1600039F4A2 /* UIView+SGFrame.m in Sources */,
 				182513CF1F21CC340039F4A2 /* DefaultVCOne.m in Sources */,
 				8DCB02AD1F95B63B00C9598A /* DefaultVCSix.m in Sources */,

@@ -74,6 +74,7 @@
         _scrollView.bounces = NO;
         _scrollView.delegate = self;
         _scrollView.pagingEnabled = YES;
+        _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         CGFloat contentWidth = self.childViewControllers.count * _scrollView.SG_width;
         _scrollView.contentSize = CGSizeMake(contentWidth, 0);
@@ -81,7 +82,7 @@
     return _scrollView;
 }
 
-/// UIScrollViewDelegate
+#pragma mark - - - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     self.isClickBtn = NO;
     self.startOffsetX = scrollView.contentOffset.x;
@@ -89,9 +90,13 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     CGFloat offsetX = scrollView.contentOffset.x;
+    // 1、pageContentScrollView:offsetX:
+    if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:offsetX:)]) {
+        [self.delegatePageContentScrollView pageContentScrollView:self offsetX:offsetX];
+    }
     NSInteger index = offsetX / scrollView.frame.size.width;
     UIViewController *childVC = self.childViewControllers[index];
-    // 判断控制器的view有没有加载过,如果已经加载过,就不需要加载
+    // 2、判断控制器的view有没有加载过,如果已经加载过,就不需要加载
     if (childVC.isViewLoaded) return;
     [self.scrollView addSubview:childVC.view];
     [self.parentViewController addChildViewController:childVC];
@@ -103,12 +108,10 @@
         [self scrollViewDidEndDecelerating:scrollView];
         return;
     }
-    
     // 1、定义获取需要的数据
     CGFloat progress = 0;
     NSInteger originalIndex = 0;
     NSInteger targetIndex = 0;
-    
     // 2、判断是左滑还是右滑
     CGFloat currentOffsetX = scrollView.contentOffset.x;
     CGFloat scrollViewW = scrollView.bounds.size.width;
@@ -139,7 +142,6 @@
             originalIndex = self.childViewControllers.count - 1;
         }
     }
-    
     // 3、pageContentViewDelegare; 将 progress／sourceIndex／targetIndex 传递给 SGPageTitleView
     if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:progress:originalIndex:targetIndex:)]) {
         [self.delegatePageContentScrollView pageContentScrollView:self progress:progress originalIndex:originalIndex targetIndex:targetIndex];
@@ -150,7 +152,6 @@
 - (void)setPageCententScrollViewCurrentIndex:(NSInteger)currentIndex {
     self.isClickBtn = YES;
     CGFloat offsetX = currentIndex * self.SG_width;
-
     if (self.isFirstViewLoaded && currentIndex == 0) {
         self.isFirstViewLoaded = NO;
         // 2、默认选中第一个子控制器；self.scrollView.contentOffset ＝ 0
@@ -160,7 +161,12 @@
         [self.parentViewController addChildViewController:childVC];
         childVC.view.frame = CGRectMake(offsetX, 0, self.SG_width, self.SG_height);
     }
+    // 1、处理内容偏移
     self.scrollView.contentOffset = CGPointMake(offsetX, 0);
+    // 2、pageContentScrollView:offsetX:
+    if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:offsetX:)]) {
+        [self.delegatePageContentScrollView pageContentScrollView:self offsetX:offsetX];
+    }
 }
 
 #pragma mark - - - set

@@ -577,7 +577,7 @@
     }
 }
 
-/// 颜色渐变方法抽取
+#pragma mark - - - 颜色渐变方法抽取
 - (void)P_isTitleGradientEffectWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
     // 获取 targetProgress
     CGFloat targetProgress = progress;

@@ -39,7 +39,7 @@
 
 
 ## SGPagingView 集成
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.2'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.3'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -128,6 +128,8 @@
 * 2017-10-28 ：v1.3.2 SGPageTitleViewConfigure 类新增指示器遮盖样式下的边框宽度及边框颜色属性
 
 * 2017-11-01 ：适配 iOS 11（如果你是 Xcode 8 的运行环境，请在 releases 中下载 v1.3.2 的代码进行运行）
+
+* 2017-11-28 ：SGPageContentView 与 SGPageContentScrollView 新增代理方法，用来处理侧滑返回手势
 
 
 ## Concluding remarks

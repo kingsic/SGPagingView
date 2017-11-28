@@ -17,6 +17,7 @@
 #import "DefaultVCSix.h"
 #import "DefaultVCSeven.h"
 #import "DefaultVCEight.h"
+#import "DefaultVCPopGesture.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -29,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.TitleDataList = @[@"静止样式", @"滚动样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果", @"微博个人主页", @"滚动结束后加载子视图", @"指示器遮盖样式", @"指示器遮盖样式二", @"内容全屏效果"];
+    self.TitleDataList = @[@"静止样式", @"滚动样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果", @"微博个人主页", @"滚动结束后加载子视图", @"指示器遮盖样式", @"指示器遮盖样式二", @"内容全屏效果", @"返回手势处理"];
     
     [self foundTableView];
 }
@@ -67,7 +68,7 @@
     } else if (indexPath.row == 2) {
         NavigationBarVC *VC = [[NavigationBarVC alloc] init];
         UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:VC];
-        // 之前在使用模态的时候并没有遇到这种情况；第一次，因为模态的时候有延迟，而且延迟比较厉害；上网查了一下，网上给出的答案：由于某种原因： presentViewController:animated:completion 里的内容并不会真的马上触发执行，除非有一个主线程事件触发。比如在弹出慢的时候，你随便点击一下屏幕，马上就能弹出来；这个我测试是这种情况
+        // 问题：模态的时候有延迟，而且延迟比较厉害。第一次遇到这种问题；上网查了一下，网上给出的答案：由于某种原因： presentViewController:animated:completion 里的内容并不会真的马上触发执行，除非有一个主线程事件触发。比如在弹出慢的时候，你随便点击一下屏幕，马上就能弹出来；这个我亲自测试了是这种情况
         // 解决方法：将 presentViewController:animated:completion: 添加到主线程
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self presentViewController:navC animated:YES completion:^{
@@ -98,9 +99,13 @@
         DefaultVCEight *eightVC = [[DefaultVCEight alloc] init];
         [self.navigationController pushViewController:eightVC animated:YES];
         
-    } else {
+    } else if (indexPath.row == 9) {
         DefaultVCSeven *sevenVC = [[DefaultVCSeven alloc] init];
         [self.navigationController pushViewController:sevenVC animated:YES];
+        
+    } else {
+        DefaultVCPopGesture *popGestureVC = [[DefaultVCPopGesture alloc] init];
+        [self.navigationController pushViewController:popGestureVC animated:YES];
     }
 }
 
