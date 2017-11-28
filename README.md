@@ -106,6 +106,34 @@
 内部是先添加子视图的 view 到父视图的 view 上的（[self.scrollView addSubview:childVC.view]），再添加子视图控制器到父视图控制器上（[self.parentViewController addChildViewController:childVC]），这时会存在一个问题：即第一次加载第一个子视图时，第一个子视图的 viewDidAppear 方法会调用二次；原因是，先调用 addSubView 时，viewWillAppear 和 viewDidAppear 会各调用一次，再 addChildViewController 时，子视图控制器与父视图控制器的事件同步，即当父视图控制器的 viewDidAppear 调用时，子视图控制器的 viewDidAppear 方法会再调用一次；所以第一次加载的子视图控制器时 viewDidAppear 方法会被调用两次，再去加载其他子视图控制器不会出现这种问题。说明：针对这种情况网络请求数据建议在 viewWillAppear 或 viewDidLoad 中作处理**
 ***
 
+#### 3、关于侧滑返回手势（请参考 DefaultVCPopGesture 类以及点击子控制器对下一界面所做的处理）
+###### 1、如果是系统默认返回 item ；只需实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法，并在此方法实现以下代码即可，如：
+```
+- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView offsetX:(CGFloat)offsetX {
+    if (offsetX == 0) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    } else {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+```
+
+###### 2、如果是自定义返回 item 
+a. 设置代理：self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
+
+b. 遵循协议：UINavigationControllerDelegate
+
+c. 实现代理方法：
+```
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+```
+d. 实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法；实现代码如 1、
+
+###### 3、issues [1.关于返回手势](https://github.com/kingsic/SGPagingView/issues/25) 有开发者提供的解决方案，可供参看
+***
+
 
 ## 版本介绍
 
