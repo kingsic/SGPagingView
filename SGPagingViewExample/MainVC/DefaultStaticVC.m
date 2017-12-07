@@ -1,25 +1,29 @@
 //
-//  DefaultVCThree.m
+//  DefaultStaticVC.m
 //  SGPageViewExample
 //
-//  Created by apple on 2017/6/12.
+//  Created by apple on 17/4/13.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import "DefaultVCThree.h"
+#import "DefaultStaticVC.h"
 #import "SGPagingView.h"
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"
 #import "ChildVCThree.h"
 #import "ChildVCFour.h"
 
-@interface DefaultVCThree () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
+@interface DefaultStaticVC () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentView *pageContentView;
 
 @end
 
-@implementation DefaultVCThree
+@implementation DefaultStaticVC
+
+- (void)dealloc {
+    NSLog(@"DefaultStaticVC - - dealloc");
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,16 +42,20 @@
         pageTitleViewY = 88;
     }
     
-    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
+    NSArray *titleArr = @[@"精选", @"请等待2s", @"QQGroup", @"429899752"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-    configure.titleColor = [UIColor lightGrayColor];
-    configure.titleSelectedColor = [UIColor blackColor];
-    configure.indicatorColor = [UIColor blackColor];
+    configure.indicatorScrollStyle = SGIndicatorScrollStyleHalf;
+    configure.titleFont = [UIFont systemFontOfSize:12];
     
-    /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
+    _pageTitleView.isTitleGradientEffect = NO;
     _pageTitleView.selectedIndex = 1;
+    _pageTitleView.isNeedBounces = NO;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_pageTitleView resetTitleWithIndex:1 newTitle:@"等待已结束"];
+    });
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
@@ -69,19 +77,5 @@
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

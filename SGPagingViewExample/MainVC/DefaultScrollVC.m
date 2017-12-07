@@ -1,12 +1,12 @@
 //
-//  DefaultVCSix.m
-//  SGPagingViewExample
+//  DefaultScrollVC.m
+//  SGPageViewExample
 //
-//  Created by kingsic on 2017/10/17.
+//  Created by apple on 17/4/13.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import "DefaultVCSix.h"
+#import "DefaultScrollVC.h"
 #import "SGPagingView.h"
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"
@@ -18,20 +18,32 @@
 #import "ChildVCEight.h"
 #import "ChildVCNine.h"
 
-@interface DefaultVCSix () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
+@interface DefaultScrollVC () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentView *pageContentView;
 
 @end
 
-@implementation DefaultVCSix
+@implementation DefaultScrollVC
+
+- (void)dealloc {
+    NSLog(@"DefaultScrollVC - - dealloc");
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSelectedIndex:) name:@"changeSelectedIndex" object:nil];
+
     [self setupPageView];
+}
+
+- (void)changeSelectedIndex:(NSNotification *)noti {
+    _pageTitleView.resetSelectedIndex = [noti.object integerValue];
 }
 
 - (void)setupPageView {
@@ -45,11 +57,7 @@
     
     NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-    configure.titleSelectedColor = [UIColor whiteColor];
-    configure.indicatorStyle = SGIndicatorStyleCover;
-    configure.indicatorColor = [UIColor blackColor];
-    configure.indicatorAdditionalWidth = 100; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
-    configure.indicatorHeight = 122; // 说明：不设置，遮盖样式下，默认高度为文字高度 + 5；若设置无限大，则高度为 PageTitleView 高度
+    configure.indicatorAdditionalWidth = 10; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
     
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
@@ -80,19 +88,6 @@
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
+

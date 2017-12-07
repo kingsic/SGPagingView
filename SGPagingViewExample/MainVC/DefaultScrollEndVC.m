@@ -1,49 +1,32 @@
 //
-//  DefaultVCPopGesture.m
-//  SGPagingViewExample
+//  DefaultScrollEndVC.m
+//  SGPageViewExample
 //
-//  Created by kingsic on 2017/11/28.
+//  Created by apple on 2017/7/21.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import "DefaultVCPopGesture.h"
+#import "DefaultScrollEndVC.h"
 #import "SGPagingView.h"
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"
 #import "ChildVCThree.h"
 #import "ChildVCFour.h"
 
-@interface DefaultVCPopGesture () <SGPageTitleViewDelegate, SGPageContentScrollViewDelegate, UINavigationControllerDelegate>
+@interface DefaultScrollEndVC () <SGPageTitleViewDelegate, SGPageContentScrollViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentScrollView *pageContentScrollView;
 
 @end
 
-@implementation DefaultVCPopGesture
+@implementation DefaultScrollEndVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-
-    [self customLeftBarButtonItem];
-    [self setupPageView];
-}
-
-- (void)customLeftBarButtonItem {
-    UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    [button setTitle:@"back" forState:(UIControlStateNormal)];
-    [button sizeToFit];
-    [button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-    [button addTarget:self action:@selector(popGesture) forControlEvents:(UIControlEventTouchUpInside)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
-    /// UINavigationControllerDelegate
-    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
-}
-
-- (void)popGesture {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self setupPageView];
 }
 
 - (void)setupPageView {
@@ -86,19 +69,11 @@
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 
-- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView offsetX:(CGFloat)offsetX {
-    if (offsetX == 0) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    } else {
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    }
-}
 
-/// 允许同时响应多个手势
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
-
 
 /*
 #pragma mark - Navigation

@@ -1,5 +1,5 @@
 //
-//  DefaultVCFour.h
+//  DefaultGradientEffectVC.h
 //  SGPageViewExample
 //
 //  Created by apple on 2017/6/12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DefaultVCFour : UIViewController
+@interface DefaultGradientEffectVC : UIViewController
 
 @end

@@ -7,17 +7,18 @@
 //
 
 #import "ViewController.h"
-#import "DefaultVCOne.h"
-#import "DefaultVCTwo.h"
-#import "DefaultVCThree.h"
-#import "DefaultVCFour.h"
+#import "DefaultStaticVC.h"
+#import "DefaultScrollVC.h"
+#import "DefaultGradientEffectVC.h"
+#import "DefaultZoomVC.h"
 #import "NavigationBarVC.h"
 #import "PersonalCenterVC.h"
-#import "DefaultVCFive.h"
-#import "DefaultVCSix.h"
-#import "DefaultVCSeven.h"
-#import "DefaultVCEight.h"
-#import "DefaultVCPopGesture.h"
+#import "DefaultScrollEndVC.h"
+#import "DefaultCoverVC.h"
+#import "DefaultTwoCoverVC.h"
+#import "DefaultThreeCoverVC.h"
+#import "DefaultFixedVC.h"
+#import "DefaultPopGestureVC.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -30,7 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.TitleDataList = @[@"静止样式", @"滚动样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果", @"微博个人主页", @"滚动结束后加载子视图", @"指示器遮盖样式", @"指示器遮盖样式二", @"内容全屏效果", @"返回手势处理"];
+    self.TitleDataList = @[@"静止样式", @"滚动样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果", @"微博个人主页", @"滚动结束后加载子视图", @"指示器遮盖样式一", @"指示器遮盖样式二", @"指示器遮盖样式三 + 内容全屏效果", @"指示器固定样式", @"返回手势处理"];
     
     [self foundTableView];
 }
@@ -45,25 +46,22 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     cell.textLabel.text = self.TitleDataList[indexPath.row];
-    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        DefaultVCOne *oneVC = [[DefaultVCOne alloc] init];
-        [self.navigationController pushViewController:oneVC animated:YES];
+        DefaultStaticVC *staticVC = [[DefaultStaticVC alloc] init];
+        [self.navigationController pushViewController:staticVC animated:YES];
         
     } else if (indexPath.row == 1) {
-        DefaultVCTwo *twoVC = [[DefaultVCTwo alloc] init];
-        [self.navigationController pushViewController:twoVC animated:YES];
+        DefaultScrollVC *scrollVC = [[DefaultScrollVC alloc] init];
+        [self.navigationController pushViewController:scrollVC animated:YES];
         
     } else if (indexPath.row == 2) {
         NavigationBarVC *VC = [[NavigationBarVC alloc] init];
@@ -76,35 +74,39 @@
         }];
         
     } else if (indexPath.row == 3) {
-        DefaultVCThree *threeVC = [[DefaultVCThree alloc] init];
-        [self.navigationController pushViewController:threeVC animated:YES];
+        DefaultGradientEffectVC *gradientEffectVC = [[DefaultGradientEffectVC alloc] init];
+        [self.navigationController pushViewController:gradientEffectVC animated:YES];
         
     } else if (indexPath.row == 4) {
-        DefaultVCFour *fourVC = [[DefaultVCFour alloc] init];
-        [self.navigationController pushViewController:fourVC animated:YES];
+        DefaultZoomVC *zoomVC = [[DefaultZoomVC alloc] init];
+        [self.navigationController pushViewController:zoomVC animated:YES];
         
     } else if (indexPath.row == 5) {
         PersonalCenterVC *PCVC = [[PersonalCenterVC alloc] init];
         [self.navigationController pushViewController:PCVC animated:YES];
         
     } else if (indexPath.row == 6) {
-        DefaultVCFive *fiveVC = [[DefaultVCFive alloc] init];
-        [self.navigationController pushViewController:fiveVC animated:YES];
+        DefaultScrollEndVC *scrollEndVC = [[DefaultScrollEndVC alloc] init];
+        [self.navigationController pushViewController:scrollEndVC animated:YES];
         
     } else if (indexPath.row == 7) {
-        DefaultVCSix *sixVC = [[DefaultVCSix alloc] init];
-        [self.navigationController pushViewController:sixVC animated:YES];
+        DefaultCoverVC *coverVC = [[DefaultCoverVC alloc] init];
+        [self.navigationController pushViewController:coverVC animated:YES];
         
     } else if (indexPath.row == 8) {
-        DefaultVCEight *eightVC = [[DefaultVCEight alloc] init];
-        [self.navigationController pushViewController:eightVC animated:YES];
+        DefaultTwoCoverVC *twoCoverVC = [[DefaultTwoCoverVC alloc] init];
+        [self.navigationController pushViewController:twoCoverVC animated:YES];
         
     } else if (indexPath.row == 9) {
-        DefaultVCSeven *sevenVC = [[DefaultVCSeven alloc] init];
-        [self.navigationController pushViewController:sevenVC animated:YES];
+        DefaultThreeCoverVC *threeCoverVC = [[DefaultThreeCoverVC alloc] init];
+        [self.navigationController pushViewController:threeCoverVC animated:YES];
+        
+    } else if (indexPath.row == 10) {
+        DefaultFixedVC *fixedVC = [[DefaultFixedVC alloc] init];
+        [self.navigationController pushViewController:fixedVC animated:YES];
         
     } else {
-        DefaultVCPopGesture *popGestureVC = [[DefaultVCPopGesture alloc] init];
+        DefaultPopGestureVC *popGestureVC = [[DefaultPopGestureVC alloc] init];
         [self.navigationController pushViewController:popGestureVC animated:YES];
     }
 }

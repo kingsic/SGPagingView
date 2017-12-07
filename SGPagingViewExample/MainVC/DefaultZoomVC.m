@@ -1,26 +1,30 @@
 //
-//  DefaultVCSeven.m
-//  SGPagingViewExample
+//  DefaultZoomVC.m
+//  SGPageViewExample
 //
-//  Created by kingsic on 2017/10/17.
+//  Created by apple on 2017/6/12.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import "DefaultVCSeven.h"
+#import "DefaultZoomVC.h"
 #import "SGPagingView.h"
-#import "ChildVCFull.h"
+#import "ChildVCOne.h"
+#import "ChildVCTwo.h"
+#import "ChildVCThree.h"
+#import "ChildVCFour.h"
+#import "ChildVCFive.h"
+#import "ChildVCSix.h"
+#import "ChildVCSeven.h"
+#import "ChildVCEight.h"
+#import "ChildVCNine.h"
 
-@interface DefaultVCSeven () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
+@interface DefaultZoomVC () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentView *pageContentView;
 
 @end
 
-@implementation DefaultVCSeven
-
-- (void)dealloc {
-    NSLog(@"DefaultVCSeven - - dealloc");
-}
+@implementation DefaultZoomVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,29 +43,30 @@
         pageTitleViewY = 88;
     }
     
-    NSArray *titleArr = @[@"精选", @"电影", @"OC", @"Swift"];
+    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-    configure.titleSelectedColor = [UIColor whiteColor];
-    configure.indicatorStyle = SGIndicatorStyleCover;
-    configure.indicatorColor = [UIColor blackColor];
-    configure.indicatorAdditionalWidth = 20; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
-    configure.indicatorCornerRadius = 30; // 说明：遮盖样式下，指示器的圆角大小，若设置的圆角大于指示器高度的 1/2，则指示器的圆角为指示器高度的 1/2
     
+    /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
-    _pageTitleView.isTitleGradientEffect = NO;
-    _pageTitleView.selectedIndex = 1;
-    _pageTitleView.isNeedBounces = NO;
+    _pageTitleView.isShowIndicator = NO;
+    _pageTitleView.isOpenTitleTextZoom = YES;
     
-    ChildVCFull *oneVC = [[ChildVCFull alloc] init];
-    ChildVCFull *twoVC = [[ChildVCFull alloc] init];
-    ChildVCFull *threeVC = [[ChildVCFull alloc] init];
-    ChildVCFull *fourVC = [[ChildVCFull alloc] init];
-    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
+    ChildVCOne *oneVC = [[ChildVCOne alloc] init];
+    ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
+    ChildVCThree *threeVC = [[ChildVCThree alloc] init];
+    ChildVCFour *fourVC = [[ChildVCFour alloc] init];
+    ChildVCFive *fiveVC = [[ChildVCFive alloc] init];
+    ChildVCSix *sixVC = [[ChildVCSix alloc] init];
+    ChildVCSeven *sevenVC = [[ChildVCSeven alloc] init];
+    ChildVCEight *eightVC = [[ChildVCEight alloc] init];
+    ChildVCNine *nineVC = [[ChildVCNine alloc] init];
+    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
     /// pageContentView
-    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) parentVC:self childVCs:childArr];
+    CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
+    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
     _pageContentView.delegatePageContentView = self;
-    [self.view insertSubview:_pageContentView atIndex:0];
+    [self.view addSubview:_pageContentView];
 }
 
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {

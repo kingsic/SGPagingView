@@ -1,20 +1,20 @@
 //
-//  ChildVCOne.m
-//  SGPageViewExample
+//  ChildFirstPopGestureVC.m
+//  SGPagingViewExample
 //
-//  Created by apple on 17/4/18.
+//  Created by kingsic on 2017/12/7.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import "ChildVCOne.h"
-//#import "Masonry.h"
+#import "ChildFirstPopGestureVC.h"
+#import "ChildFirstPopGestureNextVC.h"
 
-@interface ChildVCOne () <UITableViewDataSource, UITableViewDelegate>
+@interface ChildFirstPopGestureVC () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
 
-@implementation ChildVCOne
+@implementation ChildFirstPopGestureVC
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
@@ -43,18 +43,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
     
-    /// 解决方案一
-//    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 108) style:UITableViewStylePlain];
-//    _tableView.dataSource = self;
-//    [self.view addSubview:self.tableView];
 
+    /// 解决方案一
+    //    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 108) style:UITableViewStylePlain];
+    //    _tableView.dataSource = self;
+    //    [self.view addSubview:self.tableView];
+    
     
     /// 解决方案二
-//    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-//    _tableView.dataSource = self;
-//    [self.view addSubview:self.tableView];
+    //    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    //    _tableView.dataSource = self;
+    //    [self.view addSubview:self.tableView];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -66,9 +66,24 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"SGPagingView - ChildVCOne - - %ld", indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"点击可进入下一界面 - - %ld", indexPath.row];
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ChildFirstPopGestureNextVC *VC = [[ChildFirstPopGestureNextVC alloc] init];
+    [self.navigationController pushViewController:VC animated:YES];
+}
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

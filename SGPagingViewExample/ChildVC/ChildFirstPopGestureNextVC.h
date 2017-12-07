@@ -1,5 +1,5 @@
 //
-//  TempVC.h
+//  ChildFirstPopGestureNextVC.h
 //  SGPagingViewExample
 //
 //  Created by kingsic on 2017/11/28.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TempVC : UIViewController
-@property (nonatomic, copy) void(^ReturnBlock)(void);
+@interface ChildFirstPopGestureNextVC : UIViewController
+
 @end

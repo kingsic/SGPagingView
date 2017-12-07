@@ -1,35 +1,28 @@
 //
-//  DefaultVCTwo.m
-//  SGPageViewExample
+//  DefaultFixedVC.m
+//  SGPagingViewExample
 //
-//  Created by apple on 17/4/13.
+//  Created by kingsic on 2017/12/7.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import "DefaultVCTwo.h"
+#import "DefaultFixedVC.h"
 #import "SGPagingView.h"
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"
 #import "ChildVCThree.h"
 #import "ChildVCFour.h"
-#import "ChildVCFive.h"
-#import "ChildVCSix.h"
-#import "ChildVCSeven.h"
-#import "ChildVCEight.h"
-#import "ChildVCNine.h"
 
-@interface DefaultVCTwo () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
+@interface DefaultFixedVC () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentView *pageContentView;
 
 @end
 
-@implementation DefaultVCTwo
+@implementation DefaultFixedVC
 
 - (void)dealloc {
-    NSLog(@"DefaultVCTwo - - dealloc");
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSLog(@"DefaultFixedVC - - dealloc");
 }
 
 - (void)viewDidLoad {
@@ -37,13 +30,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSelectedIndex:) name:@"changeSelectedIndex" object:nil];
-
     [self setupPageView];
-}
-
-- (void)changeSelectedIndex:(NSNotification *)noti {
-    _pageTitleView.resetSelectedIndex = [noti.object integerValue];
 }
 
 - (void)setupPageView {
@@ -55,24 +42,22 @@
         pageTitleViewY = 88;
     }
     
-    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
+    NSArray *titleArr = @[@"精选", @"新建", @"QQGroup", @"429899752"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-    configure.indicatorAdditionalWidth = 10; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
+    configure.indicatorStyle = SGIndicatorStyleFixed;
+//    configure.indicatorScrollStyle = SGIndicatorScrollStyleHalf;
+//    configure.indicatorFixedWidth = 50;
     
-    /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
+    _pageTitleView.selectedIndex = 1;
+    _pageTitleView.isNeedBounces = NO;
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
     ChildVCThree *threeVC = [[ChildVCThree alloc] init];
     ChildVCFour *fourVC = [[ChildVCFour alloc] init];
-    ChildVCFive *fiveVC = [[ChildVCFive alloc] init];
-    ChildVCSix *sixVC = [[ChildVCSix alloc] init];
-    ChildVCSeven *sevenVC = [[ChildVCSeven alloc] init];
-    ChildVCEight *eightVC = [[ChildVCEight alloc] init];
-    ChildVCNine *nineVC = [[ChildVCNine alloc] init];
-    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
+    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
     /// pageContentView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
     self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
@@ -88,6 +73,14 @@
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end
-

@@ -1,5 +1,5 @@
 //
-//  DefaultVCOne.h
+//  DefaultStaticVC.h
 //  SGPageViewExample
 //
 //  Created by apple on 17/4/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DefaultVCOne : UIViewController
+@interface DefaultStaticVC : UIViewController
 
 @end

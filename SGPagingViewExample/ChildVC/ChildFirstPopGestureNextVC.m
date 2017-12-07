@@ -1,28 +1,18 @@
 //
-//  TempVC.m
+//  ChildFirstPopGestureNextVC.m
 //  SGPagingViewExample
 //
 //  Created by kingsic on 2017/11/28.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import "TempVC.h"
+#import "ChildFirstPopGestureNextVC.h"
 
-@interface TempVC ()
+@interface ChildFirstPopGestureNextVC ()
 
 @end
 
-@implementation TempVC
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    self.ReturnBlock();
-}
+@implementation ChildFirstPopGestureNextVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

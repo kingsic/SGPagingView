@@ -1,6 +1,6 @@
 //
 //  如遇到问题或有更好方案，请通过以下方式进行联系
-//      QQ：1357127436
+//      QQ群：429899752
 //      Email：kingsic@126.com
 //      GitHub：https://github.com/kingsic/SGPagingView
 //
@@ -19,6 +19,8 @@ typedef enum : NSUInteger {
     SGIndicatorStyleDefault,
     /// 遮盖样式
     SGIndicatorStyleCover,
+    /// 固定样式
+    SGIndicatorStyleFixed,
 } SGIndicatorStyle;
 
 typedef enum : NSUInteger {
@@ -57,6 +59,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat indicatorBorderWidth;
 /** 指示器遮盖样式下的边框颜色，默认为 clearColor */
 @property (nonatomic, strong) UIColor *indicatorBorderColor;
+/** 指示器固定样式下宽度，默认为 20.0f；最大宽度并没有做限制，请根据实际情况妥善设置 */
+@property (nonatomic, assign) CGFloat indicatorFixedWidth;
 /** 指示器滚动位置改变样式，默认为 SGIndicatorScrollStyleDefault */
 @property (nonatomic, assign) SGIndicatorScrollStyle indicatorScrollStyle;
 

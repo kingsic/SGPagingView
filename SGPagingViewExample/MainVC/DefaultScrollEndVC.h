@@ -1,5 +1,5 @@
 //
-//  DefaultVCFive.h
+//  DefaultScrollEndVC.h
 //  SGPageViewExample
 //
 //  Created by apple on 2017/7/21.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DefaultVCFive : UIViewController
+@interface DefaultScrollEndVC : UIViewController
 
 @end

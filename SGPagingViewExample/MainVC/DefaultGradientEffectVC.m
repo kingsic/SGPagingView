@@ -1,25 +1,25 @@
 //
-//  DefaultVCFive.m
+//  DefaultGradientEffectVC.m
 //  SGPageViewExample
 //
-//  Created by apple on 2017/7/21.
+//  Created by apple on 2017/6/12.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import "DefaultVCFive.h"
+#import "DefaultGradientEffectVC.h"
 #import "SGPagingView.h"
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"
 #import "ChildVCThree.h"
 #import "ChildVCFour.h"
 
-@interface DefaultVCFive () <SGPageTitleViewDelegate, SGPageContentScrollViewDelegate>
+@interface DefaultGradientEffectVC () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
-@property (nonatomic, strong) SGPageContentScrollView *pageContentScrollView;
+@property (nonatomic, strong) SGPageContentView *pageContentView;
 
 @end
 
-@implementation DefaultVCFive
+@implementation DefaultGradientEffectVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,37 +38,37 @@
         pageTitleViewY = 88;
     }
     
-    NSArray *titleArr = @[@"精选", @"电影", @"OC", @"Swift"];
+    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-    configure.indicatorAdditionalWidth = 20;
-    configure.indicatorScrollStyle = SGIndicatorScrollStyleEnd;
+    configure.titleColor = [UIColor lightGrayColor];
+    configure.titleSelectedColor = [UIColor blackColor];
+    configure.indicatorColor = [UIColor blackColor];
+    configure.indicatorAdditionalWidth = 100; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
     
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
-    _pageTitleView.isTitleGradientEffect = NO;
+    _pageTitleView.selectedIndex = 1;
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
     ChildVCThree *threeVC = [[ChildVCThree alloc] init];
     ChildVCFour *fourVC = [[ChildVCFour alloc] init];
-    
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
     /// pageContentView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
-    self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
-    _pageContentScrollView.delegatePageContentScrollView = self;
-    [self.view addSubview:_pageContentScrollView];
+    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
+    _pageContentView.delegatePageContentView = self;
+    [self.view addSubview:_pageContentView];
 }
 
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
-    [self.pageContentScrollView setPageCententScrollViewCurrentIndex:selectedIndex];
+    [self.pageContentView setPageCententViewCurrentIndex:selectedIndex];
 }
 
-- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
+- (void)pageContentView:(SGPageContentView *)pageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

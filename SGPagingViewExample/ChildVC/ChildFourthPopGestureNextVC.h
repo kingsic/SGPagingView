@@ -1,5 +1,5 @@
 //
-//  DefaultVCPopGesture.h
+//  ChildFourthPopGestureNextVC.h
 //  SGPagingViewExample
 //
 //  Created by kingsic on 2017/11/28.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DefaultVCPopGesture : UIViewController
-
+@interface ChildFourthPopGestureNextVC : UIViewController
+@property (nonatomic, copy) void(^ReturnBlock)(void);
 @end

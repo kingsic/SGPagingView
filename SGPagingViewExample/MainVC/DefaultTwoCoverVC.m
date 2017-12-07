@@ -1,29 +1,25 @@
 //
-//  DefaultVCOne.m
-//  SGPageViewExample
+//  DefaultTwoCoverVC.m
+//  SGPagingViewExample
 //
-//  Created by apple on 17/4/13.
+//  Created by kingsic on 2017/10/28.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import "DefaultVCOne.h"
+#import "DefaultTwoCoverVC.h"
 #import "SGPagingView.h"
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"
 #import "ChildVCThree.h"
 #import "ChildVCFour.h"
 
-@interface DefaultVCOne () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
+@interface DefaultTwoCoverVC () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentView *pageContentView;
 
 @end
 
-@implementation DefaultVCOne
-
-- (void)dealloc {
-    NSLog(@"DefaultVCOne - - dealloc");
-}
+@implementation DefaultTwoCoverVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,20 +38,20 @@
         pageTitleViewY = 88;
     }
     
-    NSArray *titleArr = @[@"精选", @"请等待2s", @"OC", @"Swift"];
+    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-    configure.indicatorScrollStyle = SGIndicatorScrollStyleHalf;
-    configure.titleFont = [UIFont systemFontOfSize:12];
+    configure.titleSelectedColor = [UIColor lightGrayColor];
+    configure.indicatorStyle = SGIndicatorStyleCover;
+    configure.indicatorColor = [UIColor whiteColor];
+    configure.indicatorAdditionalWidth = 25;
+    configure.indicatorBorderWidth = 1;
+    configure.indicatorBorderColor = [UIColor lightGrayColor];
+    configure.indicatorCornerRadius = 20;
+    configure.indicatorHeight = 25;
     
+    /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
-    _pageTitleView.isTitleGradientEffect = NO;
-    _pageTitleView.selectedIndex = 1;
-    _pageTitleView.isNeedBounces = NO;
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_pageTitleView resetTitleWithIndex:1 newTitle:@"等待已结束"];
-    });
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
@@ -77,5 +73,19 @@
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

@@ -1,25 +1,30 @@
 //
-//  DefaultVCEight.m
+//  DefaultCoverVC.m
 //  SGPagingViewExample
 //
-//  Created by kingsic on 2017/10/28.
+//  Created by kingsic on 2017/10/17.
 //  Copyright © 2017年 Sorgle. All rights reserved.
 //
 
-#import "DefaultVCEight.h"
+#import "DefaultCoverVC.h"
 #import "SGPagingView.h"
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"
 #import "ChildVCThree.h"
 #import "ChildVCFour.h"
+#import "ChildVCFive.h"
+#import "ChildVCSix.h"
+#import "ChildVCSeven.h"
+#import "ChildVCEight.h"
+#import "ChildVCNine.h"
 
-@interface DefaultVCEight () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
+@interface DefaultCoverVC () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentView *pageContentView;
 
 @end
 
-@implementation DefaultVCEight
+@implementation DefaultCoverVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,16 +43,13 @@
         pageTitleViewY = 88;
     }
     
-    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
+    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-    configure.titleSelectedColor = [UIColor lightGrayColor];
+    configure.titleSelectedColor = [UIColor whiteColor];
     configure.indicatorStyle = SGIndicatorStyleCover;
-    configure.indicatorColor = [UIColor whiteColor];
-    configure.indicatorAdditionalWidth = 25;
-    configure.indicatorBorderWidth = 1;
-    configure.indicatorBorderColor = [UIColor lightGrayColor];
-    configure.indicatorCornerRadius = 20;
-    configure.indicatorHeight = 25;
+    configure.indicatorColor = [UIColor blackColor];
+    configure.indicatorAdditionalWidth = 100; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
+    configure.indicatorHeight = 122; // 说明：不设置，遮盖样式下，默认高度为文字高度 + 5；若设置无限大，则高度为 PageTitleView 高度
     
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
@@ -57,7 +59,12 @@
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
     ChildVCThree *threeVC = [[ChildVCThree alloc] init];
     ChildVCFour *fourVC = [[ChildVCFour alloc] init];
-    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
+    ChildVCFive *fiveVC = [[ChildVCFive alloc] init];
+    ChildVCSix *sixVC = [[ChildVCSix alloc] init];
+    ChildVCSeven *sevenVC = [[ChildVCSeven alloc] init];
+    ChildVCEight *eightVC = [[ChildVCEight alloc] init];
+    ChildVCNine *nineVC = [[ChildVCNine alloc] init];
+    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
     /// pageContentView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
     self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
