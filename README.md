@@ -133,7 +133,7 @@ c. 实现代理方法：
 ```
 d. 实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法；实现代码如 1、
 
-###### 3、issues [1.关于返回手势](https://github.com/kingsic/SGPagingView/issues/25) 有开发者提供的解决方案，可供参看
+###### 3、issues [关于返回手势](https://github.com/kingsic/SGPagingView/issues/25) 已有开发者提供了解决方案，可供参看
 ***
 
 
@@ -157,7 +157,7 @@ d. 实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageCo
 
 * 2017-11-28 ：v1.3.3 SGPageContentView 与 SGPageContentScrollView 新增代理方法，用来处理侧滑返回手势
 
-* 2017-11-28 ：v1.3.4 新增指示器固定宽度样式以及代码优化
+* 2017-12-07 ：v1.3.4 新增指示器固定宽度样式以及代码优化
 
 
 ## Concluding remarks
