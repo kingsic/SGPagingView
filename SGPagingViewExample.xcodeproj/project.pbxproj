@@ -22,7 +22,7 @@
 		182513D61F21CC340039F4A2 /* PersonalCenterTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513BD1F21CC340039F4A2 /* PersonalCenterTableView.m */; };
 		182513D71F21CC340039F4A2 /* PersonalCenterTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513BF1F21CC340039F4A2 /* PersonalCenterTopView.m */; };
 		182513D81F21CC340039F4A2 /* PersonalCenterTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182513C01F21CC340039F4A2 /* PersonalCenterTopView.xib */; };
-		182513E91F21D1600039F4A2 /* UIView+SGFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513DD1F21D1600039F4A2 /* UIView+SGFrame.m */; };
+		182513E91F21D1600039F4A2 /* UIView+SGPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513DD1F21D1600039F4A2 /* UIView+SGPagingView.m */; };
 		182513EA1F21D1600039F4A2 /* SGPageContentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */; };
 		18B036D21F21D835004C7DE7 /* SGPageTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B036D11F21D835004C7DE7 /* SGPageTitleView.m */; };
 		18B036D51F21D8B2004C7DE7 /* SGPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B036D41F21D8B2004C7DE7 /* SGPageContentView.m */; };
@@ -107,8 +107,8 @@
 		182513BE1F21CC340039F4A2 /* PersonalCenterTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterTopView.h; sourceTree = "<group>"; };
 		182513BF1F21CC340039F4A2 /* PersonalCenterTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterTopView.m; sourceTree = "<group>"; };
 		182513C01F21CC340039F4A2 /* PersonalCenterTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalCenterTopView.xib; sourceTree = "<group>"; };
-		182513DC1F21D1600039F4A2 /* UIView+SGFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SGFrame.h"; sourceTree = "<group>"; };
-		182513DD1F21D1600039F4A2 /* UIView+SGFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SGFrame.m"; sourceTree = "<group>"; };
+		182513DC1F21D1600039F4A2 /* UIView+SGPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SGPagingView.h"; sourceTree = "<group>"; };
+		182513DD1F21D1600039F4A2 /* UIView+SGPagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SGPagingView.m"; sourceTree = "<group>"; };
 		182513DF1F21D1600039F4A2 /* SGPageContentScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageContentScrollView.h; sourceTree = "<group>"; };
 		182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageContentScrollView.m; sourceTree = "<group>"; };
 		182513EE1F21D2C90039F4A2 /* SGPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPagingView.h; sourceTree = "<group>"; };
@@ -340,8 +340,8 @@
 		182513DB1F21D1600039F4A2 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				182513DC1F21D1600039F4A2 /* UIView+SGFrame.h */,
-				182513DD1F21D1600039F4A2 /* UIView+SGFrame.m */,
+				182513DC1F21D1600039F4A2 /* UIView+SGPagingView.h */,
+				182513DD1F21D1600039F4A2 /* UIView+SGPagingView.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -610,7 +610,7 @@
 				8D0F8E6A1FD95E2300F30426 /* ChildVCFull.m in Sources */,
 				182513481F21CAC30039F4A2 /* AppDelegate.m in Sources */,
 				8D0F8E361FD95DE300F30426 /* DefaultScrollVC.m in Sources */,
-				182513E91F21D1600039F4A2 /* UIView+SGFrame.m in Sources */,
+				182513E91F21D1600039F4A2 /* UIView+SGPagingView.m in Sources */,
 				8D0F8E321FD95DE300F30426 /* DefaultFixedVC.m in Sources */,
 				182513451F21CAC30039F4A2 /* main.m in Sources */,
 				8D0F8E331FD95DE300F30426 /* DefaultGradientEffectVC.m in Sources */,

@@ -12,7 +12,7 @@
 //
 
 #import "SGPageTitleView.h"
-#import "UIView+SGFrame.h"
+#import "UIView+SGPagingView.h"
 #import "SGPageTitleViewConfigure.h"
 
 #define SGPageTitleViewWidth self.frame.size.width

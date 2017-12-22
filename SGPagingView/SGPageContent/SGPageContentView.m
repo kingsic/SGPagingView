@@ -12,7 +12,7 @@
 //
 
 #import "SGPageContentView.h"
-#import "UIView+SGFrame.h"
+#import "UIView+SGPagingView.h"
 
 @interface SGPageContentView () <UICollectionViewDataSource, UICollectionViewDelegate>
 /// 外界父控制器

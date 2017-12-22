@@ -13,7 +13,7 @@
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"
 #import "ChildVCThree.h"
-#import "UIView+SGFrame.h"
+#import "UIView+SGPagingView.h"
 
 @interface PersonalCenterVC () <UITableViewDelegate, UITableViewDataSource, SGPageTitleViewDelegate, SGPageContentViewDelegate, PersonalCenterChildBaseVCDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;

@@ -4,16 +4,16 @@
 //      Email：kingsic@126.com
 //      GitHub：https://github.com/kingsic/SGPagingView
 //
-//  UIView+SGFrame.m
-//  UIView+SGFrame
+//  UIView+SGPagingView.m
+//  UIView+SGPagingView
 //
 //  Created by kingsic on 15/7/13.
 //  Copyright © 2015年 kingsic. All rights reserved.
 //
 
-#import "UIView+SGFrame.h"
+#import "UIView+SGPagingView.h"
 
-@implementation UIView (SGFrame)
+@implementation UIView (SGPagingView)
 - (void)setSG_x:(CGFloat)SG_x {
     CGRect frame = self.frame;
     frame.origin.x = SG_x;

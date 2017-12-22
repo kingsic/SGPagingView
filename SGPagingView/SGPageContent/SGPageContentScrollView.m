@@ -12,7 +12,7 @@
 //
 
 #import "SGPageContentScrollView.h"
-#import "UIView+SGFrame.h"
+#import "UIView+SGPagingView.h"
 
 @interface SGPageContentScrollView () <UIScrollViewDelegate>
 // 外界父控制器

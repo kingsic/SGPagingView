@@ -4,8 +4,8 @@
 //      Email：kingsic@126.com
 //      GitHub：https://github.com/kingsic/SGPagingView
 //
-//  UIView+SGFrame.h
-//  UIView+SGFrame
+//  UIView+SGPagingView.h
+//  UIView+SGPagingView
 //
 //  Created by kingsic on 15/7/13.
 //  Copyright © 2015年 kingsic. All rights reserved.
@@ -13,7 +13,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (SGFrame)
+@interface UIView (SGPagingView)
 @property (nonatomic, assign) CGFloat SG_x;
 @property (nonatomic, assign) CGFloat SG_y;
 @property (nonatomic, assign) CGFloat SG_width;
