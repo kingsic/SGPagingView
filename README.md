@@ -7,7 +7,7 @@
 
 * [主要内容的介绍](#主要内容的介绍)
 
-* [SGPagingView 集成](#SGPagingView集成)
+* [SGPagingView 集成](#SGPagingView 集成)
 
 * [代码介绍](#代码介绍)
 
@@ -15,7 +15,7 @@
 
 * [版本介绍](#版本介绍)
 
-* [Concluding remarks](#Concludingremarks)
+* [Concluding remarks](#Concluding remarks)
 
 * [简书介绍](http://www.jianshu.com/p/16b0356d6ac6)
 
