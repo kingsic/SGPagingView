@@ -135,7 +135,12 @@ static CGFloat const PersonalCenterVCTopViewHeight = 200;
 }
 
 - (void)pageContentView:(SGPageContentView *)pageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
+    _tableView.scrollEnabled = NO;
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
+}
+
+- (void)pageContentView:(SGPageContentView *)pageContentView offsetX:(CGFloat)offsetX {
+    _tableView.scrollEnabled = YES;
 }
 
 - (void)didReceiveMemoryWarning {
