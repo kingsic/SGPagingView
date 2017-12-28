@@ -7,7 +7,7 @@
 
 * [主要内容的介绍](#主要内容的介绍)
 
-* [SGPagingView 集成](#SGPagingView_集成)
+* [SGPagingView 集成](#SGPagingView-集成)
 
 * [代码介绍](#代码介绍)
 
@@ -15,7 +15,7 @@
 
 * [版本介绍](#版本介绍)
 
-* [Concluding remarks](#Concluding_remarks)
+* [Concluding remarks](#Concluding-remarks)
 
 * [简书介绍](http://www.jianshu.com/p/16b0356d6ac6)
 
@@ -41,7 +41,7 @@
 
 
 ## SGPagingView 集成
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.4'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.5'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -87,9 +87,10 @@
 |**indicatorColor**|指示器颜色，默认为红色|
 |**indicatorStyle**|指示器样式，默认为下划线样式；下划线、遮盖样式|
 |**indicatorHeight**|指示器高度；下划线样式下默认为 2.f，遮盖样式下，默认为标题文字的高度，若大于 SGPageTitleView，则高度为 SGPageTitleView 高度，下划线样式未做处理|
-|**indicatorCornerRadius**|遮盖样式下圆角属性，默认为 0.f；若圆角大于 1/2 指示器高度，则圆角大小为 1/2 指示器高度|
 |**indicatorAdditionalWidth**|指示器的额外宽度，默认为 0.f，介于按钮文字宽度与按钮宽度之间；若大于按钮的宽度，则为按钮的宽度|
 |**spacingBetweenButtons**|按钮之间的间距，默认 20.f|
+|**indicatorStyle**|指示器样式;SGIndicatorStyleDefault、SGIndicatorStyleCover、SGIndicatorStyleFixed、SGIndicatorStyleDynamic（仅在 SGIndicatorScrollStyleDefault 样式下支持）|
+|**indicatorCornerRadius**|遮盖样式下圆角属性，默认为 0.f；若圆角大于 1/2 指示器高度，则圆角大小为 1/2 指示器高度|
 |**indicatorScrollStyle**|指示器滚动样式|
 |**resetTitleWithIndex:newTitle:**|更改指定下标的标题|
 |**initWithFrame:delegate:titleNames:titleFont:**|带有标题字号的初始化方法，与之对应一个类方法|
@@ -158,6 +159,8 @@ d. 实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageCo
 * 2017-11-28 ：v1.3.3 SGPageContentView 与 SGPageContentScrollView 新增代理方法，用来处理侧滑返回手势
 
 * 2017-12-07 ：v1.3.4 新增指示器固定宽度样式以及代码优化
+
+* 2017-12-28 ：v1.3.5 新增指示器动态样式
 
 
 ## Concluding remarks
