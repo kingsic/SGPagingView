@@ -25,6 +25,8 @@
 @end
 
 @interface SGPageTitleView : UIView
+/// SGPageTitleView 配置信息
+@property (nonatomic, readonly, strong) SGPageTitleViewConfigure *configure;
 /**
  *  对象方法创建 SGPageTitleView
  *

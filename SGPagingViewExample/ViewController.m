@@ -18,6 +18,7 @@
 #import "DefaultTwoCoverVC.h"
 #import "DefaultThreeCoverVC.h"
 #import "DefaultFixedVC.h"
+#import "DefaultDynamicVC.h"
 #import "DefaultPopGestureVC.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -31,7 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.TitleDataList = @[@"静止样式", @"滚动样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果", @"微博个人主页", @"滚动结束后加载子视图", @"指示器遮盖样式一", @"指示器遮盖样式二", @"指示器遮盖样式三 + 内容全屏效果", @"指示器固定样式", @"返回手势处理"];
+    self.TitleDataList = @[@"静止样式", @"滚动样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果", @"微博个人主页", @"滚动结束后加载子视图", @"指示器遮盖样式一", @"指示器遮盖样式二", @"指示器遮盖样式三 + 内容全屏效果", @"指示器固定样式", @"指示器动态样式", @"返回手势处理"];
     
     [self foundTableView];
 }
@@ -104,6 +105,10 @@
     } else if (indexPath.row == 10) {
         DefaultFixedVC *fixedVC = [[DefaultFixedVC alloc] init];
         [self.navigationController pushViewController:fixedVC animated:YES];
+        
+    } else if (indexPath.row == 11) {
+        DefaultDynamicVC *dynamicVC = [[DefaultDynamicVC alloc] init];
+        [self.navigationController pushViewController:dynamicVC animated:YES];
         
     } else {
         DefaultPopGestureVC *popGestureVC = [[DefaultPopGestureVC alloc] init];

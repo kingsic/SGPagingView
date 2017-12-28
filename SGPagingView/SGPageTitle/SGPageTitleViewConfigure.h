@@ -8,7 +8,7 @@
 //  SGPagingViewExample
 //
 //  Created by kingsic on 2017/10/16.
-//  Copyright © 2017年 Sorgle. All rights reserved.
+//  Copyright © 2017年 kingsic. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -21,6 +21,8 @@ typedef enum : NSUInteger {
     SGIndicatorStyleCover,
     /// 固定样式
     SGIndicatorStyleFixed,
+    /// 动态样式（仅在 SGIndicatorScrollStyleDefault 样式下支持）
+    SGIndicatorStyleDynamic
 } SGIndicatorStyle;
 
 typedef enum : NSUInteger {
@@ -61,6 +63,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIColor *indicatorBorderColor;
 /** 指示器固定样式下宽度，默认为 20.0f；最大宽度并没有做限制，请根据实际情况妥善设置 */
 @property (nonatomic, assign) CGFloat indicatorFixedWidth;
+/** 指示器动态样式下宽度，默认为 20.0f；最大宽度并没有做限制，请根据实际情况妥善设置 */
+@property (nonatomic, assign) CGFloat indicatorDynamicWidth;
 /** 指示器滚动位置改变样式，默认为 SGIndicatorScrollStyleDefault */
 @property (nonatomic, assign) SGIndicatorScrollStyle indicatorScrollStyle;
 

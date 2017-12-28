@@ -8,7 +8,7 @@
 //  SGPagingViewExample
 //
 //  Created by kingsic on 2017/10/16.
-//  Copyright © 2017年 Sorgle. All rights reserved.
+//  Copyright © 2017年 kingsic. All rights reserved.
 //
 
 #import "SGPageTitleViewConfigure.h"
@@ -103,6 +103,13 @@
         _indicatorFixedWidth = 20;
     }
     return _indicatorFixedWidth;
+}
+
+- (CGFloat)indicatorDynamicWidth {
+    if (_indicatorDynamicWidth <= 0) {
+        _indicatorDynamicWidth = 20;
+    }
+    return _indicatorDynamicWidth;
 }
 
 
