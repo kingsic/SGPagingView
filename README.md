@@ -17,8 +17,6 @@
 
 * [Concluding remarks](#Concluding-remarks)
 
-* [简书介绍](http://www.jianshu.com/p/16b0356d6ac6)
-
 
 ## 效果图
 ![](https://github.com/kingsic/SGPagingView/raw/master/Gif/sorgle.gif)       ![](https://github.com/kingsic/SGPagingView/raw/master/Gif/sorgle2.gif)
@@ -160,7 +158,7 @@ d. 实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageCo
 
 * 2017-11-28 ：v1.3.3 SGPageContentView 与 SGPageContentScrollView 新增代理方法，用来处理侧滑返回手势
 
-* 2017-12-07 ：v1.3.4 新增指示器固定宽度样式以及代码优化
+* 2017-12-07 ：v1.3.4 新增指示器固定样式
 
 * 2017-12-28 ：v1.3.5 新增指示器动态样式
 
