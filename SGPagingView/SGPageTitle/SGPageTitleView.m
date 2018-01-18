@@ -32,7 +32,7 @@
 /// SGPageTitleViewDelegate
 @property (nonatomic, weak) id<SGPageTitleViewDelegate> delegatePageTitleView;
 /// SGPageTitleView 配置信息
-@property (nonatomic, readwrite, strong) SGPageTitleViewConfigure *configure;
+@property (nonatomic, strong) SGPageTitleViewConfigure *configure;
 /// scrollView
 @property (nonatomic, strong) UIScrollView *scrollView;
 /// 指示器

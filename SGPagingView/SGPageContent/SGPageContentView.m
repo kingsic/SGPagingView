@@ -121,6 +121,14 @@
     }
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    CGFloat offsetX = scrollView.contentOffset.x;
+    // pageContentView:offsetX:
+    if (self.delegatePageContentView && [self.delegatePageContentView respondsToSelector:@selector(pageContentView:offsetX:)]) {
+        [self.delegatePageContentView pageContentView:self offsetX:offsetX];
+    }
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.isClickBtn == YES) {
         return;
@@ -166,7 +174,7 @@
 }
 
 #pragma mark - - - 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
-- (void)setPageCententViewCurrentIndex:(NSInteger)currentIndex {
+- (void)setPageContentViewCurrentIndex:(NSInteger)currentIndex {
     self.isClickBtn = YES;
     CGFloat offsetX = currentIndex * self.collectionView.SG_width;
     // 1、处理内容偏移

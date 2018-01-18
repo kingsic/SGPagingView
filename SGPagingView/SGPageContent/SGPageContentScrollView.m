@@ -103,6 +103,14 @@
     childVC.view.frame = CGRectMake(offsetX, 0, self.SG_width, self.SG_height);
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    CGFloat offsetX = scrollView.contentOffset.x;
+    // pageContentScrollView:offsetX:
+    if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:offsetX:)]) {
+        [self.delegatePageContentScrollView pageContentScrollView:self offsetX:offsetX];
+    }
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.isClickBtn == YES) {
         [self scrollViewDidEndDecelerating:scrollView];
@@ -149,7 +157,7 @@
 }
 
 #pragma mark - - - 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
-- (void)setPageCententScrollViewCurrentIndex:(NSInteger)currentIndex {
+- (void)setPageContentScrollViewCurrentIndex:(NSInteger)currentIndex {
     self.isClickBtn = YES;
     CGFloat offsetX = currentIndex * self.SG_width;
     if (self.isFirstViewLoaded && currentIndex == 0) {

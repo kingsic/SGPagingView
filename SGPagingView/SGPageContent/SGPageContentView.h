@@ -58,6 +58,6 @@
 @property (nonatomic, assign) BOOL isScrollEnabled;
 
 /** 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标 */
-- (void)setPageCententViewCurrentIndex:(NSInteger)currentIndex;
+- (void)setPageContentViewCurrentIndex:(NSInteger)currentIndex;
 
 @end
