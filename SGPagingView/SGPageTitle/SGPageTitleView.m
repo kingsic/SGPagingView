@@ -182,8 +182,11 @@
             
         } else {
             CGFloat indicatorViewH = self.configure.indicatorHeight;
+            //1.25新添
+            CGFloat indicatorHeightToBottom = self.configure.indicatorHeightToBottom;
             _indicatorView.SG_height = indicatorViewH;
-            _indicatorView.SG_y = self.SG_height - indicatorViewH;
+            _indicatorView.SG_y = self.SG_height - indicatorViewH - indicatorHeightToBottom;
+
         }
         _indicatorView.backgroundColor = self.configure.indicatorColor;
     }

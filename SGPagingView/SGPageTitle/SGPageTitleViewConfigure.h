@@ -68,4 +68,13 @@ typedef enum : NSUInteger {
 /** 指示器滚动位置改变样式，默认为 SGIndicatorScrollStyleDefault */
 @property (nonatomic, assign) SGIndicatorScrollStyle indicatorScrollStyle;
 
+//1.25新增
+
+//新添字段
+/** 指示器到scrollview的高度 */
+@property (nonatomic, assign) CGFloat indicatorHeightToBottom;
+
+
+
+
 @end

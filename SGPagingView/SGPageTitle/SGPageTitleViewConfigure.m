@@ -112,5 +112,14 @@
     return _indicatorDynamicWidth;
 }
 
+//1.25新添
+- (CGFloat)indicatorHeightToBottom {
+    if (_indicatorHeightToBottom <= 0) {
+        _indicatorHeightToBottom = 0;
+    }
+    return _indicatorHeightToBottom;
+}
+
+
 
 @end
