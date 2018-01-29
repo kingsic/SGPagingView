@@ -198,7 +198,7 @@
         CGFloat bottomSeparatorX = 0;
         CGFloat bottomSeparatorY = self.SG_height - bottomSeparatorH;
         _bottomSeparator.frame = CGRectMake(bottomSeparatorX, bottomSeparatorY, bottomSeparatorW, bottomSeparatorH);
-        _bottomSeparator.backgroundColor = [UIColor lightGrayColor];
+        _bottomSeparator.backgroundColor = self.configure.bottomSeparatorColor;
     }
     return _bottomSeparator;
 }
