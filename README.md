@@ -161,7 +161,7 @@ d. 实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageCo
 
 * 2017-12-28 ：v1.3.5 新增指示器动态样式（仅在 SGIndicatorScrollStyleDefault 样式下支持）
 
-* 2017-12-28 ：v1.3.6 解决 SGPageTitleView 标题点击与 SGPageContentView 滚动问题
+* 2018-01-30 ：v1.3.6 解决 SGPageTitleView 标题点击与 SGPageContentView 滚动问题
 
 
 ## Concluding remarks
