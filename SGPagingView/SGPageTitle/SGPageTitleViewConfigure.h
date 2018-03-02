@@ -37,6 +37,8 @@ typedef enum : NSUInteger {
 @interface SGPageTitleViewConfigure : NSObject
 /** 类方法创建 */
 + (instancetype)pageTitleViewConfigure;
+/* SGPageTitleView 底部分割线颜色，默认为 lightGrayColor */
+@property (nonatomic, strong) UIColor *bottomSeparatorColor;
 /** 按钮之间的间距，默认为 20.0f */
 @property (nonatomic, assign) CGFloat spacingBetweenButtons;
 /** 标题文字字号大小，默认 15 号字体 */

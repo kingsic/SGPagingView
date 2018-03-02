@@ -23,8 +23,6 @@
 
 
 ## 主要内容的介绍
-* `指示器长度自定义`<br>
-
 * `指示器遮盖样式`<br>
 
 * `指示器固定样式`<br>
@@ -33,15 +31,17 @@
 
 * `指示器下划线样式`<br>
 
+* `指示器长度自定义`<br>
+
+* `标题文字渐显效果`<br>
+
+* `标题文字缩放效果`<br>
+
 * `多种指示器滚动样式`<br>
-
-* `标题按钮文字渐显效果`<br>
-
-* `标题按钮文字缩放效果`<br>
 
 
 ## SGPagingView 集成
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.5'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.6'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -93,7 +93,6 @@
 |**indicatorCornerRadius**|遮盖样式下圆角属性，默认为 0.f；若圆角大于 1/2 指示器高度，则圆角大小为 1/2 指示器高度|
 |**indicatorScrollStyle**|指示器滚动样式|
 |**resetTitleWithIndex:newTitle:**|更改指定下标的标题|
-|**initWithFrame:delegate:titleNames:titleFont:**|带有标题字号的初始化方法，与之对应一个类方法|
 
 
 ## 问题及解决方案
@@ -160,7 +159,9 @@ d. 实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageCo
 
 * 2017-12-07 ：v1.3.4 新增指示器固定样式
 
-* 2017-12-28 ：v1.3.5 新增指示器动态样式
+* 2017-12-28 ：v1.3.5 新增指示器动态样式（仅在 SGIndicatorScrollStyleDefault 样式下支持）
+
+* 2018-01-30 ：v1.3.6 解决 SGPageTitleView 标题点击与 SGPageContentView 滚动问题
 
 
 ## Concluding remarks

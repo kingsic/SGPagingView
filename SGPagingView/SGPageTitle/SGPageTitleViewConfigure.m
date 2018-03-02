@@ -19,6 +19,13 @@
     return [[self alloc] init];
 }
 
+- (UIColor *)bottomSeparatorColor {
+    if (!_bottomSeparatorColor) {
+        _bottomSeparatorColor = [UIColor lightGrayColor];
+    }
+    return _bottomSeparatorColor;
+}
+
 - (CGFloat)spacingBetweenButtons {
     if (_spacingBetweenButtons <= 0) {
         _spacingBetweenButtons = 20;
