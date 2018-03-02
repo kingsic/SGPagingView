@@ -76,7 +76,14 @@ typedef enum : NSUInteger {
 /** 指示器到scrollview的高度 */
 @property (nonatomic, assign) CGFloat indicatorHeightToBottom;
 
+/** 被选择的标题文字字号大小，默认 15 号字体 加粗*/
+@property (nonatomic, strong) UIFont *titleSelectedFont;
 
+/** 指示器下面的横线颜色 默认lightGray*/
+@property (nonatomic, strong) UIColor *bottomLineColor;
+
+/** 指示器下划线样式下的圆角大小，默认为 0.1f */
+@property (nonatomic, assign) CGFloat defaultIndicatorCornerRadius;
 
 
 @end

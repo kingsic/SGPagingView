@@ -126,7 +126,26 @@
     }
     return _indicatorHeightToBottom;
 }
-
-
+//新添 3.2
+- (UIFont *)titleSelectedFont{
+    if (!_titleSelectedFont) {
+        _titleSelectedFont = [UIFont boldSystemFontOfSize:15];
+    }
+    return _titleSelectedFont;
+}
+//新添3.2
+- (UIColor *)bottomLineColor{
+    if (!_bottomLineColor) {
+        _bottomLineColor = [UIColor lightGrayColor];
+    }
+    return _bottomLineColor;
+}
+//新添3.2
+- (CGFloat)defaultIndicatorCornerRadius{
+    if (_defaultIndicatorCornerRadius <= 0){
+        _defaultIndicatorCornerRadius = 0;
+    }
+    return _defaultIndicatorCornerRadius;
+}
 
 @end
