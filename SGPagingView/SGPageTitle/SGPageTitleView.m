@@ -182,8 +182,15 @@
             
         } else {
             CGFloat indicatorViewH = self.configure.indicatorHeight;
+            //1.25新添
+            CGFloat indicatorHeightToBottom = self.configure.indicatorHeightToBottom;
             _indicatorView.SG_height = indicatorViewH;
-            _indicatorView.SG_y = self.SG_height - indicatorViewH;
+            _indicatorView.SG_y = self.SG_height - indicatorViewH - indicatorHeightToBottom;
+            //新添 圆角
+            if(self.configure.defaultIndicatorCornerRadius){
+                _indicatorView.layer.cornerRadius = self.configure.defaultIndicatorCornerRadius;
+            }
+
         }
         _indicatorView.backgroundColor = self.configure.indicatorColor;
     }
@@ -301,7 +308,31 @@
     }
     // 5、标记按钮下标
     self.signBtnIndex = button.tag;
+    
+    //新添方法
+    if ([SGPageTitleViewConfigure pageTitleViewConfigure].titleSelectedFont) {
+        //新添  更改被选中的标题的字号
+        [self changeButtonFont:button];
+    }
+    
 }
+
+//更改字号大小
+- (void)changeButtonFont:(UIButton *)sender{
+    [_btnMArr enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        if (idx == sender.tag) {
+            button.selected = YES;
+            button.titleLabel.font = [SGPageTitleViewConfigure pageTitleViewConfigure].titleSelectedFont;
+            _tempBtn = button;
+        } else {
+            button.selected = NO;
+            button.titleLabel.font = [SGPageTitleViewConfigure pageTitleViewConfigure].titleFont;
+            
+        }
+    }];
+}
+
 
 #pragma mark - - - 改变按钮的选择状态
 - (void)P_changeSelectedButton:(UIButton *)button {
@@ -332,6 +363,13 @@
         }];
         button.transform = CGAffineTransformMakeScale(1 + self.titleTextScaling, 1 + self.titleTextScaling);
     }
+    
+    //新添6. 更改font 粗体
+    if ([SGPageTitleViewConfigure pageTitleViewConfigure].titleSelectedFont) {
+        //新添  更改被选中的标题的字号
+        [self changeButtonFont:button];
+    }
+    
 }
 
 #pragma mark - - - 滚动标题选中按钮居中
