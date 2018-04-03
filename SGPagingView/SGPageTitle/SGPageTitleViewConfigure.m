@@ -40,6 +40,13 @@
     return _titleFont;
 }
 
+- (UIFont *)titleSelectedFont {
+    if (!_titleSelectedFont) {
+        _titleSelectedFont = [UIFont systemFontOfSize:15];
+    }
+    return _titleSelectedFont;
+}
+
 - (UIColor *)titleColor {
     if (!_titleColor) {
         _titleColor = [UIColor blackColor];
@@ -89,6 +96,13 @@
         _indicatorCornerRadius = 0;
     }
     return _indicatorCornerRadius;
+}
+
+- (CGFloat)indicatorToBottomDistance {
+    if (_indicatorToBottomDistance <= 0) {
+        _indicatorToBottomDistance = 0;
+    }
+    return _indicatorToBottomDistance;
 }
 
 - (CGFloat)indicatorBorderWidth {

@@ -137,7 +137,7 @@
 
 - (NSMutableArray *)btnMArr {
     if (!_btnMArr) {
-        _btnMArr = [NSMutableArray array];
+        _btnMArr = [[NSMutableArray alloc] init];
     }
     return _btnMArr;
 }
@@ -183,7 +183,14 @@
         } else {
             CGFloat indicatorViewH = self.configure.indicatorHeight;
             _indicatorView.SG_height = indicatorViewH;
-            _indicatorView.SG_y = self.SG_height - indicatorViewH;
+            _indicatorView.SG_y = self.SG_height - indicatorViewH - self.configure.indicatorToBottomDistance;
+            
+            // 圆角处理
+            if (self.configure.indicatorCornerRadius > 0.5 * _indicatorView.SG_height) {
+                _indicatorView.layer.cornerRadius = 0.5 * _indicatorView.SG_height;
+            } else {
+                _indicatorView.layer.cornerRadius = self.configure.indicatorCornerRadius;
+            }
         }
         _indicatorView.backgroundColor = self.configure.indicatorColor;
     }
@@ -316,22 +323,45 @@
         self.tempBtn = button;
     }
     
-    // 此处作用：避免滚动内容视图时手指不离开屏幕的前提下点击按钮后再次滚动内容视图图导致按钮文字由于文字渐变导致未选中按钮文字的不标准化处理
-    if (self.isTitleGradientEffect == YES) {
-        [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            UIButton *btn = obj;
-            btn.titleLabel.textColor = self.configure.titleColor;
-        }];
+    if (self.configure.titleSelectedFont == [UIFont systemFontOfSize:15]) {
+        // 标题文字缩放属性(开启 titleSelectedFont 属性将不起作用)
+        if (self.isOpenTitleTextZoom) {
+            [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                UIButton *btn = obj;
+                btn.transform = CGAffineTransformMakeScale(1, 1);
+            }];
+            button.transform = CGAffineTransformMakeScale(1 + self.titleTextScaling, 1 + self.titleTextScaling);
+        }
+        
+        // 此处作用：避免滚动内容视图时 手指不离开屏幕的前提下点击按钮后 再次滚动内容视图时按钮文字颜色由于文字渐变效果导致未选中按钮文字的不标准化处理
+        if (self.isTitleGradientEffect == YES) {
+            [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                UIButton *btn = obj;
+                btn.titleLabel.textColor = self.configure.titleColor;
+            }];
+            button.titleLabel.textColor = self.configure.titleSelectedColor;
+        }
+    } else {
+        // 此处作用：避免滚动内容视图时 手指不离开屏幕的前提下点击按钮后 再次滚动内容视图时按钮文字颜色由于文字渐变效果导致未选中按钮文字的不标准化处理
+        if (self.isTitleGradientEffect == YES) {
+            [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                UIButton *btn = obj;
+                btn.titleLabel.textColor = self.configure.titleColor;
+                btn.titleLabel.font = self.configure.titleFont;
+            }];
+            button.titleLabel.textColor = self.configure.titleSelectedColor;
+            button.titleLabel.font = self.configure.titleSelectedFont;
+        } else {
+            [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                UIButton *btn = obj;
+                btn.titleLabel.font = self.configure.titleFont;
+            }];
+            button.titleLabel.font = self.configure.titleSelectedFont;
+        }
     }
+
     
-    // 标题文字缩放属性
-    if (self.isOpenTitleTextZoom) {
-        [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            UIButton *btn = obj;
-            btn.transform = CGAffineTransformMakeScale(1, 1);
-        }];
-        button.transform = CGAffineTransformMakeScale(1 + self.titleTextScaling, 1 + self.titleTextScaling);
-    }
+
 }
 
 #pragma mark - - - 滚动标题选中按钮居中
@@ -395,12 +425,15 @@
     if (self.isTitleGradientEffect) {
         [self P_isTitleGradientEffectWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
     }
-    // 5 、标题文字缩放属性
-    if (self.isOpenTitleTextZoom) {
-        // 左边缩放
-        originalBtn.transform = CGAffineTransformMakeScale((1 - progress) * self.titleTextScaling + 1, (1 - progress) * self.titleTextScaling + 1);
-        // 右边缩放
-        targetBtn.transform = CGAffineTransformMakeScale(progress * self.titleTextScaling + 1, progress * self.titleTextScaling + 1);
+    
+    // 5 、标题文字缩放属性(开启文字选中字号属性将不起作用)
+    if (self.configure.titleSelectedFont == [UIFont systemFontOfSize:15]) {
+        if (self.isOpenTitleTextZoom) {
+            // 左边缩放
+            originalBtn.transform = CGAffineTransformMakeScale((1 - progress) * self.titleTextScaling + 1, (1 - progress) * self.titleTextScaling + 1);
+            // 右边缩放
+            targetBtn.transform = CGAffineTransformMakeScale(progress * self.titleTextScaling + 1, progress * self.titleTextScaling + 1);
+        }
     }
 }
 /**

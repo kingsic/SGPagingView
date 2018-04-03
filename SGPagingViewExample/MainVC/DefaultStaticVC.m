@@ -44,8 +44,12 @@
     
     NSArray *titleArr = @[@"精选", @"请等待2s", @"QQGroup", @"429899752"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-    configure.indicatorScrollStyle = SGIndicatorScrollStyleHalf;
     configure.titleFont = [UIFont systemFontOfSize:12];
+    configure.indicatorHeight = 5;
+    configure.indicatorCornerRadius = 5;
+    configure.indicatorToBottomDistance = 5;
+    configure.titleSelectedFont = [UIFont systemFontOfSize:18];
+    configure.indicatorStyle = SGIndicatorStyleFixed;
     
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];

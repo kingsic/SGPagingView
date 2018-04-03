@@ -10,8 +10,6 @@
 #import "SGPagingView.h"
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"
-#import "ChildVCThree.h"
-#import "ChildVCFour.h"
 
 @interface DefaultTwoCoverVC () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
@@ -38,7 +36,7 @@
         pageTitleViewY = 88;
     }
     
-    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
+    NSArray *titleArr = @[@"精选", @"电影"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configure.titleSelectedColor = [UIColor lightGrayColor];
     configure.indicatorStyle = SGIndicatorStyleCover;
@@ -50,14 +48,12 @@
     configure.indicatorHeight = 25;
     
     /// pageTitleView
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width / 2, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
-    ChildVCThree *threeVC = [[ChildVCThree alloc] init];
-    ChildVCFour *fourVC = [[ChildVCFour alloc] init];
-    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
+    NSArray *childArr = @[oneVC, twoVC];
     /// pageContentView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
     self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
