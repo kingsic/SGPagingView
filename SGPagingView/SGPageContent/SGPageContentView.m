@@ -130,6 +130,10 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.isClickBtn == YES) {
+        [self scrollViewDidEndDecelerating:scrollView];
+        return;
+    }
     // 1、定义获取需要的数据
     CGFloat progress = 0;
     NSInteger originalIndex = 0;

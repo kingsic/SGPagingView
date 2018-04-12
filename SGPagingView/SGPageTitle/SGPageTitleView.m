@@ -837,20 +837,12 @@
 
 - (void)setIsShowIndicator:(BOOL)isShowIndicator {
     _isShowIndicator = isShowIndicator;
-    if (isShowIndicator == NO) {
-        [self.indicatorView removeFromSuperview];
-        self.indicatorView = nil;
-    }
+    [self.indicatorView setHidden:!isShowIndicator];
 }
 
 - (void)setIsShowBottomSeparator:(BOOL)isShowBottomSeparator {
     _isShowBottomSeparator = isShowBottomSeparator;
-    if (isShowBottomSeparator) {
-        
-    } else {
-        [self.bottomSeparator removeFromSuperview];
-        self.bottomSeparator = nil;
-    }
+    [self.bottomSeparator setHidden:!isShowBottomSeparator];
 }
 
 #pragma mark - - - 颜色设置的计算
