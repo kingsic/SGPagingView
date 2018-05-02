@@ -64,6 +64,7 @@
 }
 
 - (void)layoutSubviews {
+    [super layoutSubviews];
     // when view is ready, add subviews
     [self setupSubviews];
 }
@@ -87,6 +88,9 @@
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
+        // TODO: make a configuration setting for this option
+        _collectionView.prefetchingEnabled = NO;
+        
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     }
     return _collectionView;

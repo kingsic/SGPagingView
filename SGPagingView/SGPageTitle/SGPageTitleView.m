@@ -75,7 +75,6 @@
         self.configure = configure;
         
         [self initialization];
-        [self setupSubviews];
     }
     return self;
 }
@@ -111,7 +110,8 @@
 #pragma mark - - - layoutSubviews
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+    // when view is ready, add subviews
+    [self setupSubviews];
     // 选中按钮下标初始值
     UIButton *lastBtn = self.btnMArr.lastObject;
     if (lastBtn.tag >= _selectedIndex && _selectedIndex >= 0) {
