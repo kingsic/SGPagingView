@@ -15,10 +15,6 @@
 #import "UIView+SGPagingView.h"
 
 @interface SGPageContentView () <UICollectionViewDataSource, UICollectionViewDelegate>
-/// 外界父控制器
-@property (nonatomic, weak) UIViewController *parentViewController;
-/// 存储子控制器
-@property (nonatomic, strong) NSArray *childViewControllers;
 /// collectionView
 @property (nonatomic, strong) UICollectionView *collectionView;
 /// 记录刚开始时的偏移量
