@@ -42,7 +42,6 @@
         self.childViewControllers = childVCs;
                 
         [self initialization];
-        [self setupSubviews];
     }
     return self;
 }
@@ -66,6 +65,11 @@
     }
     // 2、添加UICollectionView, 用于在Cell中存放控制器的View
     [self addSubview:self.collectionView];
+}
+
+- (void)layoutSubviews {
+    // when view is ready, add subviews
+    [self setupSubviews];
 }
 
 - (UICollectionView *)collectionView {

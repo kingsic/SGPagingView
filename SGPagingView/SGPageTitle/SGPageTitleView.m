@@ -29,18 +29,12 @@
 
 #pragma mark - - - SGPageTitleView
 @interface SGPageTitleView ()
-/// SGPageTitleViewDelegate
-@property (nonatomic, weak) id<SGPageTitleViewDelegate> delegatePageTitleView;
-/// SGPageTitleView 配置信息
-@property (nonatomic, strong) SGPageTitleViewConfigure *configure;
 /// scrollView
 @property (nonatomic, strong) UIScrollView *scrollView;
 /// 指示器
 @property (nonatomic, strong) UIView *indicatorView;
 /// 底部分割线
 @property (nonatomic, strong) UIView *bottomSeparator;
-/// 保存外界传递过来的标题数组
-@property (nonatomic, strong) NSArray *titleArr;
 /// 存储标题按钮的数组
 @property (nonatomic, strong) NSMutableArray *btnMArr;
 /// tempBtn
