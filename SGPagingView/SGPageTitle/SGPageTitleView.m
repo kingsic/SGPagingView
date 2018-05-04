@@ -65,8 +65,8 @@
             @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的代理方法必须设置" userInfo:nil];
         }
         self.delegatePageTitleView = delegate;
-        if (titleNames == nil) {
-            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的标题数组必须设置" userInfo:nil];
+        if (titleNames == nil || [titleNames count] == 0) {
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的标题数组必须设置, 且不能为空数组" userInfo:nil];
         }
         self.titleArr = titleNames;
         if (configure == nil) {
@@ -110,8 +110,19 @@
 #pragma mark - - - layoutSubviews
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
+    // check compulsory variables are valid
+    if (self.configure == nil) {
+        @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的配置属性必须设置" userInfo:nil];
+    }else if (self.delegatePageTitleView == nil) {
+        @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的代理方法必须设置" userInfo:nil];
+    }else if (self.titleArr == nil || [self.titleArr count] == 0) {
+        @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的标题数组必须设置, 且不能为空数组" userInfo:nil];
+    }
+    
     // when view is ready, add subviews
     [self setupSubviews];
+    
     // 选中按钮下标初始值
     UIButton *lastBtn = self.btnMArr.lastObject;
     if (lastBtn.tag >= _selectedIndex && _selectedIndex >= 0) {

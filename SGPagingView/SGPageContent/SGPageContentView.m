@@ -32,8 +32,8 @@
             @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 所在控制器必须设置" userInfo:nil];
         }
         self.parentViewController = parentVC;
-        if (childVCs == nil) {
-            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 子控制器必须设置" userInfo:nil];
+        if (childVCs == nil || [childVCs count] == 0) {
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 子控制器必须设置, 且不能为空vc组" userInfo:nil];
         }
         self.childViewControllers = childVCs;
                 
@@ -65,6 +65,15 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
+    // check compulsory variables are valid
+    if (self.parentViewController == nil) {
+        @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 所在控制器必须设置" userInfo:nil];
+    }
+    if (self.childViewControllers == nil || [self.childViewControllers count] == 0) {
+        @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 子控制器必须设置, 且不能为空vc组" userInfo:nil];
+    }
+    
     // when view is ready, add subviews
     [self setupSubviews];
 }
