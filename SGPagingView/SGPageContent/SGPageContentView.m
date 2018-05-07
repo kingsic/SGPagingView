@@ -15,10 +15,6 @@
 #import "UIView+SGPagingView.h"
 
 @interface SGPageContentView () <UICollectionViewDataSource, UICollectionViewDelegate>
-/// 外界父控制器
-@property (nonatomic, weak) UIViewController *parentViewController;
-/// 存储子控制器
-@property (nonatomic, strong) NSArray *childViewControllers;
 /// collectionView
 @property (nonatomic, strong) UICollectionView *collectionView;
 /// 记录刚开始时的偏移量
@@ -36,13 +32,12 @@
             @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 所在控制器必须设置" userInfo:nil];
         }
         self.parentViewController = parentVC;
-        if (childVCs == nil) {
-            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 子控制器必须设置" userInfo:nil];
+        if (childVCs == nil || [childVCs count] == 0) {
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 子控制器必须设置, 且不能为空vc组" userInfo:nil];
         }
         self.childViewControllers = childVCs;
                 
         [self initialization];
-        [self setupSubviews];
     }
     return self;
 }
@@ -68,6 +63,21 @@
     [self addSubview:self.collectionView];
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    // check compulsory variables are valid
+    if (self.parentViewController == nil) {
+        @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 所在控制器必须设置" userInfo:nil];
+    }
+    if (self.childViewControllers == nil || [self.childViewControllers count] == 0) {
+        @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 子控制器必须设置, 且不能为空vc组" userInfo:nil];
+    }
+    
+    // when view is ready, add subviews
+    [self setupSubviews];
+}
+
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -87,6 +97,9 @@
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
+        // TODO: make a configuration setting for this option
+        _collectionView.prefetchingEnabled = NO;
+        
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     }
     return _collectionView;

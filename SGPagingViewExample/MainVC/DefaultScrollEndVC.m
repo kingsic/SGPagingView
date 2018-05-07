@@ -41,7 +41,8 @@
     NSArray *titleArr = @[@"精选", @"电影", @"OC", @"Swift"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configure.indicatorAdditionalWidth = 20;
-    configure.indicatorScrollStyle = SGIndicatorScrollStyleEnd;
+    // 不需要这种方式
+//    configure.indicatorScrollStyle = SGIndicatorScrollStyleEnd;
     
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];

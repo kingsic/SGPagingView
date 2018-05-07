@@ -60,6 +60,12 @@
 @property (nonatomic, assign) BOOL isShowIndicator;
 /** 是否显示底部分割线，默认为 YES */
 @property (nonatomic, assign) BOOL isShowBottomSeparator;
+/** SGPageTitleView configuration */
+@property (nonatomic, strong) SGPageTitleViewConfigure* configure;
+/** SGPageTitleView title bar name array */
+@property (nonatomic, strong) NSArray* titleArr;
+/** SGPageTitleViewDelegate */
+@property (nonatomic, weak) id<SGPageTitleViewDelegate> delegatePageTitleView;
 
 /** 给外界提供的方法，获取 SGPageContentView 的 progress／originalIndex／targetIndex, 必须实现 */
 - (void)setPageTitleViewWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
