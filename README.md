@@ -41,7 +41,7 @@
 
 
 ## SGPagingView 集成
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.6'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.7'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -162,6 +162,8 @@ d. 实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageCo
 * 2017-12-28 ：v1.3.5 新增指示器动态样式（仅在 SGIndicatorScrollStyleDefault 样式下支持）
 
 * 2018-01-30 ：v1.3.6 解决 SGPageTitleView 标题点击与 SGPageContentView 滚动问题
+
+* 2018-05-08 ：v1.3.7 修复 v1.3.6 选中标题重复点击恢复默认状态以及 SGPageTitleViewConfigure 新增配置属性
 
 
 ## Concluding remarks
