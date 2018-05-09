@@ -163,7 +163,7 @@ d. 实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageCo
 
 * 2018-05-08 ：v1.3.7 修复 v1.3.6 选中标题重复点击恢复默认状态以及 SGPageTitleViewConfigure 新增配置属性
 
-* 2018-05-09 ：v1.4.0 修复 版本升级（SGPageTitleView.h 属性调整到 SGPageTitleViewConfigure.h 以及对 SGPageContentView 进行重构）
+* 2018-05-09 ：v1.4.0 版本升级（SGPageTitleView.h 部分属性调整到 SGPageTitleViewConfigure.h 以及对 SGPageContentView 进行重构）
 
 
 ## Concluding remarks
