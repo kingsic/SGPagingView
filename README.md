@@ -101,10 +101,9 @@
 ***
 
 #### 2、关于父子控制器的说明（SGPageContentView 与 SGPageContentScrollView）
-> **SGPageContentView 使用的是 UICollectionView 的子视图 viewWillAppear 问题（）
-#### 参考链接
+###### 参考链接
 * [iOS 进阶之正确添加子控制器的方法](https://www.jianshu.com/p/7c4aeb2c6655)
-* [添加子视图控制器时，子视图控制器的viewWillAppear方法不调用](https://blog.csdn.net/u012907783/article/details/78972227)
+* [添加子视图控制器时，子视图控制器的 viewWillAppear 方法不调用](https://blog.csdn.net/u012907783/article/details/78972227)
 ***
 
 #### 3、关于侧滑返回手势（请参考 DefaultVCPopGesture 类以及点击子控制器对下一界面所做的处理）
