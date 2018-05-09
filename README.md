@@ -101,11 +101,10 @@
 ***
 
 #### 2、关于父子控制器的说明（SGPageContentView 与 SGPageContentScrollView）
-> **SGPageContentView 使用的是 UICollectionView 的重用机制管理子视图
-内部是先添加子视图控制器到父视图控制器上（[self.parentViewController addChildViewController:childVC]），再添加子视图的 view 到父视图的 view 上的（[cell.contentView addSubview:childVC.view]），这时会存在一个问题：即第一次加载第一个子视图时，第一个子视图的 viewWillAppear 方法不会被调用；原因是，先调用 addChildViewController，子视图控制器与父视图控制器的事件同步，即当父视图控制器的 viewDidAppear 调用时，子视图控制器的 viewDidAppear 方法会调用一次，再调用 addSubView 也不会触发viewWillAppear 和 viewDidAppear；所以第一次加载子视图控制器时 viewWillAppear 不会被调用，再去加载其他子视图控制器不会出现这种问题了。说明：针对这种情况网络数据请求建议在 viewDidLoad 或 viewDidAppear 中作处理**
-
-> **SGPageContentScrollView 使用的是 UIScrollView 拖拽结束后的方法加载子视图
-内部是先添加子视图的 view 到父视图的 view 上的（[self.scrollView addSubview:childVC.view]），再添加子视图控制器到父视图控制器上（[self.parentViewController addChildViewController:childVC]），这时会存在一个问题：即第一次加载第一个子视图时，第一个子视图的 viewDidAppear 方法会调用二次；原因是，先调用 addSubView 时，viewWillAppear 和 viewDidAppear 会各调用一次，再 addChildViewController 时，子视图控制器与父视图控制器的事件同步，即当父视图控制器的 viewDidAppear 调用时，子视图控制器的 viewDidAppear 方法会再调用一次；所以第一次加载的子视图控制器时 viewDidAppear 方法会被调用两次，再去加载其他子视图控制器不会出现这种问题。说明：针对这种情况网络请求数据建议在 viewWillAppear 或 viewDidLoad 中作处理**
+> **SGPageContentView 使用的是 UICollectionView 的子视图 viewWillAppear 问题（）
+#### 参考链接
+* [iOS 进阶之正确添加子控制器的方法](https://www.jianshu.com/p/7c4aeb2c6655)
+* [添加子视图控制器时，子视图控制器的viewWillAppear方法不调用](https://blog.csdn.net/u012907783/article/details/78972227)
 ***
 
 #### 3、关于侧滑返回手势（请参考 DefaultVCPopGesture 类以及点击子控制器对下一界面所做的处理）
@@ -164,6 +163,8 @@ d. 实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageCo
 * 2018-01-30 ：v1.3.6 解决 SGPageTitleView 标题点击与 SGPageContentView 滚动问题
 
 * 2018-05-08 ：v1.3.7 修复 v1.3.6 选中标题重复点击恢复默认状态以及 SGPageTitleViewConfigure 新增配置属性
+
+* 2018-05-09 ：v1.4.0 修复 版本升级（SGPageTitleView.h 属性调整到 SGPageTitleViewConfigure.h 以及对 SGPageContentView 进行重构）
 
 
 ## Concluding remarks
