@@ -13,9 +13,9 @@
 #import "ChildVCThree.h"
 #import "ChildVCFour.h"
 
-@interface DefaultStaticVC () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
+@interface DefaultStaticVC () <SGPageTitleViewDelegate, SGPageContentScrollViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
-@property (nonatomic, strong) SGPageContentView *pageContentView;
+@property (nonatomic, strong) SGPageContentScrollView *pageContentScrollView;
 
 @end
 
@@ -67,16 +67,16 @@
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
     /// pageContentView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
-    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
-    _pageContentView.delegatePageContentView = self;
-    [self.view addSubview:_pageContentView];
+    self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
+    _pageContentScrollView.delegatePageContentScrollView = self;
+    [self.view addSubview:_pageContentScrollView];
 }
 
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
-    [self.pageContentView setPageContentViewCurrentIndex:selectedIndex];
+    [self.pageContentScrollView setPageContentScrollViewCurrentIndex:selectedIndex];
 }
 
-- (void)pageContentView:(SGPageContentView *)pageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
+- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 

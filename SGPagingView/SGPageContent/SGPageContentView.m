@@ -1,9 +1,14 @@
 //
-//  SGPageContentView.m
+//  如遇到问题或有更好方案，请通过以下方式进行联系
+//      QQ群：429899752
+//      Email：kingsic@126.com
+//      GitHub：https://github.com/kingsic/SGPagingView
+//
+//  SGPageContentView.h
 //  SGPagingViewExample
 //
-//  Created by kingsic on 2018/5/9.
-//  Copyright © 2018年 Sorgle. All rights reserved.
+//  Created by kingsic on 16/10/6.
+//  Copyright © 2016年 kingsic. All rights reserved.
 //
 
 #import "SGPageContentView.h"
