@@ -23,7 +23,8 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 /// 记录刚开始时的偏移量
 @property (nonatomic, assign) NSInteger startOffsetX;
-
+/// 记录加载的上一个控制器
+@property (nonatomic, assign) UIViewController *lastVC;
 @end
 
 @implementation SGPageContentScrollView
@@ -82,6 +83,11 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (self.lastVC != nil) {
+        [self.lastVC beginAppearanceTransition:NO animated:NO];
+        [self.lastVC endAppearanceTransition];
+    }
+
     CGFloat offsetX = scrollView.contentOffset.x;
     // 1、pageContentScrollView:offsetX:
     if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:offsetX:)]) {
@@ -94,7 +100,8 @@
     [childVC beginAppearanceTransition:YES animated:NO];
     [self.scrollView addSubview:childVC.view];
     [childVC endAppearanceTransition];
-    [childVC didMoveToParentViewController:self.parentViewController];
+    // 2.1、记录上个展示的子控制器
+    self.lastVC = childVC;
     childVC.view.frame = CGRectMake(offsetX, 0, self.SG_width, self.SG_height);
 }
 
@@ -149,6 +156,11 @@
 
 #pragma mark - - - 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
 - (void)setPageContentScrollViewCurrentIndex:(NSInteger)currentIndex {
+    if (self.lastVC != nil) {
+        [self.lastVC beginAppearanceTransition:NO animated:NO];
+        [self.lastVC endAppearanceTransition];
+    }
+    
     CGFloat offsetX = currentIndex * self.SG_width;
     
     // 1、添加子控制器以及子控制器的 view
@@ -157,8 +169,10 @@
     [childVC beginAppearanceTransition:YES animated:NO];
     [self.scrollView addSubview:childVC.view];
     [childVC endAppearanceTransition];
-    [childVC didMoveToParentViewController:self.parentViewController];
     childVC.view.frame = CGRectMake(offsetX, 0, self.SG_width, self.SG_height);
+    
+    // 1.1、记录上个展示的子控制器
+    self.lastVC = childVC;
     
     // 2、处理内容偏移
     self.scrollView.contentOffset = CGPointMake(offsetX, 0);
