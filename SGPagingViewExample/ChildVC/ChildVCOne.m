@@ -16,6 +16,11 @@
 
 @implementation ChildVCOne
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"ChildVCOne - - viewWillAppear");
+}
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
@@ -44,6 +49,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    NSLog(@"ChildVCOne - - viewDidLoad");
     
     /// 解决方案一
 //    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 108) style:UITableViewStylePlain];

@@ -15,6 +15,19 @@
 
 @implementation SGPageTitleViewConfigure
 
+- (instancetype)init {
+    if (self = [super init]) {
+        [self initialization];
+    }
+    return self;
+}
+
+- (void)initialization {
+    _needBounces = YES;
+    _showBottomSeparator = YES;
+    _showIndicator = YES;
+}
+
 + (instancetype)pageTitleViewConfigure {
     return [[self alloc] init];
 }
@@ -61,11 +74,13 @@
     return _titleSelectedColor;
 }
 
-- (CGFloat)indicatorHeight {
-    if (_indicatorHeight <= 0) {
-        _indicatorHeight = 2.0f;
+- (CGFloat)titleTextScaling {
+    if (_titleTextScaling >= 0.3) {
+        _titleTextScaling = 0.3;
+    } else {
+        _titleTextScaling = 0.1;
     }
-    return _indicatorHeight;
+    return _titleTextScaling;
 }
 
 - (UIColor *)indicatorColor {
@@ -73,6 +88,13 @@
         _indicatorColor = [UIColor redColor];
     }
     return _indicatorColor;
+}
+
+- (CGFloat)indicatorHeight {
+    if (_indicatorHeight <= 0) {
+        _indicatorHeight = 2.0f;
+    }
+    return _indicatorHeight;
 }
 
 - (CGFloat)indicatorAdditionalWidth {

@@ -49,13 +49,12 @@
     configure.indicatorCornerRadius = 5;
     configure.indicatorToBottomDistance = 5;
     configure.titleSelectedFont = [UIFont systemFontOfSize:18];
-    configure.indicatorStyle = SGIndicatorStyleFixed;
+    configure.indicatorStyle = SGIndicatorStyleDefault;
+    configure.bottomSeparatorColor = [UIColor redColor];
     
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
-    _pageTitleView.isTitleGradientEffect = NO;
     _pageTitleView.selectedIndex = 1;
-    _pageTitleView.isNeedBounces = NO;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [_pageTitleView resetTitleWithIndex:1 newTitle:@"等待已结束"];

@@ -19,9 +19,16 @@
     NSLog(@"ChildVCTwo - - dealloc");
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"ChildVCTwo - - viewWillAppear");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSLog(@"ChildVCTwo - - viewDidLoad");
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

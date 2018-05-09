@@ -51,7 +51,6 @@
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
     _pageTitleView.selectedIndex = 1;
-    _pageTitleView.isNeedBounces = NO;
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];

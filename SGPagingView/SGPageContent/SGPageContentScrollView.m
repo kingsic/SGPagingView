@@ -23,10 +23,6 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 /// 记录刚开始时的偏移量
 @property (nonatomic, assign) NSInteger startOffsetX;
-/// 标记按钮是否点击
-@property (nonatomic, assign) BOOL isClickBtn;
-/// 标记是否默认加载第一个子视图
-@property (nonatomic, assign) BOOL isFirstViewLoaded;
 
 @end
 
@@ -54,9 +50,7 @@
 }
 
 - (void)initialization {
-    self.isClickBtn = YES;
     self.startOffsetX = 0;
-    self.isFirstViewLoaded = YES;
 }
 
 - (void)setupSubviews {
@@ -84,7 +78,6 @@
 
 #pragma mark - - - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    self.isClickBtn = NO;
     self.startOffsetX = scrollView.contentOffset.x;
 }
 
@@ -97,9 +90,11 @@
     NSInteger index = offsetX / scrollView.frame.size.width;
     UIViewController *childVC = self.childViewControllers[index];
     // 2、判断控制器的view有没有加载过,如果已经加载过,就不需要加载
-    if (childVC.isViewLoaded) return;
-    [self.scrollView addSubview:childVC.view];
     [self.parentViewController addChildViewController:childVC];
+    [childVC beginAppearanceTransition:YES animated:NO];
+    [self.scrollView addSubview:childVC.view];
+    [childVC endAppearanceTransition];
+    [childVC didMoveToParentViewController:self.parentViewController];
     childVC.view.frame = CGRectMake(offsetX, 0, self.SG_width, self.SG_height);
 }
 
@@ -112,10 +107,6 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (self.isClickBtn == YES) {
-        [self scrollViewDidEndDecelerating:scrollView];
-        return;
-    }
     // 1、定义获取需要的数据
     CGFloat progress = 0;
     NSInteger originalIndex = 0;
@@ -158,20 +149,20 @@
 
 #pragma mark - - - 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
 - (void)setPageContentScrollViewCurrentIndex:(NSInteger)currentIndex {
-    self.isClickBtn = YES;
     CGFloat offsetX = currentIndex * self.SG_width;
-    if (self.isFirstViewLoaded && currentIndex == 0) {
-        self.isFirstViewLoaded = NO;
-        // 2、默认选中第一个子控制器；self.scrollView.contentOffset ＝ 0
-        UIViewController *childVC = self.childViewControllers[0];
-        if (childVC.isViewLoaded) return;
-        [self.scrollView addSubview:childVC.view];
-        [self.parentViewController addChildViewController:childVC];
-        childVC.view.frame = CGRectMake(offsetX, 0, self.SG_width, self.SG_height);
-    }
-    // 1、处理内容偏移
+    
+    // 1、添加子控制器以及子控制器的 view
+    UIViewController *childVC = self.childViewControllers[currentIndex];
+    [self.parentViewController addChildViewController:childVC];
+    [childVC beginAppearanceTransition:YES animated:NO];
+    [self.scrollView addSubview:childVC.view];
+    [childVC endAppearanceTransition];
+    [childVC didMoveToParentViewController:self.parentViewController];
+    childVC.view.frame = CGRectMake(offsetX, 0, self.SG_width, self.SG_height);
+    
+    // 2、处理内容偏移
     self.scrollView.contentOffset = CGPointMake(offsetX, 0);
-    // 2、pageContentScrollView:offsetX:
+    // 3、pageContentScrollView:offsetX:
     if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:offsetX:)]) {
         [self.delegatePageContentScrollView pageContentScrollView:self offsetX:offsetX];
     }

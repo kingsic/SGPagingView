@@ -1,30 +1,23 @@
 //
-//  如遇到问题或有更好方案，请通过以下方式进行联系
-//      QQ群：429899752
-//      Email：kingsic@126.com
-//      GitHub：https://github.com/kingsic/SGPagingView
-//
 //  SGPageContentView.m
 //  SGPagingViewExample
 //
-//  Created by kingsic on 16/10/6.
-//  Copyright © 2016年 kingsic. All rights reserved.
+//  Created by kingsic on 2018/5/9.
+//  Copyright © 2018年 Sorgle. All rights reserved.
 //
 
 #import "SGPageContentView.h"
 #import "UIView+SGPagingView.h"
 
-@interface SGPageContentView () <UICollectionViewDataSource, UICollectionViewDelegate>
-/// 外界父控制器
+@interface SGPageContentView () <UIScrollViewDelegate>
+// 外界父控制器
 @property (nonatomic, weak) UIViewController *parentViewController;
 /// 存储子控制器
 @property (nonatomic, strong) NSArray *childViewControllers;
-/// collectionView
-@property (nonatomic, strong) UICollectionView *collectionView;
+/// scrollView
+@property (nonatomic, strong) UIScrollView *scrollView;
 /// 记录刚开始时的偏移量
 @property (nonatomic, assign) NSInteger startOffsetX;
-/// 标记按钮是否点击
-@property (nonatomic, assign) BOOL isClickBtn;
 
 @end
 
@@ -33,14 +26,14 @@
 - (instancetype)initWithFrame:(CGRect)frame parentVC:(UIViewController *)parentVC childVCs:(NSArray *)childVCs {
     if (self = [super initWithFrame:frame]) {
         if (parentVC == nil) {
-            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 所在控制器必须设置" userInfo:nil];
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentScrollView 所在控制器必须设置" userInfo:nil];
         }
         self.parentViewController = parentVC;
         if (childVCs == nil) {
-            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 子控制器必须设置" userInfo:nil];
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentScrollView 子控制器必须设置" userInfo:nil];
         }
         self.childViewControllers = childVCs;
-                
+        
         [self initialization];
         [self setupSubviews];
     }
@@ -52,7 +45,6 @@
 }
 
 - (void)initialization {
-    self.isClickBtn = NO;
     self.startOffsetX = 0;
 }
 
@@ -60,57 +52,63 @@
     // 0、处理偏移量
     UIView *tempView = [[UIView alloc] initWithFrame:CGRectZero];
     [self addSubview:tempView];
-    // 1、将所有的子控制器添加父控制器中
-    for (UIViewController *childVC in self.childViewControllers) {
-        [self.parentViewController addChildViewController:childVC];
+    // 1、添加 scrollView
+    [self addSubview:self.scrollView];
+}
+
+- (UIScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.frame = self.bounds;
+        _scrollView.bounces = NO;
+        _scrollView.delegate = self;
+        _scrollView.pagingEnabled = YES;
+        _scrollView.showsVerticalScrollIndicator = NO;
+        _scrollView.showsHorizontalScrollIndicator = NO;
+        CGFloat contentWidth = self.childViewControllers.count * _scrollView.SG_width;
+        _scrollView.contentSize = CGSizeMake(contentWidth, 0);
     }
-    // 2、添加UICollectionView, 用于在Cell中存放控制器的View
-    [self addSubview:self.collectionView];
-}
-
-- (UICollectionView *)collectionView {
-    if (!_collectionView) {
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = self.bounds.size;
-        flowLayout.minimumLineSpacing = 0;
-        flowLayout.minimumInteritemSpacing = 0;
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        CGFloat collectionViewX = 0;
-        CGFloat collectionViewY = 0;
-        CGFloat collectionViewW = self.SG_width;
-        CGFloat collectionViewH = self.SG_height;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(collectionViewX, collectionViewY, collectionViewW, collectionViewH) collectionViewLayout:flowLayout];
-        _collectionView.showsVerticalScrollIndicator = NO;
-        _collectionView.showsHorizontalScrollIndicator = NO;
-        _collectionView.pagingEnabled = YES;
-        _collectionView.bounces = NO;
-        _collectionView.backgroundColor = [UIColor whiteColor];
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
-    }
-    return _collectionView;
-}
-
-#pragma mark - - - UICollectionViewDataSource
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.childViewControllers.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    // 设置内容
-    UIViewController *childVC = self.childViewControllers[indexPath.item];
-    childVC.view.frame = cell.contentView.frame;
-    [cell.contentView addSubview:childVC.view];
-    return cell;
+    return _scrollView;
 }
 
 #pragma mark - - - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    self.isClickBtn = NO;
     self.startOffsetX = scrollView.contentOffset.x;
+    
+    CGFloat originalOffsetX = scrollView.contentOffset.x;
+    NSInteger originalIndex = originalOffsetX / scrollView.SG_width;
+    if (originalIndex == 0) {
+        // 加载下个视图控制器
+        [self P_loadNextVCWithIndex:originalIndex offsetX:originalOffsetX];
+    } else if (originalIndex == self.childViewControllers.count - 1) {
+        // 加载上个视图控制器
+        [self P_loadPreviousVCWithIndex:originalIndex offsetX:originalOffsetX];
+    } else {
+        // 1、加载上个视图控制器
+        [self P_loadPreviousVCWithIndex:originalIndex offsetX:originalOffsetX];
+        // 2、加载下个视图控制器
+        [self P_loadNextVCWithIndex:originalIndex offsetX:originalOffsetX];
+    }
+}
+/// 加载上一个视图控制器
+- (void)P_loadPreviousVCWithIndex:(NSInteger)index offsetX:(CGFloat)offsetX {
+    UIViewController *childVC = self.childViewControllers[index - 1];
+    [self.parentViewController addChildViewController:childVC];
+    [childVC beginAppearanceTransition:YES animated:NO];
+    [self.scrollView addSubview:childVC.view];
+    [childVC endAppearanceTransition];
+    [childVC didMoveToParentViewController:self.parentViewController];
+    childVC.view.frame = CGRectMake(offsetX - self.SG_width, 0, self.SG_width, self.SG_height);
+}
+/// 加载下一个视图控制器
+- (void)P_loadNextVCWithIndex:(NSInteger)index offsetX:(CGFloat)offsetX {
+    UIViewController *childVC = self.childViewControllers[index + 1];
+    [self.parentViewController addChildViewController:childVC];
+    [childVC beginAppearanceTransition:YES animated:NO];
+    [self.scrollView addSubview:childVC.view];
+    [childVC endAppearanceTransition];
+    [childVC didMoveToParentViewController:self.parentViewController];
+    childVC.view.frame = CGRectMake(offsetX + self.SG_width, 0, self.SG_width, self.SG_height);
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -123,7 +121,7 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     CGFloat offsetX = scrollView.contentOffset.x;
-    // pageContentView:offsetX:
+    // pageContentScrollView:offsetX:
     if (self.delegatePageContentView && [self.delegatePageContentView respondsToSelector:@selector(pageContentView:offsetX:)]) {
         [self.delegatePageContentView pageContentView:self offsetX:offsetX];
     }
@@ -146,7 +144,7 @@
         targetIndex = originalIndex + 1;
         if (targetIndex >= self.childViewControllers.count) {
             progress = 1;
-            targetIndex = originalIndex;
+            targetIndex = self.childViewControllers.count - 1;
         }
         // 4、如果完全划过去
         if (currentOffsetX - self.startOffsetX == scrollViewW) {
@@ -172,11 +170,20 @@
 
 #pragma mark - - - 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
 - (void)setPageContentViewCurrentIndex:(NSInteger)currentIndex {
-    self.isClickBtn = YES;
-    CGFloat offsetX = currentIndex * self.collectionView.SG_width;
-    // 1、处理内容偏移
-    self.collectionView.contentOffset = CGPointMake(offsetX, 0);
-    // 2、pageContentView:offsetX:
+    CGFloat offsetX = currentIndex * self.SG_width;
+    
+    // 1、添加子控制器以及子控制器的 view
+    UIViewController *childVC = self.childViewControllers[currentIndex];
+    [self.parentViewController addChildViewController:childVC];
+    [childVC beginAppearanceTransition:YES animated:NO];
+    [self.scrollView addSubview:childVC.view];
+    [childVC endAppearanceTransition];
+    [childVC didMoveToParentViewController:self.parentViewController];
+    childVC.view.frame = CGRectMake(offsetX, 0, self.SG_width, self.SG_height);
+    
+    // 2、处理内容偏移
+    self.scrollView.contentOffset = CGPointMake(offsetX, 0);
+    // 3、pageContentScrollView:offsetX:
     if (self.delegatePageContentView && [self.delegatePageContentView respondsToSelector:@selector(pageContentView:offsetX:)]) {
         [self.delegatePageContentView pageContentView:self offsetX:offsetX];
     }
@@ -188,10 +195,9 @@
     if (isScrollEnabled) {
         
     } else {
-        _collectionView.scrollEnabled = NO;
+        _scrollView.scrollEnabled = NO;
     }
 }
 
 
 @end
-

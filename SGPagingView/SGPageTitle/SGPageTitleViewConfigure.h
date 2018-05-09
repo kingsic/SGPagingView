@@ -37,6 +37,10 @@ typedef enum : NSUInteger {
 @interface SGPageTitleViewConfigure : NSObject
 /** 类方法创建 */
 + (instancetype)pageTitleViewConfigure;
+/** SGPageTitleView 是否需要弹性效果，默认为 YES */
+@property (nonatomic, assign) BOOL needBounces;
+/** 是否显示底部分割线，默认为 YES */
+@property (nonatomic, assign) BOOL showBottomSeparator;
 /* SGPageTitleView 底部分割线颜色，默认为 lightGrayColor */
 @property (nonatomic, strong) UIColor *bottomSeparatorColor;
 /** 按钮之间的间距，默认为 20.0f */
@@ -51,10 +55,18 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIColor *titleColor;
 /** 选中状态下标题按钮文字的颜色，默认为红色 */
 @property (nonatomic, strong) UIColor *titleSelectedColor;
-/** 指示器高度，默认为 2.0f */
-@property (nonatomic, assign) CGFloat indicatorHeight;
+/** 是否让标题按钮文字具有渐变效果，默认为 NO */
+@property (nonatomic, assign) BOOL titleGradientEffect;
+/** 是否让标题按钮文字具有缩放效果，默认为 NO */
+@property (nonatomic, assign) BOOL titleTextZoom;
+/** 标题按钮文字缩放比，默认为 0.1f，取值范围 0 ～ 0.3f */
+@property (nonatomic, assign) CGFloat titleTextScaling;
+/** 是否显示指示器，默认为 YES */
+@property (nonatomic, assign) BOOL showIndicator;
 /** 指示器颜色，默认为红色 */
 @property (nonatomic, strong) UIColor *indicatorColor;
+/** 指示器高度，默认为 2.0f */
+@property (nonatomic, assign) CGFloat indicatorHeight;
 /** 指示器的额外宽度，介于按钮文字宽度与按钮宽度之间 */
 @property (nonatomic, assign) CGFloat indicatorAdditionalWidth;
 /** 指示器动画时间，默认为 0.1f，取值范围 0 ～ 0.3f */

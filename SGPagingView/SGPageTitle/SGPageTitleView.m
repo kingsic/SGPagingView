@@ -90,14 +90,7 @@
 }
 
 - (void)initialization {
-    _isTitleGradientEffect = YES;
-    _isOpenTitleTextZoom = NO;
-    _isShowIndicator = YES;
-    _isNeedBounces = YES;
-    _isShowBottomSeparator = YES;
-
     _selectedIndex = 0;
-    _titleTextScaling = 0.1;
 }
 
 - (void)setupSubviews {
@@ -109,9 +102,13 @@
     // 2、添加标题按钮
     [self setupTitleButtons];
     // 3、添加底部分割线
-    [self addSubview:self.bottomSeparator];
+    if (self.configure.showBottomSeparator == YES) {
+        [self addSubview:self.bottomSeparator];
+    }
     // 4、添加指示器
-    [self.scrollView insertSubview:self.indicatorView atIndex:0];
+    if (self.configure.showIndicator == YES) {
+        [self.scrollView insertSubview:self.indicatorView atIndex:0];
+    }
 }
 
 #pragma mark - - - layoutSubviews
@@ -149,6 +146,9 @@
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.alwaysBounceHorizontal = YES;
         _scrollView.frame = CGRectMake(0, 0, SGPageTitleViewWidth, SGPageTitleViewHeight);
+        if (_configure.needBounces == NO) {
+            _scrollView.bounces = NO;
+        }
     }
     return _scrollView;
 }
@@ -169,13 +169,6 @@
                 _indicatorView.SG_height = self.configure.indicatorHeight;
             }
             
-            // 圆角处理
-            if (self.configure.indicatorCornerRadius > 0.5 * _indicatorView.SG_height) {
-                _indicatorView.layer.cornerRadius = 0.5 * _indicatorView.SG_height;
-            } else {
-                _indicatorView.layer.cornerRadius = self.configure.indicatorCornerRadius;
-            }
-            
             // 边框宽度及边框颜色
             _indicatorView.layer.borderWidth = self.configure.indicatorBorderWidth;
             _indicatorView.layer.borderColor = self.configure.indicatorBorderColor.CGColor;
@@ -184,14 +177,14 @@
             CGFloat indicatorViewH = self.configure.indicatorHeight;
             _indicatorView.SG_height = indicatorViewH;
             _indicatorView.SG_y = self.SG_height - indicatorViewH - self.configure.indicatorToBottomDistance;
-            
-            // 圆角处理
-            if (self.configure.indicatorCornerRadius > 0.5 * _indicatorView.SG_height) {
-                _indicatorView.layer.cornerRadius = 0.5 * _indicatorView.SG_height;
-            } else {
-                _indicatorView.layer.cornerRadius = self.configure.indicatorCornerRadius;
-            }
         }
+        // 圆角处理
+        if (self.configure.indicatorCornerRadius > 0.5 * _indicatorView.SG_height) {
+            _indicatorView.layer.cornerRadius = 0.5 * _indicatorView.SG_height;
+        } else {
+            _indicatorView.layer.cornerRadius = self.configure.indicatorCornerRadius;
+        }
+        
         _indicatorView.backgroundColor = self.configure.indicatorColor;
     }
     return _indicatorView;
@@ -325,16 +318,16 @@
     
     if (self.configure.titleSelectedFont == [UIFont systemFontOfSize:15]) {
         // 标题文字缩放属性(开启 titleSelectedFont 属性将不起作用)
-        if (self.isOpenTitleTextZoom) {
+        if (self.configure.titleTextZoom == YES) {
             [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *btn = obj;
                 btn.transform = CGAffineTransformMakeScale(1, 1);
             }];
-            button.transform = CGAffineTransformMakeScale(1 + self.titleTextScaling, 1 + self.titleTextScaling);
+            button.transform = CGAffineTransformMakeScale(1 + self.configure.titleTextScaling, 1 + self.configure.titleTextScaling);
         }
         
         // 此处作用：避免滚动内容视图时 手指不离开屏幕的前提下点击按钮后 再次滚动内容视图时按钮文字颜色由于文字渐变效果导致未选中按钮文字的不标准化处理
-        if (self.isTitleGradientEffect == YES) {
+        if (self.configure.titleGradientEffect == YES) {
             [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *btn = obj;
                 btn.titleLabel.textColor = self.configure.titleColor;
@@ -343,7 +336,7 @@
         }
     } else {
         // 此处作用：避免滚动内容视图时 手指不离开屏幕的前提下点击按钮后 再次滚动内容视图时按钮文字颜色由于文字渐变效果导致未选中按钮文字的不标准化处理
-        if (self.isTitleGradientEffect == YES) {
+        if (self.configure.titleGradientEffect == YES) {
             [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *btn = obj;
                 btn.titleLabel.textColor = self.configure.titleColor;
@@ -422,17 +415,17 @@
         }
     }
     // 4、颜色的渐变(复杂)
-    if (self.isTitleGradientEffect) {
+    if (self.configure.titleGradientEffect == YES) {
         [self P_isTitleGradientEffectWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
     }
     
     // 5 、标题文字缩放属性(开启文字选中字号属性将不起作用)
     if (self.configure.titleSelectedFont == [UIFont systemFontOfSize:15]) {
-        if (self.isOpenTitleTextZoom) {
+        if (self.configure.titleTextZoom == YES) {
             // 左边缩放
-            originalBtn.transform = CGAffineTransformMakeScale((1 - progress) * self.titleTextScaling + 1, (1 - progress) * self.titleTextScaling + 1);
+            originalBtn.transform = CGAffineTransformMakeScale((1 - progress) * self.configure.titleTextScaling + 1, (1 - progress) * self.configure.titleTextScaling + 1);
             // 右边缩放
-            targetBtn.transform = CGAffineTransformMakeScale(progress * self.titleTextScaling + 1, progress * self.titleTextScaling + 1);
+            targetBtn.transform = CGAffineTransformMakeScale(progress * self.configure.titleTextScaling + 1, progress * self.configure.titleTextScaling + 1);
         }
     }
 }
@@ -795,13 +788,6 @@
 }
 
 #pragma mark - - - set
-- (void)setIsNeedBounces:(BOOL)isNeedBounces {
-    _isNeedBounces = isNeedBounces;
-    if (isNeedBounces == NO) {
-        self.scrollView.bounces = NO;
-    }
-}
-
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
     _selectedIndex = selectedIndex;
     
@@ -813,44 +799,6 @@
 - (void)setResetSelectedIndex:(NSInteger)resetSelectedIndex {
     _resetSelectedIndex = resetSelectedIndex;
     [self P_btn_action:self.btnMArr[resetSelectedIndex]];
-}
-
-- (void)setIsTitleGradientEffect:(BOOL)isTitleGradientEffect {
-    _isTitleGradientEffect = isTitleGradientEffect;
-}
-
-- (void)setIsOpenTitleTextZoom:(BOOL)isOpenTitleTextZoom {
-    _isOpenTitleTextZoom = isOpenTitleTextZoom;
-}
-
-- (void)setTitleTextScaling:(CGFloat)titleTextScaling {
-    _titleTextScaling = titleTextScaling;
-    
-    if (titleTextScaling) {
-        if (titleTextScaling >= 0.3) {
-            _titleTextScaling = 0.3;
-        } else {
-            _titleTextScaling = 0.1;
-        }
-    }
-}
-
-- (void)setIsShowIndicator:(BOOL)isShowIndicator {
-    _isShowIndicator = isShowIndicator;
-    if (isShowIndicator == NO) {
-        [self.indicatorView removeFromSuperview];
-        self.indicatorView = nil;
-    }
-}
-
-- (void)setIsShowBottomSeparator:(BOOL)isShowBottomSeparator {
-    _isShowBottomSeparator = isShowBottomSeparator;
-    if (isShowBottomSeparator) {
-        
-    } else {
-        [self.bottomSeparator removeFromSuperview];
-        self.bottomSeparator = nil;
-    }
 }
 
 #pragma mark - - - 颜色设置的计算

@@ -43,12 +43,12 @@
     configure.titleColor = [UIColor lightGrayColor];
     configure.titleSelectedColor = [UIColor blackColor];
     configure.indicatorColor = [UIColor blackColor];
-    configure.indicatorAdditionalWidth = 100; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
+    configure.indicatorAdditionalWidth = 80; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
+    configure.titleGradientEffect = YES;
     
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
-    _pageTitleView.selectedIndex = 1;
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];

@@ -25,7 +25,6 @@
 		182513E91F21D1600039F4A2 /* UIView+SGPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513DD1F21D1600039F4A2 /* UIView+SGPagingView.m */; };
 		182513EA1F21D1600039F4A2 /* SGPageContentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */; };
 		18B036D21F21D835004C7DE7 /* SGPageTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B036D11F21D835004C7DE7 /* SGPageTitleView.m */; };
-		18B036D51F21D8B2004C7DE7 /* SGPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B036D41F21D8B2004C7DE7 /* SGPageContentView.m */; };
 		8D0F8E311FD95DE300F30426 /* DefaultCoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E1E1FD95DE300F30426 /* DefaultCoverVC.m */; };
 		8D0F8E321FD95DE300F30426 /* DefaultFixedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E201FD95DE300F30426 /* DefaultFixedVC.m */; };
 		8D0F8E331FD95DE300F30426 /* DefaultGradientEffectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E221FD95DE300F30426 /* DefaultGradientEffectVC.m */; };
@@ -57,6 +56,7 @@
 		8D0F8E711FD95E2300F30426 /* ChildVCThree.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0F8E5B1FD95E2300F30426 /* ChildVCThree.xib */; };
 		8D0F8E721FD95E2300F30426 /* ChildVCTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E5D1FD95E2300F30426 /* ChildVCTwo.m */; };
 		8D0F8E731FD95E2300F30426 /* ChildVCTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0F8E5E1FD95E2300F30426 /* ChildVCTwo.xib */; };
+		8D9215B720A2878F0086BD62 /* SGPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9215B620A2878F0086BD62 /* SGPageContentView.m */; };
 		8DCB02AA1F95B0FF00C9598A /* SGPageTitleViewConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB02A91F95B0FF00C9598A /* SGPageTitleViewConfigure.m */; };
 		9A3EDE201FF4C5C600DC1EB2 /* DefaultDynamicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3EDE1F1FF4C5C600DC1EB2 /* DefaultDynamicVC.m */; };
 /* End PBXBuildFile section */
@@ -115,8 +115,6 @@
 		182513EE1F21D2C90039F4A2 /* SGPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPagingView.h; sourceTree = "<group>"; };
 		18B036D01F21D835004C7DE7 /* SGPageTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageTitleView.h; sourceTree = "<group>"; };
 		18B036D11F21D835004C7DE7 /* SGPageTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageTitleView.m; sourceTree = "<group>"; };
-		18B036D31F21D8B2004C7DE7 /* SGPageContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageContentView.h; sourceTree = "<group>"; };
-		18B036D41F21D8B2004C7DE7 /* SGPageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageContentView.m; sourceTree = "<group>"; };
 		8D0F8E1D1FD95DE300F30426 /* DefaultCoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultCoverVC.h; sourceTree = "<group>"; };
 		8D0F8E1E1FD95DE300F30426 /* DefaultCoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultCoverVC.m; sourceTree = "<group>"; };
 		8D0F8E1F1FD95DE300F30426 /* DefaultFixedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultFixedVC.h; sourceTree = "<group>"; };
@@ -172,6 +170,8 @@
 		8D0F8E5C1FD95E2300F30426 /* ChildVCTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildVCTwo.h; sourceTree = "<group>"; };
 		8D0F8E5D1FD95E2300F30426 /* ChildVCTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildVCTwo.m; sourceTree = "<group>"; };
 		8D0F8E5E1FD95E2300F30426 /* ChildVCTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildVCTwo.xib; sourceTree = "<group>"; };
+		8D9215B520A2878F0086BD62 /* SGPageContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGPageContentView.h; sourceTree = "<group>"; };
+		8D9215B620A2878F0086BD62 /* SGPageContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGPageContentView.m; sourceTree = "<group>"; };
 		8DCB02A81F95B0FF00C9598A /* SGPageTitleViewConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageTitleViewConfigure.h; sourceTree = "<group>"; };
 		8DCB02A91F95B0FF00C9598A /* SGPageTitleViewConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageTitleViewConfigure.m; sourceTree = "<group>"; };
 		9A3EDE1E1FF4C5C600DC1EB2 /* DefaultDynamicVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultDynamicVC.h; sourceTree = "<group>"; };
@@ -352,8 +352,8 @@
 		182513DE1F21D1600039F4A2 /* SGPageContent */ = {
 			isa = PBXGroup;
 			children = (
-				18B036D31F21D8B2004C7DE7 /* SGPageContentView.h */,
-				18B036D41F21D8B2004C7DE7 /* SGPageContentView.m */,
+				8D9215B520A2878F0086BD62 /* SGPageContentView.h */,
+				8D9215B620A2878F0086BD62 /* SGPageContentView.m */,
 				182513DF1F21D1600039F4A2 /* SGPageContentScrollView.h */,
 				182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */,
 			);
@@ -599,7 +599,6 @@
 				8D0F8E371FD95DE300F30426 /* DefaultStaticVC.m in Sources */,
 				182513D21F21CC340039F4A2 /* NavigationBarVC.m in Sources */,
 				8DCB02AA1F95B0FF00C9598A /* SGPageTitleViewConfigure.m in Sources */,
-				18B036D51F21D8B2004C7DE7 /* SGPageContentView.m in Sources */,
 				8D0F8E3A1FD95DE300F30426 /* DefaultZoomVC.m in Sources */,
 				182513D61F21CC340039F4A2 /* PersonalCenterTableView.m in Sources */,
 				182513D31F21CC340039F4A2 /* NavigationBarTitleView.m in Sources */,
@@ -611,6 +610,7 @@
 				8D0F8E671FD95E2300F30426 /* ChildVCFive.m in Sources */,
 				8D0F8E621FD95E2300F30426 /* ChildFourthPopGestureNextVC.m in Sources */,
 				8D0F8E6C1FD95E2300F30426 /* ChildVCNine.m in Sources */,
+				8D9215B720A2878F0086BD62 /* SGPageContentView.m in Sources */,
 				9A3EDE201FF4C5C600DC1EB2 /* DefaultDynamicVC.m in Sources */,
 				8D0F8E721FD95E2300F30426 /* ChildVCTwo.m in Sources */,
 				8D0F8E6A1FD95E2300F30426 /* ChildVCFull.m in Sources */,

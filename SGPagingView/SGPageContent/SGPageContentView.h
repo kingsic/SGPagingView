@@ -61,3 +61,4 @@
 - (void)setPageContentViewCurrentIndex:(NSInteger)currentIndex;
 
 @end
+
