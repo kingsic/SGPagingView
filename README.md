@@ -41,7 +41,7 @@
 
 
 ## SGPagingView 集成
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.3.7'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.4.1'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
