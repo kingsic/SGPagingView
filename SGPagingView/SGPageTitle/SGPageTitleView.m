@@ -235,7 +235,14 @@
         } else {
             btnH = SGPageTitleViewHeight;
         }
+        CGFloat VSeparatorW = 1;
+        CGFloat VSeparatorH = SGPageTitleViewHeight - self.configure.verticalSeparatorReduceHeight;
+        if (VSeparatorH <= 0) {
+            VSeparatorH = SGPageTitleViewHeight;
+        }
+        CGFloat VSeparatorY = 0.5 * (SGPageTitleViewHeight - VSeparatorH);
         for (NSInteger index = 0; index < titleCount; index++) {
+            // 1、添加按钮
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
             CGFloat btnX = btnW * index;
             btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
@@ -250,6 +257,17 @@
             
             [self setupStartColor:self.configure.titleColor];
             [self setupEndColor:self.configure.titleSelectedColor];
+            
+            // 2、添加按钮之间的分割线
+            if (self.configure.showVerticalSeparator == YES) {
+                UIView *VSeparator = [[UIView alloc] init];
+                if (index != 0) {
+                    CGFloat VSeparatorX = btnW * index - 0.5;
+                    VSeparator.frame = CGRectMake(VSeparatorX, VSeparatorY, VSeparatorW, VSeparatorH);
+                    VSeparator.backgroundColor = self.configure.verticalSeparatorColor;
+                    [self.scrollView addSubview:VSeparator];
+                }
+            }
         }
         self.scrollView.contentSize = CGSizeMake(SGPageTitleViewWidth, SGPageTitleViewHeight);
         
@@ -262,7 +280,14 @@
         } else {
             btnH = SGPageTitleViewHeight;
         }
+        CGFloat VSeparatorW = 1;
+        CGFloat VSeparatorH = SGPageTitleViewHeight - self.configure.verticalSeparatorReduceHeight;
+        if (VSeparatorH <= 0) {
+            VSeparatorH = SGPageTitleViewHeight;
+        }
+        CGFloat VSeparatorY = 0.5 * (SGPageTitleViewHeight - VSeparatorH);
         for (NSInteger index = 0; index < titleCount; index++) {
+            // 1、添加按钮
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
             CGFloat btnW = [self SG_widthWithString:self.titleArr[index] font:self.configure.titleFont] + self.configure.spacingBetweenButtons;
             btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
@@ -278,8 +303,18 @@
             
             [self setupStartColor:self.configure.titleColor];
             [self setupEndColor:self.configure.titleSelectedColor];
+            
+            // 2、添加按钮之间的分割线
+            if (self.configure.showVerticalSeparator == YES) {
+                UIView *VSeparator = [[UIView alloc] init];
+                if (index < titleCount - 1) {
+                    CGFloat VSeparatorX = btnX - 0.5;
+                    VSeparator.frame = CGRectMake(VSeparatorX, VSeparatorY, VSeparatorW, VSeparatorH);
+                    VSeparator.backgroundColor = self.configure.verticalSeparatorColor;
+                    [self.scrollView addSubview:VSeparator];
+                }
+            }
         }
-        
         CGFloat scrollViewWidth = CGRectGetMaxX(self.scrollView.subviews.lastObject.frame);
         self.scrollView.contentSize = CGSizeMake(scrollViewWidth, SGPageTitleViewHeight);
     }

@@ -37,14 +37,16 @@ typedef enum : NSUInteger {
 @interface SGPageTitleViewConfigure : NSObject
 /** 类方法创建 */
 + (instancetype)pageTitleViewConfigure;
+
+#pragma mark - - SGPageTitleView 属性
 /** SGPageTitleView 是否需要弹性效果，默认为 YES */
 @property (nonatomic, assign) BOOL needBounces;
 /** 是否显示底部分割线，默认为 YES */
 @property (nonatomic, assign) BOOL showBottomSeparator;
 /* SGPageTitleView 底部分割线颜色，默认为 lightGrayColor */
 @property (nonatomic, strong) UIColor *bottomSeparatorColor;
-/** 按钮之间的间距，默认为 20.0f */
-@property (nonatomic, assign) CGFloat spacingBetweenButtons;
+
+#pragma mark - - 标题属性
 /** 标题文字字号大小，默认 15 号字体 */
 @property (nonatomic, strong) UIFont *titleFont;
 /** 标题文字选中字号大小，默认 15 号字体。
@@ -61,6 +63,10 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) BOOL titleTextZoom;
 /** 标题按钮文字缩放比，默认为 0.1f，取值范围 0 ～ 0.3f */
 @property (nonatomic, assign) CGFloat titleTextScaling;
+/** 按钮之间的间距，默认为 20.0f */
+@property (nonatomic, assign) CGFloat spacingBetweenButtons;
+
+#pragma mark - - 指示器属性
 /** 是否显示指示器，默认为 YES */
 @property (nonatomic, assign) BOOL showIndicator;
 /** 指示器颜色，默认为红色 */
@@ -87,5 +93,13 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat indicatorDynamicWidth;
 /** 指示器滚动位置改变样式，默认为 SGIndicatorScrollStyleDefault */
 @property (nonatomic, assign) SGIndicatorScrollStyle indicatorScrollStyle;
+
+#pragma mark - - 按钮之间分割线属性
+/** 是否显示按钮之间的分割线，默认为 NO */
+@property (nonatomic, assign) BOOL showVerticalSeparator;
+/** 按钮之间的分割线颜色，默认为红色 */
+@property (nonatomic, strong) UIColor *verticalSeparatorColor;
+/** 按钮之间的分割线额外减少的高度，默认为 0.0f */
+@property (nonatomic, assign) CGFloat verticalSeparatorReduceHeight;
 
 @end

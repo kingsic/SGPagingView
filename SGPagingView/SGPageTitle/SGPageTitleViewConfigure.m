@@ -155,5 +155,19 @@
     return _indicatorDynamicWidth;
 }
 
+- (UIColor *)verticalSeparatorColor {
+    if (!_verticalSeparatorColor) {
+        _verticalSeparatorColor = [UIColor redColor];
+    }
+    return _verticalSeparatorColor;
+}
+
+- (CGFloat)verticalSeparatorReduceHeight {
+    if (_verticalSeparatorReduceHeight <= 0) {
+        _verticalSeparatorReduceHeight = 0;
+    }
+    return _verticalSeparatorReduceHeight;
+}
+
 
 @end

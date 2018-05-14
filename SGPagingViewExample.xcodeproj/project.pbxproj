@@ -58,6 +58,7 @@
 		8D0F8E731FD95E2300F30426 /* ChildVCTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0F8E5E1FD95E2300F30426 /* ChildVCTwo.xib */; };
 		8D9215B720A2878F0086BD62 /* SGPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9215B620A2878F0086BD62 /* SGPageContentView.m */; };
 		8DCB02AA1F95B0FF00C9598A /* SGPageTitleViewConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB02A91F95B0FF00C9598A /* SGPageTitleViewConfigure.m */; };
+		8DF628F720A94CBA00B7B85A /* DefaultSystemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DF628F620A94CBA00B7B85A /* DefaultSystemVC.m */; };
 		9A3EDE201FF4C5C600DC1EB2 /* DefaultDynamicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3EDE1F1FF4C5C600DC1EB2 /* DefaultDynamicVC.m */; };
 /* End PBXBuildFile section */
 
@@ -174,6 +175,8 @@
 		8D9215B620A2878F0086BD62 /* SGPageContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGPageContentView.m; sourceTree = "<group>"; };
 		8DCB02A81F95B0FF00C9598A /* SGPageTitleViewConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageTitleViewConfigure.h; sourceTree = "<group>"; };
 		8DCB02A91F95B0FF00C9598A /* SGPageTitleViewConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageTitleViewConfigure.m; sourceTree = "<group>"; };
+		8DF628F520A94CBA00B7B85A /* DefaultSystemVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultSystemVC.h; sourceTree = "<group>"; };
+		8DF628F620A94CBA00B7B85A /* DefaultSystemVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultSystemVC.m; sourceTree = "<group>"; };
 		9A3EDE1E1FF4C5C600DC1EB2 /* DefaultDynamicVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultDynamicVC.h; sourceTree = "<group>"; };
 		9A3EDE1F1FF4C5C600DC1EB2 /* DefaultDynamicVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultDynamicVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -378,6 +381,8 @@
 				8D0F8E2A1FD95DE300F30426 /* DefaultStaticVC.m */,
 				8D0F8E271FD95DE300F30426 /* DefaultScrollVC.h */,
 				8D0F8E281FD95DE300F30426 /* DefaultScrollVC.m */,
+				8DF628F520A94CBA00B7B85A /* DefaultSystemVC.h */,
+				8DF628F620A94CBA00B7B85A /* DefaultSystemVC.m */,
 				8D0F8E211FD95DE300F30426 /* DefaultGradientEffectVC.h */,
 				8D0F8E221FD95DE300F30426 /* DefaultGradientEffectVC.m */,
 				8D0F8E2F1FD95DE300F30426 /* DefaultZoomVC.h */,
@@ -614,6 +619,7 @@
 				9A3EDE201FF4C5C600DC1EB2 /* DefaultDynamicVC.m in Sources */,
 				8D0F8E721FD95E2300F30426 /* ChildVCTwo.m in Sources */,
 				8D0F8E6A1FD95E2300F30426 /* ChildVCFull.m in Sources */,
+				8DF628F720A94CBA00B7B85A /* DefaultSystemVC.m in Sources */,
 				182513481F21CAC30039F4A2 /* AppDelegate.m in Sources */,
 				8D0F8E361FD95DE300F30426 /* DefaultScrollVC.m in Sources */,
 				182513E91F21D1600039F4A2 /* UIView+SGPagingView.m in Sources */,
