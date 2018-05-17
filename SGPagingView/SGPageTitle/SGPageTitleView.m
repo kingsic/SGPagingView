@@ -27,6 +27,24 @@
 }
 @end
 
+#pragma mark - - - TitleAttribute
+@interface TitleAttribute : NSObject
+@property (nonatomic, strong) NSAttributedString* stateNormal;
+@property (nonatomic, strong) NSAttributedString* stateSelected;
+@property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) CGFloat width;
+@end
+@implementation TitleAttribute
+- (id)initWithNormalState:(NSAttributedString*)stateNormal stateSelected:(NSAttributedString*)stateSelected height:(CGFloat)height width:(CGFloat)width{
+    self = [self init];
+    self.stateNormal = stateNormal;
+    self.stateSelected = stateSelected;
+    self.width = width;
+    self.height = height;
+    return self;
+}
+@end
+
 #pragma mark - - - SGPageTitleView
 @interface SGPageTitleView ()
 /// scrollView
@@ -37,6 +55,8 @@
 @property (nonatomic, strong) UIView *bottomSeparator;
 /// 存储标题按钮的数组
 @property (nonatomic, strong) NSMutableArray *btnMArr;
+/// 存储标题NSAttributedString的数组
+@property (nonatomic, strong) NSMutableArray<TitleAttribute *> *titleAttributes;
 /// tempBtn
 @property (nonatomic, strong) UIButton *tempBtn;
 /// 记录所有按钮文字宽度
@@ -65,7 +85,7 @@
             @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的代理方法必须设置" userInfo:nil];
         }
         self.delegatePageTitleView = delegate;
-        if (titleNames == nil || [titleNames count] == 0) {
+        if (titleNames == nil || titleNames.count == 0) {
             @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的标题数组必须设置, 且不能为空数组" userInfo:nil];
         }
         self.titleArr = titleNames;
@@ -116,7 +136,7 @@
         @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的配置属性必须设置" userInfo:nil];
     }else if (self.delegatePageTitleView == nil) {
         @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的代理方法必须设置" userInfo:nil];
-    }else if (self.titleArr == nil || [self.titleArr count] == 0) {
+    }else if (self.titleArr == nil || self.titleArr.count == 0) {
         @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的标题数组必须设置, 且不能为空数组" userInfo:nil];
     }
     
@@ -147,6 +167,13 @@
     return _btnMArr;
 }
 
+- (NSMutableArray<TitleAttribute *> *)titleAttributes {
+    if (!_titleAttributes) {
+        _titleAttributes = [[NSMutableArray<TitleAttribute *> alloc] init];
+    }
+    return _titleAttributes;
+}
+
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
@@ -162,11 +189,16 @@
     if (!_indicatorView) {
         _indicatorView = [[UIView alloc] init];
         if (self.configure.indicatorStyle == SGIndicatorStyleCover) {
-            CGFloat indicatorWidth = [self.btnMArr[0] frame].size.width;
+            // 拿到button最大的高度
+            // TODO: 创造一个titleattribute collection, set property maxHeight while insertion
+            CGFloat maxHeight = 0;
+            for (TitleAttribute* titleAttr in self.titleAttributes) {
+                if (titleAttr.height > maxHeight) {
+                    maxHeight = titleAttr.height;
+                }
+            }
             
-            NSTextStorage*textStorage = [NSTextStorage new];
-            [textStorage appendAttributedString:[[self.btnMArr[0] titleLabel] attributedText]];
-            CGFloat tempIndicatorViewH = [self SG_heightWithNSAttributedString:textStorage width:indicatorWidth];
+            CGFloat tempIndicatorViewH = maxHeight;
             
             if (self.configure.indicatorHeight > self.SG_height) {
                 _indicatorView.SG_y = 0;
@@ -228,35 +260,90 @@
     return [textStorage.string boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size.width;
 }
 #pragma mark - - - TextKit计算字符串高度
-- (CGFloat)SG_heightWithNSAttributedString:(NSTextStorage *)textStorage width:(CGFloat)width {
+- (CGFloat)SG_heightWithNSAttributedString:(NSAttributedString *)attributedText width:(CGFloat)width {
+    NSTextStorage*textStorage = [NSTextStorage new];
+    [textStorage appendAttributedString:attributedText];
     NSTextContainer *textContainer = [[NSTextContainer alloc]
                                        initWithSize: CGSizeMake(width, FLT_MAX)];
     NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
     [layoutManager addTextContainer:textContainer];
     [textStorage addLayoutManager:layoutManager];
-    [textContainer setLineFragmentPadding:0.0];
+    [textContainer setLineFragmentPadding: 2.0];
     return [layoutManager
             usedRectForTextContainer:textContainer].size.height;
 }
 
-#pragma mark - - - 添加标题按钮
-- (void)setupTitleButtons {
-    // 计算所有按钮的文字宽度
+#pragma mark - - - 处理标题NSAttributedString
+- (void)processTitleArray {
     [self.titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        // TODO: save NSAttributedString for later usage
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.paragraphSpacing = 2.0;
         NSDictionary *titleAttrSetting = @{
                                            NSFontAttributeName : self.configure.titleFont,
-                                           NSForegroundColorAttributeName : self.configure.titleColor
+                                           NSForegroundColorAttributeName : self.configure.titleColor,
+                                           NSParagraphStyleAttributeName:paragraphStyle,
                                            };
         NSAttributedString *titleAttrString = [[NSAttributedString alloc] initWithString:obj attributes:titleAttrSetting];
-        CGFloat tempWidth = [self SG_widthWithNSAttributedString:titleAttrString];
-        self.allBtnTextWidth += tempWidth;
+        NSDictionary *titleSelectedAttrSetting = @{
+                                                   NSFontAttributeName : self.configure.titleSelectedFont,
+                                                   NSForegroundColorAttributeName : self.configure.titleSelectedColor,
+                                                   NSParagraphStyleAttributeName:paragraphStyle,
+                                                   };
+        NSAttributedString *selectedAttrString = [[NSAttributedString alloc] initWithString:obj attributes:titleSelectedAttrSetting];
+        
+        CGFloat width = 0;
+        CGFloat height = 0;
+        
+        CGFloat widthNormal = [self SG_widthWithNSAttributedString:titleAttrString];
+        CGFloat widthSelected = [self SG_widthWithNSAttributedString:selectedAttrString];
+        
+        CGFloat heightNormal = [self SG_heightWithNSAttributedString:titleAttrString width:widthNormal];
+        CGFloat heightSelected = [self SG_heightWithNSAttributedString:selectedAttrString width:widthSelected];
+        
+        if (widthNormal > widthSelected) {
+            width = widthNormal;
+        }else {
+            width = widthSelected;
+        }
+        if (heightNormal > heightSelected) {
+            height = heightNormal;
+        }else {
+            height = heightSelected;
+        }
+        
+        TitleAttribute* titleAttr = [[TitleAttribute new] initWithNormalState:titleAttrString stateSelected:selectedAttrString height:height width:width];
+        
+        [self.titleAttributes addObject:titleAttr];
     }];
+}
+
+#pragma mark - - - 添加标题按钮
+- (void)setupTitleButtons {
+    // 处理title数据
+    [self processTitleArray];
+    
+    // 计算所有按钮的文字宽度
+    // 拿到button最大的高度
+    CGFloat maxHeight = 0;
+    for (TitleAttribute* titleAttr in self.titleAttributes) {
+        CGFloat tempWidth = titleAttr.width;
+        self.allBtnTextWidth += tempWidth;
+        
+        if (titleAttr.height > maxHeight) {
+            maxHeight = titleAttr.height;
+        }
+    }
+    
     // 所有按钮文字宽度 ＋ 按钮之间的间隔
     self.allBtnWidth = self.configure.spacingBetweenButtons * (self.titleArr.count + 1) + self.allBtnTextWidth;
     self.allBtnWidth = ceilf(self.allBtnWidth);
     
-    NSInteger titleCount = self.titleArr.count;
+    // update height of title base on attributed largest height
+    // 20.0 is the padding top/bottom
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, maxHeight + 20.0);
+    self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, maxHeight + 20.0);
+    
+    NSInteger titleCount = self.titleAttributes.count;
     if (self.allBtnWidth <= self.bounds.size.width) { // SGPageTitleView 静止样式
         CGFloat btnY = 0;
         CGFloat btnW = SGPageTitleViewWidth / self.titleArr.count;
@@ -268,24 +355,15 @@
         }
         for (NSInteger index = 0; index < titleCount; index++) {
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
+            TitleAttribute* titleAttr = self.titleAttributes[index];
+            
             CGFloat btnX = btnW * index;
             btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
             btn.tag = index;
             
-            // 用nsattributedstring 增强拓展性
-            NSDictionary *titleAttrSetting = @{
-                                               NSFontAttributeName : self.configure.titleFont,
-                                               NSForegroundColorAttributeName : self.configure.titleColor
-                                               };
-            NSAttributedString *titleAttrString = [[NSAttributedString alloc] initWithString:self.titleArr[index] attributes:titleAttrSetting];
-            NSDictionary *titleSelectedAttrSetting = @{
-                                                       NSFontAttributeName : self.configure.titleSelectedFont,
-                                                       NSForegroundColorAttributeName : self.configure.titleSelectedColor
-                                                       };
-            NSAttributedString *selectedAttrString = [[NSAttributedString alloc] initWithString:self.titleArr[index] attributes:titleSelectedAttrSetting];
-            btn.titleLabel.numberOfLines = 1;
-            [btn setAttributedTitle:titleAttrString forState:(UIControlStateNormal)];
-            [btn setAttributedTitle:selectedAttrString forState:(UIControlStateSelected)];
+            btn.titleLabel.numberOfLines = 0;
+            [btn setAttributedTitle:titleAttr.stateNormal forState:(UIControlStateNormal)];
+            [btn setAttributedTitle:titleAttr.stateSelected forState:(UIControlStateSelected)];
             
             [btn addTarget:self action:@selector(P_btn_action:) forControlEvents:(UIControlEventTouchUpInside)];
             [self.btnMArr addObject:btn];
@@ -300,42 +378,45 @@
         CGFloat btnX = 0;
         CGFloat btnY = 0;
         CGFloat btnH = 0;
+        
         if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
             btnH = SGPageTitleViewHeight - self.configure.indicatorHeight;
-        } else {
+        }else {
             btnH = SGPageTitleViewHeight;
         }
+        
         for (NSInteger index = 0; index < titleCount; index++) {
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
-            // 用nsattributedstring 增强拓展性
-            // TODO: save NSAttributedString for later usage
-            NSDictionary *titleAttrSetting = @{
-                                               NSFontAttributeName : self.configure.titleFont,
-                                               NSForegroundColorAttributeName : self.configure.titleColor
-                                               };
-            NSAttributedString *titleAttrString = [[NSAttributedString alloc] initWithString:self.titleArr[index] attributes:titleAttrSetting];
-            CGFloat btnW = [self SG_widthWithNSAttributedString:titleAttrString] + self.configure.spacingBetweenButtons;
+            TitleAttribute* titleAttr = self.titleAttributes[index];
             
-            btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
-            btnX = btnX + btnW;
+            CGFloat btnW = titleAttr.width + self.configure.spacingBetweenButtons;
+            
+            if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
+                btnH = SGPageTitleViewHeight - self.configure.indicatorHeight;
+            } else {
+                CGFloat calculatedHeight = titleAttr.height;
+                if (btnH < calculatedHeight) {
+                    btnH = calculatedHeight;
+                }
+            }
+            
+            btn.titleLabel.numberOfLines = 0;
             btn.tag = index;
             
-            NSDictionary *titleSelectedAttrSetting = @{
-                                                       NSFontAttributeName : self.configure.titleSelectedFont,
-                                                       NSForegroundColorAttributeName : self.configure.titleSelectedColor
-                                                       };
-            NSAttributedString *selectedAttrString = [[NSAttributedString alloc] initWithString:self.titleArr[index] attributes:titleSelectedAttrSetting];
+            [btn setAttributedTitle:titleAttr.stateNormal forState:(UIControlStateNormal)];
+            [btn setAttributedTitle:titleAttr.stateSelected forState:(UIControlStateSelected)];
             
-            [btn setAttributedTitle:titleAttrString forState:(UIControlStateNormal)];
-            [btn setAttributedTitle:selectedAttrString forState:(UIControlStateSelected)];
+            btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
+            btn.titleLabel.frame = CGRectMake(btnX, btnY, btnW, btnH);
+            btnX = btnX + btnW;
             
             [btn addTarget:self action:@selector(P_btn_action:) forControlEvents:(UIControlEventTouchUpInside)];
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
-            
-            [self setupStartColor:self.configure.titleColor];
-            [self setupEndColor:self.configure.titleSelectedColor];
         }
+        
+        [self setupStartColor:self.configure.titleColor];
+        [self setupEndColor:self.configure.titleSelectedColor];
         
         CGFloat scrollViewWidth = CGRectGetMaxX(self.scrollView.subviews.lastObject.frame);
         self.scrollView.contentSize = CGSizeMake(scrollViewWidth, SGPageTitleViewHeight);
