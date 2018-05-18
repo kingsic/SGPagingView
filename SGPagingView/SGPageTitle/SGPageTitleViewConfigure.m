@@ -132,6 +132,9 @@
     }
     return _indicatorDynamicWidth;
 }
-
+    
+- (BOOL) elasticHeight {
+    return _elasticHeight ? YES : NO;
+}
 
 @end

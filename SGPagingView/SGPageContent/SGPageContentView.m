@@ -21,11 +21,21 @@
 @property (nonatomic, assign) NSInteger startOffsetX;
 /// 标记按钮是否点击
 @property (nonatomic, assign) BOOL isClickBtn;
+    
+/// check whether init setup done
+@property (nonatomic, assign) BOOL initSetup;
 
 @end
 
 @implementation SGPageContentView
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        _initSetup = NO;
+    }
+    return self;
+}
+    
 - (instancetype)initWithFrame:(CGRect)frame parentVC:(UIViewController *)parentVC childVCs:(NSArray *)childVCs {
     if (self = [super initWithFrame:frame]) {
         if (parentVC == nil) {
@@ -36,7 +46,9 @@
             @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 子控制器必须设置, 且不能为空vc组" userInfo:nil];
         }
         self.childViewControllers = childVCs;
-                
+        
+        _initSetup = NO;
+        
         [self initialization];
     }
     return self;
@@ -66,16 +78,21 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    // check compulsory variables are valid
-    if (self.parentViewController == nil) {
-        @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 所在控制器必须设置" userInfo:nil];
+    if (!_initSetup) {
+        
+        // check compulsory variables are valid
+        if (self.parentViewController == nil) {
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 所在控制器必须设置" userInfo:nil];
+        }
+        if (self.childViewControllers == nil || [self.childViewControllers count] == 0) {
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 子控制器必须设置, 且不能为空vc组" userInfo:nil];
+        }
+        
+        // when view is ready, add subviews
+        [self setupSubviews];
+        
+        _initSetup = YES;
     }
-    if (self.childViewControllers == nil || [self.childViewControllers count] == 0) {
-        @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 子控制器必须设置, 且不能为空vc组" userInfo:nil];
-    }
-    
-    // when view is ready, add subviews
-    [self setupSubviews];
 }
 
 - (UICollectionView *)collectionView {

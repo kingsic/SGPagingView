@@ -75,5 +75,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat indicatorDynamicWidth;
 /** 指示器滚动位置改变样式，默认为 SGIndicatorScrollStyleDefault */
 @property (nonatomic, assign) SGIndicatorScrollStyle indicatorScrollStyle;
-
+/** set the title view height dynamic base on text attributes or fixed with init frame/storyboard setting, default is NO*/
+@property (nonatomic, assign) BOOL elasticHeight;
 @end

@@ -74,9 +74,21 @@
 @property (nonatomic, assign) CGFloat endR;
 @property (nonatomic, assign) CGFloat endG;
 @property (nonatomic, assign) CGFloat endB;
+    
+/// check whether init setup done
+@property (nonatomic, assign) BOOL initSetup;
+    
 @end
 
 @implementation SGPageTitleView
+    
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.autoresizesSubviews = YES;
+        _initSetup = NO;
+    }
+    return self;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames configure:(SGPageTitleViewConfigure *)configure {
     if (self = [super initWithFrame:frame]) {
@@ -93,6 +105,8 @@
             @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的配置属性必须设置" userInfo:nil];
         }
         self.configure = configure;
+        
+        _initSetup = NO;
         
         [self initialization];
     }
@@ -131,24 +145,28 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    // check compulsory variables are valid
-    if (self.configure == nil) {
-        @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的配置属性必须设置" userInfo:nil];
-    }else if (self.delegatePageTitleView == nil) {
-        @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的代理方法必须设置" userInfo:nil];
-    }else if (self.titleArr == nil || self.titleArr.count == 0) {
-        @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的标题数组必须设置, 且不能为空数组" userInfo:nil];
-    }
-    
-    // when view is ready, add subviews
-    [self setupSubviews];
-    
-    // 选中按钮下标初始值
-    UIButton *lastBtn = self.btnMArr.lastObject;
-    if (lastBtn.tag >= _selectedIndex && _selectedIndex >= 0) {
-        [self P_btn_action:self.btnMArr[_selectedIndex]];
-    } else {
-        return;
+    if (!_initSetup) {
+        // check compulsory variables are valid
+        if (self.configure == nil) {
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的配置属性必须设置" userInfo:nil];
+        }else if (self.delegatePageTitleView == nil) {
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的代理方法必须设置" userInfo:nil];
+        }else if (self.titleArr == nil || self.titleArr.count == 0) {
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的标题数组必须设置, 且不能为空数组" userInfo:nil];
+        }
+        
+        // when view is ready, add subviews
+        [self setupSubviews];
+        
+        // 选中按钮下标初始值
+        UIButton *lastBtn = self.btnMArr.lastObject;
+        if (lastBtn.tag >= _selectedIndex && _selectedIndex >= 0) {
+            [self P_btn_action:self.btnMArr[_selectedIndex]];
+        } else {
+            return;
+        }
+        
+        _initSetup = YES;
     }
 }
 
@@ -223,9 +241,22 @@
             _indicatorView.layer.borderColor = self.configure.indicatorBorderColor.CGColor;
             
         } else {
+            // 拿到button最大的高度
+            // TODO: 创造一个titleattribute collection, set property maxHeight while insertion
+            CGFloat maxHeight = 0;
+            if (!self.configure.elasticHeight) {
+                maxHeight = self.SG_height;
+            }else {
+                for (TitleAttribute* titleAttr in self.titleAttributes) {
+                    if (titleAttr.height > maxHeight) {
+                        maxHeight = titleAttr.height;
+                    }
+                }
+            }
+            
             CGFloat indicatorViewH = self.configure.indicatorHeight;
             _indicatorView.SG_height = indicatorViewH;
-            _indicatorView.SG_y = self.SG_height - indicatorViewH - self.configure.indicatorToBottomDistance;
+            _indicatorView.SG_y = maxHeight - indicatorViewH - self.configure.indicatorToBottomDistance;
             
             // 圆角处理
             if (self.configure.indicatorCornerRadius > 0.5 * _indicatorView.SG_height) {
@@ -240,12 +271,25 @@
 }
 
 - (UIView *)bottomSeparator {
+    // 拿到button最大的高度
+    // TODO: 创造一个titleattribute collection, set property maxHeight while insertion
+    CGFloat maxHeight = 0;
+    if (!self.configure.elasticHeight) {
+        maxHeight = self.SG_height;
+    }else {
+        for (TitleAttribute* titleAttr in self.titleAttributes) {
+            if (titleAttr.height > maxHeight) {
+                maxHeight = titleAttr.height;
+            }
+        }
+    }
+    
     if (!_bottomSeparator) {
         _bottomSeparator = [[UIView alloc] init];
         CGFloat bottomSeparatorW = self.SG_width;
         CGFloat bottomSeparatorH = 0.5;
         CGFloat bottomSeparatorX = 0;
-        CGFloat bottomSeparatorY = self.SG_height - bottomSeparatorH;
+        CGFloat bottomSeparatorY = maxHeight - bottomSeparatorH;
         _bottomSeparator.frame = CGRectMake(bottomSeparatorX, bottomSeparatorY, bottomSeparatorW, bottomSeparatorH);
         _bottomSeparator.backgroundColor = self.configure.bottomSeparatorColor;
     }
@@ -325,23 +369,45 @@
     // 计算所有按钮的文字宽度
     // 拿到button最大的高度
     CGFloat maxHeight = 0;
-    for (TitleAttribute* titleAttr in self.titleAttributes) {
-        CGFloat tempWidth = titleAttr.width;
-        self.allBtnTextWidth += tempWidth;
-        
-        if (titleAttr.height > maxHeight) {
-            maxHeight = titleAttr.height;
+    if (self.configure.elasticHeight) {
+        for (TitleAttribute* titleAttr in self.titleAttributes) {
+            CGFloat tempWidth = titleAttr.width;
+            self.allBtnTextWidth += tempWidth;
+            
+            if (titleAttr.height > maxHeight) {
+                maxHeight = titleAttr.height;
+            }
         }
+    }else {
+        maxHeight = SGPageTitleViewHeight;
     }
     
     // 所有按钮文字宽度 ＋ 按钮之间的间隔
     self.allBtnWidth = self.configure.spacingBetweenButtons * (self.titleArr.count + 1) + self.allBtnTextWidth;
     self.allBtnWidth = ceilf(self.allBtnWidth);
     
-    // update height of title base on attributed largest height
-    // 20.0 is the padding top/bottom
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, maxHeight + 20.0);
-    self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, maxHeight + 20.0);
+    if (self.configure.elasticHeight) {
+        // update storyboard constraints
+        NSLayoutConstraint *titleViewheightConstraint;
+        
+        for (NSLayoutConstraint *constraint in self.constraints) {
+            if (constraint.firstAttribute == NSLayoutAttributeHeight) {
+                titleViewheightConstraint = constraint;
+                break;
+            }
+        }
+        
+        if (titleViewheightConstraint != nil) {
+            titleViewheightConstraint.constant = maxHeight;
+            // TODO: add padding option top/bottom
+            self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, maxHeight);
+        }else {
+            // update height of title base on attributed largest height
+            self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, maxHeight);
+            // TODO: add padding option top/bottom
+            self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, maxHeight);
+        }
+    }
     
     NSInteger titleCount = self.titleAttributes.count;
     if (self.allBtnWidth <= self.bounds.size.width) { // SGPageTitleView 静止样式
@@ -349,9 +415,9 @@
         CGFloat btnW = SGPageTitleViewWidth / self.titleArr.count;
         CGFloat btnH = 0;
         if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
-            btnH = SGPageTitleViewHeight - self.configure.indicatorHeight;
+            btnH = maxHeight - self.configure.indicatorHeight;
         } else {
-            btnH = SGPageTitleViewHeight;
+            btnH = maxHeight;
         }
         for (NSInteger index = 0; index < titleCount; index++) {
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
@@ -380,9 +446,9 @@
         CGFloat btnH = 0;
         
         if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
-            btnH = SGPageTitleViewHeight - self.configure.indicatorHeight;
+            btnH = maxHeight - self.configure.indicatorHeight;
         }else {
-            btnH = SGPageTitleViewHeight;
+            btnH = maxHeight;
         }
         
         for (NSInteger index = 0; index < titleCount; index++) {
@@ -392,7 +458,7 @@
             CGFloat btnW = titleAttr.width + self.configure.spacingBetweenButtons;
             
             if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
-                btnH = SGPageTitleViewHeight - self.configure.indicatorHeight;
+                btnH = maxHeight - self.configure.indicatorHeight;
             } else {
                 CGFloat calculatedHeight = titleAttr.height;
                 if (btnH < calculatedHeight) {
@@ -419,7 +485,7 @@
         [self setupEndColor:self.configure.titleSelectedColor];
         
         CGFloat scrollViewWidth = CGRectGetMaxX(self.scrollView.subviews.lastObject.frame);
-        self.scrollView.contentSize = CGSizeMake(scrollViewWidth, SGPageTitleViewHeight);
+        self.scrollView.contentSize = CGSizeMake(scrollViewWidth, maxHeight);
     }
 }
 
