@@ -50,6 +50,7 @@
     configure.indicatorToBottomDistance = 5;
     configure.titleSelectedFont = [UIFont systemFontOfSize:18];
     configure.indicatorStyle = SGIndicatorStyleFixed;
+    configure.elasticHeight = true;
     
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
@@ -68,7 +69,8 @@
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
     /// pageContentView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
-    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame) + 200.0, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
+    // 因为是用frame, 所以+100.0, 有一定问题，用storyboard可解决
+    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame) + 100.0, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
     _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
 }

@@ -114,8 +114,11 @@
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        // TODO: make a configuration setting for this option
-        _collectionView.prefetchingEnabled = NO;
+        
+        if (@available(iOS 10.0, *)) {
+            // TODO: make a configuration setting for this option
+            _collectionView.prefetchingEnabled = NO;
+        }
         
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     }

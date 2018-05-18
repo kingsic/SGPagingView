@@ -50,6 +50,7 @@
     configure.indicatorColor = [UIColor blackColor];
     configure.indicatorAdditionalWidth = 100; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
     configure.indicatorHeight = 122; // 说明：不设置，遮盖样式下，默认高度为文字高度 + 5；若设置无限大，则高度为 PageTitleView 高度
+    configure.elasticHeight = true;
     
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
@@ -67,7 +68,8 @@
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
     /// pageContentView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
-    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame) + 200.0, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
+    // 因为是用frame, 所以+20.0, 有一定问题，用storyboard可解决
+    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame) + 20.0, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
     _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
 }
