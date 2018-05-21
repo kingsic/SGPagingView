@@ -15,7 +15,6 @@
 #import "UIView+SGPagingView.h"
 #import "SGPageTitleViewConfigure.h"
 
-#define SGPageTitleViewWidth self.frame.size.width
 #define SGPageTitleViewHeight self.frame.size.height
 
 #pragma mark - - - SGPageTitleButton
@@ -81,7 +80,8 @@
 @end
 
 @implementation SGPageTitleView
-    
+
+#pragma mark - init
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
         self.autoresizesSubviews = YES;
@@ -112,16 +112,18 @@
     }
     return self;
 }
+
 + (instancetype)pageTitleViewWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames configure:(SGPageTitleViewConfigure *)configure {
     return [[self alloc] initWithFrame:frame delegate:delegate titleNames:titleNames configure:configure];
 }
 
+#pragma mark - instance methods
 - (void)initialization {
+    // TODO: need to fix those options
     _isTitleGradientEffect = YES;
     _isOpenTitleTextZoom = NO;
     _isShowIndicator = YES;
     _isNeedBounces = YES;
-    _isShowBottomSeparator = YES;
 
     _selectedIndex = 0;
     _titleTextScaling = 0.1;
@@ -136,12 +138,14 @@
     // 2、添加标题按钮
     [self setupTitleButtons];
     // 3、添加底部分割线
-    [self addSubview:self.bottomSeparator];
+    if (_isShowBottomSeparator == YES) {
+        [self addSubview:self.bottomSeparator];
+    }
     // 4、添加指示器
     [self.scrollView insertSubview:self.indicatorView atIndex:0];
 }
 
-#pragma mark - - - layoutSubviews
+#pragma mark - lifecycle
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -170,7 +174,27 @@
     }
 }
 
-#pragma mark - - - 懒加载
+#pragma mark - lazy loading
+- (CGFloat)titleViewWidth {
+    if(!_titleViewWidth) {
+        _titleViewWidth = self.frame.size.width;
+    }
+    return _titleViewWidth;
+}
+- (CGFloat)buttonPaddingX {
+    if(!_buttonPaddingX) {
+        _buttonPaddingX = 0;
+    }
+    return _buttonPaddingX;
+}
+    
+- (BOOL)isShowBottomSeparator {
+    if(!_isShowBottomSeparator) {
+        _isShowBottomSeparator = YES;
+    }
+    return _isShowBottomSeparator;
+}
+    
 - (NSArray *)titleArr {
     if (!_titleArr) {
         _titleArr = [NSArray array];
@@ -198,7 +222,7 @@
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.alwaysBounceHorizontal = YES;
-        _scrollView.frame = CGRectMake(0, 0, SGPageTitleViewWidth, SGPageTitleViewHeight);
+        _scrollView.frame = CGRectMake(0, 0, self.titleViewWidth, SGPageTitleViewHeight);
     }
     return _scrollView;
 }
@@ -286,7 +310,7 @@
     
     if (!_bottomSeparator) {
         _bottomSeparator = [[UIView alloc] init];
-        CGFloat bottomSeparatorW = self.SG_width;
+        CGFloat bottomSeparatorW = self.titleViewWidth;
         CGFloat bottomSeparatorH = 0.5;
         CGFloat bottomSeparatorX = 0;
         CGFloat bottomSeparatorY = maxHeight - bottomSeparatorH;
@@ -379,6 +403,10 @@
             }
         }
     }else {
+        for (TitleAttribute* titleAttr in self.titleAttributes) {
+            CGFloat tempWidth = titleAttr.width;
+            self.allBtnTextWidth += tempWidth;
+        }
         maxHeight = SGPageTitleViewHeight;
     }
     
@@ -410,9 +438,9 @@
     }
     
     NSInteger titleCount = self.titleAttributes.count;
-    if (self.allBtnWidth <= self.bounds.size.width) { // SGPageTitleView 静止样式
+    if (self.allBtnWidth <= self.titleViewWidth) { // SGPageTitleView 静止样式
         CGFloat btnY = 0;
-        CGFloat btnW = SGPageTitleViewWidth / self.titleArr.count;
+        CGFloat btnW = self.titleViewWidth / self.titleArr.count;
         CGFloat btnH = 0;
         if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
             btnH = maxHeight - self.configure.indicatorHeight;
@@ -423,7 +451,8 @@
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
             TitleAttribute* titleAttr = self.titleAttributes[index];
             
-            CGFloat btnX = btnW * index;
+            // shifting buttonPaddingX for needed
+            CGFloat btnX = btnW * index - self.buttonPaddingX;
             btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
             btn.tag = index;
             
@@ -438,7 +467,7 @@
             [self setupStartColor:self.configure.titleColor];
             [self setupEndColor:self.configure.titleSelectedColor];
         }
-        self.scrollView.contentSize = CGSizeMake(SGPageTitleViewWidth, SGPageTitleViewHeight);
+        self.scrollView.contentSize = CGSizeMake(self.titleViewWidth, SGPageTitleViewHeight);
         
     } else { // SGPageTitleView 滚动样式
         CGFloat btnX = 0;
@@ -494,7 +523,7 @@
     // 1、改变按钮的选择状态
     [self P_changeSelectedButton:button];
     // 2、滚动标题选中按钮居中
-    if (self.allBtnWidth > SGPageTitleViewWidth) {
+    if (self.allBtnWidth > self.titleViewWidth) {
         [self P_selectedBtnCenter:button];
     }
     // 3、改变指示器的位置以及指示器宽度样式
@@ -553,10 +582,10 @@
 #pragma mark - - - 滚动标题选中按钮居中
 - (void)P_selectedBtnCenter:(UIButton *)centerBtn {
     // 计算偏移量
-    CGFloat offsetX = centerBtn.center.x - SGPageTitleViewWidth * 0.5;
+    CGFloat offsetX = centerBtn.center.x - self.titleViewWidth * 0.5;
     if (offsetX < 0) offsetX = 0;
     // 获取最大滚动范围
-    CGFloat maxOffsetX = self.scrollView.contentSize.width - SGPageTitleViewWidth;
+    CGFloat maxOffsetX = self.scrollView.contentSize.width - self.titleViewWidth;
     if (offsetX > maxOffsetX) offsetX = maxOffsetX;
     // 滚动标题滚动条
     [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
@@ -595,7 +624,7 @@
     // 2、 滚动标题选中居中
     [self P_selectedBtnCenter:targetBtn];
     // 3、处理指示器的逻辑
-    if (self.allBtnWidth <= self.bounds.size.width) { /// SGPageTitleView 不可滚动
+    if (self.allBtnWidth <= self.titleViewWidth) { /// SGPageTitleView 不可滚动
         if (self.configure.indicatorScrollStyle == SGIndicatorScrollStyleDefault) {
             [self P_smallIndicatorScrollStyleDefaultWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
         } else {
@@ -1032,16 +1061,6 @@
     if (isShowIndicator == NO) {
         [self.indicatorView removeFromSuperview];
         self.indicatorView = nil;
-    }
-}
-
-- (void)setIsShowBottomSeparator:(BOOL)isShowBottomSeparator {
-    _isShowBottomSeparator = isShowBottomSeparator;
-    if (isShowBottomSeparator) {
-        
-    } else {
-        [self.bottomSeparator removeFromSuperview];
-        self.bottomSeparator = nil;
     }
 }
 

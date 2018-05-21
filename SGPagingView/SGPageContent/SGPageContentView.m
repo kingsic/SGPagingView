@@ -30,6 +30,7 @@
 
 @implementation SGPageContentView
 
+#pragma mark - init
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
         _initSetup = NO;
@@ -58,7 +59,36 @@
 + (instancetype)pageContentViewWithFrame:(CGRect)frame parentVC:(UIViewController *)parentVC childVCs:(NSArray *)childVCs {
     return [[self alloc] initWithFrame:frame parentVC:parentVC childVCs:childVCs];
 }
+    
+#pragma mark - getter & setter
+- (CGFloat)collectionViewWidth {
+    if (!_collectionViewWidth) {
+        _collectionViewWidth = self.bounds.size.width;
+    }
+    return _collectionViewWidth;
+}
+    
+- (UICollectionView *)collectionView {
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.itemSize = CGSizeMake(self.collectionViewWidth, self.bounds.size.height);
+        flowLayout.minimumLineSpacing = 0;
+        flowLayout.minimumInteritemSpacing = 0;
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        _collectionView.showsVerticalScrollIndicator = NO;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.pagingEnabled = YES;
+        _collectionView.bounces = NO;
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        
+        [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    }
+    return _collectionView;
+}
 
+#pragma mark - instance methods
 - (void)initialization {
     self.isClickBtn = NO;
     self.startOffsetX = 0;
@@ -82,12 +112,14 @@
     
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
+    
     if (@available(iOS 10.0, *)) {
         // TODO: make a configuration setting for this option
         _collectionView.prefetchingEnabled = NO;
     }
 }
 
+#pragma mark - lifecycle
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -108,28 +140,7 @@
     }
 }
 
-- (UICollectionView *)collectionView {
-    if (!_collectionView) {
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = self.bounds.size;
-        flowLayout.minimumLineSpacing = 0;
-        flowLayout.minimumInteritemSpacing = 0;
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
-        
-        _collectionView.showsVerticalScrollIndicator = NO;
-        _collectionView.showsHorizontalScrollIndicator = NO;
-        _collectionView.pagingEnabled = YES;
-        _collectionView.bounces = NO;
-        _collectionView.backgroundColor = [UIColor whiteColor];
-        
-        [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
-    }
-    return _collectionView;
-}
-
-#pragma mark - - - UICollectionViewDataSource
+#pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.childViewControllers.count;
 }
@@ -139,9 +150,18 @@
     [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     // 设置内容
     UIViewController *childVC = self.childViewControllers[indexPath.item];
-    childVC.view.frame = cell.contentView.frame;
     [cell.contentView addSubview:childVC.view];
+    
+    [childVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(cell.contentView);
+    }];
+    
     return cell;
+}
+
+#pragma mark - - - UICollectionViewDelegate
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(self.collectionViewWidth, self.frame.size.height);
 }
 
 #pragma mark - - - UIScrollViewDelegate
@@ -173,7 +193,7 @@
     NSInteger targetIndex = 0;
     // 2、判断是左滑还是右滑
     CGFloat currentOffsetX = scrollView.contentOffset.x;
-    CGFloat scrollViewW = scrollView.bounds.size.width;
+    CGFloat scrollViewW = self.collectionViewWidth;
     if (currentOffsetX > self.startOffsetX) { // 左滑
         // 1、计算 progress
         progress = currentOffsetX / scrollViewW - floor(currentOffsetX / scrollViewW);
@@ -210,7 +230,7 @@
 #pragma mark - - - 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
 - (void)setPageContentViewCurrentIndex:(NSInteger)currentIndex {
     self.isClickBtn = YES;
-    CGFloat offsetX = currentIndex * self.collectionView.SG_width;
+    CGFloat offsetX = currentIndex * self.collectionViewWidth;
     // 1、处理内容偏移
     self.collectionView.contentOffset = CGPointMake(offsetX, 0);
     // 2、pageContentView:offsetX:
