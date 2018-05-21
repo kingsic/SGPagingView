@@ -13,6 +13,7 @@
 
 #import "SGPageContentView.h"
 #import "UIView+SGPagingView.h"
+#import <Masonry.h>
 
 @interface SGPageContentView () <UICollectionViewDataSource, UICollectionViewDelegate>
 /// collectionView
@@ -73,6 +74,18 @@
     }
     // 2、添加UICollectionView, 用于在Cell中存放控制器的View
     [self addSubview:self.collectionView];
+    
+    // 3. add constraints to collectionView
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self);
+    }];
+    
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
+    if (@available(iOS 10.0, *)) {
+        // TODO: make a configuration setting for this option
+        _collectionView.prefetchingEnabled = NO;
+    }
 }
 
 - (void)layoutSubviews {
@@ -102,23 +115,14 @@
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        CGFloat collectionViewX = 0;
-        CGFloat collectionViewY = 0;
-        CGFloat collectionViewW = self.SG_width;
-        CGFloat collectionViewH = self.SG_height;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(collectionViewX, collectionViewY, collectionViewW, collectionViewH) collectionViewLayout:flowLayout];
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.pagingEnabled = YES;
         _collectionView.bounces = NO;
         _collectionView.backgroundColor = [UIColor whiteColor];
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        
-        if (@available(iOS 10.0, *)) {
-            // TODO: make a configuration setting for this option
-            _collectionView.prefetchingEnabled = NO;
-        }
         
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     }

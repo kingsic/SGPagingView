@@ -22,10 +22,7 @@
 		182513D61F21CC340039F4A2 /* PersonalCenterTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513BD1F21CC340039F4A2 /* PersonalCenterTableView.m */; };
 		182513D71F21CC340039F4A2 /* PersonalCenterTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513BF1F21CC340039F4A2 /* PersonalCenterTopView.m */; };
 		182513D81F21CC340039F4A2 /* PersonalCenterTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182513C01F21CC340039F4A2 /* PersonalCenterTopView.xib */; };
-		182513E91F21D1600039F4A2 /* UIView+SGPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513DD1F21D1600039F4A2 /* UIView+SGPagingView.m */; };
-		182513EA1F21D1600039F4A2 /* SGPageContentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */; };
-		18B036D21F21D835004C7DE7 /* SGPageTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B036D11F21D835004C7DE7 /* SGPageTitleView.m */; };
-		18B036D51F21D8B2004C7DE7 /* SGPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B036D41F21D8B2004C7DE7 /* SGPageContentView.m */; };
+		26F6A57D2E9A64A7B546E9CB /* libPods-SGPagingViewExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 351BF74E9DF54C40D15499CB /* libPods-SGPagingViewExample.a */; };
 		8D0F8E311FD95DE300F30426 /* DefaultCoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E1E1FD95DE300F30426 /* DefaultCoverVC.m */; };
 		8D0F8E321FD95DE300F30426 /* DefaultFixedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E201FD95DE300F30426 /* DefaultFixedVC.m */; };
 		8D0F8E331FD95DE300F30426 /* DefaultGradientEffectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E221FD95DE300F30426 /* DefaultGradientEffectVC.m */; };
@@ -57,8 +54,9 @@
 		8D0F8E711FD95E2300F30426 /* ChildVCThree.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0F8E5B1FD95E2300F30426 /* ChildVCThree.xib */; };
 		8D0F8E721FD95E2300F30426 /* ChildVCTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E5D1FD95E2300F30426 /* ChildVCTwo.m */; };
 		8D0F8E731FD95E2300F30426 /* ChildVCTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0F8E5E1FD95E2300F30426 /* ChildVCTwo.xib */; };
-		8DCB02AA1F95B0FF00C9598A /* SGPageTitleViewConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB02A91F95B0FF00C9598A /* SGPageTitleViewConfigure.m */; };
 		9A3EDE201FF4C5C600DC1EB2 /* DefaultDynamicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3EDE1F1FF4C5C600DC1EB2 /* DefaultDynamicVC.m */; };
+		B2A4629705365324D8F1DEC1 /* libPods-SGPagingViewExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2E88965FAFF577AA72A30B9 /* libPods-SGPagingViewExampleTests.a */; };
+		D7F790C80DE11F9AE256786C /* libPods-SGPagingViewExampleUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA529A095568D291B0EFCAD /* libPods-SGPagingViewExampleUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,15 +106,13 @@
 		182513BE1F21CC340039F4A2 /* PersonalCenterTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterTopView.h; sourceTree = "<group>"; };
 		182513BF1F21CC340039F4A2 /* PersonalCenterTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterTopView.m; sourceTree = "<group>"; };
 		182513C01F21CC340039F4A2 /* PersonalCenterTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalCenterTopView.xib; sourceTree = "<group>"; };
-		182513DC1F21D1600039F4A2 /* UIView+SGPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SGPagingView.h"; sourceTree = "<group>"; };
-		182513DD1F21D1600039F4A2 /* UIView+SGPagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SGPagingView.m"; sourceTree = "<group>"; };
-		182513DF1F21D1600039F4A2 /* SGPageContentScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageContentScrollView.h; sourceTree = "<group>"; };
-		182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageContentScrollView.m; sourceTree = "<group>"; };
-		182513EE1F21D2C90039F4A2 /* SGPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPagingView.h; sourceTree = "<group>"; };
-		18B036D01F21D835004C7DE7 /* SGPageTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageTitleView.h; sourceTree = "<group>"; };
-		18B036D11F21D835004C7DE7 /* SGPageTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageTitleView.m; sourceTree = "<group>"; };
-		18B036D31F21D8B2004C7DE7 /* SGPageContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageContentView.h; sourceTree = "<group>"; };
-		18B036D41F21D8B2004C7DE7 /* SGPageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageContentView.m; sourceTree = "<group>"; };
+		1E1968EAB355EDD8738AB45E /* Pods-SGPagingViewExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SGPagingViewExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SGPagingViewExampleTests/Pods-SGPagingViewExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		351BF74E9DF54C40D15499CB /* libPods-SGPagingViewExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SGPagingViewExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		45606911C13623F95AE288F1 /* Pods-SGPagingViewExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SGPagingViewExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SGPagingViewExampleTests/Pods-SGPagingViewExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		49574B00B9638E0327C58814 /* Pods-SGPagingViewExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SGPagingViewExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-SGPagingViewExample/Pods-SGPagingViewExample.release.xcconfig"; sourceTree = "<group>"; };
+		6BA72FA20000FEC47A6CAB2F /* Pods-SGPagingViewExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SGPagingViewExampleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SGPagingViewExampleUITests/Pods-SGPagingViewExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6FA529A095568D291B0EFCAD /* libPods-SGPagingViewExampleUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SGPagingViewExampleUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		71E2FB89C58D05751210C83D /* Pods-SGPagingViewExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SGPagingViewExampleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SGPagingViewExampleUITests/Pods-SGPagingViewExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8D0F8E1D1FD95DE300F30426 /* DefaultCoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultCoverVC.h; sourceTree = "<group>"; };
 		8D0F8E1E1FD95DE300F30426 /* DefaultCoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultCoverVC.m; sourceTree = "<group>"; };
 		8D0F8E1F1FD95DE300F30426 /* DefaultFixedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultFixedVC.h; sourceTree = "<group>"; };
@@ -172,10 +168,10 @@
 		8D0F8E5C1FD95E2300F30426 /* ChildVCTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildVCTwo.h; sourceTree = "<group>"; };
 		8D0F8E5D1FD95E2300F30426 /* ChildVCTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildVCTwo.m; sourceTree = "<group>"; };
 		8D0F8E5E1FD95E2300F30426 /* ChildVCTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildVCTwo.xib; sourceTree = "<group>"; };
-		8DCB02A81F95B0FF00C9598A /* SGPageTitleViewConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageTitleViewConfigure.h; sourceTree = "<group>"; };
-		8DCB02A91F95B0FF00C9598A /* SGPageTitleViewConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageTitleViewConfigure.m; sourceTree = "<group>"; };
 		9A3EDE1E1FF4C5C600DC1EB2 /* DefaultDynamicVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultDynamicVC.h; sourceTree = "<group>"; };
 		9A3EDE1F1FF4C5C600DC1EB2 /* DefaultDynamicVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultDynamicVC.m; sourceTree = "<group>"; };
+		A2E88965FAFF577AA72A30B9 /* libPods-SGPagingViewExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SGPagingViewExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADFBC617693B37557BAD4FAA /* Pods-SGPagingViewExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SGPagingViewExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SGPagingViewExample/Pods-SGPagingViewExample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26F6A57D2E9A64A7B546E9CB /* libPods-SGPagingViewExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2A4629705365324D8F1DEC1 /* libPods-SGPagingViewExampleTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,20 +195,35 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7F790C80DE11F9AE256786C /* libPods-SGPagingViewExampleUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F2273CB0CF0C53D0ECDDCE8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ADFBC617693B37557BAD4FAA /* Pods-SGPagingViewExample.debug.xcconfig */,
+				49574B00B9638E0327C58814 /* Pods-SGPagingViewExample.release.xcconfig */,
+				1E1968EAB355EDD8738AB45E /* Pods-SGPagingViewExampleTests.debug.xcconfig */,
+				45606911C13623F95AE288F1 /* Pods-SGPagingViewExampleTests.release.xcconfig */,
+				6BA72FA20000FEC47A6CAB2F /* Pods-SGPagingViewExampleUITests.debug.xcconfig */,
+				71E2FB89C58D05751210C83D /* Pods-SGPagingViewExampleUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		182513371F21CAC30039F4A2 = {
 			isa = PBXGroup;
 			children = (
-				182513DA1F21D1600039F4A2 /* SGPagingView */,
 				182513421F21CAC30039F4A2 /* SGPagingViewExample */,
 				1825135C1F21CAC30039F4A2 /* SGPagingViewExampleTests */,
 				182513671F21CAC30039F4A2 /* SGPagingViewExampleUITests */,
 				182513411F21CAC30039F4A2 /* Products */,
+				0F2273CB0CF0C53D0ECDDCE8 /* Pods */,
+				28FE2216C6E65A6A36EDA4E5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -329,46 +342,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		182513DA1F21D1600039F4A2 /* SGPagingView */ = {
+		28FE2216C6E65A6A36EDA4E5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				182513EE1F21D2C90039F4A2 /* SGPagingView.h */,
-				182513E31F21D1600039F4A2 /* SGPageTitle */,
-				182513DE1F21D1600039F4A2 /* SGPageContent */,
-				182513DB1F21D1600039F4A2 /* Category */,
+				351BF74E9DF54C40D15499CB /* libPods-SGPagingViewExample.a */,
+				A2E88965FAFF577AA72A30B9 /* libPods-SGPagingViewExampleTests.a */,
+				6FA529A095568D291B0EFCAD /* libPods-SGPagingViewExampleUITests.a */,
 			);
-			path = SGPagingView;
-			sourceTree = "<group>";
-		};
-		182513DB1F21D1600039F4A2 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				182513DC1F21D1600039F4A2 /* UIView+SGPagingView.h */,
-				182513DD1F21D1600039F4A2 /* UIView+SGPagingView.m */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
-		182513DE1F21D1600039F4A2 /* SGPageContent */ = {
-			isa = PBXGroup;
-			children = (
-				18B036D31F21D8B2004C7DE7 /* SGPageContentView.h */,
-				18B036D41F21D8B2004C7DE7 /* SGPageContentView.m */,
-				182513DF1F21D1600039F4A2 /* SGPageContentScrollView.h */,
-				182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */,
-			);
-			path = SGPageContent;
-			sourceTree = "<group>";
-		};
-		182513E31F21D1600039F4A2 /* SGPageTitle */ = {
-			isa = PBXGroup;
-			children = (
-				8DCB02A81F95B0FF00C9598A /* SGPageTitleViewConfigure.h */,
-				8DCB02A91F95B0FF00C9598A /* SGPageTitleViewConfigure.m */,
-				18B036D01F21D835004C7DE7 /* SGPageTitleView.h */,
-				18B036D11F21D835004C7DE7 /* SGPageTitleView.m */,
-			);
-			path = SGPageTitle;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8D0F8E1C1FD95DE300F30426 /* MainVC */ = {
@@ -449,6 +430,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1825136D1F21CAC30039F4A2 /* Build configuration list for PBXNativeTarget "SGPagingViewExample" */;
 			buildPhases = (
+				03C1A19BF5718CC2E66CA601 /* [CP] Check Pods Manifest.lock */,
 				1825133C1F21CAC30039F4A2 /* Sources */,
 				1825133D1F21CAC30039F4A2 /* Frameworks */,
 				1825133E1F21CAC30039F4A2 /* Resources */,
@@ -466,6 +448,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 182513701F21CAC30039F4A2 /* Build configuration list for PBXNativeTarget "SGPagingViewExampleTests" */;
 			buildPhases = (
+				3BCFA1EB31A4DDF8C85C8463 /* [CP] Check Pods Manifest.lock */,
 				182513551F21CAC30039F4A2 /* Sources */,
 				182513561F21CAC30039F4A2 /* Frameworks */,
 				182513571F21CAC30039F4A2 /* Resources */,
@@ -484,6 +467,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 182513731F21CAC30039F4A2 /* Build configuration list for PBXNativeTarget "SGPagingViewExampleUITests" */;
 			buildPhases = (
+				32F673740E80516F975FEB13 /* [CP] Check Pods Manifest.lock */,
 				182513601F21CAC30039F4A2 /* Sources */,
 				182513611F21CAC30039F4A2 /* Frameworks */,
 				182513621F21CAC30039F4A2 /* Resources */,
@@ -504,7 +488,7 @@
 		182513381F21CAC30039F4A2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Sorgle;
 				TargetAttributes = {
 					1825133F1F21CAC30039F4A2 = {
@@ -578,6 +562,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		03C1A19BF5718CC2E66CA601 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SGPagingViewExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		32F673740E80516F975FEB13 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SGPagingViewExampleUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3BCFA1EB31A4DDF8C85C8463 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SGPagingViewExampleTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1825133C1F21CAC30039F4A2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -591,15 +632,11 @@
 				182513D71F21CC340039F4A2 /* PersonalCenterTopView.m in Sources */,
 				8D0F8E381FD95DE300F30426 /* DefaultThreeCoverVC.m in Sources */,
 				1825134B1F21CAC30039F4A2 /* ViewController.m in Sources */,
-				18B036D21F21D835004C7DE7 /* SGPageTitleView.m in Sources */,
 				8D0F8E681FD95E2300F30426 /* ChildVCFour.m in Sources */,
-				182513EA1F21D1600039F4A2 /* SGPageContentScrollView.m in Sources */,
 				8D0F8E611FD95E2300F30426 /* ChildFirstPopGestureVC.m in Sources */,
 				8D0F8E6E1FD95E2300F30426 /* ChildVCSeven.m in Sources */,
 				8D0F8E371FD95DE300F30426 /* DefaultStaticVC.m in Sources */,
 				182513D21F21CC340039F4A2 /* NavigationBarVC.m in Sources */,
-				8DCB02AA1F95B0FF00C9598A /* SGPageTitleViewConfigure.m in Sources */,
-				18B036D51F21D8B2004C7DE7 /* SGPageContentView.m in Sources */,
 				8D0F8E3A1FD95DE300F30426 /* DefaultZoomVC.m in Sources */,
 				182513D61F21CC340039F4A2 /* PersonalCenterTableView.m in Sources */,
 				182513D31F21CC340039F4A2 /* NavigationBarTitleView.m in Sources */,
@@ -616,7 +653,6 @@
 				8D0F8E6A1FD95E2300F30426 /* ChildVCFull.m in Sources */,
 				182513481F21CAC30039F4A2 /* AppDelegate.m in Sources */,
 				8D0F8E361FD95DE300F30426 /* DefaultScrollVC.m in Sources */,
-				182513E91F21D1600039F4A2 /* UIView+SGPagingView.m in Sources */,
 				8D0F8E321FD95DE300F30426 /* DefaultFixedVC.m in Sources */,
 				182513451F21CAC30039F4A2 /* main.m in Sources */,
 				8D0F8E331FD95DE300F30426 /* DefaultGradientEffectVC.m in Sources */,
@@ -690,6 +726,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -697,6 +734,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -744,6 +782,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -751,6 +790,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -780,9 +820,11 @@
 		};
 		1825136E1F21CAC30039F4A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADFBC617693B37557BAD4FAA /* Pods-SGPagingViewExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = SGPagingViewExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Sorgle.SGPagingViewExample;
@@ -792,9 +834,11 @@
 		};
 		1825136F1F21CAC30039F4A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49574B00B9638E0327C58814 /* Pods-SGPagingViewExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = SGPagingViewExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Sorgle.SGPagingViewExample;
@@ -804,6 +848,7 @@
 		};
 		182513711F21CAC30039F4A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E1968EAB355EDD8738AB45E /* Pods-SGPagingViewExampleTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SGPagingViewExampleTests/Info.plist;
@@ -816,6 +861,7 @@
 		};
 		182513721F21CAC30039F4A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45606911C13623F95AE288F1 /* Pods-SGPagingViewExampleTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SGPagingViewExampleTests/Info.plist;
@@ -828,6 +874,7 @@
 		};
 		182513741F21CAC30039F4A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BA72FA20000FEC47A6CAB2F /* Pods-SGPagingViewExampleUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = SGPagingViewExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -839,6 +886,7 @@
 		};
 		182513751F21CAC30039F4A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71E2FB89C58D05751210C83D /* Pods-SGPagingViewExampleUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = SGPagingViewExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
