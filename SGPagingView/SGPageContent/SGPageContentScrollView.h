@@ -57,7 +57,7 @@
 /** 是否需要滚动 SGPageContentScrollView 默认为 YES；设为 NO 时，不必设置 SGPageContentScrollView 的代理及代理方法 */
 @property (nonatomic, assign) BOOL isScrollEnabled;
 
-/** 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标 */
+/** 给外界提供的方法，根据 SGPageTitleView 标题选中时的下标并显示相应的子控制器 */
 - (void)setPageContentScrollViewCurrentIndex:(NSInteger)currentIndex;
 
 @end

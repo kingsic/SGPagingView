@@ -32,6 +32,7 @@
     return [[self alloc] init];
 }
 
+#pragma mark - - SGPageTitleView 属性
 - (UIColor *)bottomSeparatorColor {
     if (!_bottomSeparatorColor) {
         _bottomSeparatorColor = [UIColor lightGrayColor];
@@ -39,13 +40,7 @@
     return _bottomSeparatorColor;
 }
 
-- (CGFloat)spacingBetweenButtons {
-    if (_spacingBetweenButtons <= 0) {
-        _spacingBetweenButtons = 20;
-    }
-    return _spacingBetweenButtons;
-}
-
+#pragma mark - - 标题属性
 - (UIFont *)titleFont {
     if (!_titleFont) {
         _titleFont = [UIFont systemFontOfSize:15];
@@ -83,6 +78,14 @@
     return _titleTextScaling;
 }
 
+- (CGFloat)spacingBetweenButtons {
+    if (_spacingBetweenButtons <= 0) {
+        _spacingBetweenButtons = 20;
+    }
+    return _spacingBetweenButtons;
+}
+
+#pragma mark - - 指示器属性
 - (UIColor *)indicatorColor {
     if (!_indicatorColor) {
         _indicatorColor = [UIColor redColor];
@@ -155,6 +158,7 @@
     return _indicatorDynamicWidth;
 }
 
+#pragma mark - - 按钮之间分割线属性
 - (UIColor *)verticalSeparatorColor {
     if (!_verticalSeparatorColor) {
         _verticalSeparatorColor = [UIColor redColor];

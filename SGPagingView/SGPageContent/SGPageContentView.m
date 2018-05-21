@@ -32,11 +32,11 @@
 - (instancetype)initWithFrame:(CGRect)frame parentVC:(UIViewController *)parentVC childVCs:(NSArray *)childVCs {
     if (self = [super initWithFrame:frame]) {
         if (parentVC == nil) {
-            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentScrollView 所在控制器必须设置" userInfo:nil];
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 初始化方法中所在控制器必须设置" userInfo:nil];
         }
         self.parentViewController = parentVC;
         if (childVCs == nil) {
-            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentScrollView 子控制器必须设置" userInfo:nil];
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageContentView 初始化方法中子控制器必须设置" userInfo:nil];
         }
         self.childViewControllers = childVCs;
         

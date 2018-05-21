@@ -68,15 +68,15 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.77];
         if (delegate == nil) {
-            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的代理方法必须设置" userInfo:nil];
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 初始化方法中的代理必须设置" userInfo:nil];
         }
         self.delegatePageTitleView = delegate;
         if (titleNames == nil) {
-            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的标题数组必须设置" userInfo:nil];
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 初始化方法中的标题数组必须设置" userInfo:nil];
         }
         self.titleArr = titleNames;
         if (configure == nil) {
-            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 的配置属性必须设置" userInfo:nil];
+            @throw [NSException exceptionWithName:@"SGPagingView" reason:@"SGPageTitleView 初始化方法中的配置信息必须设置" userInfo:nil];
         }
         self.configure = configure;
         
