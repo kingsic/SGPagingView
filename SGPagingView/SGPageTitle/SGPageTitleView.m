@@ -464,27 +464,39 @@
         }
     }
 }
+
 /**
- *  根据下标重置标题文字
+ *  根据标题下标重置标题文字
  *
- *  @param index 标题所对应的下标
- *  @param title 新标题名
+ *  @param title    标题名
+ *  @param index    标题所对应的下标
  */
-- (void)resetTitleWithIndex:(NSInteger)index newTitle:(NSString *)title {
-    if (index < self.btnMArr.count) {
-        UIButton *button = (UIButton *)self.btnMArr[index];
-        [button setTitle:title forState:UIControlStateNormal];
-        if (self.signBtnIndex == index) {
-            if (self.configure.indicatorStyle == SGIndicatorStyleDefault || self.configure.indicatorStyle == SGIndicatorStyleCover) {
-                CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + [self SG_widthWithString:button.currentTitle font:self.configure.titleFont];
-                if (tempIndicatorWidth > button.SG_width) {
-                    tempIndicatorWidth = button.SG_width;
-                }
-                self.indicatorView.SG_width = tempIndicatorWidth;
-                self.indicatorView.SG_centerX = button.SG_centerX;
+- (void)resetTitle:(NSString *)title forIndex:(NSInteger)index {
+    UIButton *button = (UIButton *)self.btnMArr[index];
+    [button setTitle:title forState:UIControlStateNormal];
+    if (self.signBtnIndex == index) {
+        if (self.configure.indicatorStyle == SGIndicatorStyleDefault || self.configure.indicatorStyle == SGIndicatorStyleCover) {
+            CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + [self SG_widthWithString:button.currentTitle font:self.configure.titleFont];
+            if (tempIndicatorWidth > button.SG_width) {
+                tempIndicatorWidth = button.SG_width;
             }
+            self.indicatorView.SG_width = tempIndicatorWidth;
+            self.indicatorView.SG_centerX = button.SG_centerX;
         }
     }
+}
+
+/**
+ *  根据标题下标设置标题的 attributedTitle 属性
+ *
+ *  @param attributedTitle      attributedTitle 属性
+ *  @param selectedAttributedTitle      选中状态下 attributedTitle 属性
+ *  @param index     标题所对应的下标
+ */
+- (void)setAttributedTitle:(NSMutableAttributedString *)attributedTitle selectedAttributedTitle:(NSMutableAttributedString *)selectedAttributedTitle forIndex:(NSInteger)index {
+    UIButton *button = (UIButton *)self.btnMArr[index];
+    [button setAttributedTitle:attributedTitle forState:(UIControlStateNormal)];
+    [button setAttributedTitle:selectedAttributedTitle forState:(UIControlStateSelected)];
 }
 
 #pragma mark - - - SGPageTitleView 静止样式下指示器默认滚动样式（SGIndicatorScrollStyleDefault）

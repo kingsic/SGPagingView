@@ -73,8 +73,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIColor *indicatorColor;
 /** 指示器高度，默认为 2.0f */
 @property (nonatomic, assign) CGFloat indicatorHeight;
-/** 指示器的额外宽度，介于按钮文字宽度与按钮宽度之间 */
-@property (nonatomic, assign) CGFloat indicatorAdditionalWidth;
 /** 指示器动画时间，默认为 0.1f，取值范围 0 ～ 0.3f */
 @property (nonatomic, assign) CGFloat indicatorAnimationTime;
 /** 指示器样式，默认为 SGIndicatorStyleDefault */
@@ -87,6 +85,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat indicatorBorderWidth;
 /** 指示器遮盖样式下的边框颜色，默认为 clearColor */
 @property (nonatomic, strong) UIColor *indicatorBorderColor;
+/** 指示器遮盖、下划线样式下额外增加的宽度，默认为 0.0f；介于标题文字宽度与按钮宽度之间 */
+@property (nonatomic, assign) CGFloat indicatorAdditionalWidth;
 /** 指示器固定样式下宽度，默认为 20.0f；最大宽度并没有做限制，请根据实际情况妥善设置 */
 @property (nonatomic, assign) CGFloat indicatorFixedWidth;
 /** 指示器动态样式下宽度，默认为 20.0f；最大宽度并没有做限制，请根据实际情况妥善设置 */

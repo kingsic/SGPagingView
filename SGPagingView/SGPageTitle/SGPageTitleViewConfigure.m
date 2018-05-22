@@ -100,13 +100,6 @@
     return _indicatorHeight;
 }
 
-- (CGFloat)indicatorAdditionalWidth {
-    if (_indicatorAdditionalWidth <= 0) {
-        _indicatorAdditionalWidth = 0;
-    }
-    return _indicatorAdditionalWidth;
-}
-
 - (CGFloat)indicatorAnimationTime {
     if (_indicatorAnimationTime <= 0) {
         _indicatorAnimationTime = 0.1;
@@ -142,6 +135,13 @@
         _indicatorBorderColor = [UIColor clearColor];
     }
     return _indicatorBorderColor;
+}
+
+- (CGFloat)indicatorAdditionalWidth {
+    if (_indicatorAdditionalWidth <= 0) {
+        _indicatorAdditionalWidth = 0;
+    }
+    return _indicatorAdditionalWidth;
 }
 
 - (CGFloat)indicatorFixedWidth {
