@@ -2,6 +2,11 @@
 
 The changelog for `SGPagingView`.
 
+1.4.1
+-----
+### Bug Fixing
+- change the way import Masonry lib, if user use swift mix objc project, will get issue
+
 1.4.0
 -----
 ### Enhancements
