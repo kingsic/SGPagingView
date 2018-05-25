@@ -13,7 +13,7 @@
 
 #import "SGPageContentView.h"
 #import "UIView+SGPagingView.h"
-#import <Masonry.h>
+#import <Masonry/Masonry.h>
 
 @interface SGPageContentView () <UICollectionViewDataSource, UICollectionViewDelegate>
 /// collectionView
