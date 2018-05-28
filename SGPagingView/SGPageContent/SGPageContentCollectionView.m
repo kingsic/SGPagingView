@@ -102,6 +102,7 @@ static NSString *const cellID = @"cellID";
     [self.parentViewController addChildViewController:childVC];
     [cell.contentView addSubview:childVC.view];
     childVC.view.frame = cell.contentView.frame;
+    [childVC didMoveToParentViewController:self.parentViewController];
     return cell;
 }
 
@@ -196,4 +197,3 @@ static NSString *const cellID = @"cellID";
 
 
 @end
-

@@ -61,4 +61,3 @@
 - (void)setPageContentScrollViewCurrentIndex:(NSInteger)currentIndex;
 
 @end
-

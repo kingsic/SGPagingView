@@ -86,6 +86,7 @@
     }
     return self;
 }
+
 + (instancetype)pageTitleViewWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames configure:(SGPageTitleViewConfigure *)configure {
     return [[self alloc] initWithFrame:frame delegate:delegate titleNames:titleNames configure:configure];
 }
@@ -388,9 +389,6 @@
             button.titleLabel.font = self.configure.titleSelectedFont;
         }
     }
-
-    
-
 }
 
 #pragma mark - - - 滚动标题选中按钮居中
@@ -499,7 +497,6 @@
     [button setAttributedTitle:attributedTitle forState:(UIControlStateNormal)];
     [button setAttributedTitle:selectedAttributedTitle forState:(UIControlStateSelected)];
 }
-
 
 /**
  *  设置图片及样式
@@ -957,4 +954,3 @@
 
 
 @end
-
