@@ -53,7 +53,8 @@
 }
 
 - (void)initialization {
-    self.startOffsetX = 0;
+    _startOffsetX = 0;
+    _previousCVCIndex = -1;
 }
 
 - (void)setupSubviews {
@@ -81,16 +82,15 @@
 
 #pragma mark - - - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    self.startOffsetX = scrollView.contentOffset.x;
+    _startOffsetX = scrollView.contentOffset.x;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     // 1、根据标题下标计算 pageContent 偏移量
     CGFloat offsetX = scrollView.contentOffset.x;
-    // 2、切换子控制器的时候，执行上个子控制器的 viewWillDisappear、viewDidDisappear 方法
-    if (self.startOffsetX != offsetX) {
+    // 2、切换子控制器的时候，执行上个子控制器的 viewWillDisappear 方法
+    if (_startOffsetX != offsetX) {
         [self.previousCVC beginAppearanceTransition:NO animated:NO];
-        [self.previousCVC endAppearanceTransition];
     }
     // 3、获取当前显示子控制器的下标
     NSInteger index = offsetX / scrollView.frame.size.width;
@@ -99,10 +99,17 @@
     [self.parentViewController addChildViewController:childVC];
     [childVC beginAppearanceTransition:YES animated:NO];
     [self.scrollView addSubview:childVC.view];
+    // 2.1、切换子控制器的时候，执行上个子控制器的 viewDidDisappear 方法
+    if (_startOffsetX != offsetX) {
+        [self.previousCVC endAppearanceTransition];
+    }
     [childVC endAppearanceTransition];
     childVC.view.frame = CGRectMake(offsetX, 0, self.SG_width, self.SG_height);
-    // 4.1、记录上个展示的子控制器
+    [childVC didMoveToParentViewController:self.parentViewController];
+
+    // 4.1、记录上个展示的子控制器、记录当前子控制器偏移量
     self.previousCVC = childVC;
+    _previousCVCIndex = index;
     // 5、pageContentScrollView:offsetX:
     if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:offsetX:)]) {
         [self.delegatePageContentScrollView pageContentScrollView:self offsetX:offsetX];
@@ -125,7 +132,7 @@
     // 2、判断是左滑还是右滑
     CGFloat currentOffsetX = scrollView.contentOffset.x;
     CGFloat scrollViewW = scrollView.bounds.size.width;
-    if (currentOffsetX > self.startOffsetX) { // 左滑
+    if (currentOffsetX > _startOffsetX) { // 左滑
         // 1、计算 progress
         progress = currentOffsetX / scrollViewW - floor(currentOffsetX / scrollViewW);
         // 2、计算 originalIndex
@@ -137,7 +144,7 @@
             targetIndex = self.childViewControllers.count - 1;
         }
         // 4、如果完全划过去
-        if (currentOffsetX - self.startOffsetX == scrollViewW) {
+        if (currentOffsetX - _startOffsetX == scrollViewW) {
             progress = 1;
             targetIndex = originalIndex;
         }
@@ -152,7 +159,7 @@
             originalIndex = self.childViewControllers.count - 1;
         }
     }
-    // 3、pageContentViewDelegare; 将 progress／sourceIndex／targetIndex 传递给 SGPageTitleView
+    // 3、pageContentScrollViewDelegate; 将 progress／sourceIndex／targetIndex 传递给 SGPageTitleView
     if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:progress:originalIndex:targetIndex:)]) {
         [self.delegatePageContentScrollView pageContentScrollView:self progress:progress originalIndex:originalIndex targetIndex:targetIndex];
     }
@@ -160,26 +167,30 @@
 
 #pragma mark - - - 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
 - (void)setPageContentScrollViewCurrentIndex:(NSInteger)currentIndex {
-    // 1、切换子控制器的时候，执行上个子控制器的 viewWillDisappear、viewDidDisappear 方法
-    if (self.previousCVC != nil && self.previousCVCIndex != currentIndex) {
+    // 1、切换子控制器的时候，执行上个子控制器的 viewWillDisappear 方法
+    if (self.previousCVC != nil && _previousCVCIndex != currentIndex) {
         [self.previousCVC beginAppearanceTransition:NO animated:NO];
-        [self.previousCVC endAppearanceTransition];
     }
     // 2、根据标题下标计算 pageContent 偏移量
     CGFloat offsetX = currentIndex * self.SG_width;
     // 3、添加子控制器及子控制器的 view 到父控制器以及父控制器 view 中
-    if (self.previousCVCIndex != currentIndex) {
+    if (_previousCVCIndex != currentIndex) {
         UIViewController *childVC = self.childViewControllers[currentIndex];
         [self.parentViewController addChildViewController:childVC];
         [childVC beginAppearanceTransition:YES animated:NO];
         [self.scrollView addSubview:childVC.view];
+        // 1.1、切换子控制器的时候，执行上个子控制器的 viewDidDisappear 方法
+        if (self.previousCVC != nil && _previousCVCIndex != currentIndex) {
+            [self.previousCVC endAppearanceTransition];
+        }
         [childVC endAppearanceTransition];
         childVC.view.frame = CGRectMake(offsetX, 0, self.SG_width, self.SG_height);
+        [childVC didMoveToParentViewController:self.parentViewController];
         // 3.1、记录上个子控制器
         self.previousCVC = childVC;
     }
     // 3.2、记录上个子控制器下标
-    self.previousCVCIndex = currentIndex;
+    _previousCVCIndex = currentIndex;
     // 4、处理内容偏移
     self.scrollView.contentOffset = CGPointMake(offsetX, 0);
     // 5、pageContentScrollView:offsetX:

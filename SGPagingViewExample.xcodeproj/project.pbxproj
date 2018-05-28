@@ -57,7 +57,9 @@
 		8D0F8E721FD95E2300F30426 /* ChildVCTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E5D1FD95E2300F30426 /* ChildVCTwo.m */; };
 		8D0F8E731FD95E2300F30426 /* ChildVCTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0F8E5E1FD95E2300F30426 /* ChildVCTwo.xib */; };
 		8D1A05F820B441B800743EAD /* DefaultAttributedTitleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A05F720B441B800743EAD /* DefaultAttributedTitleVC.m */; };
-		8D9215B720A2878F0086BD62 /* SGPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9215B620A2878F0086BD62 /* SGPageContentView.m */; };
+		8DA4304120BBE3D600C47917 /* SGPageContentCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4303F20BBE3D500C47917 /* SGPageContentCollectionView.m */; };
+		8DA4304420BBEDEC00C47917 /* UIButton+SGPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4304320BBEDEC00C47917 /* UIButton+SGPagingView.m */; };
+		8DA4304720BBEF3B00C47917 /* DefaultImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4304620BBEF3B00C47917 /* DefaultImageVC.m */; };
 		8DCB02AA1F95B0FF00C9598A /* SGPageTitleViewConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB02A91F95B0FF00C9598A /* SGPageTitleViewConfigure.m */; };
 		8DF628F720A94CBA00B7B85A /* DefaultSystemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DF628F620A94CBA00B7B85A /* DefaultSystemVC.m */; };
 		9A3EDE201FF4C5C600DC1EB2 /* DefaultDynamicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3EDE1F1FF4C5C600DC1EB2 /* DefaultDynamicVC.m */; };
@@ -174,8 +176,12 @@
 		8D0F8E5E1FD95E2300F30426 /* ChildVCTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildVCTwo.xib; sourceTree = "<group>"; };
 		8D1A05F620B441B800743EAD /* DefaultAttributedTitleVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultAttributedTitleVC.h; sourceTree = "<group>"; };
 		8D1A05F720B441B800743EAD /* DefaultAttributedTitleVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultAttributedTitleVC.m; sourceTree = "<group>"; };
-		8D9215B520A2878F0086BD62 /* SGPageContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGPageContentView.h; sourceTree = "<group>"; };
-		8D9215B620A2878F0086BD62 /* SGPageContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGPageContentView.m; sourceTree = "<group>"; };
+		8DA4303F20BBE3D500C47917 /* SGPageContentCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageContentCollectionView.m; sourceTree = "<group>"; };
+		8DA4304020BBE3D600C47917 /* SGPageContentCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageContentCollectionView.h; sourceTree = "<group>"; };
+		8DA4304220BBEDEC00C47917 /* UIButton+SGPagingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+SGPagingView.h"; sourceTree = "<group>"; };
+		8DA4304320BBEDEC00C47917 /* UIButton+SGPagingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+SGPagingView.m"; sourceTree = "<group>"; };
+		8DA4304520BBEF3B00C47917 /* DefaultImageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultImageVC.h; sourceTree = "<group>"; };
+		8DA4304620BBEF3B00C47917 /* DefaultImageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultImageVC.m; sourceTree = "<group>"; };
 		8DCB02A81F95B0FF00C9598A /* SGPageTitleViewConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageTitleViewConfigure.h; sourceTree = "<group>"; };
 		8DCB02A91F95B0FF00C9598A /* SGPageTitleViewConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageTitleViewConfigure.m; sourceTree = "<group>"; };
 		8DF628F520A94CBA00B7B85A /* DefaultSystemVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultSystemVC.h; sourceTree = "<group>"; };
@@ -351,6 +357,8 @@
 			children = (
 				182513DC1F21D1600039F4A2 /* UIView+SGPagingView.h */,
 				182513DD1F21D1600039F4A2 /* UIView+SGPagingView.m */,
+				8DA4304220BBEDEC00C47917 /* UIButton+SGPagingView.h */,
+				8DA4304320BBEDEC00C47917 /* UIButton+SGPagingView.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -358,10 +366,10 @@
 		182513DE1F21D1600039F4A2 /* SGPageContent */ = {
 			isa = PBXGroup;
 			children = (
-				8D9215B520A2878F0086BD62 /* SGPageContentView.h */,
-				8D9215B620A2878F0086BD62 /* SGPageContentView.m */,
 				182513DF1F21D1600039F4A2 /* SGPageContentScrollView.h */,
 				182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */,
+				8DA4304020BBE3D600C47917 /* SGPageContentCollectionView.h */,
+				8DA4303F20BBE3D500C47917 /* SGPageContentCollectionView.m */,
 			);
 			path = SGPageContent;
 			sourceTree = "<group>";
@@ -386,6 +394,8 @@
 				8D0F8E281FD95DE300F30426 /* DefaultScrollVC.m */,
 				8DF628F520A94CBA00B7B85A /* DefaultSystemVC.h */,
 				8DF628F620A94CBA00B7B85A /* DefaultSystemVC.m */,
+				8DA4304520BBEF3B00C47917 /* DefaultImageVC.h */,
+				8DA4304620BBEF3B00C47917 /* DefaultImageVC.m */,
 				8D0F8E211FD95DE300F30426 /* DefaultGradientEffectVC.h */,
 				8D0F8E221FD95DE300F30426 /* DefaultGradientEffectVC.m */,
 				8D0F8E2F1FD95DE300F30426 /* DefaultZoomVC.h */,
@@ -601,7 +611,9 @@
 				182513D71F21CC340039F4A2 /* PersonalCenterTopView.m in Sources */,
 				8D0F8E381FD95DE300F30426 /* DefaultThreeCoverVC.m in Sources */,
 				1825134B1F21CAC30039F4A2 /* ViewController.m in Sources */,
+				8DA4304420BBEDEC00C47917 /* UIButton+SGPagingView.m in Sources */,
 				18B036D21F21D835004C7DE7 /* SGPageTitleView.m in Sources */,
+				8DA4304120BBE3D600C47917 /* SGPageContentCollectionView.m in Sources */,
 				8D0F8E681FD95E2300F30426 /* ChildVCFour.m in Sources */,
 				182513EA1F21D1600039F4A2 /* SGPageContentScrollView.m in Sources */,
 				8D0F8E611FD95E2300F30426 /* ChildFirstPopGestureVC.m in Sources */,
@@ -617,10 +629,10 @@
 				182513D41F21CC340039F4A2 /* PersonalCenterChildBaseVC.m in Sources */,
 				182513D51F21CC340039F4A2 /* PersonalCenterVC.m in Sources */,
 				8D0F8E6D1FD95E2300F30426 /* ChildVCOne.m in Sources */,
+				8DA4304720BBEF3B00C47917 /* DefaultImageVC.m in Sources */,
 				8D0F8E671FD95E2300F30426 /* ChildVCFive.m in Sources */,
 				8D0F8E621FD95E2300F30426 /* ChildFourthPopGestureNextVC.m in Sources */,
 				8D0F8E6C1FD95E2300F30426 /* ChildVCNine.m in Sources */,
-				8D9215B720A2878F0086BD62 /* SGPageContentView.m in Sources */,
 				9A3EDE201FF4C5C600DC1EB2 /* DefaultDynamicVC.m in Sources */,
 				8D0F8E721FD95E2300F30426 /* ChildVCTwo.m in Sources */,
 				8D0F8E6A1FD95E2300F30426 /* ChildVCFull.m in Sources */,

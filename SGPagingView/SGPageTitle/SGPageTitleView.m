@@ -13,6 +13,7 @@
 
 #import "SGPageTitleView.h"
 #import "UIView+SGPagingView.h"
+#import "UIButton+SGPagingView.h"
 #import "SGPageTitleViewConfigure.h"
 
 #define SGPageTitleViewWidth self.frame.size.width
@@ -497,6 +498,75 @@
     UIButton *button = (UIButton *)self.btnMArr[index];
     [button setAttributedTitle:attributedTitle forState:(UIControlStateNormal)];
     [button setAttributedTitle:selectedAttributedTitle forState:(UIControlStateSelected)];
+}
+
+
+/**
+ *  设置图片及样式
+ *
+ *  @param images       默认图片数组
+ *  @param selectedImages       选中时图片数组
+ *  @param imagePositionType       图片位置样式
+ *  @param spacing      图片与标题文字之间的间距
+ */
+- (void)setImages:(NSArray *)images selectedImages:(NSArray *)selectedImages imagePositionType:(SGImagePositionType)imagePositionType spacing:(CGFloat)spacing {
+    NSInteger imagesCount = images.count;
+    NSInteger selectedImagesCount = selectedImages.count;
+    NSInteger titlesCount = self.titleArr.count;
+    if (imagesCount < selectedImagesCount) {
+        NSLog(@"温馨提示：SGPageTitleView -> [setImages:selectedImages:imagePositionType:spacing] 方法中 images 必须大于或者等于selectedImages，否则 imagePositionTypeDefault 以外的其他样式图片及文字布局将会出现问题");
+    }
+    
+    if (imagesCount < titlesCount) {
+        [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            UIButton *btn = obj;
+            if (idx >= imagesCount - 1) {
+                *stop = YES;
+            }
+            [self P_btn:btn imageName:images[idx] imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateNormal)];
+        }];
+    } else {
+        [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            UIButton *btn = obj;
+            [self P_btn:btn imageName:images[idx] imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateNormal)];
+        }];
+    }
+    
+    if (selectedImagesCount < titlesCount) {
+        [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            UIButton *btn = obj;
+            if (idx >= selectedImagesCount - 1) {
+                *stop = YES;
+            }
+            [self P_btn:btn imageName:selectedImages[idx] imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateSelected)];
+        }];
+    } else {
+        [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            UIButton *btn = obj;
+            [self P_btn:btn imageName:selectedImages[idx] imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateSelected)];
+        }];
+    }
+}
+
+/// imagePositionType 样式设置方法抽取
+- (void)P_btn:(UIButton *)btn imageName:(NSString *)imageName imagePositionType:(SGImagePositionType)imagePositionType spacing:(CGFloat)spacing btnControlState:(UIControlState)btnControlState {
+    if (imagePositionType == SGImagePositionTypeDefault) {
+        [btn SG_imagePositionStyle:SGImagePositionStyleDefault spacing:spacing imagePositionBlock:^(UIButton *button) {
+            [btn setImage:[UIImage imageNamed:imageName] forState:btnControlState];
+        }];
+    } else if (imagePositionType == SGImagePositionTypeRight) {
+        [btn SG_imagePositionStyle:SGImagePositionStyleRight spacing:spacing imagePositionBlock:^(UIButton *button) {
+            [btn setImage:[UIImage imageNamed:imageName] forState:btnControlState];
+        }];
+    } else if (imagePositionType == SGImagePositionTypeTop) {
+        [btn SG_imagePositionStyle:SGImagePositionStyleTop spacing:spacing imagePositionBlock:^(UIButton *button) {
+            [btn setImage:[UIImage imageNamed:imageName] forState:btnControlState];
+        }];
+    } else if (imagePositionType == SGImagePositionTypeBottom) {
+        [btn SG_imagePositionStyle:SGImagePositionStyleBottom spacing:spacing imagePositionBlock:^(UIButton *button) {
+            [btn setImage:[UIImage imageNamed:imageName] forState:btnControlState];
+        }];
+    }
 }
 
 #pragma mark - - - SGPageTitleView 静止样式下指示器默认滚动样式（SGIndicatorScrollStyleDefault）

@@ -14,6 +14,17 @@
 #import <UIKit/UIKit.h>
 @class SGPageTitleViewConfigure, SGPageTitleView;
 
+typedef enum : NSUInteger {
+    /// 图片在左，文字在右
+    SGImagePositionTypeDefault,
+    /// 图片在右，文字在左
+    SGImagePositionTypeRight,
+    /// 图片在上，文字在下
+    SGImagePositionTypeTop,
+    /// 图片在下，文字在上
+    SGImagePositionTypeBottom,
+} SGImagePositionType;
+
 @protocol SGPageTitleViewDelegate <NSObject>
 /**
  *  联动 pageContent 的方法
@@ -56,5 +67,14 @@
 - (void)resetTitle:(NSString *)title forIndex:(NSInteger)index;
 /** 根据标题下标设置标题的 attributedTitle 属性 */
 - (void)setAttributedTitle:(NSMutableAttributedString *)attributedTitle selectedAttributedTitle:(NSMutableAttributedString *)selectedAttributedTitle forIndex:(NSInteger)index;
+/**
+ *  设置图片及样式
+ *
+ *  @param images       默认图片数组
+ *  @param selectedImages       选中时图片数组
+ *  @param imagePositionType       图片位置样式
+ *  @param spacing      图片与标题文字之间的间距
+ */
+- (void)setImages:(NSArray *)images selectedImages:(NSArray *)selectedImages imagePositionType:(SGImagePositionType)imagePositionType spacing:(CGFloat)spacing;
 
 @end

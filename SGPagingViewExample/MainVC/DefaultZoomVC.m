@@ -18,9 +18,9 @@
 #import "ChildVCEight.h"
 #import "ChildVCNine.h"
 
-@interface DefaultZoomVC () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
+@interface DefaultZoomVC () <SGPageTitleViewDelegate, SGPageContentCollectionViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
-@property (nonatomic, strong) SGPageContentView *pageContentView;
+@property (nonatomic, strong) SGPageContentCollectionView *pageContentCollectionView;
 
 @end
 
@@ -63,18 +63,18 @@
     ChildVCEight *eightVC = [[ChildVCEight alloc] init];
     ChildVCNine *nineVC = [[ChildVCNine alloc] init];
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
-    /// pageContentView
-    CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
-    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
-    _pageContentView.delegatePageContentView = self;
-    [self.view addSubview:_pageContentView];
+    /// pageContentCollectionView
+    CGFloat ContentCollectionViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
+    self.pageContentCollectionView = [[SGPageContentCollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, ContentCollectionViewHeight) parentVC:self childVCs:childArr];
+    _pageContentCollectionView.delegatePageContentCollectionView = self;
+    [self.view addSubview:_pageContentCollectionView];
 }
 
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
-    [self.pageContentView setPageContentViewCurrentIndex:selectedIndex];
+    [self.pageContentCollectionView setPageContentCollectionViewCurrentIndex:selectedIndex];
 }
 
-- (void)pageContentView:(SGPageContentView *)pageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
+- (void)pageContentCollectionView:(SGPageContentCollectionView *)pageContentCollectionView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 

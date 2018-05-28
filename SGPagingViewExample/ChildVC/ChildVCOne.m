@@ -72,7 +72,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"SGPagingView - ChildVCOne - - %ld", indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"SGPagingView - ChildVCOne - - %ld", (long)indexPath.row];
     return cell;
 }
 

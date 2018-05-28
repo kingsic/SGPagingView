@@ -15,9 +15,9 @@
 #import "ChildVCThree.h"
 #import "UIView+SGPagingView.h"
 
-@interface PersonalCenterVC () <UITableViewDelegate, UITableViewDataSource, SGPageTitleViewDelegate, SGPageContentViewDelegate, PersonalCenterChildBaseVCDelegate>
+@interface PersonalCenterVC () <UITableViewDelegate, UITableViewDataSource, SGPageTitleViewDelegate, SGPageContentCollectionViewDelegate, PersonalCenterChildBaseVCDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
-@property (nonatomic, strong) SGPageContentView *pageContentView;
+@property (nonatomic, strong) SGPageContentCollectionView *pageContentCollectionView;
 @property (nonatomic, strong) PersonalCenterTableView *tableView;
 @property (nonatomic, strong) PersonalCenterTopView *topView;
 @property (nonatomic, strong) UIScrollView *childVCScrollView;
@@ -76,8 +76,8 @@ static CGFloat const PersonalCenterVCTopViewHeight = 200;
     return _pageTitleView;
 }
 
-- (SGPageContentView *)pageContentView {
-    if (!_pageContentView) {
+- (SGPageContentCollectionView *)pageContentCollectionView {
+    if (!_pageContentCollectionView) {
         ChildVCOne *oneVC = [[ChildVCOne alloc] init];
         oneVC.delegatePersonalCenterChildBaseVC = self;
         ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
@@ -86,12 +86,12 @@ static CGFloat const PersonalCenterVCTopViewHeight = 200;
         threeVC.delegatePersonalCenterChildBaseVC = self;
 
         NSArray *childArr = @[oneVC, twoVC, threeVC];
-        /// pageContentView
-        CGFloat contentViewHeight = self.view.frame.size.height - PersonalCenterVCNavHeight - PersonalCenterVCPageTitleViewHeight;
-        _pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
-        _pageContentView.delegatePageContentView = self;
+        /// pageContentCollectionView
+        CGFloat ContentCollectionViewHeight = self.view.frame.size.height - PersonalCenterVCNavHeight - PersonalCenterVCPageTitleViewHeight;
+        _pageContentCollectionView = [[SGPageContentCollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, ContentCollectionViewHeight) parentVC:self childVCs:childArr];
+        _pageContentCollectionView.delegatePageContentCollectionView = self;
     }
-    return _pageContentView;
+    return _pageContentCollectionView;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -121,7 +121,7 @@ static CGFloat const PersonalCenterVCTopViewHeight = 200;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    [cell.contentView addSubview:self.pageContentView];
+    [cell.contentView addSubview:self.pageContentCollectionView];
     return cell;
 }
 
@@ -129,17 +129,17 @@ static CGFloat const PersonalCenterVCTopViewHeight = 200;
     return self.pageTitleView;
 }
 
-#pragma mark - - - SGPageTitleViewDelegate - SGPageContentViewDelegate
+#pragma mark - - - SGPageTitleViewDelegate - SGPageContentCollectionViewDelegate
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
-    [self.pageContentView setPageContentViewCurrentIndex:selectedIndex];
+    [self.pageContentCollectionView setPageContentCollectionViewCurrentIndex:selectedIndex];
 }
 
-- (void)pageContentView:(SGPageContentView *)pageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
+- (void)pageContentCollectionView:(SGPageContentCollectionView *)pageContentCollectionView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     _tableView.scrollEnabled = NO;
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 
-- (void)pageContentView:(SGPageContentView *)pageContentView offsetX:(CGFloat)offsetX {
+- (void)pageContentCollectionView:(SGPageContentCollectionView *)pageContentCollectionView offsetX:(CGFloat)offsetX {
     _tableView.scrollEnabled = YES;
 }
 
