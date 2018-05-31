@@ -189,7 +189,7 @@ static NSString *const cellID = @"cellID";
 - (void)setIsScrollEnabled:(BOOL)isScrollEnabled {
     _isScrollEnabled = isScrollEnabled;
     if (isScrollEnabled) {
-        
+        _collectionView.scrollEnabled = YES;
     } else {
         _collectionView.scrollEnabled = NO;
     }

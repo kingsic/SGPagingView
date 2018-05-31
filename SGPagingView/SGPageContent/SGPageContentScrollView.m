@@ -203,7 +203,7 @@
 - (void)setIsScrollEnabled:(BOOL)isScrollEnabled {
     _isScrollEnabled = isScrollEnabled;
     if (isScrollEnabled) {
-        
+        _scrollView.scrollEnabled = YES;
     } else {
         _scrollView.scrollEnabled = NO;
     }

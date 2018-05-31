@@ -23,6 +23,10 @@
 
 
 ## 主要内容的介绍
+* `系统样式`<br>
+
+* `图片样式`<br>
+
 * `指示器遮盖样式`<br>
 
 * `指示器固定样式`<br>
@@ -41,7 +45,7 @@
 
 
 ## SGPagingView 集成
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.4.1'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.4.2'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -56,22 +60,22 @@
     
     
     /// pageContentView
-    self.pageContentView = [[SGPageContentView alloc] initWithFrame:frame parentVC:self childVCs:childVCs];
-    _pageContentView.delegatePageContentView = self;
-    [self.view addSubview:_pageContentView];
+    self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:frame parentVC:self childVCs:childVCs];
+    _pageContentScrollView.delegatePageContentScrollView = self;
+    [self.view addSubview:_pageContentScrollView];
 ```
 
 * 滚动内容视图的代理方法
 ```
-- (void)pageContentView:(SGPageContentView *)pageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
-    [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
+- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
+[self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 ```
 
 * 滚动标题视图的代理方法
 ```
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
-    [self.pageContentView setPageCententViewCurrentIndex:selectedIndex];
+    [self.pageContentView setPageCententScrollViewCurrentIndex:selectedIndex];
 }
 ```
 
@@ -87,12 +91,14 @@
 |**indicatorColor**|指示器颜色，默认为红色|
 |**indicatorStyle**|指示器样式，默认为下划线样式；下划线、遮盖样式|
 |**indicatorHeight**|指示器高度；下划线样式下默认为 2.f，遮盖样式下，默认为标题文字的高度，若大于 SGPageTitleView，则高度为 SGPageTitleView 高度，下划线样式未做处理|
-|**indicatorAdditionalWidth**|指示器的额外宽度，默认为 0.f，介于按钮文字宽度与按钮宽度之间；若大于按钮的宽度，则为按钮的宽度|
+|**indicatorAdditionalWidth**|指示器遮盖、下划线样式下额外增加的宽度，默认为 0.0f；介于标题文字宽度与按钮宽度之间|
 |**spacingBetweenButtons**|按钮之间的间距，默认 20.f|
 |**indicatorStyle**|指示器样式;SGIndicatorStyleDefault、SGIndicatorStyleCover、SGIndicatorStyleFixed、SGIndicatorStyleDynamic（仅在 SGIndicatorScrollStyleDefault 样式下支持）|
-|**indicatorCornerRadius**|遮盖样式下圆角属性，默认为 0.f；若圆角大于 1/2 指示器高度，则圆角大小为 1/2 指示器高度|
+|**indicatorCornerRadius**|圆角属性，默认为 0.f；若圆角大于 1/2 指示器高度，则圆角大小为指示器高度的 1/2|
 |**indicatorScrollStyle**|指示器滚动样式|
-|**resetTitleWithIndex:newTitle:**|更改指定下标的标题|
+|**resetTitle:forIndex:**|根据标题下标重置标题文字|
+|**setAttributedTitle:selectedAttributedTitle:forIndex:**|根据标题下标设置标题的 attributedTitle 属性|
+|**setImages:selectedImages:imagePositionType:spacing:**|设置图片及样式|
 
 
 ## 问题及解决方案
@@ -109,7 +115,7 @@
 ***
 
 #### 3、关于侧滑返回手势（请参考 DefaultVCPopGesture 类以及点击子控制器对下一界面所做的处理）
-###### 1、如果是系统默认返回 item ；只需实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法，并在此方法实现以下代码即可，如：
+###### 1、如果是系统默认返回 item ；只需实现 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法或 SGPageContentCollectionView 的 pageContentCollectionView:offsetX:代理方法，并在此方法实现以下代码即可，如：
 ```
 - (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView offsetX:(CGFloat)offsetX {
     if (offsetX == 0) {
@@ -131,7 +137,7 @@ c. 实现代理方法：
     return YES;
 }
 ```
-d. 实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法；实现代码如 1、
+d. 实现 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法或 SGPageContentCollectionView 的 pageContentCollectionView:offsetX:代理方法；实现代码如 1、
 
 ###### 3、issues [关于返回手势](https://github.com/kingsic/SGPagingView/issues/25) 已有开发者提供了解决方案，可供参看
 ***
@@ -166,6 +172,8 @@ d. 实现 SGPageContentView 的 pageContentView:offsetX:代理方法或 SGPageCo
 * 2018-05-08 ：v1.3.7 修复 v1.3.6 选中标题重复点击恢复默认状态以及 SGPageTitleViewConfigure 新增配置属性
 
 * 2018-05-09 ：v1.4.0 版本升级（SGPageTitleView.h 部分属性调整到 SGPageTitleViewConfigure.h 以及对 SGPageContentView 进行重构）
+
+* 2018-06-01 ：v1.4.2 新增标题之间分割线属性、根据下标设置标题的 attributedTitle 方法以及设置标题图片及位置样式方法
 
 
 ## Concluding remarks

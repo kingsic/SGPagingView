@@ -68,7 +68,7 @@ typedef enum : NSUInteger {
 /** 根据标题下标设置标题的 attributedTitle 属性 */
 - (void)setAttributedTitle:(NSMutableAttributedString *)attributedTitle selectedAttributedTitle:(NSMutableAttributedString *)selectedAttributedTitle forIndex:(NSInteger)index;
 /**
- *  设置图片及样式
+ *  设置标题图片及位置样式
  *
  *  @param images       默认图片数组
  *  @param selectedImages       选中时图片数组

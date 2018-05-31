@@ -499,7 +499,7 @@
 }
 
 /**
- *  设置图片及样式
+ *  设置标题图片及位置样式
  *
  *  @param images       默认图片数组
  *  @param selectedImages       选中时图片数组
