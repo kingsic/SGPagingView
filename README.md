@@ -68,7 +68,7 @@
 * 滚动内容视图的代理方法
 ```
 - (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
-[self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
+    [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 ```
 
@@ -173,7 +173,7 @@ d. 实现 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法
 
 * 2018-05-09 ：v1.4.0 版本升级（SGPageTitleView.h 部分属性调整到 SGPageTitleViewConfigure.h 以及对 SGPageContentView 进行重构）
 
-* 2018-06-01 ：v1.4.2 新增标题之间分割线属性、根据下标设置标题的 attributedTitle 方法以及设置标题图片及位置样式方法
+* 2018-06-01 ：v1.4.2 新增标题间分割线属性、根据下标设置标题的 attributedTitle 方法以及设置标题图片位置样式方法
 
 
 ## Concluding remarks
