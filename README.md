@@ -52,17 +52,16 @@
 ## 代码介绍
 #### SGPagingView 的使用（详细使用, 请参考 Demo）
 ``` 
-    /// pageTitleView 
+    /// pageTitleViewConfigure
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
+    /// pageTitleView
+    SGPageTitleView *pageTitleView = [SGPageTitleView pageTitleViewWithFrame:frame delegate:self titleNames:titleNames configure:configure];
+    [self.view addSubview:pageTitleView];
     
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:frame delegate:self titleNames:titleNames configure:configure];
-    [self.view addSubview:_pageTitleView];
-    
-    
-    /// pageContentView
-    self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:frame parentVC:self childVCs:childVCs];
-    _pageContentScrollView.delegatePageContentScrollView = self;
-    [self.view addSubview:_pageContentScrollView];
+    /// pageContent
+    SGPageContentScrollView *pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:frame parentVC:self childVCs:childVCs];
+    pageContentScrollView.delegatePageContentScrollView = self;
+    [self.view addSubview:pageContentScrollView];
 ```
 
 * 滚动内容视图的代理方法
@@ -75,7 +74,7 @@
 * 滚动标题视图的代理方法
 ```
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
-    [self.pageContentView setPageCententScrollViewCurrentIndex:selectedIndex];
+    [self.pageContentScrollView setPageCententScrollViewCurrentIndex:selectedIndex];
 }
 ```
 
@@ -147,15 +146,13 @@ d. 实现 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法
 
 * 2016-10-07 ：初始版本的创建
 
-* 2017-04-13 ：版本升级（根据标题内容自动识别 SGPageTitleView 是静止还是滚动）
+* 2017-04-13 ：版本升级（根据标题内容自动识别 SGPageTitleView 是静止还是滚动样式）
 
 * 2017-06-01 ：v1.1.0 解决标题中既有中文又有英文存在的指示器滚动错乱问题以及性能优化
 
-* 2017-06-15 ：v1.1.5 新增新浪微博模块以及代码的优化
+* 2017-07-21 ：v1.1.7 加入 CocoaPods 管理以及新增 SGPageContentScrollView 类
 
-* 2017-07-21 ：v1.1.7 新增 SGPageContentScrollView 类以及加入 pods 管理
-
-* 2017-10-17 ：v1.3.0 版本升级（新增 SGPageTitleViewConfigure 类，提供更多的属性设置以及支持指示器遮盖样式）
+* 2017-10-17 ：v1.3.0 版本升级（新增 SGPageTitleViewConfigure 类并提供更多属性设置以及支持指示器遮盖样式）
 
 * 2017-10-28 ：v1.3.2 SGPageTitleViewConfigure 类新增指示器遮盖样式下的边框宽度及边框颜色属性
 
@@ -163,15 +160,13 @@ d. 实现 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法
 
 * 2017-11-28 ：v1.3.3 SGPageContentView 与 SGPageContentScrollView 新增代理方法，用来处理侧滑返回手势
 
-* 2017-12-07 ：v1.3.4 新增指示器固定样式
-
 * 2017-12-28 ：v1.3.5 新增指示器动态样式（仅在 SGIndicatorScrollStyleDefault 样式下支持）
 
 * 2018-01-30 ：v1.3.6 解决 SGPageTitleView 标题点击与 SGPageContentView 滚动问题
 
 * 2018-05-08 ：v1.3.7 修复 v1.3.6 选中标题重复点击恢复默认状态以及 SGPageTitleViewConfigure 新增配置属性
 
-* 2018-05-09 ：v1.4.0 版本升级（SGPageTitleView.h 部分属性调整到 SGPageTitleViewConfigure.h 以及对 SGPageContentView 进行重构）
+* 2018-05-09 ：v1.4.0 版本升级（SGPageTitleView.h 中的部分属性调整到 SGPageTitleViewConfigure.h）
 
 * 2018-06-01 ：v1.4.2 新增标题间分割线属性、根据下标设置标题的 attributedTitle 方法以及设置标题图片位置样式方法
 
