@@ -3,11 +3,15 @@
 
 
 ## 目录
+
 * [效果图](#效果图)
+
 
 * [主要内容的介绍](#主要内容的介绍)
 
 * [SGPagingView 集成](#SGPagingView-集成)
+
+* [SGPagingView 结构图](#SGPagingView-结构图)
 
 * [代码介绍](#代码介绍)
 
@@ -19,7 +23,7 @@
 
 
 ## 效果图
-![](https://github.com/kingsic/SGPagingView/raw/master/Gif/sorgle.gif)       ![](https://github.com/kingsic/SGPagingView/raw/master/Gif/sorgle2.gif)
+![](https://github.com/kingsic/SGPagingView/raw/master/Picture/sorgle.gif)       ![](https://github.com/kingsic/SGPagingView/raw/master/Picture/sorgle2.gif)
 
 
 ## 主要内容的介绍
@@ -47,6 +51,17 @@
 ## SGPagingView 集成
 * 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.4.2'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
+
+
+## SGPagingView 结构图
+![](https://github.com/kingsic/SGPagingView/raw/master/Picture/SGPagingView)
+*  SGPageTitleViewConfigure：SGPageTitleView 初始化配置信息
+
+*  SGPageTitleView：用于与 SGPageContent 联动
+
+*  SGPageContentScrollView：内部布局由 UIScrollView 实现
+
+*  SGPageContentCollectionView：内部布局由 UICollectionView 实现
 
 
 ## 代码介绍
@@ -105,7 +120,7 @@
 * 若在使用 CocoaPods 安装 SGPagingView 时，出现 [!] Unable to find a specification for SGPagingView 提示时，打开终端先输入 pod repo remove master；执行完毕后再输入 pod setup 即可 (可能会等待一段时间)
 ***
 
-#### 2、关于父子控制器的说明（SGPageContentView 与 SGPageContentScrollView）
+#### 2、关于父子控制器的说明（SGPageContentScrollView 与 SGPageContentCollectionView）
 ###### 参考链接
 * [iOS 父子控制器添加与移除](https://www.aliyun.com/jiaocheng/352895.html)
 * [iOS 进阶之正确添加子控制器的方法](https://www.jianshu.com/p/7c4aeb2c6655)
