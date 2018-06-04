@@ -54,14 +54,16 @@
 
 
 ## SGPagingView 结构图
-![](https://github.com/kingsic/SGPagingView/raw/master/Picture/SGPagingView)
-*  SGPageTitleViewConfigure：SGPageTitleView 初始化配置信息
+![](https://github.com/kingsic/SGPagingView/raw/master/Picture/SGPagingView.png)
+``` 
+*  SGPageTitleViewConfigure（SGPageTitleView 初始化配置信息）
 
-*  SGPageTitleView：用于与 SGPageContent 联动
+*  SGPageTitleView（用于与 SGPageContent 联动）
 
-*  SGPageContentScrollView：内部布局由 UIScrollView 实现
+*  SGPageContentScrollView（内部布局由 UIScrollView 实现）
 
-*  SGPageContentCollectionView：内部布局由 UICollectionView 实现
+*  SGPageContentCollectionView（内部布局由 UICollectionView 实现）
+``` 
 
 
 ## 代码介绍
