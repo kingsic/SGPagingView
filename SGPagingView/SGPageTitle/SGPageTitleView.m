@@ -52,6 +52,8 @@
 @property (nonatomic, assign) CGFloat allBtnWidth;
 /// 标记按钮下标
 @property (nonatomic, assign) NSInteger signBtnIndex;
+/// 标记按钮是否点击
+@property (nonatomic, assign) BOOL signBtnClick;
 
 /// 开始颜色, 取值范围 0~1
 @property (nonatomic, assign) CGFloat startR;
@@ -328,6 +330,7 @@
     [self P_changeSelectedButton:button];
     // 2、滚动标题选中按钮居中
     if (self.allBtnWidth > SGPageTitleViewWidth) {
+        _signBtnClick = YES;
         [self P_selectedBtnCenter:button];
     }
     // 3、改变指示器的位置以及指示器宽度样式
@@ -432,7 +435,12 @@
     UIButton *targetBtn = self.btnMArr[targetIndex];
     self.signBtnIndex = targetBtn.tag;
     // 2、 滚动标题选中居中
-    [self P_selectedBtnCenter:targetBtn];
+    if (self.allBtnWidth > SGPageTitleViewWidth) {
+        if (_signBtnClick == NO) {
+            [self P_selectedBtnCenter:targetBtn];
+        }
+        _signBtnClick = NO;
+    }
     // 3、处理指示器的逻辑
     if (self.allBtnWidth <= self.bounds.size.width) { /// SGPageTitleView 不可滚动
         if (self.configure.indicatorScrollStyle == SGIndicatorScrollStyleDefault) {

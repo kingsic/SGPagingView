@@ -38,11 +38,12 @@
     } else {
         pageTitleViewY = 108;
     }
-    CGFloat pageTitleViewW = self.view.frame.size.width * 2 / 3;
+    CGFloat pageTitleViewW = self.view.frame.size.width * 4 / 5;
     CGFloat pageTitleViewX = 0.5 * (self.view.frame.size.width - pageTitleViewW);
     NSArray *titleArr = @[@"新建", @"QQGroup", @"429899752"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configure.titleSelectedColor = [UIColor whiteColor];
+    configure.titleFont = [UIFont systemFontOfSize:12];
     configure.showBottomSeparator = NO;
     configure.indicatorStyle = SGIndicatorStyleCover;
     configure.indicatorColor = [UIColor orangeColor];

@@ -31,6 +31,7 @@
     configure.indicatorAdditionalWidth = 30;
     configure.indicatorColor = [UIColor orangeColor];
     configure.titleSelectedColor = [UIColor orangeColor];
+    configure.titleFont = [UIFont systemFontOfSize:11];
 
     /// pageTitleView
     CGFloat statusHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
@@ -50,7 +51,7 @@
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
     NSDictionary *normalDict = @{
                                  NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                 NSFontAttributeName : [UIFont systemFontOfSize:12]
+                                 NSFontAttributeName : [UIFont systemFontOfSize:9]
                                  };
     NSRange normalRange = NSMakeRange(2, attributedString.length - 2);
     [attributedString addAttributes:normalDict range:normalRange];
@@ -58,12 +59,12 @@
     NSMutableAttributedString *selectedAttributedString = [[NSMutableAttributedString alloc] initWithString:string];
     NSDictionary *selectedDict = @{
                                    NSForegroundColorAttributeName: [UIColor orangeColor],
-                                   NSFontAttributeName : [UIFont systemFontOfSize:12]                                   };
+                                   NSFontAttributeName : [UIFont systemFontOfSize:9]                                   };
     NSRange selectedRange = NSMakeRange(0, selectedAttributedString.length);
     [selectedAttributedString addAttributes:selectedDict range:selectedRange];
     [selectedAttributedString addAttributes:@{
                                        NSForegroundColorAttributeName: [UIColor orangeColor],
-                                       NSFontAttributeName : [UIFont systemFontOfSize:15]
+                                       NSFontAttributeName : [UIFont systemFontOfSize:11]
                                        } range:NSMakeRange(0, 2)];
     
     [pageTitleView setAttributedTitle:attributedString selectedAttributedTitle:selectedAttributedString forIndex:3];
@@ -108,7 +109,8 @@
     configure.indicatorCornerRadius = 1.5;
     configure.indicatorToBottomDistance = 4;
     configure.titleSelectedColor = [UIColor orangeColor];
-
+    configure.titleFont = [UIFont systemFontOfSize:11];
+    
     /// pageTitleView
     CGFloat pageTitleViewY = self.view.frame.size.height * 0.5;
     SGPageTitleView *pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArrS configure:configure];
