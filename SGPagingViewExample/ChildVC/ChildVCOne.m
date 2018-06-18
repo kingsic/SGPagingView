@@ -24,7 +24,7 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    // 切记：纯代码在 viewDidLoad 方法中创建 tableView 时，高度一定要等于 SGPageContentView 的高度 self.view.frame.size.height - 108 或 使用 Masonry 进行 下面一句代码的约束；
+    // 切记：纯代码在 viewDidLoad 方法中创建 tableView 时，高度一定要等于 PageContent 的高度 self.view.frame.size.height - 108 或 使用 Masonry 进行 下面一句代码的约束；
     //    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
     //        make.edges.equalTo(self.view);
     //    }];

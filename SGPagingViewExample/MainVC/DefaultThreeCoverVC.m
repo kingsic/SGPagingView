@@ -12,7 +12,7 @@
 
 @interface DefaultThreeCoverVC () <SGPageTitleViewDelegate, SGPageContentScrollViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
-@property (nonatomic, strong) SGPageContentScrollView *pageContentView;
+@property (nonatomic, strong) SGPageContentScrollView *pageContentScrollView;
 
 @end
 
@@ -56,14 +56,14 @@
     ChildVCFull *threeVC = [[ChildVCFull alloc] init];
     ChildVCFull *fourVC = [[ChildVCFull alloc] init];
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
-    /// pageContentView
-    self.pageContentView = [[SGPageContentScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) parentVC:self childVCs:childArr];
-    _pageContentView.delegatePageContentScrollView = self;
-    [self.view insertSubview:_pageContentView atIndex:0];
+    /// pageContentScrollView
+    self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) parentVC:self childVCs:childArr];
+    _pageContentScrollView.delegatePageContentScrollView = self;
+    [self.view insertSubview:_pageContentScrollView atIndex:0];
 }
 
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
-    [self.pageContentView setPageContentScrollViewCurrentIndex:selectedIndex];
+    [self.pageContentScrollView setPageContentScrollViewCurrentIndex:selectedIndex];
 }
 
 - (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {

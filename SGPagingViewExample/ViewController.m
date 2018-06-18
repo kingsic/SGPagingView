@@ -13,16 +13,15 @@
 #import "DefaultImageVC.h"
 #import "DefaultGradientEffectVC.h"
 #import "DefaultZoomVC.h"
-#import "NavigationBarVC.h"
-#import "PersonalCenterVC.h"
-#import "DefaultScrollEndVC.h"
+#import "DefaultFixedVC.h"
+#import "DefaultDynamicVC.h"
 #import "DefaultCoverVC.h"
 #import "DefaultTwoCoverVC.h"
 #import "DefaultThreeCoverVC.h"
-#import "DefaultFixedVC.h"
-#import "DefaultDynamicVC.h"
-#import "DefaultAttributedTitleVC.h"
 #import "DefaultPopGestureVC.h"
+#import "DefaultAttributedTitleVC.h"
+#import "NavigationBarVC.h"
+#import "PersonalCenterVC.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -35,7 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.TitleDataList = @[@"静止样式", @"滚动样式", @"系统样式", @"图片样式", @"导航栏样式", @"文字渐变效果", @"文字缩放效果", @"微博个人主页", @"滚动结束后加载子视图", @"指示器遮盖样式一", @"指示器遮盖样式二", @"指示器遮盖样式三 + 内容全屏效果", @"指示器固定样式", @"指示器动态样式", @"AttributedTitle 属性", @"返回手势处理"];
+    self.TitleDataList = @[@"静止样式", @"滚动样式", @"系统样式", @"图片样式", @"文字渐变效果", @"文字缩放效果", @"指示器固定样式", @"指示器动态样式", @"指示器遮盖样式一", @"指示器遮盖样式二", @"指示器遮盖样式三", @"侧滑返回手势处理案例", @"AttributedTitle 属性案例", @"导航栏样式案例", @"微博个人主页案例"];
     
     [self foundTableView];
 }
@@ -76,6 +75,42 @@
         [self.navigationController pushViewController:imageVC animated:YES];
         
     } else if (indexPath.row == 4) {
+        DefaultGradientEffectVC *gradientEffectVC = [[DefaultGradientEffectVC alloc] init];
+        [self.navigationController pushViewController:gradientEffectVC animated:YES];
+        
+    } else if (indexPath.row == 5) {
+        DefaultZoomVC *zoomVC = [[DefaultZoomVC alloc] init];
+        [self.navigationController pushViewController:zoomVC animated:YES];
+        
+    } else if (indexPath.row == 6) {
+        DefaultFixedVC *fixedVC = [[DefaultFixedVC alloc] init];
+        [self.navigationController pushViewController:fixedVC animated:YES];
+        
+    } else if (indexPath.row == 7) {
+        DefaultDynamicVC *dynamicVC = [[DefaultDynamicVC alloc] init];
+        [self.navigationController pushViewController:dynamicVC animated:YES];
+
+    } else if (indexPath.row == 8) {
+        DefaultCoverVC *coverVC = [[DefaultCoverVC alloc] init];
+        [self.navigationController pushViewController:coverVC animated:YES];
+        
+    } else if (indexPath.row == 9) {
+        DefaultTwoCoverVC *twoCoverVC = [[DefaultTwoCoverVC alloc] init];
+        [self.navigationController pushViewController:twoCoverVC animated:YES];
+        
+    } else if (indexPath.row == 10) {
+        DefaultThreeCoverVC *threeCoverVC = [[DefaultThreeCoverVC alloc] init];
+        [self.navigationController pushViewController:threeCoverVC animated:YES];
+        
+    } else if (indexPath.row == 11) {
+        DefaultPopGestureVC *popGestureVC = [[DefaultPopGestureVC alloc] init];
+        [self.navigationController pushViewController:popGestureVC animated:YES];
+
+    } else if (indexPath.row == 12) {
+        DefaultAttributedTitleVC *attributedTitleVC = [[DefaultAttributedTitleVC alloc] init];
+        [self.navigationController pushViewController:attributedTitleVC animated:YES];
+      
+    } else if (indexPath.row == 13) {
         NavigationBarVC *VC = [[NavigationBarVC alloc] init];
         UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:VC];
         // 问题：模态的时候有延迟，而且延迟比较厉害。第一次遇到这种问题；上网查了一下，网上给出的答案：由于某种原因： presentViewController:animated:completion 里的内容并不会真的马上触发执行，除非有一个主线程事件触发。比如在弹出慢的时候，你随便点击一下屏幕，马上就能弹出来；这个我亲自测试了是这种情况
@@ -85,49 +120,9 @@
             }];
         }];
         
-    } else if (indexPath.row == 5) {
-        DefaultGradientEffectVC *gradientEffectVC = [[DefaultGradientEffectVC alloc] init];
-        [self.navigationController pushViewController:gradientEffectVC animated:YES];
-        
-    } else if (indexPath.row == 6) {
-        DefaultZoomVC *zoomVC = [[DefaultZoomVC alloc] init];
-        [self.navigationController pushViewController:zoomVC animated:YES];
-        
-    } else if (indexPath.row == 7) {
+    } else {
         PersonalCenterVC *PCVC = [[PersonalCenterVC alloc] init];
         [self.navigationController pushViewController:PCVC animated:YES];
-        
-    } else if (indexPath.row == 8) {
-        DefaultScrollEndVC *scrollEndVC = [[DefaultScrollEndVC alloc] init];
-        [self.navigationController pushViewController:scrollEndVC animated:YES];
-        
-    } else if (indexPath.row == 9) {
-        DefaultCoverVC *coverVC = [[DefaultCoverVC alloc] init];
-        [self.navigationController pushViewController:coverVC animated:YES];
-        
-    } else if (indexPath.row == 10) {
-        DefaultTwoCoverVC *twoCoverVC = [[DefaultTwoCoverVC alloc] init];
-        [self.navigationController pushViewController:twoCoverVC animated:YES];
-        
-    } else if (indexPath.row == 11) {
-        DefaultThreeCoverVC *threeCoverVC = [[DefaultThreeCoverVC alloc] init];
-        [self.navigationController pushViewController:threeCoverVC animated:YES];
-        
-    } else if (indexPath.row == 12) {
-        DefaultFixedVC *fixedVC = [[DefaultFixedVC alloc] init];
-        [self.navigationController pushViewController:fixedVC animated:YES];
-        
-    } else if (indexPath.row == 13) {
-        DefaultDynamicVC *dynamicVC = [[DefaultDynamicVC alloc] init];
-        [self.navigationController pushViewController:dynamicVC animated:YES];
-        
-    } else if (indexPath.row == 14) {
-        DefaultAttributedTitleVC *attributedTitleVC = [[DefaultAttributedTitleVC alloc] init];
-        [self.navigationController pushViewController:attributedTitleVC animated:YES];
-        
-    } else {
-        DefaultPopGestureVC *popGestureVC = [[DefaultPopGestureVC alloc] init];
-        [self.navigationController pushViewController:popGestureVC animated:YES];
     }
 }
 

@@ -29,7 +29,6 @@
 		8D0F8E321FD95DE300F30426 /* DefaultFixedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E201FD95DE300F30426 /* DefaultFixedVC.m */; };
 		8D0F8E331FD95DE300F30426 /* DefaultGradientEffectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E221FD95DE300F30426 /* DefaultGradientEffectVC.m */; };
 		8D0F8E341FD95DE300F30426 /* DefaultPopGestureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E241FD95DE300F30426 /* DefaultPopGestureVC.m */; };
-		8D0F8E351FD95DE300F30426 /* DefaultScrollEndVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E261FD95DE300F30426 /* DefaultScrollEndVC.m */; };
 		8D0F8E361FD95DE300F30426 /* DefaultScrollVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E281FD95DE300F30426 /* DefaultScrollVC.m */; };
 		8D0F8E371FD95DE300F30426 /* DefaultStaticVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E2A1FD95DE300F30426 /* DefaultStaticVC.m */; };
 		8D0F8E381FD95DE300F30426 /* DefaultThreeCoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E2C1FD95DE300F30426 /* DefaultThreeCoverVC.m */; };
@@ -127,8 +126,6 @@
 		8D0F8E221FD95DE300F30426 /* DefaultGradientEffectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultGradientEffectVC.m; sourceTree = "<group>"; };
 		8D0F8E231FD95DE300F30426 /* DefaultPopGestureVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultPopGestureVC.h; sourceTree = "<group>"; };
 		8D0F8E241FD95DE300F30426 /* DefaultPopGestureVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultPopGestureVC.m; sourceTree = "<group>"; };
-		8D0F8E251FD95DE300F30426 /* DefaultScrollEndVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultScrollEndVC.h; sourceTree = "<group>"; };
-		8D0F8E261FD95DE300F30426 /* DefaultScrollEndVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultScrollEndVC.m; sourceTree = "<group>"; };
 		8D0F8E271FD95DE300F30426 /* DefaultScrollVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultScrollVC.h; sourceTree = "<group>"; };
 		8D0F8E281FD95DE300F30426 /* DefaultScrollVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultScrollVC.m; sourceTree = "<group>"; };
 		8D0F8E291FD95DE300F30426 /* DefaultStaticVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultStaticVC.h; sourceTree = "<group>"; };
@@ -400,8 +397,6 @@
 				8D0F8E221FD95DE300F30426 /* DefaultGradientEffectVC.m */,
 				8D0F8E2F1FD95DE300F30426 /* DefaultZoomVC.h */,
 				8D0F8E301FD95DE300F30426 /* DefaultZoomVC.m */,
-				8D0F8E251FD95DE300F30426 /* DefaultScrollEndVC.h */,
-				8D0F8E261FD95DE300F30426 /* DefaultScrollEndVC.m */,
 				8D0F8E1D1FD95DE300F30426 /* DefaultCoverVC.h */,
 				8D0F8E1E1FD95DE300F30426 /* DefaultCoverVC.m */,
 				8D0F8E2D1FD95DE300F30426 /* DefaultTwoCoverVC.h */,
@@ -606,7 +601,6 @@
 				8D0F8E6F1FD95E2300F30426 /* ChildVCSix.m in Sources */,
 				8D0F8E5F1FD95E2300F30426 /* ChildFirstPopGestureNextVC.m in Sources */,
 				8D0F8E391FD95DE300F30426 /* DefaultTwoCoverVC.m in Sources */,
-				8D0F8E351FD95DE300F30426 /* DefaultScrollEndVC.m in Sources */,
 				8D0F8E641FD95E2300F30426 /* ChildFourthPopGestureVC.m in Sources */,
 				182513D71F21CC340039F4A2 /* PersonalCenterTopView.m in Sources */,
 				8D0F8E381FD95DE300F30426 /* DefaultThreeCoverVC.m in Sources */,

@@ -48,6 +48,7 @@
     configure.showIndicator = NO;
     configure.titleTextZoom = YES;
     configure.titleTextScaling = 0.3;
+    configure.spacingBetweenButtons = 30;
     
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];

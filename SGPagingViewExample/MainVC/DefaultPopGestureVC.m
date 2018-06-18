@@ -70,7 +70,7 @@
     ChildFourthPopGestureVC *fourVC = [[ChildFourthPopGestureVC alloc] init];
     
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
-    /// pageContentView
+    /// pageContentScrollView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
     self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
     _pageContentScrollView.delegatePageContentScrollView = self;

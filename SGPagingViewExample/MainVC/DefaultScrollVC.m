@@ -73,7 +73,7 @@
     ChildVCEight *eightVC = [[ChildVCEight alloc] init];
     ChildVCNine *nineVC = [[ChildVCNine alloc] init];
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
-    /// pageContentCollectionView
+    /// pageContentScrollView
     CGFloat ContentCollectionViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
     self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, ContentCollectionViewHeight) parentVC:self childVCs:childArr];
     _pageContentScrollView.delegatePageContentScrollView = self;

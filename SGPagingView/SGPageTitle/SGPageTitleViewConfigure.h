@@ -50,8 +50,7 @@ typedef enum : NSUInteger {
 /** 标题文字字号大小，默认 15 号字体 */
 @property (nonatomic, strong) UIFont *titleFont;
 /** 标题文字选中字号大小，默认 15 号字体。
-  * 一旦开启此属性，SGPageTitleView.h 里面的 isOpenTitleTextZoom 属性将不起作用，
-  * SGPageTitleView.m 内部已做处理 */
+  * 一旦设置此属性，titleTextZoom 属性将不起作用 */
 @property (nonatomic, strong) UIFont *titleSelectedFont;
 /** 普通状态下标题按钮文字的颜色，默认为黑色 */
 @property (nonatomic, strong) UIColor *titleColor;
