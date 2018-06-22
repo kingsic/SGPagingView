@@ -7,6 +7,7 @@ target 'SGPagingViewExample' do
 
   # Pods for SGPagingViewExample
   pod 'SGPagingView', :path => './SGPagingView.podspec'
+  pod 'Masonry'
 
   target 'SGPagingViewExampleTests' do
     inherit! :search_paths

@@ -81,7 +81,7 @@
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.pagingEnabled = YES;
         _collectionView.bounces = NO;
-        _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.backgroundColor = [UIColor clearColor];
         
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     }
@@ -138,6 +138,8 @@
         
         _initSetup = YES;
     }
+    
+    [_collectionView.collectionViewLayout invalidateLayout];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -161,7 +163,7 @@
 
 #pragma mark - - - UICollectionViewDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(self.collectionViewWidth, self.frame.size.height);
+    return collectionView.frame.size;
 }
 
 #pragma mark - - - UIScrollViewDelegate
@@ -193,7 +195,7 @@
     NSInteger targetIndex = 0;
     // 2、判断是左滑还是右滑
     CGFloat currentOffsetX = scrollView.contentOffset.x;
-    CGFloat scrollViewW = self.collectionViewWidth;
+    CGFloat scrollViewW = self.collectionView.frame.size.width;
     if (currentOffsetX > self.startOffsetX) { // 左滑
         // 1、计算 progress
         progress = currentOffsetX / scrollViewW - floor(currentOffsetX / scrollViewW);

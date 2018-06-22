@@ -17,6 +17,7 @@
 #import "ChildVCSeven.h"
 #import "ChildVCEight.h"
 #import "ChildVCNine.h"
+#import <Masonry/Masonry.h>
 
 @interface DefaultScrollVC () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
@@ -50,9 +51,9 @@
     CGFloat statusHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
     CGFloat pageTitleViewY = 0;
     if (statusHeight == 20.0) {
-        pageTitleViewY = 64;
+        pageTitleViewY = statusHeight + self.navigationController.navigationBar.frame.size.height;
     } else {
-        pageTitleViewY = 88;
+        pageTitleViewY = self.navigationController.navigationBar.frame.size.height;
     }
     
     NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
@@ -60,8 +61,16 @@
     configure.indicatorAdditionalWidth = 10; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
     
     /// pageTitleView
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
+    self.pageTitleView = [[SGPageTitleView alloc] init];
+    self.pageTitleView.titleArr = titleArr;
+    self.pageTitleView.configure = configure;
     [self.view addSubview:_pageTitleView];
+    [self.pageTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(44.0));
+        make.top.equalTo(@(pageTitleViewY));
+        make.leading.trailing.equalTo(self.view);
+    }];
+    self.pageTitleView.delegatePageTitleView = self;
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
@@ -75,15 +84,26 @@
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
     /// pageContentView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
-    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
-    _pageContentView.delegatePageContentView = self;
+    
+    self.pageContentView = [[SGPageContentView alloc] init];
+    self.pageContentView.parentViewController = self;
+    self.pageContentView.childViewControllers = childArr;
     [self.view addSubview:_pageContentView];
+    [self.pageContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(contentViewHeight));
+        make.top.equalTo(self.pageTitleView.mas_bottom);
+        make.leading.trailing.equalTo(self.view);
+    }];
+    
+    _pageContentView.delegatePageContentView = self;
 }
 
+#pragma mark SGPageTitleViewDelegate
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
     [self.pageContentView setPageContentViewCurrentIndex:selectedIndex];
 }
 
+#pragma mark SGPageContentViewDelegate
 - (void)pageContentView:(SGPageContentView *)pageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }

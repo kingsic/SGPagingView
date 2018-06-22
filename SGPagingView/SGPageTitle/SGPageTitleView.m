@@ -14,11 +14,13 @@
 #import "SGPageTitleView.h"
 #import "UIView+SGPagingView.h"
 #import "SGPageTitleViewConfigure.h"
+#import <Masonry/Masonry.h>
 
 #define SGPageTitleViewHeight self.frame.size.height
 
 #pragma mark - - - SGPageTitleButton
 @interface SGPageTitleButton : UIButton
+@property (nonatomic, assign) CGFloat width;
 @end
 @implementation SGPageTitleButton
 - (void)setHighlighted:(BOOL)highlighted {
@@ -135,6 +137,10 @@
     [self addSubview:tempView];
     // 1、添加 UIScrollView
     [self addSubview:self.scrollView];
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.leading.trailing.equalTo(self);
+        make.height.equalTo(@(SGPageTitleViewHeight));
+    }];
     // 2、添加标题按钮
     [self setupTitleButtons];
     // 3、添加底部分割线
@@ -222,7 +228,7 @@
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.alwaysBounceHorizontal = YES;
-        _scrollView.frame = CGRectMake(0, 0, self.titleViewWidth, SGPageTitleViewHeight);
+//        _scrollView.frame = CGRectMake(0, 0, self.titleViewWidth, SGPageTitleViewHeight);
     }
     return _scrollView;
 }
@@ -368,18 +374,10 @@
         CGFloat heightNormal = [self SG_heightWithNSAttributedString:titleAttrString width:widthNormal];
         CGFloat heightSelected = [self SG_heightWithNSAttributedString:selectedAttrString width:widthSelected];
         
-        if (widthNormal > widthSelected) {
-            width = widthNormal;
-        }else {
-            width = widthSelected;
-        }
-        if (heightNormal > heightSelected) {
-            height = heightNormal;
-        }else {
-            height = heightSelected;
-        }
+        width = widthNormal > widthSelected ? widthNormal: widthSelected;
+        height = heightNormal > heightSelected ? heightNormal: heightSelected;
         
-        TitleAttribute* titleAttr = [[TitleAttribute new] initWithNormalState:titleAttrString stateSelected:selectedAttrString height:height width:width];
+        TitleAttribute* titleAttr = [[TitleAttribute alloc] initWithNormalState:titleAttrString stateSelected:selectedAttrString height:height width:width];
         
         [self.titleAttributes addObject:titleAttr];
     }];
@@ -438,9 +436,22 @@
     }
     
     NSInteger titleCount = self.titleAttributes.count;
-    if (self.allBtnWidth <= self.titleViewWidth) { // SGPageTitleView 静止样式
+    if (self.allBtnWidth <= self.titleViewWidth) { // SGPageTitleView 静止样式, 总按钮宽度小于screen width
         CGFloat btnY = 0;
-        CGFloat btnW = self.titleViewWidth / self.titleArr.count;
+        
+        // this place divided width equality
+        //        CGFloat btnW = self.titleViewWidth / self.titleArr.count;
+        
+        // base on largest width set title view width
+        CGFloat maxWidth = 0;
+        for (TitleAttribute* titleAttr in self.titleAttributes) {
+            if (titleAttr.width > maxWidth) {
+                maxWidth = titleAttr.width;
+            }
+        }
+        CGFloat btnW = maxWidth;
+        CGFloat totalBtnWidthWithInterSpace = btnW*titleCount + _configure.spacingBetweenButtons*(titleCount - 1);
+        
         CGFloat btnH = 0;
         if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
             btnH = maxHeight - self.configure.indicatorHeight;
@@ -449,14 +460,19 @@
         }
         for (NSInteger index = 0; index < titleCount; index++) {
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
+            btn.width = btnW;
+            
             TitleAttribute* titleAttr = self.titleAttributes[index];
             
-            // shifting buttonPaddingX for needed
-            CGFloat btnX = btnW * index - self.buttonPaddingX;
-            btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
             btn.tag = index;
             
-            btn.titleLabel.numberOfLines = 0;
+            // multiple line display support
+            if (_configure.multipleLineDisplay == YES) {
+                btn.titleLabel.numberOfLines = 0;
+            }else {
+                btn.titleLabel.numberOfLines = 1;
+            }
+            
             [btn setAttributedTitle:titleAttr.stateNormal forState:(UIControlStateNormal)];
             [btn setAttributedTitle:titleAttr.stateSelected forState:(UIControlStateSelected)];
             
@@ -464,13 +480,29 @@
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
             
-            [self setupStartColor:self.configure.titleColor];
-            [self setupEndColor:self.configure.titleSelectedColor];
+            // add Masonry autolayout for btn
+            if (index == 0) {
+                [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.height.equalTo(@(btnH));
+                    make.width.equalTo(@(btnW));
+                    make.top.equalTo(@(btnY));
+                    make.centerX.equalTo(self.scrollView).offset(-totalBtnWidthWithInterSpace/2 + btnW/2);
+                }];
+            }else {
+                [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.height.equalTo(@(btnH));
+                    make.width.equalTo(@(btnW));
+                    make.top.equalTo(@(btnY));
+                    make.leading.equalTo([self.scrollView subviews][index - 1].mas_trailing).offset(self.configure.spacingBetweenButtons);
+                }];
+            }
         }
+        
+        [self setupStartColor:self.configure.titleColor];
+        [self setupEndColor:self.configure.titleSelectedColor];
         self.scrollView.contentSize = CGSizeMake(self.titleViewWidth, SGPageTitleViewHeight);
         
     } else { // SGPageTitleView 滚动样式
-        CGFloat btnX = 0;
         CGFloat btnY = 0;
         CGFloat btnH = 0;
         
@@ -480,11 +512,18 @@
             btnH = maxHeight;
         }
         
+        CGFloat totalBtnWidthWithInterSpace = 0;
+        for (TitleAttribute* titleAttr in self.titleAttributes) {
+            totalBtnWidthWithInterSpace += titleAttr.width;
+        }
+        totalBtnWidthWithInterSpace += _configure.spacingBetweenButtons*(titleCount - 1);
+        
         for (NSInteger index = 0; index < titleCount; index++) {
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
             TitleAttribute* titleAttr = self.titleAttributes[index];
             
-            CGFloat btnW = titleAttr.width + self.configure.spacingBetweenButtons;
+            CGFloat btnW = titleAttr.width;
+            btn.width = btnW;
             
             if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
                 btnH = maxHeight - self.configure.indicatorHeight;
@@ -495,31 +534,48 @@
                 }
             }
             
-            btn.titleLabel.numberOfLines = 0;
+            // multiple line display support
+            if (_configure.multipleLineDisplay == YES) {
+                btn.titleLabel.numberOfLines = 0;
+            }else {
+                btn.titleLabel.numberOfLines = 1;
+            }
+            
             btn.tag = index;
             
             [btn setAttributedTitle:titleAttr.stateNormal forState:(UIControlStateNormal)];
             [btn setAttributedTitle:titleAttr.stateSelected forState:(UIControlStateSelected)];
             
-            btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
-            btn.titleLabel.frame = CGRectMake(btnX, btnY, btnW, btnH);
-            btnX = btnX + btnW;
-            
             [btn addTarget:self action:@selector(P_btn_action:) forControlEvents:(UIControlEventTouchUpInside)];
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
+            
+            // add Masonry autolayout for btn
+            if (index == 0) {
+                [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.height.equalTo(@(btnH));
+                    make.width.equalTo(@(btnW));
+                    make.top.equalTo(@(btnY));
+                    make.leading.equalTo(self.scrollView);
+                }];
+            }else {
+                [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.height.equalTo(@(btnH));
+                    make.width.equalTo(@(btnW));
+                    make.top.equalTo(@(btnY));
+                    make.leading.equalTo([self.scrollView subviews][index - 1].mas_trailing).offset(self.configure.spacingBetweenButtons);
+                }];
+            }
         }
         
         [self setupStartColor:self.configure.titleColor];
         [self setupEndColor:self.configure.titleSelectedColor];
-        
-        CGFloat scrollViewWidth = CGRectGetMaxX(self.scrollView.subviews.lastObject.frame);
-        self.scrollView.contentSize = CGSizeMake(scrollViewWidth, maxHeight);
+        self.scrollView.contentSize = CGSizeMake(totalBtnWidthWithInterSpace, maxHeight);
     }
 }
 
 #pragma mark - - - 标题按钮的点击事件
-- (void)P_btn_action:(UIButton *)button {
+- (void)P_btn_action:(SGPageTitleButton *)button {
     // 1、改变按钮的选择状态
     [self P_changeSelectedButton:button];
     // 2、滚动标题选中按钮居中
@@ -527,7 +583,7 @@
         [self P_selectedBtnCenter:button];
     }
     // 3、改变指示器的位置以及指示器宽度样式
-    [self P_changeIndicatorViewLocationWithButton:button];
+//    [self P_changeIndicatorViewLocationWithButton:button];
     // 4、pageTitleViewDelegate
     if ([self.delegatePageTitleView respondsToSelector:@selector(pageTitleView:selectedIndex:)]) {
         [self.delegatePageTitleView pageTitleView:self selectedIndex:button.tag];
@@ -537,16 +593,30 @@
 }
 
 #pragma mark - - - 改变按钮的选择状态
-- (void)P_changeSelectedButton:(UIButton *)button {
+- (void)P_changeSelectedButton:(SGPageTitleButton *)button {
     if (self.tempBtn == nil) {
         button.selected = YES;
         self.tempBtn = button;
+        CGFloat indicatorWidth = _configure.indicatorFixedWidth;
+        // get first button, and calculate offset
+        SGPageTitleButton *firstBtn = _btnMArr[0];
+        [self.indicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(firstBtn.mas_bottom);
+            make.width.equalTo(@(indicatorWidth));
+            make.height.equalTo(@(self.configure.indicatorHeight));
+            make.leading.equalTo(firstBtn).offset([self offsetToButton:button] + (button.width - indicatorWidth)/2);
+        }];
     } else if (self.tempBtn != nil && self.tempBtn == button){
         button.selected = YES;
     } else if (self.tempBtn != button && self.tempBtn != nil){
         self.tempBtn.selected = NO;
         button.selected = YES;
         self.tempBtn = button;
+        CGFloat indicatorWidth = _configure.indicatorFixedWidth;
+        SGPageTitleButton *firstBtn = _btnMArr[0];
+        [self.indicatorView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(firstBtn).offset([self offsetToButton:button] + (button.width - indicatorWidth)/2);
+        }];
     }
     
     if (self.configure.titleSelectedFont == [UIFont systemFontOfSize:15]) {
@@ -591,35 +661,35 @@
     [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
 }
 
-#pragma mark - - - 改变指示器的位置以及指示器宽度样式
-- (void)P_changeIndicatorViewLocationWithButton:(UIButton *)button {
-    [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
-        if (self.configure.indicatorStyle == SGIndicatorStyleFixed) {
-            self.indicatorView.SG_width = self.configure.indicatorFixedWidth;
-            self.indicatorView.SG_centerX = button.SG_centerX;
-            
-        } else if (self.configure.indicatorStyle == SGIndicatorStyleDynamic) {
-            self.indicatorView.SG_width = self.configure.indicatorDynamicWidth;
-            self.indicatorView.SG_centerX = button.SG_centerX;
-            
-        } else {
-            CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + [self SG_widthWithNSAttributedString:[[button titleLabel] attributedText]];
-            
-            if (tempIndicatorWidth > button.SG_width) {
-                tempIndicatorWidth = button.SG_width;
-            }
-            
-            self.indicatorView.SG_width = tempIndicatorWidth;
-            self.indicatorView.SG_centerX = button.SG_centerX;
-        }
-    }];
-}
+//#pragma mark - - - 改变指示器的位置以及指示器宽度样式
+//- (void)P_changeIndicatorViewLocationWithButton:(UIButton *)button {
+//    [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
+//        if (self.configure.indicatorStyle == SGIndicatorStyleFixed) {
+//            self.indicatorView.SG_width = self.configure.indicatorFixedWidth;
+//            self.indicatorView.SG_centerX = button.SG_centerX;
+//
+//        } else if (self.configure.indicatorStyle == SGIndicatorStyleDynamic) {
+//            self.indicatorView.SG_width = self.configure.indicatorDynamicWidth;
+//            self.indicatorView.SG_centerX = button.SG_centerX;
+//
+//        } else {
+//            CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + [self SG_widthWithNSAttributedString:[[button titleLabel] attributedText]];
+//
+//            if (tempIndicatorWidth > button.SG_width) {
+//                tempIndicatorWidth = button.SG_width;
+//            }
+//
+//            self.indicatorView.SG_width = tempIndicatorWidth;
+//            self.indicatorView.SG_centerX = button.SG_centerX;
+//        }
+//    }];
+//}
 
 #pragma mark - - - 给外界提供的方法
 - (void)setPageTitleViewWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     // 1、取出 originalBtn／targetBtn
-    UIButton *originalBtn = self.btnMArr[originalIndex];
-    UIButton *targetBtn = self.btnMArr[targetIndex];
+    SGPageTitleButton *originalBtn = self.btnMArr[originalIndex];
+    SGPageTitleButton *targetBtn = self.btnMArr[targetIndex];
     self.signBtnIndex = targetBtn.tag;
     // 2、 滚动标题选中居中
     [self P_selectedBtnCenter:targetBtn];
@@ -678,7 +748,7 @@
 }
 
 #pragma mark - - - SGPageTitleView 静止样式下指示器默认滚动样式（SGIndicatorScrollStyleDefault）
-- (void)P_smallIndicatorScrollStyleDefaultWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
+- (void)P_smallIndicatorScrollStyleDefaultWithProgress:(CGFloat)progress originalBtn:(SGPageTitleButton *)originalBtn targetBtn:(SGPageTitleButton *)targetBtn {
     // 1、改变按钮的选择状态
     if (progress >= 0.8) { /// 此处取 >= 0.8 而不是 1.0 为的是防止用户滚动过快而按钮的选中状态并没有改变
         [self P_changeSelectedButton:targetBtn];
@@ -716,46 +786,23 @@
         self.indicatorView.SG_x = originalBtnIndicatorX + progress * totalOffsetX;
         
     } else {
-        /// 1、计算 indicator 偏移量
-        // targetBtn 文字宽度
-        CGFloat targetBtnTextWidth = [self SG_widthWithNSAttributedString:[[targetBtn titleLabel] attributedText]];
-        CGFloat targetBtnIndicatorX = CGRectGetMaxX(targetBtn.frame) - targetBtnTextWidth - 0.5 * (self.SG_width / self.titleArr.count - targetBtnTextWidth + self.configure.indicatorAdditionalWidth);
-        // originalBtn 文字宽度
-        CGFloat originalBtnTextWidth = [self SG_widthWithNSAttributedString:[[originalBtn titleLabel] attributedText]];
+        /// 计算 indicatorView 滚动时 x 的偏移量
+        CGFloat offsetX = 0.0;
+        CGFloat indicatorWidth = _configure.indicatorFixedWidth;
         
-        CGFloat originalBtnIndicatorX = CGRectGetMaxX(originalBtn.frame) - originalBtnTextWidth - 0.5 * (self.SG_width / self.titleArr.count - originalBtnTextWidth + self.configure.indicatorAdditionalWidth);
-        CGFloat totalOffsetX = targetBtnIndicatorX - originalBtnIndicatorX;
-        
-        /// 2、计算文字之间差值
-        // 按钮宽度的距离
-        CGFloat btnWidth = self.SG_width / self.titleArr.count;
-        // targetBtn 文字右边的 x 值
-        CGFloat targetBtnRightTextX = CGRectGetMaxX(targetBtn.frame) - 0.5 * (btnWidth - targetBtnTextWidth);
-        // originalBtn 文字右边的 x 值
-        CGFloat originalBtnRightTextX = CGRectGetMaxX(originalBtn.frame) - 0.5 * (btnWidth - originalBtnTextWidth);
-        CGFloat totalRightTextDistance = targetBtnRightTextX - originalBtnRightTextX;
-        
-        // 计算 indicatorView 滚动时 x 的偏移量
-        CGFloat offsetX = totalOffsetX * progress;
-        // 计算 indicatorView 滚动时文字宽度的偏移量
-        CGFloat distance = progress * (totalRightTextDistance - totalOffsetX);
-        
-        /// 3、计算 indicatorView 新的 frame
-        self.indicatorView.SG_x = originalBtnIndicatorX + offsetX;
-        
-        CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + originalBtnTextWidth + distance;
-        if (tempIndicatorWidth >= targetBtn.SG_width) {
-            CGFloat moveTotalX = targetBtn.SG_origin.x - originalBtn.SG_origin.x;
-            CGFloat moveX = moveTotalX * progress;
-            self.indicatorView.SG_centerX = originalBtn.SG_centerX + moveX;
-        } else {
-            self.indicatorView.SG_width = tempIndicatorWidth;
+        // because progress 1 update constraints will update by other place
+        if (progress != 1) {
+            offsetX = (([self offsetToButton:targetBtn] + (targetBtn.width - indicatorWidth)/2) - ([self offsetToButton:originalBtn] + (originalBtn.width - indicatorWidth)/2)) * progress;
+            SGPageTitleButton *firstBtn = _btnMArr[0];
+            [self.indicatorView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.leading.equalTo(firstBtn).offset(([self offsetToButton:originalBtn] + (originalBtn.width - indicatorWidth)/2) + offsetX);
+            }];
         }
     }
 }
 
 #pragma mark - - - SGPageTitleView 滚动样式下指示器默认滚动样式（SGIndicatorScrollStyleDefault）
-- (void)P_indicatorScrollStyleDefaultWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
+- (void)P_indicatorScrollStyleDefaultWithProgress:(CGFloat)progress originalBtn:(SGPageTitleButton *)originalBtn targetBtn:(SGPageTitleButton *)targetBtn {
     /// 改变按钮的选择状态
     if (progress >= 0.8) { /// 此处取 >= 0.8 而不是 1.0 为的是防止用户滚动过快而按钮的选中状态并没有改变
         [self P_changeSelectedButton:targetBtn];
@@ -796,35 +843,23 @@
         self.indicatorView.SG_x = originalBtnIndicatorX + offsetX;
         
     } else {
-        // 1、计算 targetBtn／originalBtn 之间的 x 差值
-        CGFloat totalOffsetX = targetBtn.SG_origin.x - originalBtn.SG_origin.x;
-        // 2、计算 targetBtn／originalBtn 之间的差值
-        CGFloat totalDistance = CGRectGetMaxX(targetBtn.frame) - CGRectGetMaxX(originalBtn.frame);
         /// 计算 indicatorView 滚动时 x 的偏移量
         CGFloat offsetX = 0.0;
-        /// 计算 indicatorView 滚动时宽度的偏移量
-        CGFloat distance = 0.0;
-        
-        CGFloat targetBtnTextWidth = [self SG_widthWithNSAttributedString:[[targetBtn titleLabel] attributedText]];
-        
-        CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + targetBtnTextWidth;
-        if (tempIndicatorWidth >= targetBtn.SG_width) {
-            offsetX = totalOffsetX * progress;
-            distance = progress * (totalDistance - totalOffsetX);
-            self.indicatorView.SG_x = originalBtn.SG_origin.x + offsetX;
-            self.indicatorView.SG_width = originalBtn.SG_width + distance;
-        } else {
-            offsetX = totalOffsetX * progress + 0.5 * self.configure.spacingBetweenButtons - 0.5 * self.configure.indicatorAdditionalWidth;
-            distance = progress * (totalDistance - totalOffsetX) - self.configure.spacingBetweenButtons;
-            /// 计算 indicatorView 新的 frame
-            self.indicatorView.SG_x = originalBtn.SG_origin.x + offsetX;
-            self.indicatorView.SG_width = originalBtn.SG_width + distance + self.configure.indicatorAdditionalWidth;
+        CGFloat indicatorWidth = _configure.indicatorFixedWidth;
+    
+        // because progress 1 update constraints will update by other place
+        if (progress != 1) {
+            offsetX = (([self offsetToButton:targetBtn] + (targetBtn.width - indicatorWidth)/2) - ([self offsetToButton:originalBtn] + (originalBtn.width - indicatorWidth)/2)) * progress;
+            SGPageTitleButton *firstBtn = _btnMArr[0];
+            [self.indicatorView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.leading.equalTo(firstBtn).offset(([self offsetToButton:originalBtn] + (originalBtn.width - indicatorWidth)/2) + offsetX);
+            }];
         }
     }
 }
 
 #pragma mark - - - SGPageTitleView 静止样式下指示器 SGIndicatorScrollStyleHalf 和 SGIndicatorScrollStyleEnd 滚动样式
-- (void)P_smallIndicatorScrollStyleHalfEndWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
+- (void)P_smallIndicatorScrollStyleHalfEndWithProgress:(CGFloat)progress originalBtn:(SGPageTitleButton *)originalBtn targetBtn:(SGPageTitleButton *)targetBtn {
     if (self.configure.indicatorScrollStyle == SGIndicatorScrollStyleHalf) {
         if (self.configure.indicatorStyle == SGIndicatorStyleFixed) {
             if (progress >= 0.5) {
@@ -911,7 +946,7 @@
 }
 
 #pragma mark - - - SGPageTitleView 滚动样式下指示器 SGIndicatorScrollStyleHalf 和 SGIndicatorScrollStyleEnd 滚动样式
-- (void)P_indicatorScrollStyleHalfEndWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
+- (void)P_indicatorScrollStyleHalfEndWithProgress:(CGFloat)progress originalBtn:(SGPageTitleButton *)originalBtn targetBtn:(SGPageTitleButton *)targetBtn {
     if (self.configure.indicatorScrollStyle == SGIndicatorScrollStyleHalf) {
         if (self.configure.indicatorStyle == SGIndicatorStyleFixed) {
             if (progress >= 0.5) {
@@ -1101,6 +1136,20 @@
     }
 }
 
+- (CGFloat)offsetToButton:(SGPageTitleButton*)btn {
+    CGFloat offsetX = 0;
+    NSUInteger index = 0;
+    if (btn.tag) {
+        index = btn.tag;
+    }
+    if (index < _btnMArr.count) {
+        for (int i = 0; i < index; i++) {
+            SGPageTitleButton *btn = _btnMArr[i];
+            offsetX += btn.width + _configure.spacingBetweenButtons;
+        }
+    }
+    return offsetX;
+}
 
 @end
 

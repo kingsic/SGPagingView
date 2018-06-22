@@ -1,9 +1,10 @@
 PODS:
   - Masonry (1.1.0)
-  - SGPagingView (1.3.9):
+  - SGPagingView (1.4.1):
     - Masonry
 
 DEPENDENCIES:
+  - Masonry
   - SGPagingView (from `./SGPagingView.podspec`)
 
 SPEC REPOS:
@@ -16,8 +17,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  SGPagingView: 3a2f56d373547ca18efa0dd2b98196b231a0d5ef
+  SGPagingView: 28ff80fae6c7bba117a3b887e0834472ec41c60b
 
-PODFILE CHECKSUM: 705f264f3e9cfc8589f95d7e2cd11a4d69bc6efa
+PODFILE CHECKSUM: c00f213af61bd636ad9121e107306a6a16a273b1
 
 COCOAPODS: 1.5.2

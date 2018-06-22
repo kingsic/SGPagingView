@@ -77,4 +77,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) SGIndicatorScrollStyle indicatorScrollStyle;
 /** set the title view height dynamic base on text attributes or fixed with init frame/storyboard setting, default is NO*/
 @property (nonatomic, assign) BOOL elasticHeight;
+/** set the title text display in single line or multiple line base on your attribute set, default is NO*/
+@property (nonatomic, assign) BOOL multipleLineDisplay;
 @end

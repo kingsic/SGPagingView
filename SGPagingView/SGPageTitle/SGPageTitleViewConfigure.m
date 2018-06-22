@@ -137,4 +137,8 @@
     return _elasticHeight ? YES : NO;
 }
 
+- (BOOL) multipleLineDisplay {
+    return _multipleLineDisplay ? YES : NO;
+}
+
 @end
