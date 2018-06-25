@@ -69,8 +69,6 @@
 
 /** actual titleViewWidth, default is initializer frame width*/
 @property (nonatomic, assign) CGFloat titleViewWidth;
-/** button x shifting padding, because the final width != init width, default is 0, default they are equal*/
-@property (nonatomic, assign) CGFloat buttonPaddingX;
 
 /** 给外界提供的方法，获取 SGPageContentView 的 progress／originalIndex／targetIndex, 必须实现 */
 - (void)setPageTitleViewWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;

@@ -43,6 +43,7 @@
     configure.titleColor = [UIColor lightGrayColor];
     configure.titleSelectedColor = [UIColor blackColor];
     configure.indicatorColor = [UIColor blackColor];
+    configure.titleAlignment = SGPageTitleAlignmentJustified;
     configure.indicatorAdditionalWidth = 100; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
     
     /// pageTitleView

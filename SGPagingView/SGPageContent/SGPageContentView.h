@@ -61,9 +61,6 @@
 @property (nonatomic, weak) UIViewController *parentViewController;
 /// 子控制器Reference
 @property (nonatomic, strong) NSArray *childViewControllers;
-    
-/** actual collectionViewWidth, default is initializer SGPageContentView frame width*/
-@property (nonatomic, assign) CGFloat collectionViewWidth;
 
 /** 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标 */
 - (void)setPageContentViewCurrentIndex:(NSInteger)currentIndex;

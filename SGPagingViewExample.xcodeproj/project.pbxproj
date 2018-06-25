@@ -493,6 +493,7 @@
 				TargetAttributes = {
 					1825133F1F21CAC30039F4A2 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = L6TLAD67NF;
 						ProvisioningStyle = Automatic;
 					};
 					182513581F21CAC30039F4A2 = {
@@ -823,7 +824,7 @@
 			baseConfigurationReference = ADFBC617693B37557BAD4FAA /* Pods-SGPagingViewExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L6TLAD67NF;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = SGPagingViewExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -837,7 +838,7 @@
 			baseConfigurationReference = 49574B00B9638E0327C58814 /* Pods-SGPagingViewExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L6TLAD67NF;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = SGPagingViewExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

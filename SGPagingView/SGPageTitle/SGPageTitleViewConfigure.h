@@ -15,6 +15,15 @@
 #import <Foundation/Foundation.h>
 
 typedef enum : NSUInteger {
+    /// alignment center, default
+    SGPageTitleAlignmentCenter,
+    /// alignment left
+    SGPageTitleAlignmentLeft,
+    /// alignment justified
+    SGPageTitleAlignmentJustified // position title equally
+} SGPageTitleAlignment;
+
+typedef enum : NSUInteger {
     /// 下划线样式
     SGIndicatorStyleDefault,
     /// 遮盖样式
@@ -51,8 +60,12 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIColor *titleColor;
 /** 选中状态下标题按钮文字的颜色，默认为红色 */
 @property (nonatomic, strong) UIColor *titleSelectedColor;
+/** title alignment */
+@property (nonatomic, assign) SGPageTitleAlignment titleAlignment;
 /** 指示器高度，默认为 2.0f */
 @property (nonatomic, assign) CGFloat indicatorHeight;
+/** titleview padding */
+@property (nonatomic, assign) CGSize titleViewPadding;
 /** 指示器颜色，默认为红色 */
 @property (nonatomic, strong) UIColor *indicatorColor;
 /** 指示器的额外宽度，介于按钮文字宽度与按钮宽度之间 */

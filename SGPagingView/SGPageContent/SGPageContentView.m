@@ -61,17 +61,10 @@
 }
     
 #pragma mark - getter & setter
-- (CGFloat)collectionViewWidth {
-    if (!_collectionViewWidth) {
-        _collectionViewWidth = self.bounds.size.width;
-    }
-    return _collectionViewWidth;
-}
-    
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = CGSizeMake(self.collectionViewWidth, self.bounds.size.height);
+        flowLayout.itemSize = CGSizeZero;
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -232,7 +225,7 @@
 #pragma mark - - - 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
 - (void)setPageContentViewCurrentIndex:(NSInteger)currentIndex {
     self.isClickBtn = YES;
-    CGFloat offsetX = currentIndex * self.collectionViewWidth;
+    CGFloat offsetX = currentIndex * self.collectionView.frame.size.width;
     // 1、处理内容偏移
     self.collectionView.contentOffset = CGPointMake(offsetX, 0);
     // 2、pageContentView:offsetX:

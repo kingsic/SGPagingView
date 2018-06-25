@@ -187,12 +187,6 @@
     }
     return _titleViewWidth;
 }
-- (CGFloat)buttonPaddingX {
-    if(!_buttonPaddingX) {
-        _buttonPaddingX = 0;
-    }
-    return _buttonPaddingX;
-}
     
 - (BOOL)isShowBottomSeparator {
     if(!_isShowBottomSeparator) {
@@ -438,26 +432,29 @@
     NSInteger titleCount = self.titleAttributes.count;
     if (self.allBtnWidth <= self.titleViewWidth) { // SGPageTitleView 静止样式, 总按钮宽度小于screen width
         CGFloat btnY = 0;
-        
-        // this place divided width equality
-        //        CGFloat btnW = self.titleViewWidth / self.titleArr.count;
-        
-        // base on largest width set title view width
-        CGFloat maxWidth = 0;
-        for (TitleAttribute* titleAttr in self.titleAttributes) {
-            if (titleAttr.width > maxWidth) {
-                maxWidth = titleAttr.width;
+        CGFloat btnW = 0;
+        if (self.configure.titleAlignment == SGPageTitleAlignmentJustified) {
+            // this place divided width equality
+            btnW = self.titleViewWidth / self.titleArr.count;
+        }else {
+            // base on largest width set title view width
+            CGFloat maxWidth = 0;
+            for (TitleAttribute* titleAttr in self.titleAttributes) {
+                if (titleAttr.width > maxWidth) {
+                    maxWidth = titleAttr.width;
+                }
             }
+            btnW = maxWidth;
         }
-        CGFloat btnW = maxWidth;
-        CGFloat totalBtnWidthWithInterSpace = btnW*titleCount + _configure.spacingBetweenButtons*(titleCount - 1);
         
+        CGFloat totalBtnWidthWithInterSpace = btnW*titleCount + _configure.spacingBetweenButtons*(titleCount - 1);
         CGFloat btnH = 0;
         if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
             btnH = maxHeight - self.configure.indicatorHeight;
         } else {
             btnH = maxHeight;
         }
+        
         for (NSInteger index = 0; index < titleCount; index++) {
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
             btn.width = btnW;
@@ -486,14 +483,22 @@
                     make.height.equalTo(@(btnH));
                     make.width.equalTo(@(btnW));
                     make.top.equalTo(@(btnY));
-                    make.centerX.equalTo(self.scrollView).offset(-totalBtnWidthWithInterSpace/2 + btnW/2);
+                    if (self.configure.titleAlignment == SGPageTitleAlignmentJustified) {
+                        make.leading.equalTo(self.scrollView);
+                    }else {
+                        make.centerX.equalTo(self.scrollView).offset(-totalBtnWidthWithInterSpace/2 + btnW/2);
+                    }
                 }];
             }else {
                 [btn mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.height.equalTo(@(btnH));
                     make.width.equalTo(@(btnW));
                     make.top.equalTo(@(btnY));
-                    make.leading.equalTo([self.scrollView subviews][index - 1].mas_trailing).offset(self.configure.spacingBetweenButtons);
+                    if (self.configure.titleAlignment == SGPageTitleAlignmentJustified) {
+                        make.leading.equalTo([self.scrollView subviews][index - 1].mas_trailing);
+                    }else {
+                        make.leading.equalTo([self.scrollView subviews][index - 1].mas_trailing).offset(self.configure.spacingBetweenButtons);
+                    }
                 }];
             }
         }
@@ -506,17 +511,12 @@
         CGFloat btnY = 0;
         CGFloat btnH = 0;
         
-        if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
-            btnH = maxHeight - self.configure.indicatorHeight;
-        }else {
-            btnH = maxHeight;
-        }
-        
         CGFloat totalBtnWidthWithInterSpace = 0;
         for (TitleAttribute* titleAttr in self.titleAttributes) {
             totalBtnWidthWithInterSpace += titleAttr.width;
         }
         totalBtnWidthWithInterSpace += _configure.spacingBetweenButtons*(titleCount - 1);
+        totalBtnWidthWithInterSpace += 2*_configure.titleViewPadding.width;
         
         for (NSInteger index = 0; index < titleCount; index++) {
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
@@ -528,10 +528,7 @@
             if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
                 btnH = maxHeight - self.configure.indicatorHeight;
             } else {
-                CGFloat calculatedHeight = titleAttr.height;
-                if (btnH < calculatedHeight) {
-                    btnH = calculatedHeight;
-                }
+                btnH = maxHeight;
             }
             
             // multiple line display support
@@ -556,7 +553,7 @@
                     make.height.equalTo(@(btnH));
                     make.width.equalTo(@(btnW));
                     make.top.equalTo(@(btnY));
-                    make.leading.equalTo(self.scrollView);
+                    make.leading.equalTo(self.scrollView).offset(self.configure.titleViewPadding.width);
                 }];
             }else {
                 [btn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -1145,7 +1142,11 @@
     if (index < _btnMArr.count) {
         for (int i = 0; i < index; i++) {
             SGPageTitleButton *btn = _btnMArr[i];
-            offsetX += btn.width + _configure.spacingBetweenButtons;
+            if (self.configure.titleAlignment == SGPageTitleAlignmentJustified) {
+                offsetX += btn.width;
+            }else {
+                offsetX += btn.width + _configure.spacingBetweenButtons;
+            }
         }
     }
     return offsetX;
