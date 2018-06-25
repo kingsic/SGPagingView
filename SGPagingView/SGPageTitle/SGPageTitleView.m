@@ -141,6 +141,7 @@
         make.top.leading.trailing.equalTo(self);
         make.height.equalTo(@(SGPageTitleViewHeight));
     }];
+    [self.scrollView layoutIfNeeded];
     // 2、添加标题按钮
     [self setupTitleButtons];
     // 3、添加指示器
@@ -425,8 +426,9 @@
             }
             btnW = maxWidth;
         }
-        
+    
         CGFloat totalBtnWidthWithInterSpace = btnW*titleCount + _configure.spacingBetweenButtons*(titleCount - 1);
+    
         CGFloat btnH = 0;
         if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
             btnH = maxHeight - self.configure.indicatorHeight;
@@ -489,43 +491,43 @@
     } else { // SGPageTitleView 滚动样式
         CGFloat btnY = 0;
         CGFloat btnH = 0;
-        
+
         CGFloat totalBtnWidthWithInterSpace = 0;
         for (TitleAttribute* titleAttr in self.titleAttributes) {
             totalBtnWidthWithInterSpace += titleAttr.width;
         }
         totalBtnWidthWithInterSpace += _configure.spacingBetweenButtons*(titleCount - 1);
         totalBtnWidthWithInterSpace += 2*_configure.titleViewPadding.width;
-        
+
         for (NSInteger index = 0; index < titleCount; index++) {
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
             TitleAttribute* titleAttr = self.titleAttributes[index];
-            
+
             CGFloat btnW = titleAttr.width;
             btn.width = btnW;
-            
+
             if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
                 btnH = maxHeight - self.configure.indicatorHeight;
             } else {
                 btnH = maxHeight;
             }
-            
+
             // multiple line display support
             if (_configure.multipleLineDisplay == YES) {
                 btn.titleLabel.numberOfLines = 0;
             }else {
                 btn.titleLabel.numberOfLines = 1;
             }
-            
+
             btn.tag = index;
-            
+
             [btn setAttributedTitle:titleAttr.stateNormal forState:(UIControlStateNormal)];
             [btn setAttributedTitle:titleAttr.stateSelected forState:(UIControlStateSelected)];
-            
+
             [btn addTarget:self action:@selector(P_btn_action:) forControlEvents:(UIControlEventTouchUpInside)];
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
-            
+
             // add Masonry autolayout for btn
             if (index == 0) {
                 [btn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -543,7 +545,7 @@
                 }];
             }
         }
-        
+
         [self setupStartColor:self.configure.titleColor];
         [self setupEndColor:self.configure.titleSelectedColor];
         self.scrollView.contentSize = CGSizeMake(totalBtnWidthWithInterSpace, maxHeight);
@@ -558,13 +560,11 @@
     if (self.allBtnWidth > self.scrollView.frame.size.width) {
         [self P_selectedBtnCenter:button];
     }
-    // 3、改变指示器的位置以及指示器宽度样式
-//    [self P_changeIndicatorViewLocationWithButton:button];
-    // 4、pageTitleViewDelegate
+    // 3、pageTitleViewDelegate
     if ([self.delegatePageTitleView respondsToSelector:@selector(pageTitleView:selectedIndex:)]) {
         [self.delegatePageTitleView pageTitleView:self selectedIndex:button.tag];
     }
-    // 5、标记按钮下标
+    // 4、标记按钮下标
     self.signBtnIndex = button.tag;
 }
 
@@ -643,9 +643,8 @@
     SGPageTitleButton *originalBtn = self.btnMArr[originalIndex];
     SGPageTitleButton *targetBtn = self.btnMArr[targetIndex];
     self.signBtnIndex = targetBtn.tag;
-    // 2、 滚动标题选中居中
-    [self P_selectedBtnCenter:targetBtn];
-    // 3、处理指示器的逻辑
+    
+    // 2、处理指示器的逻辑
     if (self.allBtnWidth <= self.scrollView.frame.size.width) { /// SGPageTitleView 不可滚动
         if (self.configure.indicatorScrollStyle == SGIndicatorScrollStyleDefault) {
             [self P_smallIndicatorScrollStyleDefaultWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
@@ -654,6 +653,7 @@
         }
 
     } else { /// SGPageTitleView 可滚动
+        [self P_selectedBtnCenter:targetBtn];
         if (self.configure.indicatorScrollStyle == SGIndicatorScrollStyleDefault) {
             [self P_indicatorScrollStyleDefaultWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
         } else {

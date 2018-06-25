@@ -48,12 +48,12 @@
 }
 
 - (void)setupPageView {
-    CGFloat statusHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
     CGFloat pageTitleViewY = 0;
-    if (statusHeight == 20.0) {
-        pageTitleViewY = statusHeight + self.navigationController.navigationBar.frame.size.height;
-    } else {
-        pageTitleViewY = self.navigationController.navigationBar.frame.size.height;
+    if ([UIApplication sharedApplication].isStatusBarHidden == NO) {
+        pageTitleViewY += CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+    }
+    if (self.navigationController.navigationBar.isHidden == NO) {
+        pageTitleViewY += self.navigationController.navigationBar.frame.size.height;
     }
     
     NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
@@ -98,6 +98,21 @@
     }];
     
     _pageContentView.delegatePageContentView = self;
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [coordinator animateAlongsideTransition: nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        CGFloat pageTitleViewY = 0;
+        if ([UIApplication sharedApplication].isStatusBarHidden == NO) {
+            pageTitleViewY += CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+        }
+        if (self.navigationController.navigationBar.isHidden == NO) {
+            pageTitleViewY += self.navigationController.navigationBar.frame.size.height;
+        }
+        [self.pageTitleView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(@(pageTitleViewY));
+        }];
+    }];
 }
 
 #pragma mark SGPageTitleViewDelegate

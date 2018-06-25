@@ -12,6 +12,7 @@
 #import "ChildVCTwo.h"
 #import "ChildVCThree.h"
 #import "ChildVCFour.h"
+#import <Masonry/Masonry.h>
 
 @interface DefaultGradientEffectVC () <SGPageTitleViewDelegate, SGPageContentViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
@@ -30,12 +31,12 @@
 }
 
 - (void)setupPageView {
-    CGFloat statusHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
     CGFloat pageTitleViewY = 0;
-    if (statusHeight == 20.0) {
-        pageTitleViewY = 64;
-    } else {
-        pageTitleViewY = 88;
+    if ([UIApplication sharedApplication].isStatusBarHidden == NO) {
+        pageTitleViewY += CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+    }
+    if (self.navigationController.navigationBar.isHidden == NO) {
+        pageTitleViewY += self.navigationController.navigationBar.frame.size.height;
     }
     
     NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
@@ -47,8 +48,17 @@
     configure.indicatorAdditionalWidth = 100; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
     
     /// pageTitleView
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
+    self.pageTitleView = [[SGPageTitleView alloc] init];
+    self.pageTitleView.titleArr = titleArr;
+    self.pageTitleView.configure = configure;
+    self.pageTitleView.isShowBottomSeparator = YES;
     [self.view addSubview:_pageTitleView];
+    [self.pageTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(44.0));
+        make.top.equalTo(@(pageTitleViewY));
+        make.leading.trailing.equalTo(self.view);
+    }];
+    self.pageTitleView.delegatePageTitleView = self;
     _pageTitleView.selectedIndex = 1;
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
@@ -58,15 +68,40 @@
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
     /// pageContentView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
-    self.pageContentView = [[SGPageContentView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
+    self.pageContentView = [[SGPageContentView alloc] init];
+    self.pageContentView.parentViewController = self;
+    self.pageContentView.childViewControllers = childArr;
+    [self.view addSubview:_pageContentView];
+    [self.pageContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(contentViewHeight));
+        make.top.equalTo(self.pageTitleView.mas_bottom);
+        make.leading.trailing.equalTo(self.view);
+    }];
     _pageContentView.delegatePageContentView = self;
     [self.view addSubview:_pageContentView];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [coordinator animateAlongsideTransition: nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        CGFloat pageTitleViewY = 0;
+        if ([UIApplication sharedApplication].isStatusBarHidden == NO) {
+            pageTitleViewY += CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+        }
+        if (self.navigationController.navigationBar.isHidden == NO) {
+            pageTitleViewY += self.navigationController.navigationBar.frame.size.height;
+        }
+        [self.pageTitleView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(@(pageTitleViewY));
+        }];
+    }];
+}
+
+#pragma mark SGPageTitleViewDelegate
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
     [self.pageContentView setPageContentViewCurrentIndex:selectedIndex];
 }
 
+#pragma mark SGPageContentViewDelegate
 - (void)pageContentView:(SGPageContentView *)pageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
@@ -75,15 +110,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
