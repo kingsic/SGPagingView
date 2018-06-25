@@ -67,9 +67,6 @@
 /** SGPageTitleViewDelegate */
 @property (nonatomic, weak) id<SGPageTitleViewDelegate> delegatePageTitleView;
 
-/** actual titleViewWidth, default is initializer frame width*/
-@property (nonatomic, assign) CGFloat titleViewWidth;
-
 /** 给外界提供的方法，获取 SGPageContentView 的 progress／originalIndex／targetIndex, 必须实现 */
 - (void)setPageTitleViewWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
 

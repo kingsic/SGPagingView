@@ -143,12 +143,16 @@
     }];
     // 2、添加标题按钮
     [self setupTitleButtons];
-    // 3、添加底部分割线
+    // 3、添加指示器
+    [self.scrollView insertSubview:self.indicatorView atIndex:0];
+    // 4、添加底部分割线
     if (_isShowBottomSeparator == YES) {
         [self addSubview:self.bottomSeparator];
+        [self.bottomSeparator mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@(0.5));
+            make.leading.trailing.bottom.equalTo(self.scrollView);
+        }];
     }
-    // 4、添加指示器
-    [self.scrollView insertSubview:self.indicatorView atIndex:0];
 }
 
 #pragma mark - lifecycle
@@ -181,12 +185,6 @@
 }
 
 #pragma mark - lazy loading
-- (CGFloat)titleViewWidth {
-    if(!_titleViewWidth) {
-        _titleViewWidth = self.frame.size.width;
-    }
-    return _titleViewWidth;
-}
     
 - (BOOL)isShowBottomSeparator {
     if(!_isShowBottomSeparator) {
@@ -222,7 +220,6 @@
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.alwaysBounceHorizontal = YES;
-//        _scrollView.frame = CGRectMake(0, 0, self.titleViewWidth, SGPageTitleViewHeight);
     }
     return _scrollView;
 }
@@ -295,26 +292,8 @@
 }
 
 - (UIView *)bottomSeparator {
-    // 拿到button最大的高度
-    // TODO: 创造一个titleattribute collection, set property maxHeight while insertion
-    CGFloat maxHeight = 0;
-    if (!self.configure.elasticHeight) {
-        maxHeight = self.SG_height;
-    }else {
-        for (TitleAttribute* titleAttr in self.titleAttributes) {
-            if (titleAttr.height > maxHeight) {
-                maxHeight = titleAttr.height;
-            }
-        }
-    }
-    
     if (!_bottomSeparator) {
         _bottomSeparator = [[UIView alloc] init];
-        CGFloat bottomSeparatorW = self.titleViewWidth;
-        CGFloat bottomSeparatorH = 0.5;
-        CGFloat bottomSeparatorX = 0;
-        CGFloat bottomSeparatorY = maxHeight - bottomSeparatorH;
-        _bottomSeparator.frame = CGRectMake(bottomSeparatorX, bottomSeparatorY, bottomSeparatorW, bottomSeparatorH);
         _bottomSeparator.backgroundColor = self.configure.bottomSeparatorColor;
     }
     return _bottomSeparator;
@@ -430,12 +409,12 @@
     }
     
     NSInteger titleCount = self.titleAttributes.count;
-    if (self.allBtnWidth <= self.titleViewWidth) { // SGPageTitleView 静止样式, 总按钮宽度小于screen width
+    if (self.allBtnWidth <= self.scrollView.frame.size.width) { // SGPageTitleView 静止样式, 总按钮宽度小于screen width
         CGFloat btnY = 0;
         CGFloat btnW = 0;
         if (self.configure.titleAlignment == SGPageTitleAlignmentJustified) {
             // this place divided width equality
-            btnW = self.titleViewWidth / self.titleArr.count;
+            btnW = self.scrollView.frame.size.width / self.titleArr.count;
         }else {
             // base on largest width set title view width
             CGFloat maxWidth = 0;
@@ -505,7 +484,7 @@
         
         [self setupStartColor:self.configure.titleColor];
         [self setupEndColor:self.configure.titleSelectedColor];
-        self.scrollView.contentSize = CGSizeMake(self.titleViewWidth, SGPageTitleViewHeight);
+        self.scrollView.contentSize = CGSizeMake(self.frame.size.width, SGPageTitleViewHeight);
         
     } else { // SGPageTitleView 滚动样式
         CGFloat btnY = 0;
@@ -576,7 +555,7 @@
     // 1、改变按钮的选择状态
     [self P_changeSelectedButton:button];
     // 2、滚动标题选中按钮居中
-    if (self.allBtnWidth > self.titleViewWidth) {
+    if (self.allBtnWidth > self.scrollView.frame.size.width) {
         [self P_selectedBtnCenter:button];
     }
     // 3、改变指示器的位置以及指示器宽度样式
@@ -649,38 +628,14 @@
 #pragma mark - - - 滚动标题选中按钮居中
 - (void)P_selectedBtnCenter:(UIButton *)centerBtn {
     // 计算偏移量
-    CGFloat offsetX = centerBtn.center.x - self.titleViewWidth * 0.5;
+    CGFloat offsetX = centerBtn.center.x - self.scrollView.frame.size.width * 0.5;
     if (offsetX < 0) offsetX = 0;
     // 获取最大滚动范围
-    CGFloat maxOffsetX = self.scrollView.contentSize.width - self.titleViewWidth;
+    CGFloat maxOffsetX = self.scrollView.contentSize.width - self.scrollView.frame.size.width;
     if (offsetX > maxOffsetX) offsetX = maxOffsetX;
     // 滚动标题滚动条
     [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
 }
-
-//#pragma mark - - - 改变指示器的位置以及指示器宽度样式
-//- (void)P_changeIndicatorViewLocationWithButton:(UIButton *)button {
-//    [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
-//        if (self.configure.indicatorStyle == SGIndicatorStyleFixed) {
-//            self.indicatorView.SG_width = self.configure.indicatorFixedWidth;
-//            self.indicatorView.SG_centerX = button.SG_centerX;
-//
-//        } else if (self.configure.indicatorStyle == SGIndicatorStyleDynamic) {
-//            self.indicatorView.SG_width = self.configure.indicatorDynamicWidth;
-//            self.indicatorView.SG_centerX = button.SG_centerX;
-//
-//        } else {
-//            CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + [self SG_widthWithNSAttributedString:[[button titleLabel] attributedText]];
-//
-//            if (tempIndicatorWidth > button.SG_width) {
-//                tempIndicatorWidth = button.SG_width;
-//            }
-//
-//            self.indicatorView.SG_width = tempIndicatorWidth;
-//            self.indicatorView.SG_centerX = button.SG_centerX;
-//        }
-//    }];
-//}
 
 #pragma mark - - - 给外界提供的方法
 - (void)setPageTitleViewWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
@@ -691,7 +646,7 @@
     // 2、 滚动标题选中居中
     [self P_selectedBtnCenter:targetBtn];
     // 3、处理指示器的逻辑
-    if (self.allBtnWidth <= self.titleViewWidth) { /// SGPageTitleView 不可滚动
+    if (self.allBtnWidth <= self.scrollView.frame.size.width) { /// SGPageTitleView 不可滚动
         if (self.configure.indicatorScrollStyle == SGIndicatorScrollStyleDefault) {
             [self P_smallIndicatorScrollStyleDefaultWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
         } else {
