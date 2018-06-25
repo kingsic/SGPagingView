@@ -22,10 +22,8 @@
 @property (nonatomic, assign) NSInteger startOffsetX;
 /// 标记按钮是否点击
 @property (nonatomic, assign) BOOL isClickBtn;
-    
 /// check whether init setup done
 @property (nonatomic, assign) BOOL initSetup;
-
 @end
 
 @implementation SGPageContentView
@@ -132,7 +130,7 @@
         _initSetup = YES;
     }
     
-    [_collectionView.collectionViewLayout invalidateLayout];
+    
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -222,13 +220,21 @@
     }
 }
 
+- (NSUInteger)currentPageIndex {
+    return _collectionView.contentOffset.x/_collectionView.bounds.size.width;
+}
+
 #pragma mark - - - 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
-- (void)setPageContentViewCurrentIndex:(NSInteger)currentIndex {
+- (void)setPageContentViewCurrentIndex:(NSInteger)currentIndex invalidateLayout:(BOOL)invalidateLayout {
     self.isClickBtn = YES;
     CGFloat offsetX = currentIndex * self.collectionView.frame.size.width;
-    // 1、处理内容偏移
+    // 1.处理内容偏移
     self.collectionView.contentOffset = CGPointMake(offsetX, 0);
-    // 2、pageContentView:offsetX:
+    // 2.check if need apply invalidateLayout
+    if (invalidateLayout) {
+        [self.collectionView.collectionViewLayout invalidateLayout];
+    }
+    // 3.pageContentView:offsetX:
     if (self.delegatePageContentView && [self.delegatePageContentView respondsToSelector:@selector(pageContentView:offsetX:)]) {
         [self.delegatePageContentView pageContentView:self offsetX:offsetX];
     }
@@ -243,7 +249,6 @@
         _collectionView.scrollEnabled = NO;
     }
 }
-
 
 @end
 

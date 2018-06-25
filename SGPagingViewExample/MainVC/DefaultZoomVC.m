@@ -70,7 +70,7 @@
 }
 
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
-    [self.pageContentView setPageContentViewCurrentIndex:selectedIndex];
+    [self.pageContentView setPageContentViewCurrentIndex:selectedIndex invalidateLayout:NO];
 }
 
 - (void)pageContentView:(SGPageContentView *)pageContentView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {

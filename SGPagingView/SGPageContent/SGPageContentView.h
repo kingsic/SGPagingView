@@ -63,6 +63,8 @@
 @property (nonatomic, strong) NSArray *childViewControllers;
 
 /** 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标 */
-- (void)setPageContentViewCurrentIndex:(NSInteger)currentIndex;
+- (void)setPageContentViewCurrentIndex:(NSInteger)currentIndex invalidateLayout:(BOOL)invalidateLayout;
 
+/** get current page index */
+- (NSUInteger)currentPageIndex;
 @end

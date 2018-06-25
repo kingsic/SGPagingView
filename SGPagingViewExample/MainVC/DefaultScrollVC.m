@@ -84,16 +84,14 @@
     ChildVCEight *eightVC = [[ChildVCEight alloc] init];
     ChildVCNine *nineVC = [[ChildVCNine alloc] init];
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
-    /// pageContentView
-    CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
     
     self.pageContentView = [[SGPageContentView alloc] init];
     self.pageContentView.parentViewController = self;
     self.pageContentView.childViewControllers = childArr;
     [self.view addSubview:_pageContentView];
     [self.pageContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@(contentViewHeight));
         make.top.equalTo(self.pageTitleView.mas_bottom);
+        make.bottom.equalTo(self.view);
         make.leading.trailing.equalTo(self.view);
     }];
     
@@ -101,6 +99,10 @@
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    NSUInteger visiblePage = [self.pageContentView currentPageIndex];
+    
     [coordinator animateAlongsideTransition: nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         CGFloat pageTitleViewY = 0;
         if ([UIApplication sharedApplication].isStatusBarHidden == NO) {
@@ -112,12 +114,13 @@
         [self.pageTitleView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(@(pageTitleViewY));
         }];
+        [self.pageContentView setPageContentViewCurrentIndex:visiblePage invalidateLayout:YES];
     }];
 }
 
 #pragma mark SGPageTitleViewDelegate
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
-    [self.pageContentView setPageContentViewCurrentIndex:selectedIndex];
+    [self.pageContentView setPageContentViewCurrentIndex:selectedIndex invalidateLayout:NO];
 }
 
 #pragma mark SGPageContentViewDelegate

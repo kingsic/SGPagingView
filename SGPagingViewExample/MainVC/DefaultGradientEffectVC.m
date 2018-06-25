@@ -82,6 +82,9 @@
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    NSUInteger visiblePage = [self.pageContentView currentPageIndex];
+    
     [coordinator animateAlongsideTransition: nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         CGFloat pageTitleViewY = 0;
         if ([UIApplication sharedApplication].isStatusBarHidden == NO) {
@@ -93,12 +96,14 @@
         [self.pageTitleView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(@(pageTitleViewY));
         }];
+        
+        [self.pageContentView setPageContentViewCurrentIndex:visiblePage invalidateLayout:YES];
     }];
 }
 
 #pragma mark SGPageTitleViewDelegate
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
-    [self.pageContentView setPageContentViewCurrentIndex:selectedIndex];
+    [self.pageContentView setPageContentViewCurrentIndex:selectedIndex invalidateLayout:NO];
 }
 
 #pragma mark SGPageContentViewDelegate
