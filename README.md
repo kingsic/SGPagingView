@@ -49,20 +49,20 @@
 
 
 ## SGPagingView 集成
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.4.2'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.4.3'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
 ## SGPagingView 结构图
 ![](https://github.com/kingsic/SGPagingView/raw/master/Picture/SGPagingView.png)
 ``` 
-*  SGPageTitleViewConfigure（SGPageTitleView 初始化配置信息）
+ SGPageTitleViewConfigure（SGPageTitleView 初始化配置信息）
 
-*  SGPageTitleView（用于与 SGPageContent 联动）
+ SGPageTitleView（用于与 SGPageContent 联动）
 
-*  SGPageContentScrollView（内部布局由 UIScrollView 实现）
+ SGPageContentScrollView（内部布局由 UIScrollView 实现）
 
-*  SGPageContentCollectionView（内部布局由 UICollectionView 实现）
+ SGPageContentCollectionView（内部布局由 UICollectionView 实现）
 ``` 
 
 
@@ -124,8 +124,6 @@
 
 #### 2、关于父子控制器的说明（SGPageContentScrollView 与 SGPageContentCollectionView）
 ###### 参考链接
-* [iOS 父子控制器添加与移除](https://www.aliyun.com/jiaocheng/352895.html)
-* [iOS 进阶之正确添加子控制器的方法](https://www.jianshu.com/p/7c4aeb2c6655)
 * [添加子视图控制器时，子视图控制器的 viewWillAppear 方法不调用](https://blog.csdn.net/u012907783/article/details/78972227)
 * [addChildViewController 与 viewWillAppear、viewDidAppear 关系说明](https://blog.csdn.net/zhaoxy_thu/article/details/50826190)
 ***
@@ -186,6 +184,8 @@ d. 实现 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法
 * 2018-05-09 ：v1.4.0 版本升级（SGPageTitleView.h 中的部分属性调整到 SGPageTitleViewConfigure.h）
 
 * 2018-06-01 ：v1.4.2 新增标题间分割线属性、根据下标设置标题的 attributedTitle 方法以及设置标题图片位置样式方法
+
+* 2018-07-01 ：v1.4.3 优化标题首次点击居中问题以及修复标题文字缩放切换到后台再返回时存在的标题字号问题
 
 
 ## Concluding remarks

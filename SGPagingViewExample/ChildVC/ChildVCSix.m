@@ -19,21 +19,6 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor yellowColor];
-    
-    UILabel *label = [[UILabel alloc] init];
-    CGFloat labelX = 0;
-    CGFloat labelY = 100;
-    CGFloat labelW = self.view.frame.size.width;
-    CGFloat labelH = 44;
-    label.frame = CGRectMake(labelX, labelY, labelW, labelH);
-    label.text = @"点击控制器视图返回上一界面";
-    label.textColor = [UIColor blackColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:label];
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

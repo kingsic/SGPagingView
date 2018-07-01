@@ -356,7 +356,9 @@
         self.tempBtn = button;
     }
     
-    if (self.configure.titleSelectedFont == [UIFont systemFontOfSize:15]) {
+    UIFont *configureTitleSelectedFont = self.configure.titleSelectedFont;
+    UIFont *defaultTitleFont = [UIFont systemFontOfSize:15];
+    if ([configureTitleSelectedFont.fontName isEqualToString:defaultTitleFont.fontName] && configureTitleSelectedFont.pointSize == defaultTitleFont.pointSize) {
         // 标题文字缩放属性(开启 titleSelectedFont 属性将不起作用)
         if (self.configure.titleTextZoom == YES) {
             [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -462,14 +464,17 @@
     }
     
     // 5 、标题文字缩放属性(开启文字选中字号属性将不起作用)
-    if (self.configure.titleSelectedFont == [UIFont systemFontOfSize:15]) {
+    UIFont *configureTitleSelectedFont = self.configure.titleSelectedFont;
+    UIFont *defaultTitleFont = [UIFont systemFontOfSize:15];
+    if ([configureTitleSelectedFont.fontName isEqualToString:defaultTitleFont.fontName] && configureTitleSelectedFont.pointSize == defaultTitleFont.pointSize) {
         if (self.configure.titleTextZoom == YES) {
             // 左边缩放
             originalBtn.transform = CGAffineTransformMakeScale((1 - progress) * self.configure.titleTextScaling + 1, (1 - progress) * self.configure.titleTextScaling + 1);
             // 右边缩放
             targetBtn.transform = CGAffineTransformMakeScale(progress * self.configure.titleTextScaling + 1, progress * self.configure.titleTextScaling + 1);
         }
-    }
+
+    };
 }
 
 /**

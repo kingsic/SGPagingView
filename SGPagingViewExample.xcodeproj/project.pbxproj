@@ -17,11 +17,6 @@
 		182513691F21CAC30039F4A2 /* SGPagingViewExampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513681F21CAC30039F4A2 /* SGPagingViewExampleUITests.m */; };
 		182513D21F21CC340039F4A2 /* NavigationBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513B11F21CC340039F4A2 /* NavigationBarVC.m */; };
 		182513D31F21CC340039F4A2 /* NavigationBarTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513B41F21CC340039F4A2 /* NavigationBarTitleView.m */; };
-		182513D41F21CC340039F4A2 /* PersonalCenterChildBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513B81F21CC340039F4A2 /* PersonalCenterChildBaseVC.m */; };
-		182513D51F21CC340039F4A2 /* PersonalCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513BA1F21CC340039F4A2 /* PersonalCenterVC.m */; };
-		182513D61F21CC340039F4A2 /* PersonalCenterTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513BD1F21CC340039F4A2 /* PersonalCenterTableView.m */; };
-		182513D71F21CC340039F4A2 /* PersonalCenterTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513BF1F21CC340039F4A2 /* PersonalCenterTopView.m */; };
-		182513D81F21CC340039F4A2 /* PersonalCenterTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182513C01F21CC340039F4A2 /* PersonalCenterTopView.xib */; };
 		182513E91F21D1600039F4A2 /* UIView+SGPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513DD1F21D1600039F4A2 /* UIView+SGPagingView.m */; };
 		182513EA1F21D1600039F4A2 /* SGPageContentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */; };
 		18B036D21F21D835004C7DE7 /* SGPageTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B036D11F21D835004C7DE7 /* SGPageTitleView.m */; };
@@ -102,15 +97,6 @@
 		182513B11F21CC340039F4A2 /* NavigationBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarVC.m; sourceTree = "<group>"; };
 		182513B31F21CC340039F4A2 /* NavigationBarTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarTitleView.h; sourceTree = "<group>"; };
 		182513B41F21CC340039F4A2 /* NavigationBarTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarTitleView.m; sourceTree = "<group>"; };
-		182513B71F21CC340039F4A2 /* PersonalCenterChildBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterChildBaseVC.h; sourceTree = "<group>"; };
-		182513B81F21CC340039F4A2 /* PersonalCenterChildBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterChildBaseVC.m; sourceTree = "<group>"; };
-		182513B91F21CC340039F4A2 /* PersonalCenterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterVC.h; sourceTree = "<group>"; };
-		182513BA1F21CC340039F4A2 /* PersonalCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterVC.m; sourceTree = "<group>"; };
-		182513BC1F21CC340039F4A2 /* PersonalCenterTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterTableView.h; sourceTree = "<group>"; };
-		182513BD1F21CC340039F4A2 /* PersonalCenterTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterTableView.m; sourceTree = "<group>"; };
-		182513BE1F21CC340039F4A2 /* PersonalCenterTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterTopView.h; sourceTree = "<group>"; };
-		182513BF1F21CC340039F4A2 /* PersonalCenterTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterTopView.m; sourceTree = "<group>"; };
-		182513C01F21CC340039F4A2 /* PersonalCenterTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalCenterTopView.xib; sourceTree = "<group>"; };
 		182513DC1F21D1600039F4A2 /* UIView+SGPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SGPagingView.h"; sourceTree = "<group>"; };
 		182513DD1F21D1600039F4A2 /* UIView+SGPagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SGPagingView.m"; sourceTree = "<group>"; };
 		182513DF1F21D1600039F4A2 /* SGPageContentScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageContentScrollView.h; sourceTree = "<group>"; };
@@ -242,7 +228,6 @@
 				1825134A1F21CAC30039F4A2 /* ViewController.m */,
 				8D0F8E1C1FD95DE300F30426 /* MainVC */,
 				182513AE1F21CC340039F4A2 /* NavigationBar */,
-				182513B51F21CC340039F4A2 /* PersonalCenter */,
 				8D0F8E3B1FD95E2300F30426 /* ChildVC */,
 				1825134C1F21CAC30039F4A2 /* Main.storyboard */,
 				1825134F1F21CAC30039F4A2 /* Assets.xcassets */,
@@ -306,38 +291,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		182513B51F21CC340039F4A2 /* PersonalCenter */ = {
-			isa = PBXGroup;
-			children = (
-				182513B61F21CC340039F4A2 /* Controller */,
-				182513BB1F21CC340039F4A2 /* View */,
-			);
-			path = PersonalCenter;
-			sourceTree = "<group>";
-		};
-		182513B61F21CC340039F4A2 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				182513B71F21CC340039F4A2 /* PersonalCenterChildBaseVC.h */,
-				182513B81F21CC340039F4A2 /* PersonalCenterChildBaseVC.m */,
-				182513B91F21CC340039F4A2 /* PersonalCenterVC.h */,
-				182513BA1F21CC340039F4A2 /* PersonalCenterVC.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		182513BB1F21CC340039F4A2 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				182513BC1F21CC340039F4A2 /* PersonalCenterTableView.h */,
-				182513BD1F21CC340039F4A2 /* PersonalCenterTableView.m */,
-				182513BE1F21CC340039F4A2 /* PersonalCenterTopView.h */,
-				182513BF1F21CC340039F4A2 /* PersonalCenterTopView.m */,
-				182513C01F21CC340039F4A2 /* PersonalCenterTopView.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		182513DA1F21D1600039F4A2 /* SGPagingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,10 +305,10 @@
 		182513DB1F21D1600039F4A2 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				182513DC1F21D1600039F4A2 /* UIView+SGPagingView.h */,
-				182513DD1F21D1600039F4A2 /* UIView+SGPagingView.m */,
 				8DA4304220BBEDEC00C47917 /* UIButton+SGPagingView.h */,
 				8DA4304320BBEDEC00C47917 /* UIButton+SGPagingView.m */,
+				182513DC1F21D1600039F4A2 /* UIView+SGPagingView.h */,
+				182513DD1F21D1600039F4A2 /* UIView+SGPagingView.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -363,10 +316,10 @@
 		182513DE1F21D1600039F4A2 /* SGPageContent */ = {
 			isa = PBXGroup;
 			children = (
-				182513DF1F21D1600039F4A2 /* SGPageContentScrollView.h */,
-				182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */,
 				8DA4304020BBE3D600C47917 /* SGPageContentCollectionView.h */,
 				8DA4303F20BBE3D500C47917 /* SGPageContentCollectionView.m */,
+				182513DF1F21D1600039F4A2 /* SGPageContentScrollView.h */,
+				182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */,
 			);
 			path = SGPageContent;
 			sourceTree = "<group>";
@@ -573,7 +526,6 @@
 				8D0F8E601FD95E2300F30426 /* ChildFirstPopGestureNextVC.xib in Resources */,
 				1825134E1F21CAC30039F4A2 /* Main.storyboard in Resources */,
 				8D0F8E731FD95E2300F30426 /* ChildVCTwo.xib in Resources */,
-				182513D81F21CC340039F4A2 /* PersonalCenterTopView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,7 +554,6 @@
 				8D0F8E5F1FD95E2300F30426 /* ChildFirstPopGestureNextVC.m in Sources */,
 				8D0F8E391FD95DE300F30426 /* DefaultTwoCoverVC.m in Sources */,
 				8D0F8E641FD95E2300F30426 /* ChildFourthPopGestureVC.m in Sources */,
-				182513D71F21CC340039F4A2 /* PersonalCenterTopView.m in Sources */,
 				8D0F8E381FD95DE300F30426 /* DefaultThreeCoverVC.m in Sources */,
 				1825134B1F21CAC30039F4A2 /* ViewController.m in Sources */,
 				8DA4304420BBEDEC00C47917 /* UIButton+SGPagingView.m in Sources */,
@@ -616,12 +567,9 @@
 				182513D21F21CC340039F4A2 /* NavigationBarVC.m in Sources */,
 				8DCB02AA1F95B0FF00C9598A /* SGPageTitleViewConfigure.m in Sources */,
 				8D0F8E3A1FD95DE300F30426 /* DefaultZoomVC.m in Sources */,
-				182513D61F21CC340039F4A2 /* PersonalCenterTableView.m in Sources */,
 				182513D31F21CC340039F4A2 /* NavigationBarTitleView.m in Sources */,
 				8D0F8E341FD95DE300F30426 /* DefaultPopGestureVC.m in Sources */,
 				8D0F8E661FD95E2300F30426 /* ChildVCEight.m in Sources */,
-				182513D41F21CC340039F4A2 /* PersonalCenterChildBaseVC.m in Sources */,
-				182513D51F21CC340039F4A2 /* PersonalCenterVC.m in Sources */,
 				8D0F8E6D1FD95E2300F30426 /* ChildVCOne.m in Sources */,
 				8DA4304720BBEF3B00C47917 /* DefaultImageVC.m in Sources */,
 				8D0F8E671FD95E2300F30426 /* ChildVCFive.m in Sources */,
