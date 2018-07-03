@@ -69,20 +69,20 @@
     return _titleSelectedColor;
 }
 
-- (CGFloat)titleTextScaling {
-    if (_titleTextScaling >= 0.3) {
-        _titleTextScaling = 0.3;
-    } else {
-        _titleTextScaling = 0.1;
+- (CGFloat)titleTextZoomAdditionalPointSize {
+    if (_titleTextZoomAdditionalPointSize <= 3) {
+        _titleTextZoomAdditionalPointSize = 3;
+    } else if (_titleTextZoomAdditionalPointSize >= 10) {
+        _titleTextZoomAdditionalPointSize = 10;
     }
-    return _titleTextScaling;
+    return _titleTextZoomAdditionalPointSize;
 }
 
-- (CGFloat)spacingBetweenButtons {
-    if (_spacingBetweenButtons <= 0) {
-        _spacingBetweenButtons = 20;
+- (CGFloat)titleAdditionalWidth {
+    if (_titleAdditionalWidth <= 0) {
+        _titleAdditionalWidth = 20;
     }
-    return _spacingBetweenButtons;
+    return _titleAdditionalWidth;
 }
 
 #pragma mark - - 指示器属性

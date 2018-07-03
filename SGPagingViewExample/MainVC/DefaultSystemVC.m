@@ -75,7 +75,7 @@
     NSArray *titleArrL = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
     SGPageTitleViewConfigure *configureL = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configureL.indicatorStyle = SGIndicatorStyleDynamic;
-    configureL.spacingBetweenButtons = 30;
+    configureL.titleAdditionalWidth = 30;
     configureL.showVerticalSeparator = YES;
     configureL.verticalSeparatorReduceHeight = 24;
     /// pageTitleViewL
