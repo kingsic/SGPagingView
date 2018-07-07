@@ -26,12 +26,12 @@
  */
 - (void)pageContentCollectionView:(SGPageContentCollectionView *)pageContentCollectionView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
 /**
- *  给 SGPageContentCollectionView 所在控制器提供的方法（根据偏移量来处理返回手势的问题）
+ *  获取 SGPageContentCollectionView 当前子控制器的下标值
  *
  *  @param pageContentCollectionView     SGPageContentCollectionView
- *  @param offsetX             SGPageContentCollectionView 内部视图的偏移量
+ *  @param index                         SGPageContentCollectionView 当前子控制器的下标值
  */
-- (void)pageContentCollectionView:(SGPageContentCollectionView *)pageContentCollectionView offsetX:(CGFloat)offsetX;
+- (void)pageContentCollectionView:(SGPageContentCollectionView *)pageContentCollectionView index:(NSInteger)index;
 @end
 
 @interface SGPageContentCollectionView : UIView

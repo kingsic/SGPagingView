@@ -1,49 +1,35 @@
 //
-//  DefaultPopGestureVC.m
+//  DefaultCurrentIndexVC.m
 //  SGPagingViewExample
 //
-//  Created by kingsic on 2017/11/28.
-//  Copyright © 2017年 Sorgle. All rights reserved.
+//  Created by kingsic on 2018/7/7.
+//  Copyright © 2018年 Sorgle. All rights reserved.
 //
 
-#import "DefaultPopGestureVC.h"
+#import "DefaultCurrentIndexVC.h"
 #import "SGPagingView.h"
-#import "ChildFirstPopGestureVC.h"
+#import "ChildVCOne.h"
 #import "ChildVCTwo.h"
 #import "ChildVCThree.h"
-#import "ChildFourthPopGestureVC.h"
+#import "ChildVCFour.h"
 
-@interface DefaultPopGestureVC () <SGPageTitleViewDelegate, SGPageContentScrollViewDelegate, UINavigationControllerDelegate>
+@interface DefaultCurrentIndexVC () <SGPageTitleViewDelegate, SGPageContentScrollViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentScrollView *pageContentScrollView;
-
 @end
 
-@implementation DefaultPopGestureVC
+@implementation DefaultCurrentIndexVC
+
+- (void)dealloc {
+    NSLog(@"DefaultCurrentIndexVC - - dealloc");
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-
-    [self customLeftBarButtonItem];
-    [self setupPageView];
-}
-
-- (void)customLeftBarButtonItem {
-    UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    [button setTitle:@"back" forState:(UIControlStateNormal)];
-    [button sizeToFit];
-    [button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-    [button addTarget:self action:@selector(popGesture) forControlEvents:(UIControlEventTouchUpInside)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
-    /// UINavigationControllerDelegate
-    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
-}
-
-- (void)popGesture {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self setupPageView];
 }
 
 - (void)setupPageView {
@@ -55,20 +41,17 @@
         pageTitleViewY = 88;
     }
     
-    NSArray *titleArr = @[@"精选", @"电影", @"OC", @"Swift"];
+    NSArray *titleArr = @[@"精选", @"新建", @"QQGroup", @"429899752"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-    configure.indicatorAdditionalWidth = 20;
-    configure.indicatorScrollStyle = SGIndicatorScrollStyleEnd;
+    configure.indicatorToBottomDistance = 5;
     
-    /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
     
-    ChildFirstPopGestureVC *oneVC = [[ChildFirstPopGestureVC alloc] init];
+    ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
     ChildVCThree *threeVC = [[ChildVCThree alloc] init];
-    ChildFourthPopGestureVC *fourVC = [[ChildFourthPopGestureVC alloc] init];
-    
+    ChildVCFour *fourVC = [[ChildVCFour alloc] init];
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
     /// pageContentScrollView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
@@ -86,18 +69,14 @@
 }
 
 - (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView index:(NSInteger)index {
-    if (index == 0) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    } else {
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    }
+    /// 在此获取标题or当前子控制器下标
+    NSLog(@"%ld", index);
 }
 
-/// 允许同时响应多个手势
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
-
 
 /*
 #pragma mark - Navigation

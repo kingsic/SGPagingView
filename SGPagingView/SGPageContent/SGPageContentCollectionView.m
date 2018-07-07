@@ -115,17 +115,9 @@ static NSString *const cellID = @"cellID";
     CGFloat offsetX = scrollView.contentOffset.x;
     // 1、记录上个子控制器下标
     _previousCVCIndex = offsetX / scrollView.frame.size.width;
-    // 2、pageContentCollectionView:offsetX:
-    if (self.delegatePageContentCollectionView && [self.delegatePageContentCollectionView respondsToSelector:@selector(pageContentCollectionView:offsetX:)]) {
-        [self.delegatePageContentCollectionView pageContentCollectionView:self offsetX:offsetX];
-    }
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    CGFloat offsetX = scrollView.contentOffset.x;
-    // pageContentCollectionView:offsetX:
-    if (self.delegatePageContentCollectionView && [self.delegatePageContentCollectionView respondsToSelector:@selector(pageContentCollectionView:offsetX:)]) {
-        [self.delegatePageContentCollectionView pageContentCollectionView:self offsetX:offsetX];
+    // 2、pageContentCollectionView:index:
+    if (self.delegatePageContentCollectionView && [self.delegatePageContentCollectionView respondsToSelector:@selector(pageContentCollectionView:index:)]) {
+        [self.delegatePageContentCollectionView pageContentCollectionView:self index:_previousCVCIndex];
     }
 }
 
@@ -179,9 +171,9 @@ static NSString *const cellID = @"cellID";
     }
     // 2、记录上个子控制器下标
     _previousCVCIndex = currentIndex;
-    // 3、pageContentCollectionView:offsetX:
-    if (self.delegatePageContentCollectionView && [self.delegatePageContentCollectionView respondsToSelector:@selector(pageContentCollectionView:offsetX:)]) {
-        [self.delegatePageContentCollectionView pageContentCollectionView:self offsetX:offsetX];
+    // 3、pageContentCollectionView:index:
+    if (self.delegatePageContentCollectionView && [self.delegatePageContentCollectionView respondsToSelector:@selector(pageContentCollectionView:index:)]) {
+        [self.delegatePageContentCollectionView pageContentCollectionView:self index:currentIndex];
     }
 }
 

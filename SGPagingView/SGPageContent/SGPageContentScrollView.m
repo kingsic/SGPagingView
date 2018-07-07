@@ -110,17 +110,10 @@
     // 4.1、记录上个展示的子控制器、记录当前子控制器偏移量
     self.previousCVC = childVC;
     _previousCVCIndex = index;
-    // 5、pageContentScrollView:offsetX:
-    if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:offsetX:)]) {
-        [self.delegatePageContentScrollView pageContentScrollView:self offsetX:offsetX];
-    }
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    CGFloat offsetX = scrollView.contentOffset.x;
-    // pageContentScrollView:offsetX:
-    if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:offsetX:)]) {
-        [self.delegatePageContentScrollView pageContentScrollView:self offsetX:offsetX];
+    
+    // 5、pageContentScrollView:index:
+    if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:index:)]) {
+        [self.delegatePageContentScrollView pageContentScrollView:self index:index];
     }
 }
 
@@ -193,9 +186,9 @@
     _previousCVCIndex = currentIndex;
     // 4、处理内容偏移
     self.scrollView.contentOffset = CGPointMake(offsetX, 0);
-    // 5、pageContentScrollView:offsetX:
-    if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:offsetX:)]) {
-        [self.delegatePageContentScrollView pageContentScrollView:self offsetX:offsetX];
+    // 5、pageContentScrollView:index:
+    if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:index:)]) {
+        [self.delegatePageContentScrollView pageContentScrollView:self index:currentIndex];
     }
 }
 

@@ -26,12 +26,12 @@
  */
 - (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex;
 /**
- *  给 SGPageContentScrollView 所在控制器提供的方法（根据偏移量来处理返回手势的问题）
+ *  获取 SGPageContentScrollView 当前子控制器的下标值
  *
  *  @param pageContentScrollView     SGPageContentScrollView
- *  @param offsetX                   SGPageContentScrollView 内部视图的偏移量
+ *  @param index                     SGPageContentScrollView 当前子控制器的下标值
  */
-- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView offsetX:(CGFloat)offsetX;
+- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView index:(NSInteger)index;
 @end
 
 @interface SGPageContentScrollView : UIView
