@@ -108,12 +108,12 @@
 |**indicatorStyle**|指示器样式，默认为下划线样式；下划线、遮盖样式|
 |**indicatorHeight**|指示器高度；下划线样式下默认为 2.f，遮盖样式下，默认为标题文字的高度，若大于 SGPageTitleView，则高度为 SGPageTitleView 高度，下划线样式未做处理|
 |**indicatorAdditionalWidth**|指示器遮盖、下划线样式下额外增加的宽度，默认为 0.0f；介于标题文字宽度与按钮宽度之间|
-|**spacingBetweenButtons**|按钮之间的间距，默认 20.f|
+|**titleAdditionalWidth**|标题额外增加的宽度，默认为 20.0f|
 |**indicatorStyle**|指示器样式;SGIndicatorStyleDefault、SGIndicatorStyleCover、SGIndicatorStyleFixed、SGIndicatorStyleDynamic（仅在 SGIndicatorScrollStyleDefault 样式下支持）|
 |**indicatorCornerRadius**|圆角属性，默认为 0.f；若圆角大于 1/2 指示器高度，则圆角大小为指示器高度的 1/2|
 |**indicatorScrollStyle**|指示器滚动样式|
-|**resetTitle:forIndex:**|根据标题下标重置标题文字|
-|**setAttributedTitle:selectedAttributedTitle:forIndex:**|根据标题下标设置标题的 attributedTitle 属性|
+|**resetTitle:forIndex:**|根据标题下标值重置标题文字|
+|**setAttributedTitle:selectedAttributedTitle:forIndex:**|根据标题下标值设置标题的 attributedTitle 属性|
 |**setImages:selectedImages:imagePositionType:spacing:**|设置图片及样式|
 
 

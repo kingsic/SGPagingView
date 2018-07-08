@@ -173,5 +173,26 @@
     return _verticalSeparatorReduceHeight;
 }
 
+#pragma mark - - badge 相关属性
+- (UIColor *)badgeColor {
+    if (!_badgeColor) {
+        _badgeColor = [UIColor redColor];
+    }
+    return _badgeColor;
+}
+
+- (CGFloat)badgeSize {
+    if (!_badgeSize) {
+        _badgeSize = 7.0f;
+    }
+    return _badgeSize;
+}
+
+- (CGPoint)badgePoint {
+    if (!_badgePoint.x && !_badgePoint.y) {
+        _badgePoint = CGPointMake(0, 0);
+    }
+    return _badgePoint;
+}
 
 @end

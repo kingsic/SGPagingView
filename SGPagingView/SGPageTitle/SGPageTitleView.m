@@ -493,7 +493,7 @@
 }
 
 /**
- *  根据标题下标重置标题文字
+ *  根据标题下标值重置标题文字
  *
  *  @param title    标题名
  *  @param index    标题所对应的下标
@@ -514,8 +514,35 @@
     }
 }
 
+/** 根据下标值添加 badge */
+- (void)addBadgeForIndex:(NSInteger)index {
+    UIButton *btn = self.btnMArr[index];
+    UIView *badge = [[UIView alloc] init];
+    CGFloat btnTextWidth = [btn.currentTitle SG_sizeWithFont:self.configure.titleFont].width;
+    CGFloat btnTextHeight = [btn.currentTitle SG_sizeWithFont:self.configure.titleFont].height;
+    CGFloat badgeX = 0.5 * (btn.SG_width - btnTextWidth) + btnTextWidth + self.configure.badgePoint.x;
+    CGFloat badgeY = 0.5 * (btn.SG_height - btnTextHeight) + self.configure.badgePoint.y - self.configure.badgeSize;
+    CGFloat badgeWidth = self.configure.badgeSize;
+    CGFloat badgeHeight = badgeWidth;
+    badge.frame = CGRectMake(badgeX, badgeY, badgeWidth, badgeHeight);
+    badge.layer.backgroundColor = self.configure.badgeColor.CGColor;
+    badge.layer.cornerRadius = 0.5 * self.configure.badgeSize;
+    badge.tag = 2018 + index;
+    [btn addSubview:badge];
+}
+/** 根据下标值移除 badge */
+- (void)removeBadgeForIndex:(NSInteger)index {
+    UIButton *btn = self.btnMArr[index];
+    [btn.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.tag != 0) {
+            [obj removeFromSuperview];
+            obj = nil;
+        }
+    }];
+}
+
 /**
- *  根据标题下标设置标题的 attributedTitle 属性
+ *  根据标题下标值设置标题的 attributedTitle 属性
  *
  *  @param attributedTitle      attributedTitle 属性
  *  @param selectedAttributedTitle      选中状态下 attributedTitle 属性

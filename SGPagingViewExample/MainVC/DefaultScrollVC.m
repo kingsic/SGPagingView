@@ -62,6 +62,8 @@
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
+    [_pageTitleView addBadgeForIndex:1];
+    [_pageTitleView addBadgeForIndex:5];
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
@@ -86,6 +88,12 @@
 
 - (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
+}
+
+- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView index:(NSInteger)index {
+    if (index == 1 || index == 5) {
+        [_pageTitleView removeBadgeForIndex:index];
+    }
 }
 
 

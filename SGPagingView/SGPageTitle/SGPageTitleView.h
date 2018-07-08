@@ -63,9 +63,13 @@ typedef enum : NSUInteger {
 /** 重置选中标题按钮下标（用于子控制器内的点击事件改变标题的选中下标）*/
 @property (nonatomic, assign) NSInteger resetSelectedIndex;
 
-/** 根据标题下标重置标题文字 */
+/** 根据标题下标值添加 badge */
+- (void)addBadgeForIndex:(NSInteger)index;
+/** 根据标题下标值移除 badge */
+- (void)removeBadgeForIndex:(NSInteger)index;
+/** 根据标题下标值重置标题文字 */
 - (void)resetTitle:(NSString *)title forIndex:(NSInteger)index;
-/** 根据标题下标设置标题的 attributedTitle 属性 */
+/** 根据标题下标值设置标题的 attributedTitle 属性 */
 - (void)setAttributedTitle:(NSMutableAttributedString *)attributedTitle selectedAttributedTitle:(NSMutableAttributedString *)selectedAttributedTitle forIndex:(NSInteger)index;
 /**
  *  设置标题图片及位置样式

@@ -101,4 +101,12 @@ typedef enum : NSUInteger {
 /** 按钮之间的分割线额外减少的高度，默认为 0.0f */
 @property (nonatomic, assign) CGFloat verticalSeparatorReduceHeight;
 
+#pragma mark - - badge 相关属性
+/** badge 颜色，默认红色 */
+@property (nonatomic, strong) UIColor *badgeColor;
+/** badge 尺寸大小，默认为 7.0f */
+@property (nonatomic, assign) CGFloat badgeSize;
+/** badge 点位置，默认（0，0）*/
+@property (nonatomic, assign) CGPoint badgePoint;
+
 @end

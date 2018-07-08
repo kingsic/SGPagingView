@@ -51,7 +51,6 @@
 		8D0F8E721FD95E2300F30426 /* ChildVCTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E5D1FD95E2300F30426 /* ChildVCTwo.m */; };
 		8D0F8E731FD95E2300F30426 /* ChildVCTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0F8E5E1FD95E2300F30426 /* ChildVCTwo.xib */; };
 		8D1A05F820B441B800743EAD /* DefaultAttributedTitleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A05F720B441B800743EAD /* DefaultAttributedTitleVC.m */; };
-		8D5E68C320F0EF820068044C /* DefaultCurrentIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5E68C220F0EF820068044C /* DefaultCurrentIndexVC.m */; };
 		8D5E68C620F0F6CC0068044C /* NSString+SGPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5E68C420F0F6CC0068044C /* NSString+SGPagingView.m */; };
 		8DA4304120BBE3D600C47917 /* SGPageContentCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4303F20BBE3D500C47917 /* SGPageContentCollectionView.m */; };
 		8DA4304420BBEDEC00C47917 /* UIButton+SGPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4304320BBEDEC00C47917 /* UIButton+SGPagingView.m */; };
@@ -161,8 +160,6 @@
 		8D0F8E5E1FD95E2300F30426 /* ChildVCTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildVCTwo.xib; sourceTree = "<group>"; };
 		8D1A05F620B441B800743EAD /* DefaultAttributedTitleVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultAttributedTitleVC.h; sourceTree = "<group>"; };
 		8D1A05F720B441B800743EAD /* DefaultAttributedTitleVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultAttributedTitleVC.m; sourceTree = "<group>"; };
-		8D5E68C120F0EF820068044C /* DefaultCurrentIndexVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultCurrentIndexVC.h; sourceTree = "<group>"; };
-		8D5E68C220F0EF820068044C /* DefaultCurrentIndexVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultCurrentIndexVC.m; sourceTree = "<group>"; };
 		8D5E68C420F0F6CC0068044C /* NSString+SGPagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SGPagingView.m"; sourceTree = "<group>"; };
 		8D5E68C520F0F6CC0068044C /* NSString+SGPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SGPagingView.h"; sourceTree = "<group>"; };
 		8DA4303F20BBE3D500C47917 /* SGPageContentCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageContentCollectionView.m; sourceTree = "<group>"; };
@@ -358,22 +355,20 @@
 				8D0F8E221FD95DE300F30426 /* DefaultGradientEffectVC.m */,
 				8D0F8E2F1FD95DE300F30426 /* DefaultZoomVC.h */,
 				8D0F8E301FD95DE300F30426 /* DefaultZoomVC.m */,
+				8D0F8E1F1FD95DE300F30426 /* DefaultFixedVC.h */,
+				8D0F8E201FD95DE300F30426 /* DefaultFixedVC.m */,
+				9A3EDE1E1FF4C5C600DC1EB2 /* DefaultDynamicVC.h */,
+				9A3EDE1F1FF4C5C600DC1EB2 /* DefaultDynamicVC.m */,
 				8D0F8E1D1FD95DE300F30426 /* DefaultCoverVC.h */,
 				8D0F8E1E1FD95DE300F30426 /* DefaultCoverVC.m */,
 				8D0F8E2D1FD95DE300F30426 /* DefaultTwoCoverVC.h */,
 				8D0F8E2E1FD95DE300F30426 /* DefaultTwoCoverVC.m */,
 				8D0F8E2B1FD95DE300F30426 /* DefaultThreeCoverVC.h */,
 				8D0F8E2C1FD95DE300F30426 /* DefaultThreeCoverVC.m */,
-				8D0F8E1F1FD95DE300F30426 /* DefaultFixedVC.h */,
-				8D0F8E201FD95DE300F30426 /* DefaultFixedVC.m */,
-				9A3EDE1E1FF4C5C600DC1EB2 /* DefaultDynamicVC.h */,
-				9A3EDE1F1FF4C5C600DC1EB2 /* DefaultDynamicVC.m */,
-				8D1A05F620B441B800743EAD /* DefaultAttributedTitleVC.h */,
-				8D1A05F720B441B800743EAD /* DefaultAttributedTitleVC.m */,
 				8D0F8E231FD95DE300F30426 /* DefaultPopGestureVC.h */,
 				8D0F8E241FD95DE300F30426 /* DefaultPopGestureVC.m */,
-				8D5E68C120F0EF820068044C /* DefaultCurrentIndexVC.h */,
-				8D5E68C220F0EF820068044C /* DefaultCurrentIndexVC.m */,
+				8D1A05F620B441B800743EAD /* DefaultAttributedTitleVC.h */,
+				8D1A05F720B441B800743EAD /* DefaultAttributedTitleVC.m */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
@@ -566,7 +561,6 @@
 				8D0F8E641FD95E2300F30426 /* ChildFourthPopGestureVC.m in Sources */,
 				8D0F8E381FD95DE300F30426 /* DefaultThreeCoverVC.m in Sources */,
 				1825134B1F21CAC30039F4A2 /* ViewController.m in Sources */,
-				8D5E68C320F0EF820068044C /* DefaultCurrentIndexVC.m in Sources */,
 				8DA4304420BBEDEC00C47917 /* UIButton+SGPagingView.m in Sources */,
 				8D5E68C620F0F6CC0068044C /* NSString+SGPagingView.m in Sources */,
 				18B036D21F21D835004C7DE7 /* SGPageTitleView.m in Sources */,
