@@ -45,7 +45,7 @@
     
     NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-    configure.showIndicator = NO;
+//    configure.showIndicator = NO;
     configure.titleTextZoom = YES;
     configure.titleTextZoomAdditionalPointSize = 0.3;
     configure.titleAdditionalWidth = 30;
@@ -69,7 +69,6 @@
     self.pageContentCollectionView = [[SGPageContentCollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, ContentCollectionViewHeight) parentVC:self childVCs:childArr];
     _pageContentCollectionView.delegatePageContentCollectionView = self;
     [self.view addSubview:_pageContentCollectionView];
-    _pageContentCollectionView.isAnimated = YES;
 }
 
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {

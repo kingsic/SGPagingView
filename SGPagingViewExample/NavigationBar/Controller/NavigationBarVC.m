@@ -60,8 +60,15 @@
     ChildVCNine *nineVC = [[ChildVCNine alloc] init];
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
     /// pageContentCollectionView
-    CGFloat ContentCollectionViewHeight = self.view.frame.size.height - 64;
-    self.pageContentCollectionView = [[SGPageContentCollectionView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, ContentCollectionViewHeight) parentVC:self childVCs:childArr];
+    CGFloat statusHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+    CGFloat pageTitleViewY = 0;
+    if (statusHeight == 20.0) {
+        pageTitleViewY = 64;
+    } else {
+        pageTitleViewY = 88;
+    }
+    CGFloat ContentCollectionViewHeight = self.view.frame.size.height - pageTitleViewY;
+    self.pageContentCollectionView = [[SGPageContentCollectionView alloc] initWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, ContentCollectionViewHeight) parentVC:self childVCs:childArr];
     _pageContentCollectionView.delegatePageContentCollectionView = self;
     [self.view addSubview:_pageContentCollectionView];
 }

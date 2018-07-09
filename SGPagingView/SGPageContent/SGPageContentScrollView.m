@@ -27,6 +27,8 @@
 @property (nonatomic, weak) UIViewController *previousCVC;
 /// 记录加载的上个子控制器的下标
 @property (nonatomic, assign) NSInteger previousCVCIndex;
+/// 标记内容滚动
+@property (nonatomic, assign) BOOL isScrll;
 @end
 
 @implementation SGPageContentScrollView
@@ -83,12 +85,14 @@
 #pragma mark - - - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     _startOffsetX = scrollView.contentOffset.x;
+    _isScrll = YES;
     if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollViewWillBeginDragging)]) {
         [self.delegatePageContentScrollView pageContentScrollViewWillBeginDragging];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    _isScrll = NO;
     // 1、根据标题下标计算 pageContent 偏移量
     CGFloat offsetX = scrollView.contentOffset.x;
     // 2、切换子控制器的时候，执行上个子控制器的 viewWillDisappear 方法
@@ -126,6 +130,9 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (_isAnimated == YES && _isScrll == NO) {
+        return;
+    }
     // 1、定义获取需要的数据
     CGFloat progress = 0;
     NSInteger originalIndex = 0;
@@ -168,12 +175,14 @@
 
 #pragma mark - - - 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
 - (void)setPageContentScrollViewCurrentIndex:(NSInteger)currentIndex {
-    // 1、切换子控制器的时候，执行上个子控制器的 viewWillDisappear 方法
+    // 1、根据标题下标计算 pageContent 偏移量
+    CGFloat offsetX = currentIndex * self.SG_width;
+
+    // 2、切换子控制器的时候，执行上个子控制器的 viewWillDisappear 方法
     if (self.previousCVC != nil && _previousCVCIndex != currentIndex) {
         [self.previousCVC beginAppearanceTransition:NO animated:NO];
     }
-    // 2、根据标题下标计算 pageContent 偏移量
-    CGFloat offsetX = currentIndex * self.SG_width;
+
     // 3、添加子控制器及子控制器的 view 到父控制器以及父控制器 view 中
     if (_previousCVCIndex != currentIndex) {
         UIViewController *childVC = self.childViewControllers[currentIndex];
@@ -195,7 +204,9 @@
     }
     // 3.2、记录上个子控制器下标
     _previousCVCIndex = currentIndex;
-
+    // 3.3、重置 _startOffsetX
+    _startOffsetX = offsetX;
+    
     // 5、pageContentScrollView:index:
     if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:index:)]) {
         [self.delegatePageContentScrollView pageContentScrollView:self index:currentIndex];

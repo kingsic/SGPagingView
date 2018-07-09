@@ -25,6 +25,8 @@
 @property (nonatomic, assign) NSInteger startOffsetX;
 /// 记录加载的上个子控制器的下标
 @property (nonatomic, assign) NSInteger previousCVCIndex;
+/// 标记内容滚动
+@property (nonatomic, assign) BOOL isScrll;
 @end
 
 @implementation SGPageContentCollectionView
@@ -109,12 +111,14 @@ static NSString *const cellID = @"cellID";
 #pragma mark - - - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     _startOffsetX = scrollView.contentOffset.x;
+    _isScrll = YES;
     if (self.delegatePageContentCollectionView && [self.delegatePageContentCollectionView respondsToSelector:@selector(pageContentCollectionViewWillBeginDragging)]) {
         [self.delegatePageContentCollectionView pageContentCollectionViewWillBeginDragging];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    _isScrll = NO;
     CGFloat offsetX = scrollView.contentOffset.x;
     // 1、记录上个子控制器下标
     _previousCVCIndex = offsetX / scrollView.frame.size.width;
@@ -129,6 +133,9 @@ static NSString *const cellID = @"cellID";
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (_isAnimated == YES && _isScrll == NO) {
+        return;
+    }
     // 1、定义获取需要的数据
     CGFloat progress = 0;
     NSInteger originalIndex = 0;
@@ -172,6 +179,7 @@ static NSString *const cellID = @"cellID";
 #pragma mark - - - 给外界提供的方法，获取 SGPageTitleView 选中按钮的下标
 - (void)setPageContentCollectionViewCurrentIndex:(NSInteger)currentIndex {
     CGFloat offsetX = currentIndex * self.collectionView.SG_width;
+    _startOffsetX = offsetX;
     // 1、处理内容偏移
     if (_previousCVCIndex != currentIndex) {
         [self.collectionView setContentOffset:CGPointMake(offsetX, 0) animated:_isAnimated];
