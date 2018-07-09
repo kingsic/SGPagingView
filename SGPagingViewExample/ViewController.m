@@ -19,6 +19,7 @@
 #import "DefaultTwoCoverVC.h"
 #import "DefaultThreeCoverVC.h"
 #import "DefaultPopGestureVC.h"
+#import "DefaultAnimatedVC.h"
 #import "DefaultAttributedTitleVC.h"
 #import "NavigationBarVC.h"
 
@@ -33,7 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.TitleDataList = @[@"静止样式", @"滚动样式", @"系统样式", @"图片样式", @"文字渐变效果", @"文字缩放效果", @"指示器固定样式", @"指示器动态样式", @"指示器遮盖样式一", @"指示器遮盖样式二", @"指示器遮盖样式三", @"侧滑返回手势案例", @"AttributedTitle 属性案例", @"导航栏样式案例"];
+    self.TitleDataList = @[@"静止样式", @"滚动样式", @"系统样式", @"图片样式", @"文字渐变效果", @"文字缩放效果", @"指示器固定样式", @"指示器动态样式", @"指示器遮盖样式一", @"指示器遮盖样式二", @"指示器遮盖样式三", @"侧滑返回手势案例", @"滚动内容动画案例", @"AttributedTitle 属性案例", @"导航栏样式案例"];
     
     [self foundTableView];
 }
@@ -106,6 +107,10 @@
         [self.navigationController pushViewController:popGestureVC animated:YES];
 
     } else if (indexPath.row == 12) {
+        DefaultAnimatedVC *animatedVC = [[DefaultAnimatedVC alloc] init];
+        [self.navigationController pushViewController:animatedVC animated:YES];
+        
+    } else if (indexPath.row == 13) {
         DefaultAttributedTitleVC *attributedTitleVC = [[DefaultAttributedTitleVC alloc] init];
         [self.navigationController pushViewController:attributedTitleVC animated:YES];
       

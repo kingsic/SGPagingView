@@ -121,12 +121,7 @@
     [super layoutSubviews];
 
     // 选中按钮下标初始值
-    UIButton *lastBtn = self.btnMArr.lastObject;
-    if (lastBtn.tag >= _selectedIndex && _selectedIndex >= 0) {
-        [self P_btn_action:self.btnMArr[_selectedIndex]];
-    } else {
-        return;
-    }
+    [self P_btn_action:self.btnMArr[_selectedIndex]];
 }
 
 #pragma mark - - - 懒加载
@@ -209,12 +204,6 @@
     return _bottomSeparator;
 }
 
-#pragma mark - - - 计算字符串宽度
-//- (CGFloat)SG_widthWithString:(NSString *)string font:(UIFont *)font {
-//    NSDictionary *attrs = @{NSFontAttributeName : font};
-//    return [string boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size.width;
-//}
-
 #pragma mark - - - 添加标题按钮
 - (void)setupTitleButtons {
     NSInteger titleCount = self.titleArr.count;
@@ -273,7 +262,7 @@
             }
         }
         self.scrollView.contentSize = CGSizeMake(SGPageTitleViewWidth, SGPageTitleViewHeight);
-        
+
     } else { // SGPageTitleView 滚动样式
         CGFloat btnX = 0;
         CGFloat btnY = 0;
@@ -492,6 +481,33 @@
     };
 }
 
+/** 根据下标值添加 badge */
+- (void)addBadgeForIndex:(NSInteger)index {
+    UIButton *btn = self.btnMArr[index];
+    UIView *badge = [[UIView alloc] init];
+    CGFloat btnTextWidth = [btn.currentTitle SG_sizeWithFont:self.configure.titleFont].width;
+    CGFloat btnTextHeight = [btn.currentTitle SG_sizeWithFont:self.configure.titleFont].height;
+    CGFloat badgeX = 0.5 * (btn.SG_width - btnTextWidth) + btnTextWidth + self.configure.badgeOff.x;
+    CGFloat badgeY = 0.5 * (btn.SG_height - btnTextHeight) + self.configure.badgeOff.y - self.configure.badgeSize;
+    CGFloat badgeWidth = self.configure.badgeSize;
+    CGFloat badgeHeight = badgeWidth;
+    badge.frame = CGRectMake(badgeX, badgeY, badgeWidth, badgeHeight);
+    badge.layer.backgroundColor = self.configure.badgeColor.CGColor;
+    badge.layer.cornerRadius = 0.5 * self.configure.badgeSize;
+    badge.tag = 2018 + index;
+    [btn addSubview:badge];
+}
+/** 根据下标值移除 badge */
+- (void)removeBadgeForIndex:(NSInteger)index {
+    UIButton *btn = self.btnMArr[index];
+    [btn.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.tag != 0) {
+            [obj removeFromSuperview];
+            obj = nil;
+        }
+    }];
+}
+
 /**
  *  根据标题下标值重置标题文字
  *
@@ -512,33 +528,6 @@
             self.indicatorView.SG_centerX = button.SG_centerX;
         }
     }
-}
-
-/** 根据下标值添加 badge */
-- (void)addBadgeForIndex:(NSInteger)index {
-    UIButton *btn = self.btnMArr[index];
-    UIView *badge = [[UIView alloc] init];
-    CGFloat btnTextWidth = [btn.currentTitle SG_sizeWithFont:self.configure.titleFont].width;
-    CGFloat btnTextHeight = [btn.currentTitle SG_sizeWithFont:self.configure.titleFont].height;
-    CGFloat badgeX = 0.5 * (btn.SG_width - btnTextWidth) + btnTextWidth + self.configure.badgePoint.x;
-    CGFloat badgeY = 0.5 * (btn.SG_height - btnTextHeight) + self.configure.badgePoint.y - self.configure.badgeSize;
-    CGFloat badgeWidth = self.configure.badgeSize;
-    CGFloat badgeHeight = badgeWidth;
-    badge.frame = CGRectMake(badgeX, badgeY, badgeWidth, badgeHeight);
-    badge.layer.backgroundColor = self.configure.badgeColor.CGColor;
-    badge.layer.cornerRadius = 0.5 * self.configure.badgeSize;
-    badge.tag = 2018 + index;
-    [btn addSubview:badge];
-}
-/** 根据下标值移除 badge */
-- (void)removeBadgeForIndex:(NSInteger)index {
-    UIButton *btn = self.btnMArr[index];
-    [btn.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.tag != 0) {
-            [obj removeFromSuperview];
-            obj = nil;
-        }
-    }];
 }
 
 /**
@@ -987,13 +976,6 @@
 }
 
 #pragma mark - - - set
-- (void)setSelectedIndex:(NSInteger)selectedIndex {
-    _selectedIndex = selectedIndex;
-    if (selectedIndex) {
-        _selectedIndex = selectedIndex;
-    }
-}
-
 - (void)setResetSelectedIndex:(NSInteger)resetSelectedIndex {
     _resetSelectedIndex = resetSelectedIndex;
     [self P_btn_action:self.btnMArr[resetSelectedIndex]];

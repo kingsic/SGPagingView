@@ -1,12 +1,12 @@
 //
-//  DefaultZoomVC.m
-//  SGPageViewExample
+//  DefaultAnimatedVC.m
+//  SGPagingViewExample
 //
-//  Created by apple on 2017/6/12.
-//  Copyright © 2017年 Sorgle. All rights reserved.
+//  Created by kingsic on 2018/7/9.
+//  Copyright © 2018年 Sorgle. All rights reserved.
 //
 
-#import "DefaultZoomVC.h"
+#import "DefaultAnimatedVC.h"
 #import "SGPagingView.h"
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"
@@ -18,13 +18,17 @@
 #import "ChildVCEight.h"
 #import "ChildVCNine.h"
 
-@interface DefaultZoomVC () <SGPageTitleViewDelegate, SGPageContentCollectionViewDelegate>
+@interface DefaultAnimatedVC () <SGPageTitleViewDelegate, SGPageContentScrollViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
-@property (nonatomic, strong) SGPageContentCollectionView *pageContentCollectionView;
+@property (nonatomic, strong) SGPageContentScrollView *pageContentScrollView;
 
 @end
 
-@implementation DefaultZoomVC
+@implementation DefaultAnimatedVC
+
+- (void)dealloc {
+    NSLog(@"DefaultAnimatedVC - - dealloc");
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,10 +49,6 @@
     
     NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-    configure.showIndicator = NO;
-    configure.titleTextZoom = YES;
-    configure.titleTextZoomAdditionalPointSize = 0.3;
-    configure.titleAdditionalWidth = 30;
     
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
@@ -64,21 +64,33 @@
     ChildVCEight *eightVC = [[ChildVCEight alloc] init];
     ChildVCNine *nineVC = [[ChildVCNine alloc] init];
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
-    /// pageContentCollectionView
+    /// pageContentScrollView
     CGFloat ContentCollectionViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
-    self.pageContentCollectionView = [[SGPageContentCollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, ContentCollectionViewHeight) parentVC:self childVCs:childArr];
-    _pageContentCollectionView.delegatePageContentCollectionView = self;
-    [self.view addSubview:_pageContentCollectionView];
-    _pageContentCollectionView.isAnimated = YES;
+    self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, ContentCollectionViewHeight) parentVC:self childVCs:childArr];
+    _pageContentScrollView.delegatePageContentScrollView = self;
+    [self.view addSubview:_pageContentScrollView];
+    _pageContentScrollView.isAnimated = YES;
 }
 
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {
-    [self.pageContentCollectionView setPageContentCollectionViewCurrentIndex:selectedIndex];
+    [self.pageContentScrollView setPageContentScrollViewCurrentIndex:selectedIndex];
 }
 
-- (void)pageContentCollectionView:(SGPageContentCollectionView *)pageContentCollectionView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
+- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
+
+/// 说明：1、这里的处理是为了滚动过程中（手指未离开屏幕）点击标题再滚动造成标题与内容短暂的不一致
+/// 说明：2、了解了一下市场上的 app，大致分为二种情况：一种是滚动过程中标题可以点击（网易新闻、今日头条）；另一种是滚动过程中标题不可以点击（贝贝、汽车之家）
+/// 说明：3、淘宝->微淘界面（带动画）也会存在这种情况但相对来说比我处理得好；所以我只能让动画与说明：2、的后一种情况相结合来做处理（美其名也：为了用户体验）
+- (void)pageContentScrollViewWillBeginDragging {
+    _pageTitleView.userInteractionEnabled = NO;
+}
+
+- (void)pageContentScrollViewDidEndDecelerating {
+    _pageTitleView.userInteractionEnabled = YES;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

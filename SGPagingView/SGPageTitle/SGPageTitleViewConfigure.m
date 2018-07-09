@@ -188,11 +188,11 @@
     return _badgeSize;
 }
 
-- (CGPoint)badgePoint {
-    if (!_badgePoint.x && !_badgePoint.y) {
-        _badgePoint = CGPointMake(0, 0);
+- (CGPoint)badgeOff {
+    if (!_badgeOff.x && !_badgeOff.y) {
+        _badgeOff = CGPointMake(0, 0);
     }
-    return _badgePoint;
+    return _badgeOff;
 }
 
 @end

@@ -5,7 +5,7 @@
 //      GitHub：https://github.com/kingsic
 //
 //  SGPagingView.h
-//  Version 1.4.4
+//  Version 1.5.0
 //
 //  Created by kingsic on 2016/10/6.
 //  Copyright © 2016年 kingsic. All rights reserved.

@@ -49,7 +49,7 @@
 
 
 ## SGPagingView 集成
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.4.3'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.5.0'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -131,8 +131,8 @@
 #### 3、关于侧滑返回手势（请参考 DefaultVCPopGesture 类以及点击子控制器对下一界面所做的处理）
 ###### 1、如果是系统默认返回 item ；只需实现 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法或 SGPageContentCollectionView 的 pageContentCollectionView:offsetX:代理方法，并在此方法实现以下代码即可，如：
 ```
-- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView offsetX:(CGFloat)offsetX {
-    if (offsetX == 0) {
+- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView index:(NSInteger)index {
+    if (index == 0) {
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     } else {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
@@ -151,7 +151,7 @@ c. 实现代理方法：
     return YES;
 }
 ```
-d. 实现 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法或 SGPageContentCollectionView 的 pageContentCollectionView:offsetX:代理方法；实现代码如 1、
+d. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法或 SGPageContentCollectionView 的 pageContentCollectionView:index:代理方法；实现代码如 1、
 
 ###### 3、issues [关于返回手势](https://github.com/kingsic/SGPagingView/issues/25) 已有开发者提供了解决方案，可供参看
 ***
@@ -163,15 +163,11 @@ d. 实现 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法
 
 * 2017-04-13 ：版本升级（根据标题内容自动识别 SGPageTitleView 是静止还是滚动样式）
 
-* 2017-06-01 ：v1.1.0 解决标题中既有中文又有英文存在的指示器滚动错乱问题以及性能优化
-
 * 2017-07-21 ：v1.1.7 加入 CocoaPods 管理以及新增 SGPageContentScrollView 类
 
 * 2017-10-17 ：v1.3.0 版本升级（新增 SGPageTitleViewConfigure 类并提供更多属性设置以及支持指示器遮盖样式）
 
 * 2017-10-28 ：v1.3.2 SGPageTitleViewConfigure 类新增指示器遮盖样式下的边框宽度及边框颜色属性
-
-* 2017-11-01 ：适配 iOS 11（如果你是 Xcode 8 的运行环境，请在 releases 中下载 v1.3.2 的代码进行运行）
 
 * 2017-11-28 ：v1.3.3 SGPageContentView 与 SGPageContentScrollView 新增代理方法，用来处理侧滑返回手势
 
@@ -186,6 +182,8 @@ d. 实现 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法
 * 2018-06-01 ：v1.4.2 新增标题间分割线属性、根据下标设置标题的 attributedTitle 方法以及设置标题图片位置样式方法
 
 * 2018-07-01 ：v1.4.3 优化标题首次点击居中问题以及修复标题文字缩放切换到后台再返回时存在的标题字号问题
+
+* 2018-07-09 ：v1.5.0 版本升级（具体相关信息请查看 release 中版本介绍）
 
 
 ## Concluding remarks

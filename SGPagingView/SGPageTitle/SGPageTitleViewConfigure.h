@@ -106,7 +106,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIColor *badgeColor;
 /** badge 尺寸大小，默认为 7.0f */
 @property (nonatomic, assign) CGFloat badgeSize;
-/** badge 点位置，默认（0，0）*/
-@property (nonatomic, assign) CGPoint badgePoint;
+/** badge 偏移量，默认（0，0）*/
+@property (nonatomic, assign) CGPoint badgeOff;
 
 @end

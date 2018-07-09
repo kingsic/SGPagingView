@@ -83,6 +83,9 @@
 #pragma mark - - - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     _startOffsetX = scrollView.contentOffset.x;
+    if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollViewWillBeginDragging)]) {
+        [self.delegatePageContentScrollView pageContentScrollViewWillBeginDragging];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -114,6 +117,11 @@
     // 5、pageContentScrollView:index:
     if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:index:)]) {
         [self.delegatePageContentScrollView pageContentScrollView:self index:index];
+    }
+    
+    // 6、pageContentScrollViewDidEndDecelerating
+    if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollViewDidEndDecelerating)]) {
+        [self.delegatePageContentScrollView pageContentScrollViewDidEndDecelerating];
     }
 }
 
@@ -181,11 +189,13 @@
         [childVC didMoveToParentViewController:self.parentViewController];
         // 3.1、记录上个子控制器
         self.previousCVC = childVC;
+        
+        // 4、处理内容偏移
+        [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:_isAnimated];
     }
     // 3.2、记录上个子控制器下标
     _previousCVCIndex = currentIndex;
-    // 4、处理内容偏移
-    self.scrollView.contentOffset = CGPointMake(offsetX, 0);
+
     // 5、pageContentScrollView:index:
     if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollView:index:)]) {
         [self.delegatePageContentScrollView pageContentScrollView:self index:currentIndex];
@@ -200,6 +210,10 @@
     } else {
         _scrollView.scrollEnabled = NO;
     }
+}
+
+- (void)setIsAnimated:(BOOL)isAnimated {
+    _isAnimated = isAnimated;
 }
 
 

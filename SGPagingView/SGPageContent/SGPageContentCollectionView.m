@@ -109,6 +109,9 @@ static NSString *const cellID = @"cellID";
 #pragma mark - - - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     _startOffsetX = scrollView.contentOffset.x;
+    if (self.delegatePageContentCollectionView && [self.delegatePageContentCollectionView respondsToSelector:@selector(pageContentCollectionViewWillBeginDragging)]) {
+        [self.delegatePageContentCollectionView pageContentCollectionViewWillBeginDragging];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -118,6 +121,10 @@ static NSString *const cellID = @"cellID";
     // 2、pageContentCollectionView:index:
     if (self.delegatePageContentCollectionView && [self.delegatePageContentCollectionView respondsToSelector:@selector(pageContentCollectionView:index:)]) {
         [self.delegatePageContentCollectionView pageContentCollectionView:self index:_previousCVCIndex];
+    }
+    // 3、pageContentCollectionViewDidEndDecelerating
+    if (self.delegatePageContentCollectionView && [self.delegatePageContentCollectionView respondsToSelector:@selector(pageContentCollectionViewDidEndDecelerating)]) {
+        [self.delegatePageContentCollectionView pageContentCollectionViewDidEndDecelerating];
     }
 }
 
@@ -167,7 +174,7 @@ static NSString *const cellID = @"cellID";
     CGFloat offsetX = currentIndex * self.collectionView.SG_width;
     // 1、处理内容偏移
     if (_previousCVCIndex != currentIndex) {
-        self.collectionView.contentOffset = CGPointMake(offsetX, 0);
+        [self.collectionView setContentOffset:CGPointMake(offsetX, 0) animated:_isAnimated];
     }
     // 2、记录上个子控制器下标
     _previousCVCIndex = currentIndex;
@@ -185,6 +192,10 @@ static NSString *const cellID = @"cellID";
     } else {
         _collectionView.scrollEnabled = NO;
     }
+}
+
+- (void)setIsAnimated:(BOOL)isAnimated {
+    _isAnimated = isAnimated;
 }
 
 
