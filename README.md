@@ -6,7 +6,6 @@
 
 * [效果图](#效果图)
 
-
 * [主要内容的介绍](#主要内容的介绍)
 
 * [SGPagingView 集成](#SGPagingView-集成)
@@ -49,7 +48,7 @@
 
 
 ## SGPagingView 集成
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.5.0'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.5.1'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -60,9 +59,9 @@
 
  SGPageTitleView（用于与 SGPageContent 联动）
 
- SGPageContentScrollView（内部布局由 UIScrollView 实现）
+ SGPageContentScrollView（内部由 UIScrollView 实现）
 
- SGPageContentCollectionView（内部布局由 UICollectionView 实现）
+ SGPageContentCollectionView（内部由 UICollectionView 实现）
 ``` 
 
 
@@ -183,7 +182,7 @@ d. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 * 2018-07-01 ：v1.4.3 优化标题首次点击居中问题以及修复标题文字缩放切换到后台再返回时存在的标题字号问题
 
-* 2018-07-09 ：v1.5.0 版本升级（具体相关信息请查看 [releas](https://github.com/kingsic/SGPagingView/releases) 中版本介绍）
+* 2018-07-09 ：v1.5.0 版本升级（具体相关信息请查看 [releases](https://github.com/kingsic/SGPagingView/releases) 中版本介绍）
 
 
 ## Concluding remarks
