@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ChildFourthPopGestureNextVC : UIViewController
-@property (nonatomic, copy) void(^ReturnBlock)(void);
+
 @end

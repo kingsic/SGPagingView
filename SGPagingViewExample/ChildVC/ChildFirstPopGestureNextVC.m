@@ -7,6 +7,7 @@
 //
 
 #import "ChildFirstPopGestureNextVC.h"
+#import "ChhildTempPopGestureVC.h"
 
 @interface ChildFirstPopGestureNextVC ()
 
@@ -31,6 +32,11 @@
 
 - (void)popGesture {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    ChhildTempPopGestureVC *tempVC = [[ChhildTempPopGestureVC alloc] init];
+    [self.navigationController pushViewController:tempVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -1,26 +1,23 @@
 //
-//  ChildFourthPopGestureNextVC.m
+//  ChhildTempPopGestureVC.m
 //  SGPagingViewExample
 //
-//  Created by kingsic on 2017/11/28.
-//  Copyright © 2017年 Sorgle. All rights reserved.
+//  Created by kingsic on 2018/8/1.
+//  Copyright © 2018年 Sorgle. All rights reserved.
 //
 
-#import "ChildFourthPopGestureNextVC.h"
 #import "ChhildTempPopGestureVC.h"
 
-@interface ChildFourthPopGestureNextVC ()
+@interface ChhildTempPopGestureVC ()
 
 @end
 
-@implementation ChildFourthPopGestureNextVC
+@implementation ChhildTempPopGestureVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view from its nib.
     [self customLeftBarButtonItem];
-    
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 
 - (void)customLeftBarButtonItem {
@@ -37,8 +34,9 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    ChhildTempPopGestureVC *tempVC = [[ChhildTempPopGestureVC alloc] init];
-    [self.navigationController pushViewController:tempVC animated:YES];
+    UIViewController *VC = [[UIViewController alloc] init];
+    VC.view.backgroundColor = [UIColor purpleColor];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
