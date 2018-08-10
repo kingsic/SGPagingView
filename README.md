@@ -22,7 +22,7 @@
 
 
 ## 效果图
-![](https://github.com/kingsic/SGPagingView/raw/master/Picture/sorgle.gif)       ![](https://github.com/kingsic/SGPagingView/raw/master/Picture/sorgle2.gif)
+![](https://github.com/kingsic/SGPagingView/raw/master/Picture/sorgle.gif)
 
 
 ## 主要内容的介绍
@@ -169,8 +169,6 @@ d. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 * 2017-10-28 ：v1.3.2 SGPageTitleViewConfigure 类新增指示器遮盖样式下的边框宽度及边框颜色属性
 
 * 2017-11-28 ：v1.3.3 SGPageContentView 与 SGPageContentScrollView 新增代理方法，用来处理侧滑返回手势
-
-* 2017-12-28 ：v1.3.5 新增指示器动态样式（仅在 SGIndicatorScrollStyleDefault 样式下支持）
 
 * 2018-01-30 ：v1.3.6 解决 SGPageTitleView 标题点击与 SGPageContentView 滚动问题
 
