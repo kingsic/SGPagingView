@@ -8,9 +8,9 @@
 
 * [主要内容的介绍](#主要内容的介绍)
 
-* [SGPagingView 集成](#SGPagingView-集成)
+* [SGPagingView 集成](#SGPagingView_集成)
 
-* [SGPagingView 结构图](#SGPagingView-结构图)
+* [SGPagingView 结构图](#SGPagingView_结构图)
 
 * [代码介绍](#代码介绍)
 
@@ -18,7 +18,7 @@
 
 * [版本介绍](#版本介绍)
 
-* [Concluding remarks](#Concluding-remarks)
+* [Concluding remarks](#Concluding_remarks)
 
 
 ## 效果图
@@ -186,5 +186,7 @@ d. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 
 ## Concluding remarks
+
+* iOS技术交流群：429899752
 
 * 如在使用中, 遇到什么问题或有更好建议者, 请记得 [Issues me](https://github.com/kingsic/SGPagingView/issues) 或 kingsic@126.com 邮箱联系我
