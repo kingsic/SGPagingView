@@ -16,10 +16,7 @@
 
 @implementation ChildVCOne
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    NSLog(@"ChildVCOne - - viewWillAppear");
-}
+
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
@@ -36,6 +33,43 @@
     [self.view addSubview:self.tableView];
 }
 
+- (void)dealloc {
+    NSLog(@"ChildVCOne - - dealloc");
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"ChildVCOne - - viewWillAppear");
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSLog(@"ChildVCOne - - viewDidAppear");
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    NSLog(@"ChildVCOne - - viewWillDisappear");
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSLog(@"ChildVCOne - - viewDidDisappear");
+}
+- (void)removeFromParentViewController {
+    [super removeFromParentViewController];
+    NSLog(@"%s",__func__);
+}
+
+- (void)willMoveToParentViewController:(UIViewController *)parent {
+    [super willMoveToParentViewController:parent];
+    NSLog(@"%s--%@",__func__, parent);
+}
+- (void)didMoveToParentViewController:(UIViewController *)parent {
+    [super didMoveToParentViewController:parent];
+    NSLog(@"%s--%@",__func__, parent);
+}
+
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
@@ -48,19 +82,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    
     NSLog(@"ChildVCOne - - viewDidLoad");
     
     /// 解决方案一
-//    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 108) style:UITableViewStylePlain];
-//    _tableView.dataSource = self;
-//    [self.view addSubview:self.tableView];
-
+    //    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 108) style:UITableViewStylePlain];
+    //    _tableView.dataSource = self;
+    //    [self.view addSubview:self.tableView];
+    
     
     /// 解决方案二
-//    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-//    _tableView.dataSource = self;
-//    [self.view addSubview:self.tableView];
+    //    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    //    _tableView.dataSource = self;
+    //    [self.view addSubview:self.tableView];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -78,3 +112,4 @@
 
 
 @end
+

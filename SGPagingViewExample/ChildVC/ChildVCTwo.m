@@ -15,6 +15,13 @@
 
 @implementation ChildVCTwo
 
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    NSLog(@"ChildVCTwo - - viewDidLoad");
+}
 - (void)dealloc {
     NSLog(@"ChildVCTwo - - dealloc");
 }
@@ -24,11 +31,34 @@
     NSLog(@"ChildVCTwo - - viewWillAppear");
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    NSLog(@"ChildVCTwo - - viewDidLoad");
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    NSLog(@"ChildVCTwo - - viewWillDisappear");
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSLog(@"ChildVCTwo - - viewDidDisappear");
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSLog(@"ChildVCTwo - - viewDidAppear");
+}
+
+- (void)removeFromParentViewController {
+    [super removeFromParentViewController];
+    NSLog(@"%s",__func__);
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parent {
+    [super didMoveToParentViewController:parent];
+    NSLog(@"%s--%@",__func__, parent);
+}
+
+- (void)willMoveToParentViewController:(UIViewController *)parent {
+    [super willMoveToParentViewController:parent];
+    NSLog(@"%s--%@",__func__, parent);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

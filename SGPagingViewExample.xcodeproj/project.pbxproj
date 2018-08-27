@@ -495,7 +495,8 @@
 				TargetAttributes = {
 					1825133F1F21CAC30039F4A2 = {
 						CreatedOnToolsVersion = 8.3.3;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = U7F2PF4JVH;
+						ProvisioningStyle = Manual;
 					};
 					182513581F21CAC30039F4A2 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -771,13 +772,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = U7F2PF4JVH;
 				INFOPLIST_FILE = SGPagingViewExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Sorgle.SGPagingViewExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sorgle.SGPagingViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "576811d9-2d98-4669-a419-04a59007c7e1";
+				PROVISIONING_PROFILE_SPECIFIER = 9188universalProfile;
 			};
 			name = Debug;
 		};
@@ -786,11 +788,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SGPagingViewExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Sorgle.SGPagingViewExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sorgle.SGPagingViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
