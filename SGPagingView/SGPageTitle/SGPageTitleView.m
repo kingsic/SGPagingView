@@ -1,9 +1,4 @@
 //
-//  如遇到问题或有更好方案，请通过以下方式进行联系
-//      QQ群：429899752
-//      Email：kingsic@126.com
-//      GitHub：https://github.com/kingsic/SGPagingView
-//
 //  SGPageTitleView.m
 //  SGPagingViewExample
 //
@@ -14,7 +9,6 @@
 #import "SGPageTitleView.h"
 #import "UIView+SGPagingView.h"
 #import "UIButton+SGPagingView.h"
-#import "NSString+SGPagingView.h"
 #import "SGPageTitleViewConfigure.h"
 
 #define SGPageTitleViewWidth self.frame.size.width
@@ -124,6 +118,12 @@
     [self P_btn_action:self.btnMArr[_selectedIndex]];
 }
 
+#pragma mark - - - 计算字符串尺寸
+- (CGSize)P_sizeWithString:(NSString *)string font:(UIFont *)font {
+    NSDictionary *attrs = @{NSFontAttributeName : font};
+    return [string boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+}
+
 #pragma mark - - - 懒加载
 - (NSArray *)titleArr {
     if (!_titleArr) {
@@ -157,7 +157,7 @@
     if (!_indicatorView) {
         _indicatorView = [[UIView alloc] init];
         if (self.configure.indicatorStyle == SGIndicatorStyleCover) {
-            CGSize tempSize = [[self.btnMArr[0] currentTitle] SG_sizeWithFont:self.configure.titleFont];
+            CGSize tempSize = [self P_sizeWithString:[self.btnMArr[0] currentTitle] font:self.configure.titleFont];
             CGFloat tempIndicatorViewH = tempSize.height;
             if (self.configure.indicatorHeight > self.SG_height) {
                 _indicatorView.SG_y = 0;
@@ -210,7 +210,7 @@
 
     // 计算所有按钮的文字宽度
     [self.titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        CGSize tempSize = [obj SG_sizeWithFont:self.configure.titleFont];
+        CGSize tempSize = [self P_sizeWithString:obj font:self.configure.titleFont];
         CGFloat tempWidth = tempSize.width;
         self.allBtnTextWidth += tempWidth;
     }];
@@ -281,7 +281,7 @@
         for (NSInteger index = 0; index < titleCount; index++) {
             // 1、添加按钮
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
-            CGSize tempSize = [self.titleArr[index] SG_sizeWithFont:self.configure.titleFont];
+            CGSize tempSize = [self P_sizeWithString:self.titleArr[index] font:self.configure.titleFont];
             CGFloat btnW = tempSize.width + self.configure.titleAdditionalWidth;
             btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
             btnX = btnX + btnW;
@@ -414,7 +414,7 @@
             return;
         }
         
-        CGSize tempSize = [button.currentTitle SG_sizeWithFont:self.configure.titleFont];
+        CGSize tempSize = [self P_sizeWithString:button.currentTitle font:self.configure.titleFont];
         CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
         if (tempIndicatorWidth > button.SG_width) {
             tempIndicatorWidth = button.SG_width;
@@ -485,8 +485,8 @@
 - (void)addBadgeForIndex:(NSInteger)index {
     UIButton *btn = self.btnMArr[index];
     UIView *badge = [[UIView alloc] init];
-    CGFloat btnTextWidth = [btn.currentTitle SG_sizeWithFont:self.configure.titleFont].width;
-    CGFloat btnTextHeight = [btn.currentTitle SG_sizeWithFont:self.configure.titleFont].height;
+    CGFloat btnTextWidth = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].width;
+    CGFloat btnTextHeight = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].height;
     CGFloat badgeX = 0.5 * (btn.SG_width - btnTextWidth) + btnTextWidth + self.configure.badgeOff.x;
     CGFloat badgeY = 0.5 * (btn.SG_height - btnTextHeight) + self.configure.badgeOff.y - self.configure.badgeSize;
     CGFloat badgeWidth = self.configure.badgeSize;
@@ -519,7 +519,7 @@
     [button setTitle:title forState:UIControlStateNormal];
     if (_signBtnIndex == index) {
         if (self.configure.indicatorStyle == SGIndicatorStyleDefault || self.configure.indicatorStyle == SGIndicatorStyleCover) {
-            CGSize tempSize = [button.currentTitle SG_sizeWithFont:self.configure.titleFont];
+            CGSize tempSize = [self P_sizeWithString:button.currentTitle font:self.configure.titleFont];
             CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
             if (tempIndicatorWidth > button.SG_width) {
                 tempIndicatorWidth = button.SG_width;
@@ -664,8 +664,8 @@
     /// 处理指示器下划线、遮盖样式
     CGFloat btnWidth = self.SG_width / self.titleArr.count;
     // 文字宽度
-    CGFloat targetBtnTextWidth = [targetBtn.currentTitle SG_sizeWithFont:self.configure.titleFont].width;
-    CGFloat originalBtnTextWidth = [originalBtn.currentTitle SG_sizeWithFont:self.configure.titleFont].width;
+    CGFloat targetBtnTextWidth = [self P_sizeWithString:targetBtn.currentTitle font:self.configure.titleFont].width;
+    CGFloat originalBtnTextWidth = [self P_sizeWithString:originalBtn.currentTitle font:self.configure.titleFont].width;
     CGFloat targetIndicatorX = CGRectGetMaxX(targetBtn.frame) - targetBtnTextWidth - 0.5 * (btnWidth - targetBtnTextWidth + self.configure.indicatorAdditionalWidth);
     CGFloat originalIndicatorX = CGRectGetMaxX(originalBtn.frame) - originalBtnTextWidth - 0.5 * (btnWidth - originalBtnTextWidth + self.configure.indicatorAdditionalWidth);
     CGFloat totalOffsetX = targetIndicatorX - originalIndicatorX;
@@ -750,7 +750,7 @@
     /// 计算 indicator 滚动时宽度的偏移量
     CGFloat distance = 0.0;
     
-    CGFloat targetBtnTextWidth = [targetBtn.currentTitle SG_sizeWithFont:self.configure.titleFont].width;
+    CGFloat targetBtnTextWidth = [self P_sizeWithString:targetBtn.currentTitle font:self.configure.titleFont].width;
     CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + targetBtnTextWidth;
     if (tempIndicatorWidth >= targetBtn.SG_width) {
         offsetX = totalOffsetX * progress;
@@ -788,7 +788,7 @@
         
         // 2、处理指示器下划线、遮盖样式
         if (progress >= 0.5) {
-            CGSize tempSize = [targetBtn.currentTitle SG_sizeWithFont:self.configure.titleFont];
+            CGSize tempSize = [self P_sizeWithString:targetBtn.currentTitle font:self.configure.titleFont];
             CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
             [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                 if (tempIndicatorWidth >= targetBtn.SG_width) {
@@ -800,7 +800,7 @@
                 [self P_changeSelectedButton:targetBtn];
             }];
         } else {
-            CGSize tempSize = [originalBtn.currentTitle SG_sizeWithFont:self.configure.titleFont];
+            CGSize tempSize = [self P_sizeWithString:originalBtn.currentTitle font:self.configure.titleFont];
             CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
             [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                 if (tempIndicatorWidth >= targetBtn.SG_width) {
@@ -835,7 +835,7 @@
     
     // 2、处理指示器下划线、遮盖样式
     if (progress == 1.0) {
-        CGSize tempSize = [targetBtn.currentTitle SG_sizeWithFont:self.configure.titleFont];
+        CGSize tempSize = [self P_sizeWithString:targetBtn.currentTitle font:self.configure.titleFont];
         CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
         [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
             if (tempIndicatorWidth >= targetBtn.SG_width) {
@@ -847,7 +847,7 @@
             [self P_changeSelectedButton:targetBtn];
         }];
     } else {
-        CGSize tempSize = [originalBtn.currentTitle SG_sizeWithFont:self.configure.titleFont];
+        CGSize tempSize = [self P_sizeWithString:originalBtn.currentTitle font:self.configure.titleFont];
         CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
         [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
             if (tempIndicatorWidth >= targetBtn.SG_width) {
@@ -883,7 +883,7 @@
         
         // 2、处理指示器下划线、遮盖样式
         if (progress >= 0.5) {
-            CGSize tempSize = [targetBtn.currentTitle SG_sizeWithFont:self.configure.titleFont];
+            CGSize tempSize = [self P_sizeWithString:targetBtn.currentTitle font:self.configure.titleFont];
             CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
             [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                 if (tempIndicatorWidth >= targetBtn.SG_width) {
@@ -895,7 +895,7 @@
                 [self P_changeSelectedButton:targetBtn];
             }];
         } else {
-            CGSize tempSize = [originalBtn.currentTitle SG_sizeWithFont:self.configure.titleFont];
+            CGSize tempSize = [self P_sizeWithString:originalBtn.currentTitle font:self.configure.titleFont];
             CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
             [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                 if (tempIndicatorWidth >= originalBtn.SG_width) {
@@ -930,7 +930,7 @@
     
     // 2、处理指示器下划线、遮盖样式
     if (progress == 1.0) {
-        CGSize tempSize = [targetBtn.currentTitle SG_sizeWithFont:self.configure.titleFont];
+        CGSize tempSize = [self P_sizeWithString:targetBtn.currentTitle font:self.configure.titleFont];
         CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
         [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
             if (tempIndicatorWidth >= targetBtn.SG_width) {
@@ -943,7 +943,7 @@
         }];
 
     } else {
-        CGSize tempSize = [originalBtn.currentTitle SG_sizeWithFont:self.configure.titleFont];
+        CGSize tempSize = [self P_sizeWithString:originalBtn.currentTitle font:self.configure.titleFont];
         CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
         [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
             if (tempIndicatorWidth >= originalBtn.SG_width) {

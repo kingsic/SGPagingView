@@ -6,11 +6,11 @@
 
 * [效果图](#效果图)
 
+* [结构图](#结构图)
+
 * [主要内容的介绍](#主要内容的介绍)
 
-* [SGPagingView 集成](#SGPagingView_集成)
-
-* [SGPagingView 结构图](#SGPagingView_结构图)
+* [Installation](#Installation)
 
 * [代码介绍](#代码介绍)
 
@@ -23,6 +23,19 @@
 
 ## 效果图
 ![](https://github.com/kingsic/SGPagingView/raw/master/Picture/sorgle.gif)
+
+
+## 结构图
+![](https://github.com/kingsic/SGPagingView/raw/master/Picture/SGPagingView.png)
+``` 
+SGPageTitleViewConfigure（SGPageTitleView 初始化配置信息）
+
+SGPageTitleView（用于与 SGPageContent 联动）
+
+SGPageContentScrollView（内部由 UIScrollView 实现）
+
+SGPageContentCollectionView（内部由 UICollectionView 实现）
+``` 
 
 
 ## 主要内容的介绍
@@ -47,22 +60,9 @@
 * `多种指示器滚动样式`<br>
 
 
-## SGPagingView 集成
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.5.1'
+## Installation
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.5.2'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
-
-
-## SGPagingView 结构图
-![](https://github.com/kingsic/SGPagingView/raw/master/Picture/SGPagingView.png)
-``` 
- SGPageTitleViewConfigure（SGPageTitleView 初始化配置信息）
-
- SGPageTitleView（用于与 SGPageContent 联动）
-
- SGPageContentScrollView（内部由 UIScrollView 实现）
-
- SGPageContentCollectionView（内部由 UICollectionView 实现）
-``` 
 
 
 ## 代码介绍
@@ -170,8 +170,6 @@ d. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 * 2017-11-28 ：v1.3.3 SGPageContentView 与 SGPageContentScrollView 新增代理方法，用来处理侧滑返回手势
 
-* 2018-01-30 ：v1.3.6 解决 SGPageTitleView 标题点击与 SGPageContentView 滚动问题
-
 * 2018-05-08 ：v1.3.7 修复 v1.3.6 选中标题重复点击恢复默认状态以及 SGPageTitleViewConfigure 新增配置属性
 
 * 2018-05-09 ：v1.4.0 版本升级（SGPageTitleView.h 中的部分属性调整到 SGPageTitleViewConfigure.h）
@@ -182,9 +180,11 @@ d. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 * 2018-07-09 ：v1.5.0 版本升级（具体相关信息请查看 [releases](https://github.com/kingsic/SGPagingView/releases) 中版本介绍）
 
+* 2018-08-28 ：v1.5.2 SGPageContentScrollView 内部代码优化处理（感谢 [petyou](https://github.com/petyou) 提供的优化方案）
+
 
 ## Concluding remarks
 
-* iOS技术交流群：429899752
+* iOS 技术交流群：429899752
 
 * 如在使用中, 遇到什么问题或有更好建议者, 请记得 [Issues me](https://github.com/kingsic/SGPagingView/issues) 或 kingsic@126.com 邮箱联系我

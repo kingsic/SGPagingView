@@ -1,9 +1,4 @@
 //
-//  如遇到问题或有更好方案，请通过以下方式进行联系
-//      QQ群：429899752
-//      Email：kingsic@126.com
-//      GitHub：https://github.com/kingsic/SGPagingView
-//
 //  SGPageTitleViewConfigure.h
 //  SGPagingViewExample
 //
@@ -12,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 
 typedef enum : NSUInteger {
     /// 下划线样式

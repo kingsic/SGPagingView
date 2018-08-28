@@ -53,7 +53,6 @@
 		8D1A05F820B441B800743EAD /* DefaultAttributedTitleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A05F720B441B800743EAD /* DefaultAttributedTitleVC.m */; };
 		8D1D282521114426009B3DF4 /* ChhildTempPopGestureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1D282321114426009B3DF4 /* ChhildTempPopGestureVC.m */; };
 		8D1D282621114426009B3DF4 /* ChhildTempPopGestureVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D1D282421114426009B3DF4 /* ChhildTempPopGestureVC.xib */; };
-		8D5E68C620F0F6CC0068044C /* NSString+SGPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5E68C420F0F6CC0068044C /* NSString+SGPagingView.m */; };
 		8D5E68CF20F2FA140068044C /* DefaultAnimatedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5E68CE20F2FA140068044C /* DefaultAnimatedVC.m */; };
 		8DA4304120BBE3D600C47917 /* SGPageContentCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4303F20BBE3D500C47917 /* SGPageContentCollectionView.m */; };
 		8DA4304420BBEDEC00C47917 /* UIButton+SGPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4304320BBEDEC00C47917 /* UIButton+SGPagingView.m */; };
@@ -166,8 +165,6 @@
 		8D1D282221114426009B3DF4 /* ChhildTempPopGestureVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChhildTempPopGestureVC.h; sourceTree = "<group>"; };
 		8D1D282321114426009B3DF4 /* ChhildTempPopGestureVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChhildTempPopGestureVC.m; sourceTree = "<group>"; };
 		8D1D282421114426009B3DF4 /* ChhildTempPopGestureVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChhildTempPopGestureVC.xib; sourceTree = "<group>"; };
-		8D5E68C420F0F6CC0068044C /* NSString+SGPagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SGPagingView.m"; sourceTree = "<group>"; };
-		8D5E68C520F0F6CC0068044C /* NSString+SGPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SGPagingView.h"; sourceTree = "<group>"; };
 		8D5E68CD20F2FA140068044C /* DefaultAnimatedVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultAnimatedVC.h; sourceTree = "<group>"; };
 		8D5E68CE20F2FA140068044C /* DefaultAnimatedVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultAnimatedVC.m; sourceTree = "<group>"; };
 		8DA4303F20BBE3D500C47917 /* SGPageContentCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageContentCollectionView.m; sourceTree = "<group>"; };
@@ -316,8 +313,6 @@
 		182513DB1F21D1600039F4A2 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				8D5E68C520F0F6CC0068044C /* NSString+SGPagingView.h */,
-				8D5E68C420F0F6CC0068044C /* NSString+SGPagingView.m */,
 				8DA4304220BBEDEC00C47917 /* UIButton+SGPagingView.h */,
 				8DA4304320BBEDEC00C47917 /* UIButton+SGPagingView.m */,
 				182513DC1F21D1600039F4A2 /* UIView+SGPagingView.h */,
@@ -576,7 +571,6 @@
 				8D0F8E381FD95DE300F30426 /* DefaultThreeCoverVC.m in Sources */,
 				1825134B1F21CAC30039F4A2 /* ViewController.m in Sources */,
 				8DA4304420BBEDEC00C47917 /* UIButton+SGPagingView.m in Sources */,
-				8D5E68C620F0F6CC0068044C /* NSString+SGPagingView.m in Sources */,
 				18B036D21F21D835004C7DE7 /* SGPageTitleView.m in Sources */,
 				8DA4304120BBE3D600C47917 /* SGPageContentCollectionView.m in Sources */,
 				8D0F8E681FD95E2300F30426 /* ChildVCFour.m in Sources */,
