@@ -78,7 +78,7 @@
     /// pageContentScrollView
     CGFloat ContentCollectionViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
     self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, ContentCollectionViewHeight) parentVC:self childVCs:childArr];
-    _pageContentScrollView.delegatePageContentScrollView = self;
+    _pageContentScrollView.pageContentScrollViewDelegate = self;
     [self.view addSubview:_pageContentScrollView];
 }
 
@@ -86,11 +86,11 @@
     [self.pageContentScrollView setPageContentScrollViewCurrentIndex:selectedIndex];
 }
 
-- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
+- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView didScrollToChangedProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 
-- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView index:(NSInteger)index {
+- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView didScrollToIndex:(NSInteger)index previousIndex:(NSInteger)previousIndex {
     if (index == 1 || index == 5) {
         [_pageTitleView removeBadgeForIndex:index];
     }

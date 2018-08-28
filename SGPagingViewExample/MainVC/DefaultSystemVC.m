@@ -44,7 +44,10 @@
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configure.titleSelectedColor = [UIColor whiteColor];
     configure.titleFont = [UIFont systemFontOfSize:12];
-    configure.showBottomSeparator = NO;
+    configure.showBottomSeparator = YES;
+    
+    configure.bottomSeparatorColor = [UIColor blackColor];
+    
     configure.indicatorStyle = SGIndicatorStyleCover;
     configure.indicatorColor = [UIColor orangeColor];
     configure.indicatorHeight = 30;
@@ -66,7 +69,7 @@
     configureS.indicatorAdditionalWidth = 20;
     configureS.showVerticalSeparator = YES;
     configureS.verticalSeparatorColor = [UIColor grayColor];
-    configureS.verticalSeparatorReduceHeight = 14;
+    configureS.verticalSeparatorReduceHeight = 20;
     /// pageTitleViewS
     CGFloat pageTitleViewSY = CGRectGetMaxY(_pageTitleView.frame) + 30;
     SGPageTitleView *pageTitleViewS = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewSY, self.view.frame.size.width, 44) delegate:self titleNames:titleArrS configure:configureS];

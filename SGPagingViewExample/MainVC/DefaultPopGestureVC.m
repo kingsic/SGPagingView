@@ -73,7 +73,7 @@
     /// pageContentScrollView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
     self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
-    _pageContentScrollView.delegatePageContentScrollView = self;
+    _pageContentScrollView.pageContentScrollViewDelegate = self;
     [self.view addSubview:_pageContentScrollView];
 }
 
@@ -85,7 +85,7 @@
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 
-- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView index:(NSInteger)index {
+- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView didScrollToIndex:(NSInteger)index previousIndex:(NSInteger)previousIndex {
     if (index == 0) {
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     } else {

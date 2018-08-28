@@ -33,6 +33,11 @@
     [self setupPageView];
 }
 
+- (void)didMoveToParentViewController:(UIViewController *)parent {
+    [super didMoveToParentViewController:parent];
+    [self.pageContentScrollView parentControllerdidMoveToParentViewController:parent];
+}
+
 - (void)setupPageView {
     CGFloat statusHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
     CGFloat pageTitleViewY = 0;
@@ -68,7 +73,8 @@
     /// pageContentScrollView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
     self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];
-    _pageContentScrollView.delegatePageContentScrollView = self;
+    self.pageContentScrollView.isAnimated = YES;
+    _pageContentScrollView.pageContentScrollViewDelegate = self;
     [self.view addSubview:_pageContentScrollView];
 }
 
@@ -76,13 +82,12 @@
     [self.pageContentScrollView setPageContentScrollViewCurrentIndex:selectedIndex];
 }
 
-- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
+- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView didScrollToChangedProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
 }
 
-- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView index:(NSInteger)index {
-    /// 说明：在此获取标题or当前子控制器下标值
-    NSLog(@"index - - %ld", index);
+- (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView didScrollToIndex:(NSInteger)currentIndex previousIndex:(NSInteger)previousIndex {
+    NSLog(@"currentIndex:%zd   previousIndex:%zd", currentIndex, previousIndex);
 }
 
 @end

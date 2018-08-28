@@ -59,7 +59,7 @@
     NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
     /// pageContentScrollView
     self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) parentVC:self childVCs:childArr];
-    _pageContentScrollView.delegatePageContentScrollView = self;
+    _pageContentScrollView.pageContentScrollViewDelegate = self;
     [self.view insertSubview:_pageContentScrollView atIndex:0];
 }
 
