@@ -4,9 +4,9 @@
 
 ## 目录
 
-* [效果图](#效果图)
-
 * [结构图](#结构图)
+
+* [效果图](#效果图)
 
 * [主要内容的介绍](#主要内容的介绍)
 
@@ -21,10 +21,6 @@
 * [Concluding remarks](#Concluding_remarks)
 
 
-## 效果图
-![](https://github.com/kingsic/SGPagingView/raw/master/Picture/sorgle.gif)
-
-
 ## 结构图
 ![](https://github.com/kingsic/SGPagingView/raw/master/Picture/SGPagingView.png)
 ``` 
@@ -36,6 +32,10 @@ SGPageContentScrollView（内部由 UIScrollView 实现）
 
 SGPageContentCollectionView（内部由 UICollectionView 实现）
 ``` 
+
+
+## 效果图
+![](https://github.com/kingsic/SGPagingView/raw/master/Picture/sorgle.gif)
 
 
 ## 主要内容的介绍
