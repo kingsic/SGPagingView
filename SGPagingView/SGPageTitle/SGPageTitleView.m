@@ -233,6 +233,10 @@
             VSeparatorH = SGPageTitleViewHeight;
         }
         CGFloat VSeparatorY = 0.5 * (SGPageTitleViewHeight - VSeparatorH);
+        
+        [self setupStartColor:self.configure.titleColor];
+        [self setupEndColor:self.configure.titleSelectedColor];
+        
         for (NSInteger index = 0; index < titleCount; index++) {
             // 1、添加按钮
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
@@ -246,10 +250,7 @@
             [btn addTarget:self action:@selector(P_btn_action:) forControlEvents:(UIControlEventTouchUpInside)];
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
-            
-            [self setupStartColor:self.configure.titleColor];
-            [self setupEndColor:self.configure.titleSelectedColor];
-            
+    
             // 2、添加按钮之间的分割线
             if (self.configure.showVerticalSeparator == YES) {
                 UIView *VSeparator = [[UIView alloc] init];
@@ -278,6 +279,10 @@
             VSeparatorH = SGPageTitleViewHeight;
         }
         CGFloat VSeparatorY = 0.5 * (SGPageTitleViewHeight - VSeparatorH);
+        
+        [self setupStartColor:self.configure.titleColor];
+        [self setupEndColor:self.configure.titleSelectedColor];
+        
         for (NSInteger index = 0; index < titleCount; index++) {
             // 1、添加按钮
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
@@ -293,10 +298,7 @@
             [btn addTarget:self action:@selector(P_btn_action:) forControlEvents:(UIControlEventTouchUpInside)];
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
-            
-            [self setupStartColor:self.configure.titleColor];
-            [self setupEndColor:self.configure.titleSelectedColor];
-            
+     
             // 2、添加按钮之间的分割线
             if (self.configure.showVerticalSeparator == YES) {
                 UIView *VSeparator = [[UIView alloc] init];
@@ -1006,17 +1008,15 @@
  *  @param color      颜色
  */
 - (void)P_getRGBComponents:(CGFloat [3])components forColor:(UIColor *)color {
-    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
-    unsigned char resultingPixel[4];
-    CGContextRef context = CGBitmapContextCreate(&resultingPixel, 1, 1, 8, 4, rgbColorSpace, 1);
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, CGRectMake(0, 0, 1, 1));
-    CGContextRelease(context);
-    CGColorSpaceRelease(rgbColorSpace);
-    for (int component = 0; component < 3; component++) {
-        components[component] = resultingPixel[component] / 255.0f;
-    }
+    CGFloat red = 0.0;
+    CGFloat green = 0.0;
+    CGFloat blue = 0.0;
+    CGFloat alpha = 0.0;
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];
+    
+    components[0] = red;
+    components[1] = green;
+    components[2] = blue;
 }
-
 
 @end
