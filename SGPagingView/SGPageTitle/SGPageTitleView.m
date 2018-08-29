@@ -234,8 +234,11 @@
         }
         CGFloat VSeparatorY = 0.5 * (SGPageTitleViewHeight - VSeparatorH);
         
-        [self setupStartColor:self.configure.titleColor];
-        [self setupEndColor:self.configure.titleSelectedColor];
+        // 标题文字渐变效果下对文字默认以及选中状态下颜色的记录
+        if (self.configure.titleGradientEffect) {
+            [self setupStartColor:self.configure.titleColor];
+            [self setupEndColor:self.configure.titleSelectedColor];
+        }
         
         for (NSInteger index = 0; index < titleCount; index++) {
             // 1、添加按钮
@@ -280,8 +283,11 @@
         }
         CGFloat VSeparatorY = 0.5 * (SGPageTitleViewHeight - VSeparatorH);
         
-        [self setupStartColor:self.configure.titleColor];
-        [self setupEndColor:self.configure.titleSelectedColor];
+        // 标题文字渐变效果下对文字默认以及选中状态下颜色的记录
+        if (self.configure.titleGradientEffect) {
+            [self setupStartColor:self.configure.titleColor];
+            [self setupEndColor:self.configure.titleSelectedColor];
+        }
         
         for (NSInteger index = 0; index < titleCount; index++) {
             // 1、添加按钮
