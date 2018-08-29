@@ -101,11 +101,11 @@
     // 2、添加标题按钮
     [self setupTitleButtons];
     // 3、添加底部分割线
-    if (self.configure.showBottomSeparator == YES) {
+    if (self.configure.showBottomSeparator) {
         [self addSubview:self.bottomSeparator];
     }
     // 4、添加指示器
-    if (self.configure.showIndicator == YES) {
+    if (self.configure.showIndicator) {
         [self.scrollView insertSubview:self.indicatorView atIndex:0];
     }
 }
@@ -246,12 +246,9 @@
             [btn addTarget:self action:@selector(P_btn_action:) forControlEvents:(UIControlEventTouchUpInside)];
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
-            
-            [self setupStartColor:self.configure.titleColor];
-            [self setupEndColor:self.configure.titleSelectedColor];
-            
+
             // 2、添加按钮之间的分割线
-            if (self.configure.showVerticalSeparator == YES) {
+            if (self.configure.showVerticalSeparator) {
                 UIView *VSeparator = [[UIView alloc] init];
                 if (index != 0) {
                     CGFloat VSeparatorX = btnW * index - 0.5;
@@ -294,11 +291,8 @@
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
             
-            [self setupStartColor:self.configure.titleColor];
-            [self setupEndColor:self.configure.titleSelectedColor];
-            
             // 2、添加按钮之间的分割线
-            if (self.configure.showVerticalSeparator == YES) {
+            if (self.configure.showVerticalSeparator) {
                 UIView *VSeparator = [[UIView alloc] init];
                 if (index < titleCount - 1) {
                     CGFloat VSeparatorX = btnX - 0.5;
@@ -310,6 +304,12 @@
         }
         CGFloat scrollViewWidth = CGRectGetMaxX(self.scrollView.subviews.lastObject.frame);
         self.scrollView.contentSize = CGSizeMake(scrollViewWidth, SGPageTitleViewHeight);
+    }
+    
+    // 标题文字渐变效果下对标题文字默认、选中状态下颜色的记录
+    if (self.configure.titleGradientEffect) {
+        [self setupStartColor:self.configure.titleColor];
+        [self setupEndColor:self.configure.titleSelectedColor];
     }
 }
 
