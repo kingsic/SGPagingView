@@ -233,6 +233,10 @@
             VSeparatorH = SGPageTitleViewHeight;
         }
         CGFloat VSeparatorY = 0.5 * (SGPageTitleViewHeight - VSeparatorH);
+        
+        [self setupStartColor:self.configure.titleColor];
+        [self setupEndColor:self.configure.titleSelectedColor];
+        
         for (NSInteger index = 0; index < titleCount; index++) {
             // 1、添加按钮
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
@@ -246,12 +250,7 @@
             [btn addTarget:self action:@selector(P_btn_action:) forControlEvents:(UIControlEventTouchUpInside)];
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
-            
-            if (index == 0) {
-                [self setupStartColor:self.configure.titleColor];
-                [self setupEndColor:self.configure.titleSelectedColor];
-            }
-            
+    
             // 2、添加按钮之间的分割线
             if (self.configure.showVerticalSeparator == YES) {
                 UIView *VSeparator = [[UIView alloc] init];
@@ -280,6 +279,10 @@
             VSeparatorH = SGPageTitleViewHeight;
         }
         CGFloat VSeparatorY = 0.5 * (SGPageTitleViewHeight - VSeparatorH);
+        
+        [self setupStartColor:self.configure.titleColor];
+        [self setupEndColor:self.configure.titleSelectedColor];
+        
         for (NSInteger index = 0; index < titleCount; index++) {
             // 1、添加按钮
             SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
@@ -295,12 +298,7 @@
             [btn addTarget:self action:@selector(P_btn_action:) forControlEvents:(UIControlEventTouchUpInside)];
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
-            
-            if (index == 0) {
-                [self setupStartColor:self.configure.titleColor];
-                [self setupEndColor:self.configure.titleSelectedColor];
-            }
-            
+     
             // 2、添加按钮之间的分割线
             if (self.configure.showVerticalSeparator == YES) {
                 UIView *VSeparator = [[UIView alloc] init];
