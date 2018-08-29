@@ -296,8 +296,10 @@
             [self.btnMArr addObject:btn];
             [self.scrollView addSubview:btn];
             
-            [self setupStartColor:self.configure.titleColor];
-            [self setupEndColor:self.configure.titleSelectedColor];
+            if (index == 0) {
+                [self setupStartColor:self.configure.titleColor];
+                [self setupEndColor:self.configure.titleSelectedColor];
+            }
             
             // 2、添加按钮之间的分割线
             if (self.configure.showVerticalSeparator == YES) {
