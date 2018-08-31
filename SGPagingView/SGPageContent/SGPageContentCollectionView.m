@@ -82,6 +82,12 @@ static NSString *const cellID = @"cellID";
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellID];
+        
+        if (self.parentViewController.navigationController) {
+            for (UIGestureRecognizer *gestureRecognizer in _collectionView.gestureRecognizers) {
+                [gestureRecognizer requireGestureRecognizerToFail:self.parentViewController.navigationController.interactivePopGestureRecognizer];
+            }
+        }
     }
     return _collectionView;
 }

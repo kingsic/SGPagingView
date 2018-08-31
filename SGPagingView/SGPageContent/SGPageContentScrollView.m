@@ -73,6 +73,12 @@
         _scrollView.showsHorizontalScrollIndicator = NO;
         CGFloat contentWidth = self.childViewControllers.count * _scrollView.SG_width;
         _scrollView.contentSize = CGSizeMake(contentWidth, 0);
+        
+        if (self.parentViewController.navigationController) {
+            for (UIGestureRecognizer *gestureRecognizer in _scrollView.gestureRecognizers) {
+                [gestureRecognizer requireGestureRecognizerToFail:self.parentViewController.navigationController.interactivePopGestureRecognizer];
+            }
+        }
     }
     return _scrollView;
 }

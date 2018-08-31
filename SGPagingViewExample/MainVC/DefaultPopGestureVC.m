@@ -13,7 +13,7 @@
 #import "ChildVCThree.h"
 #import "ChildFourthPopGestureVC.h"
 
-@interface DefaultPopGestureVC () <SGPageTitleViewDelegate, SGPageContentScrollViewDelegate, UINavigationControllerDelegate>
+@interface DefaultPopGestureVC () <SGPageTitleViewDelegate, SGPageContentScrollViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
 @property (nonatomic, strong) SGPageContentScrollView *pageContentScrollView;
 
@@ -37,9 +37,6 @@
     [button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     [button addTarget:self action:@selector(popGesture) forControlEvents:(UIControlEventTouchUpInside)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    
-    /// UINavigationControllerDelegate
-    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
 }
 
 - (void)popGesture {
@@ -92,12 +89,6 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
 }
-
-/// 允许同时响应多个手势
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
-}
-
 
 /*
 #pragma mark - Navigation
