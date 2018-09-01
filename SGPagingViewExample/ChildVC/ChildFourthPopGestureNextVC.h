@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SGPagingViewPopGestureVC.h"
 
-@interface ChildFourthPopGestureNextVC : UIViewController
+@interface ChildFourthPopGestureNextVC : SGPagingViewPopGestureVC
 
 @end

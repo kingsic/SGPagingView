@@ -7,7 +7,7 @@
 //
 
 #import "ChildFirstPopGestureNextVC.h"
-#import "ChhildTempPopGestureVC.h"
+#import "ChildTempPopGestureVC.h"
 
 @interface ChildFirstPopGestureNextVC ()
 
@@ -21,6 +21,11 @@
     [self customLeftBarButtonItem];
 }
 
+- (IBAction)pushToNextVC:(id)sender {
+    ChildTempPopGestureVC *tempVC = [[ChildTempPopGestureVC alloc] init];
+    [self.navigationController pushViewController:tempVC animated:YES];
+}
+
 - (void)customLeftBarButtonItem {
     UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];
     [button setTitle:@"back" forState:(UIControlStateNormal)];
@@ -32,11 +37,6 @@
 
 - (void)popGesture {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    ChhildTempPopGestureVC *tempVC = [[ChhildTempPopGestureVC alloc] init];
-    [self.navigationController pushViewController:tempVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

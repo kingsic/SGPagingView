@@ -19,19 +19,18 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击继续跳转下一界面" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYg-82-ZMJ">
-                    <rect key="frame" x="20" y="323.5" width="335" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQs-j9-4W3">
+                    <rect key="frame" x="111" y="318.5" width="153" height="30"/>
+                    <state key="normal" title="点击继续跳转下一界面"/>
+                    <connections>
+                        <action selector="pushToNextVC:" destination="-1" eventType="touchUpInside" id="Bdj-MI-e0j"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.085766502169999995" green="1" blue="0.33105846459999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="MYg-82-ZMJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="KsF-Qt-r39"/>
-                <constraint firstItem="MYg-82-ZMJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="qYm-r0-MZu"/>
-                <constraint firstAttribute="trailing" secondItem="MYg-82-ZMJ" secondAttribute="trailing" constant="20" id="scI-UQ-Ra6"/>
-                <constraint firstItem="MYg-82-ZMJ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="yxt-A6-ArQ"/>
+                <constraint firstItem="yQs-j9-4W3" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="WXd-BU-q3P"/>
+                <constraint firstItem="yQs-j9-4W3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="jrh-wz-9SR"/>
             </constraints>
         </view>
     </objects>
