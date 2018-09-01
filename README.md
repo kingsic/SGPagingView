@@ -61,7 +61,7 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 
 
 ## Installation
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.5.2'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.5.3'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -140,7 +140,7 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 ```
 
 #### 2、如果是自定义返回 item 
-a. .h 文件中 #import "SGPagingViewPopGestureVC.h"，控制器继承 SGPagingViewPopGestureVC;
+a. 需单独在 .h 文件中导入 #import "SGPagingViewPopGestureVC.h"，且控制器继承 SGPagingViewPopGestureVC;
 
 b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法或 SGPageContentCollectionView 的 pageContentCollectionView:index:代理方法
 ```
@@ -153,9 +153,9 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 }
 ```
 
-##### 温馨提示一：由于 index != 0 时 self.navigationController.interactivePopGestureRecognizer.enabled = NO; 所以 push 到下一个控制器需在 viewDidLoad 中设置为 YES；
+##### 温馨提示一：由于 index != 0 时 self.navigationController.interactivePopGestureRecognizer.enabled = NO; 所以 push 到下一控制器需在 viewDidLoad 中设置为 YES；
 
-##### 温馨提示二：导航栏包装自定义返回 item；使用 SGPagingView 也会导致侧滑返回失效解决方案同（2、如果是自定义返回 item）如果你工程中某个控制器使用自定义返回 item 解决方案同（2、如果是自定义返回 item）；这里只是提供一种解决方案，仅供参考。如果你有更好的解决方案欢迎联我
+##### 温馨提示二：导航栏包装自定义返回 item 使用 SGPagingView 也会导致侧滑返回失效解决方案同（2、如果是自定义返回 item）；如果你工程中某个控制器使用自定义返回 item 解决方案同（2、如果是自定义返回 item）；这里只是提供一种解决方案，仅供参考。如果你有更好的解决方案欢迎联我
 
 ##### 温馨提示三：自定义返回 item 导致侧滑返回手势失效[参考链接](https://www.jianshu.com/p/33ce1340a543)
 
@@ -173,8 +173,6 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 * 2017-10-17 ：v1.3.0 版本升级（新增 SGPageTitleViewConfigure 类并提供更多属性设置以及支持指示器遮盖样式）
 
-* 2017-10-28 ：v1.3.2 SGPageTitleViewConfigure 类新增指示器遮盖样式下的边框宽度及边框颜色属性
-
 * 2017-11-28 ：v1.3.3 SGPageContentView 与 SGPageContentScrollView 新增代理方法，用来处理侧滑返回手势
 
 * 2018-05-08 ：v1.3.7 修复 v1.3.6 选中标题重复点击恢复默认状态以及 SGPageTitleViewConfigure 新增配置属性
@@ -188,6 +186,8 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 * 2018-07-09 ：v1.5.0 版本升级（具体相关信息请查看 [releases](https://github.com/kingsic/SGPagingView/releases) 中版本介绍）
 
 * 2018-08-28 ：v1.5.2 SGPageContentScrollView 内部代码优化处理（感谢 [petyou](https://github.com/petyou) 提供的优化方案）
+
+* 2018-09-01 ：v1.5.3 SGPageTitleView 内部代码优化以及新增 SGPagingViewPopGestureVC 用于解决侧滑返回手势
 
 
 ## Concluding remarks
