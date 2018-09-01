@@ -60,6 +60,7 @@
 		8DCB02AA1F95B0FF00C9598A /* SGPageTitleViewConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB02A91F95B0FF00C9598A /* SGPageTitleViewConfigure.m */; };
 		8DF628F720A94CBA00B7B85A /* DefaultSystemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DF628F620A94CBA00B7B85A /* DefaultSystemVC.m */; };
 		9A3EDE201FF4C5C600DC1EB2 /* DefaultDynamicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3EDE1F1FF4C5C600DC1EB2 /* DefaultDynamicVC.m */; };
+		C51A9552213917970075FBEF /* SGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C51A9551213917970075FBEF /* SGNavigationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,8 @@
 		8DF628F620A94CBA00B7B85A /* DefaultSystemVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultSystemVC.m; sourceTree = "<group>"; };
 		9A3EDE1E1FF4C5C600DC1EB2 /* DefaultDynamicVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultDynamicVC.h; sourceTree = "<group>"; };
 		9A3EDE1F1FF4C5C600DC1EB2 /* DefaultDynamicVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultDynamicVC.m; sourceTree = "<group>"; };
+		C51A9550213917970075FBEF /* SGNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGNavigationController.h; sourceTree = "<group>"; };
+		C51A9551213917970075FBEF /* SGNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGNavigationController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +238,8 @@
 				182513471F21CAC30039F4A2 /* AppDelegate.m */,
 				182513491F21CAC30039F4A2 /* ViewController.h */,
 				1825134A1F21CAC30039F4A2 /* ViewController.m */,
+				C51A9550213917970075FBEF /* SGNavigationController.h */,
+				C51A9551213917970075FBEF /* SGNavigationController.m */,
 				8D0F8E1C1FD95DE300F30426 /* MainVC */,
 				182513AE1F21CC340039F4A2 /* NavigationBar */,
 				8D0F8E3B1FD95E2300F30426 /* ChildVC */,
@@ -500,7 +505,8 @@
 				TargetAttributes = {
 					1825133F1F21CAC30039F4A2 = {
 						CreatedOnToolsVersion = 8.3.3;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = U7F2PF4JVH;
+						ProvisioningStyle = Manual;
 					};
 					182513581F21CAC30039F4A2 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -596,6 +602,7 @@
 				8D0F8E661FD95E2300F30426 /* ChildVCEight.m in Sources */,
 				8D0F8E6D1FD95E2300F30426 /* ChildVCOne.m in Sources */,
 				8DA4304720BBEF3B00C47917 /* DefaultImageVC.m in Sources */,
+				C51A9552213917970075FBEF /* SGNavigationController.m in Sources */,
 				8D0F8E671FD95E2300F30426 /* ChildVCFive.m in Sources */,
 				8D0F8E621FD95E2300F30426 /* ChildFourthPopGestureNextVC.m in Sources */,
 				8D0F8E6C1FD95E2300F30426 /* ChildVCNine.m in Sources */,
@@ -775,13 +782,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = U7F2PF4JVH;
 				INFOPLIST_FILE = SGPagingViewExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Sorgle.SGPagingViewExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sorgle.SGPagingViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "576811d9-2d98-4669-a419-04a59007c7e1";
+				PROVISIONING_PROFILE_SPECIFIER = 9188universalProfile;
 			};
 			name = Debug;
 		};
@@ -790,11 +798,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SGPagingViewExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Sorgle.SGPagingViewExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sorgle.SGPagingViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
