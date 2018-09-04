@@ -353,10 +353,10 @@
         if (self.configure.titleTextZoom == YES) {
             [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *btn = obj;
-                btn.titleLabel.font = [btn.titleLabel.font fontWithSize:self.configure.titleFont.pointSize];
+                btn.transform = CGAffineTransformIdentity;
             }];
-            CGFloat zoomFontSize = self.configure.titleFont.pointSize + self.configure.titleTextZoomAdditionalPointSize;
-            button.titleLabel.font = [button.titleLabel.font fontWithSize:zoomFontSize];
+            CGFloat afterZoomRatio = 1 + self.configure.titleTextZoomRatio;
+            button.transform = CGAffineTransformMakeScale(afterZoomRatio, afterZoomRatio);
         }
         
         // 此处作用：避免滚动过程中点击标题手指不离开屏幕的前提下再次滚动造成的误差（由于文字渐变效果导致未选中标题的不准确处理）
@@ -463,20 +463,11 @@
     if ([configureTitleSelectedFont.fontName isEqualToString:defaultTitleFont.fontName] && configureTitleSelectedFont.pointSize == defaultTitleFont.pointSize) {
         if (self.configure.titleTextZoom == YES) {
             // originalBtn 缩放
-            CGFloat originalZoomFontSize = self.configure.titleFont.pointSize + (1 - progress) * self.configure.titleTextZoomAdditionalPointSize;
-            originalBtn.titleLabel.font = [originalBtn.titleLabel.font fontWithSize:originalZoomFontSize];
+            CGFloat originalBtnZoomRatio = (1 - progress) * self.configure.titleTextZoomRatio;
+            originalBtn.transform = CGAffineTransformMakeScale(originalBtnZoomRatio + 1, originalBtnZoomRatio + 1);
             // targetBtn 缩放
-            CGFloat targetZoomFontSize = self.configure.titleFont.pointSize + progress * self.configure.titleTextZoomAdditionalPointSize;
-            targetBtn.titleLabel.font = [targetBtn.titleLabel.font fontWithSize:targetZoomFontSize];
-            
-            // 此处作用：避免滚动过程中点击标题手指不离开屏幕的前提下再次滚动造成的误差（由于文字缩放效果导致选中与未选中按钮文字的不准确处理）
-            if (originalZoomFontSize > targetZoomFontSize) {
-                targetBtn.titleLabel.textColor = self.configure.titleColor;
-                originalBtn.titleLabel.textColor = self.configure.titleSelectedColor;
-            } else {
-                originalBtn.titleLabel.textColor = self.configure.titleColor;
-                targetBtn.titleLabel.textColor = self.configure.titleSelectedColor;
-            }
+            CGFloat targetBtnZoomRatio = progress * self.configure.titleTextZoomRatio;
+            targetBtn.transform = CGAffineTransformMakeScale(targetBtnZoomRatio + 1, targetBtnZoomRatio + 1);
         }
     };
 }
@@ -627,35 +618,41 @@
     /// 处理 SGIndicatorStyleFixed 样式
     if (self.configure.indicatorStyle == SGIndicatorStyleFixed) {
         CGFloat btnWidth = self.SG_width / self.titleArr.count;
-        CGFloat targetBtnIndicatorX = CGRectGetMaxX(targetBtn.frame) - 0.5 * (btnWidth - self.configure.indicatorFixedWidth) - self.configure.indicatorFixedWidth;
-        CGFloat originalBtnIndicatorX = CGRectGetMaxX(originalBtn.frame) - 0.5 * (btnWidth - self.configure.indicatorFixedWidth) - self.configure.indicatorFixedWidth;
+        CGFloat targetBtnMaxX = (targetBtn.tag + 1) * btnWidth;
+        CGFloat originalBtnMaxX = (originalBtn.tag + 1) * btnWidth;
+
+        CGFloat targetBtnIndicatorX = targetBtnMaxX - 0.5 * (btnWidth - self.configure.indicatorFixedWidth) - self.configure.indicatorFixedWidth;
+        CGFloat originalBtnIndicatorX = originalBtnMaxX - 0.5 * (btnWidth - self.configure.indicatorFixedWidth) - self.configure.indicatorFixedWidth;
         CGFloat totalOffsetX = targetBtnIndicatorX - originalBtnIndicatorX;
         self.indicatorView.SG_x = originalBtnIndicatorX + progress * totalOffsetX;
         return;
     }
+    
     /// 处理 SGIndicatorStyleDynamic 样式
     if (self.configure.indicatorStyle == SGIndicatorStyleDynamic) {
         NSInteger originalBtnTag = originalBtn.tag;
         NSInteger targetBtnTag = targetBtn.tag;
-        // 按钮之间的距离
-        CGFloat distance = self.SG_width / self.titleArr.count;
+        CGFloat btnWidth = self.SG_width / self.titleArr.count;
+        CGFloat targetBtnMaxX = (targetBtn.tag + 1) * btnWidth;;
+        CGFloat originalBtnMaxX = (originalBtn.tag + 1) * btnWidth;
+        
         if (originalBtnTag <= targetBtnTag) { // 往左滑
             if (progress <= 0.5) {
-                self.indicatorView.SG_width = self.configure.indicatorDynamicWidth + 2 * progress * distance;
+                self.indicatorView.SG_width = self.configure.indicatorDynamicWidth + 2 * progress * btnWidth;
             } else {
-                CGFloat targetBtnIndicatorX = CGRectGetMaxX(targetBtn.frame) - 0.5 * (distance - self.configure.indicatorDynamicWidth) - self.configure.indicatorDynamicWidth;
-                self.indicatorView.SG_x = targetBtnIndicatorX + 2 * (progress - 1) * distance;
-                self.indicatorView.SG_width = self.configure.indicatorDynamicWidth + 2 * (1 - progress) * distance;
+                CGFloat targetBtnIndicatorX = targetBtnMaxX - 0.5 * (btnWidth - self.configure.indicatorDynamicWidth) - self.configure.indicatorDynamicWidth;
+                self.indicatorView.SG_x = targetBtnIndicatorX + 2 * (progress - 1) * btnWidth;
+                self.indicatorView.SG_width = self.configure.indicatorDynamicWidth + 2 * (1 - progress) * btnWidth;
             }
         } else {
             if (progress <= 0.5) {
-                CGFloat originalBtnIndicatorX = CGRectGetMaxX(originalBtn.frame) - 0.5 * (distance - self.configure.indicatorDynamicWidth) - self.configure.indicatorDynamicWidth;
-                self.indicatorView.SG_x = originalBtnIndicatorX - 2 * progress * distance;
-                self.indicatorView.SG_width = self.configure.indicatorDynamicWidth + 2 * progress * distance;
+                CGFloat originalBtnIndicatorX = originalBtnMaxX - 0.5 * (btnWidth - self.configure.indicatorDynamicWidth) - self.configure.indicatorDynamicWidth;
+                self.indicatorView.SG_x = originalBtnIndicatorX - 2 * progress * btnWidth;
+                self.indicatorView.SG_width = self.configure.indicatorDynamicWidth + 2 * progress * btnWidth;
             } else {
-                CGFloat targetBtnIndicatorX = CGRectGetMaxX(targetBtn.frame) - self.configure.indicatorDynamicWidth - 0.5 * (distance - self.configure.indicatorDynamicWidth);
+                CGFloat targetBtnIndicatorX = targetBtnMaxX - self.configure.indicatorDynamicWidth - 0.5 * (btnWidth - self.configure.indicatorDynamicWidth);
                 self.indicatorView.SG_x = targetBtnIndicatorX; // 这句代码必须写，防止滚动结束之后指示器位置存在偏差，这里的偏差是由于 progress >= 0.8 导致的
-                self.indicatorView.SG_width = self.configure.indicatorDynamicWidth + 2 * (1 - progress) * distance;
+                self.indicatorView.SG_width = self.configure.indicatorDynamicWidth + 2 * (1 - progress) * btnWidth;
             }
         }
         return;
@@ -666,15 +663,26 @@
     // 文字宽度
     CGFloat targetBtnTextWidth = [self P_sizeWithString:targetBtn.currentTitle font:self.configure.titleFont].width;
     CGFloat originalBtnTextWidth = [self P_sizeWithString:originalBtn.currentTitle font:self.configure.titleFont].width;
-    CGFloat targetIndicatorX = CGRectGetMaxX(targetBtn.frame) - targetBtnTextWidth - 0.5 * (btnWidth - targetBtnTextWidth + self.configure.indicatorAdditionalWidth);
-    CGFloat originalIndicatorX = CGRectGetMaxX(originalBtn.frame) - originalBtnTextWidth - 0.5 * (btnWidth - originalBtnTextWidth + self.configure.indicatorAdditionalWidth);
+    CGFloat targetBtnMaxX = 0.0;
+    CGFloat originalBtnMaxX = 0.0;
+    /// 这里的缩放是标题按钮缩放，按钮的 frame 会发生变化，开启缩放性后，如果指示器还使用 CGRectGetMaxX 获取按钮的最大 X 值是会比之前的值大，这样会导致指示器的位置相对按钮位置不对应（存在一定的偏移）；所以这里根据按钮下标计算原本的 CGRectGetMaxX 的值，缩放后的不去理会，这样指示器位置会与按钮位置保持一致。
+    /// 在缩放属性关闭情况下，下面的计算结果一样的，所以可以省略判断，直接采用第一种计算结果（这个只是做个记录对指示器位置与按钮保持一致的方法）
+    if (self.configure.titleTextZoom == YES) {
+        targetBtnMaxX = (targetBtn.tag + 1) * btnWidth;
+        originalBtnMaxX = (originalBtn.tag + 1) * btnWidth;
+    } else {
+        targetBtnMaxX = CGRectGetMaxX(targetBtn.frame);
+        originalBtnMaxX = CGRectGetMaxX(originalBtn.frame);
+    }
+    CGFloat targetIndicatorX = targetBtnMaxX - targetBtnTextWidth - 0.5 * (btnWidth - targetBtnTextWidth + self.configure.indicatorAdditionalWidth);
+    CGFloat originalIndicatorX = originalBtnMaxX - originalBtnTextWidth - 0.5 * (btnWidth - originalBtnTextWidth + self.configure.indicatorAdditionalWidth);
     CGFloat totalOffsetX = targetIndicatorX - originalIndicatorX;
     
     /// 2、计算文字之间差值
     // targetBtn 文字右边的 x 值
-    CGFloat targetBtnRightTextX = CGRectGetMaxX(targetBtn.frame) - 0.5 * (btnWidth - targetBtnTextWidth);
+    CGFloat targetBtnRightTextX = targetBtnMaxX - 0.5 * (btnWidth - targetBtnTextWidth);
     // originalBtn 文字右边的 x 值
-    CGFloat originalBtnRightTextX = CGRectGetMaxX(originalBtn.frame) - 0.5 * (btnWidth - originalBtnTextWidth);
+    CGFloat originalBtnRightTextX = originalBtnMaxX - 0.5 * (btnWidth - originalBtnTextWidth);
     CGFloat totalRightTextDistance = targetBtnRightTextX - originalBtnRightTextX;
     // 计算 indicatorView 滚动时 x 的偏移量
     CGFloat offsetX = totalOffsetX * progress;
@@ -741,8 +749,13 @@
     }
     
     /// 处理指示器下划线、遮盖样式
+    if (self.configure.titleTextZoom && self.configure.showIndicator) {
+        NSLog(@"标题文字缩放属性与指示器下划线、遮盖样式下不兼容，但固定及动态样式下兼容");
+        return;
+    }
+
     // 1、计算 targetBtn 与 originalBtn 之间的 x 差值
-    CGFloat totalOffsetX = targetBtn.SG_origin.x - originalBtn.SG_origin.x;
+    CGFloat totalOffsetX = targetBtn.SG_x - originalBtn.SG_x;
     // 2、计算 targetBtn 与 originalBtn 之间距离的差值
     CGFloat totalDistance = CGRectGetMaxX(targetBtn.frame) - CGRectGetMaxX(originalBtn.frame);
     /// 计算 indicator 滚动时 x 的偏移量
@@ -755,13 +768,13 @@
     if (tempIndicatorWidth >= targetBtn.SG_width) {
         offsetX = totalOffsetX * progress;
         distance = progress * (totalDistance - totalOffsetX);
-        self.indicatorView.SG_x = originalBtn.SG_origin.x + offsetX;
+        self.indicatorView.SG_x = originalBtn.SG_x + offsetX;
         self.indicatorView.SG_width = originalBtn.SG_width + distance;
     } else {
         offsetX = totalOffsetX * progress + 0.5 * self.configure.titleAdditionalWidth - 0.5 * self.configure.indicatorAdditionalWidth;
         distance = progress * (totalDistance - totalOffsetX) - self.configure.titleAdditionalWidth;
         /// 计算 indicator 新的 frame
-        self.indicatorView.SG_x = originalBtn.SG_origin.x + offsetX;
+        self.indicatorView.SG_x = originalBtn.SG_x + offsetX;
         self.indicatorView.SG_width = originalBtn.SG_width + distance + self.configure.indicatorAdditionalWidth;
     }
 }

@@ -64,13 +64,13 @@
     return _titleSelectedColor;
 }
 
-- (CGFloat)titleTextZoomAdditionalPointSize {
-    if (_titleTextZoomAdditionalPointSize <= 3) {
-        _titleTextZoomAdditionalPointSize = 3;
-    } else if (_titleTextZoomAdditionalPointSize >= 10) {
-        _titleTextZoomAdditionalPointSize = 10;
+- (CGFloat)titleTextZoomRatio {
+    if (_titleTextZoomRatio <= 0.0) {
+        _titleTextZoomRatio = 0.0;
+    } else if (_titleTextZoomRatio >= 1.0){
+        _titleTextZoomRatio = 1.0;
     }
-    return _titleTextZoomAdditionalPointSize;
+    return _titleTextZoomRatio * 0.5;
 }
 
 - (CGFloat)titleAdditionalWidth {

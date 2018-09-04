@@ -7,7 +7,6 @@
 //
 
 #import "DefaultPopGestureVC.h"
-#import "SGPagingView.h"
 #import "ChildFirstPopGestureVC.h"
 #import "ChildVCTwo.h"
 #import "ChildVCThree.h"

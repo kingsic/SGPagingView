@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SGPagingViewPopGestureVC.h"
+#import "SGPagingView.h"
 
 @interface DefaultPopGestureVC : SGPagingViewPopGestureVC
 
