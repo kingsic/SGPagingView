@@ -353,10 +353,10 @@
         if (self.configure.titleTextZoom == YES) {
             [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *btn = obj;
-                btn.titleLabel.font = [btn.titleLabel.font fontWithSize:self.configure.titleFont.pointSize];
+                btn.transform = CGAffineTransformIdentity;
             }];
-            CGFloat zoomFontSize = self.configure.titleFont.pointSize + self.configure.titleTextZoomAdditionalPointSize;
-            button.titleLabel.font = [button.titleLabel.font fontWithSize:zoomFontSize];
+            CGFloat zoomScale = (self.configure.titleFont.pointSize + self.configure.titleTextZoomAdditionalPointSize) / self.configure.titleFont.pointSize;
+            button.transform = CGAffineTransformMakeScale(zoomScale, zoomScale);
         }
         
         // 此处作用：避免滚动过程中点击标题手指不离开屏幕的前提下再次滚动造成的误差（由于文字渐变效果导致未选中标题的不准确处理）
@@ -373,16 +373,19 @@
             [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *btn = obj;
                 btn.titleLabel.textColor = self.configure.titleColor;
-                btn.titleLabel.font = self.configure.titleFont;
+                btn.transform = CGAffineTransformIdentity;
             }];
             button.titleLabel.textColor = self.configure.titleSelectedColor;
-            button.titleLabel.font = self.configure.titleSelectedFont;
+            CGFloat zoomScale = (self.configure.titleFont.pointSize + self.configure.titleTextZoomAdditionalPointSize) / self.configure.titleFont.pointSize;
+            button.transform = CGAffineTransformMakeScale(zoomScale, zoomScale);
+            
         } else {
             [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *btn = obj;
-                btn.titleLabel.font = self.configure.titleFont;
+                btn.transform = CGAffineTransformIdentity;
             }];
-            button.titleLabel.font = self.configure.titleSelectedFont;
+            CGFloat zoomScale = (self.configure.titleFont.pointSize + self.configure.titleTextZoomAdditionalPointSize) / self.configure.titleFont.pointSize;
+            button.transform = CGAffineTransformMakeScale(zoomScale, zoomScale);
         }
     }
 }
@@ -463,20 +466,12 @@
     if ([configureTitleSelectedFont.fontName isEqualToString:defaultTitleFont.fontName] && configureTitleSelectedFont.pointSize == defaultTitleFont.pointSize) {
         if (self.configure.titleTextZoom == YES) {
             // originalBtn 缩放
-            CGFloat originalZoomFontSize = self.configure.titleFont.pointSize + (1 - progress) * self.configure.titleTextZoomAdditionalPointSize;
-            originalBtn.titleLabel.font = [originalBtn.titleLabel.font fontWithSize:originalZoomFontSize];
-            // targetBtn 缩放
-            CGFloat targetZoomFontSize = self.configure.titleFont.pointSize + progress * self.configure.titleTextZoomAdditionalPointSize;
-            targetBtn.titleLabel.font = [targetBtn.titleLabel.font fontWithSize:targetZoomFontSize];
+            CGFloat originalZoomScale = (self.configure.titleFont.pointSize + self.configure.titleTextZoomAdditionalPointSize * (1- progress)) / self.configure.titleFont.pointSize;
+            originalBtn.transform = CGAffineTransformMakeScale(originalZoomScale, originalZoomScale);
             
-            // 此处作用：避免滚动过程中点击标题手指不离开屏幕的前提下再次滚动造成的误差（由于文字缩放效果导致选中与未选中按钮文字的不准确处理）
-            if (originalZoomFontSize > targetZoomFontSize) {
-                targetBtn.titleLabel.textColor = self.configure.titleColor;
-                originalBtn.titleLabel.textColor = self.configure.titleSelectedColor;
-            } else {
-                originalBtn.titleLabel.textColor = self.configure.titleColor;
-                targetBtn.titleLabel.textColor = self.configure.titleSelectedColor;
-            }
+            // targetBtn 缩放
+            CGFloat targetZoomScale = (self.configure.titleFont.pointSize + self.configure.titleTextZoomAdditionalPointSize * progress) / self.configure.titleFont.pointSize;
+            targetBtn.transform = CGAffineTransformMakeScale(targetZoomScale, targetZoomScale);
         }
     };
 }
