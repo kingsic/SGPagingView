@@ -2,6 +2,11 @@
 # SGPagingView
 
 
+#### [Swift Version](https://github.com/kingsic/SGPagingView-Swift)
+
+#### iOS技术交流群：429899752
+
+
 ## 目录
 
 * [结构图](#结构图)
@@ -173,8 +178,6 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 * 2017-10-17 ：v1.3.0 版本升级（新增 SGPageTitleViewConfigure 类并提供更多属性设置以及支持指示器遮盖样式）
 
-* 2017-11-28 ：v1.3.3 SGPageContentView 与 SGPageContentScrollView 新增代理方法，用来处理侧滑返回手势
-
 * 2018-05-08 ：v1.3.7 修复 v1.3.6 选中标题重复点击恢复默认状态以及 SGPageTitleViewConfigure 新增配置属性
 
 * 2018-05-09 ：v1.4.0 版本升级（SGPageTitleView.h 中的部分属性调整到 SGPageTitleViewConfigure.h）
@@ -191,7 +194,5 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 
 ## Concluding remarks
-
-* iOS 技术交流群：429899752
 
 * 如在使用中, 遇到什么问题或有更好建议者, 请记得 [Issues me](https://github.com/kingsic/SGPagingView/issues) 或 kingsic@126.com 邮箱联系我
