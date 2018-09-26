@@ -87,12 +87,12 @@ typedef enum : NSUInteger {
 /** 指示器滚动位置改变样式，默认为 SGIndicatorScrollStyleDefault */
 @property (nonatomic, assign) SGIndicatorScrollStyle indicatorScrollStyle;
 
-#pragma mark - - 按钮之间分割线属性
-/** 是否显示按钮之间的分割线，默认为 NO */
+#pragma mark - - 标题间分割线属性
+/** 是否显示标题间分割线，默认为 NO */
 @property (nonatomic, assign) BOOL showVerticalSeparator;
-/** 按钮之间的分割线颜色，默认为红色 */
+/** 标题间分割线颜色，默认为红色 */
 @property (nonatomic, strong) UIColor *verticalSeparatorColor;
-/** 按钮之间的分割线额外减少的高度，默认为 0.0f */
+/** 标题间分割线额外减少的高度，默认为 0.0f */
 @property (nonatomic, assign) CGFloat verticalSeparatorReduceHeight;
 
 #pragma mark - - badge 相关属性

@@ -4,27 +4,6 @@
 
 #### [Swift Version](https://github.com/kingsic/SGPagingView-Swift)
 
-#### iOS技术交流群：429899752
-
-
-## 目录
-
-* [结构图](#结构图)
-
-* [效果图](#效果图)
-
-* [主要内容的介绍](#主要内容的介绍)
-
-* [Installation](#Installation)
-
-* [代码介绍](#代码介绍)
-
-* [问题及解决方案](#问题及解决方案)
-
-* [版本介绍](#版本介绍)
-
-* [Concluding remarks](#Concluding_remarks)
-
 
 ## 结构图
 ![](https://github.com/kingsic/SGPagingView/raw/master/Picture/SGPagingView.png)
@@ -43,7 +22,7 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 ![](https://github.com/kingsic/SGPagingView/raw/master/Picture/sorgle.gif)
 
 
-## 主要内容的介绍
+## 主要内容介绍
 * `系统样式`<br>
 
 * `图片样式`<br>
@@ -66,7 +45,7 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 
 
 ## Installation
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.5.3'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.5.5'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -98,27 +77,6 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
     [self.pageContentScrollView setPageCententScrollViewCurrentIndex:selectedIndex];
 }
 ```
-
-
-#### SGPagingView 的介绍
-|主要属性、方法|描述|
-|----|-----|
-|**selectedIndex**|选中标题下标|
-|**resetSelectedIndex**|重置标题下标|
-|**titleFont**|标题文字字号大小，默认 15 号字体|
-|**titleColor**|普通状态下标题按钮文字的颜色，默认为黑色|
-|**titleSelectedColor**|选中状态下标题按钮文字的颜色，默认为红色|
-|**indicatorColor**|指示器颜色，默认为红色|
-|**indicatorStyle**|指示器样式，默认为下划线样式；下划线、遮盖样式|
-|**indicatorHeight**|指示器高度；下划线样式下默认为 2.f，遮盖样式下，默认为标题文字的高度，若大于 SGPageTitleView，则高度为 SGPageTitleView 高度，下划线样式未做处理|
-|**indicatorAdditionalWidth**|指示器遮盖、下划线样式下额外增加的宽度，默认为 0.0f；介于标题文字宽度与按钮宽度之间|
-|**titleAdditionalWidth**|标题额外增加的宽度，默认为 20.0f|
-|**indicatorStyle**|指示器样式;SGIndicatorStyleDefault、SGIndicatorStyleCover、SGIndicatorStyleFixed、SGIndicatorStyleDynamic（仅在 SGIndicatorScrollStyleDefault 样式下支持）|
-|**indicatorCornerRadius**|圆角属性，默认为 0.f；若圆角大于 1/2 指示器高度，则圆角大小为指示器高度的 1/2|
-|**indicatorScrollStyle**|指示器滚动样式|
-|**resetTitle:forIndex:**|根据标题下标值重置标题文字|
-|**setAttributedTitle:selectedAttributedTitle:forIndex:**|根据标题下标值设置标题的 attributedTitle 属性|
-|**setImages:selectedImages:imagePositionType:spacing:**|设置图片及样式|
 
 
 ## 问题及解决方案
@@ -192,7 +150,16 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 * 2018-09-01 ：v1.5.3 SGPageTitleView 内部代码优化以及新增 SGPagingViewPopGestureVC 用于解决侧滑返回手势
 
+* 2018-09-26 ：v1.5.5 标题文字缩放效果由文字缩放调整为控件缩放
 
-## Concluding remarks
 
-* 如在使用中, 遇到什么问题或有更好建议者, 请记得 [Issues me](https://github.com/kingsic/SGPagingView/issues) 或 kingsic@126.com 邮箱联系我
+## Author
+
+* Email：kingsic@126.com
+
+* QQ群：(付费群)<br>
+![](https://github.com/kingsic/Kar98k/blob/master/Source/QQGroup_qrcode.png)
+
+
+## License
+SGPagingView is released under the MIT license. See [LICENSE](https://github.com/kingsic/SGPagingView/blob/master/LICENSE) for details.

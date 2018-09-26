@@ -153,7 +153,7 @@
     return _indicatorDynamicWidth;
 }
 
-#pragma mark - - 按钮之间分割线属性
+#pragma mark - - 标题间分割线属性
 - (UIColor *)verticalSeparatorColor {
     if (!_verticalSeparatorColor) {
         _verticalSeparatorColor = [UIColor redColor];

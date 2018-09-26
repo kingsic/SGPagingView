@@ -23,7 +23,7 @@
 /// 记录加载的上个子控制器的下标
 @property (nonatomic, assign) NSInteger previousCVCIndex;
 /// 标记内容滚动
-@property (nonatomic, assign) BOOL isScrll;
+@property (nonatomic, assign) BOOL isScroll;
 @end
 
 @implementation SGPageContentScrollView
@@ -80,14 +80,14 @@
 #pragma mark - - - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     _startOffsetX = scrollView.contentOffset.x;
-    _isScrll = YES;
+    _isScroll = YES;
     if (self.delegatePageContentScrollView && [self.delegatePageContentScrollView respondsToSelector:@selector(pageContentScrollViewWillBeginDragging)]) {
         [self.delegatePageContentScrollView pageContentScrollViewWillBeginDragging];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    _isScrll = NO;
+    _isScroll = NO;
     // 1、根据标题下标计算 pageContent 偏移量
     CGFloat offsetX = scrollView.contentOffset.x;
     // 2、切换子控制器的时候，执行上个子控制器的 viewWillDisappear 方法
@@ -138,7 +138,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (_isAnimated == YES && _isScrll == NO) {
+    if (_isAnimated == YES && _isScroll == NO) {
         return;
     }
     // 1、定义获取需要的数据

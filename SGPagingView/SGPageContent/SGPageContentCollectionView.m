@@ -21,7 +21,7 @@
 /// 记录加载的上个子控制器的下标
 @property (nonatomic, assign) NSInteger previousCVCIndex;
 /// 标记内容滚动
-@property (nonatomic, assign) BOOL isScrll;
+@property (nonatomic, assign) BOOL isScroll;
 @end
 
 @implementation SGPageContentCollectionView
@@ -106,14 +106,14 @@ static NSString *const cellID = @"cellID";
 #pragma mark - - - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     _startOffsetX = scrollView.contentOffset.x;
-    _isScrll = YES;
+    _isScroll = YES;
     if (self.delegatePageContentCollectionView && [self.delegatePageContentCollectionView respondsToSelector:@selector(pageContentCollectionViewWillBeginDragging)]) {
         [self.delegatePageContentCollectionView pageContentCollectionViewWillBeginDragging];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    _isScrll = NO;
+    _isScroll = NO;
     CGFloat offsetX = scrollView.contentOffset.x;
     // 1、记录上个子控制器下标
     _previousCVCIndex = offsetX / scrollView.frame.size.width;
@@ -128,7 +128,7 @@ static NSString *const cellID = @"cellID";
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (_isAnimated == YES && _isScrll == NO) {
+    if (_isAnimated == YES && _isScroll == NO) {
         return;
     }
     // 1、定义获取需要的数据
