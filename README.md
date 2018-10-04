@@ -6,7 +6,7 @@
 
 
 ## 结构图
-![](https://github.com/kingsic/SGPagingView/raw/master/Picture/SGPagingView.png)
+![](https://github.com/kingsic/Kar98k/blob/master/SGPagingView/SGPagingView.png)
 ``` 
 SGPageTitleViewConfigure（SGPageTitleView 初始化配置信息）
 
@@ -19,7 +19,7 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 
 
 ## 效果图
-![](https://github.com/kingsic/SGPagingView/raw/master/Picture/sorgle.gif)
+![](https://github.com/kingsic/Kar98k/blob/master/SGPagingView/SGPagingView.gif)
 
 
 ## 主要内容介绍
