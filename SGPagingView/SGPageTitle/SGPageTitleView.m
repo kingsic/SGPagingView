@@ -521,6 +521,35 @@
     }
 }
 
+/** 重置指示器颜色 */
+- (void)resetIndicatorColor:(UIColor *)color {
+    _indicatorView.backgroundColor = color;
+}
+/**
+ *  重置标题普通状态、选中状态下文字颜色及指示器颜色方法
+ *
+ *  @param color       普通状态下标题文字颜色
+ *  @param selectedColor       选中状态下标题文字颜色
+ */
+- (void)resetTitleColor:(UIColor *)color titleSelectedColor:(UIColor *)selectedColor {
+    [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIButton *btn = obj;
+        [btn setTitleColor:color forState:(UIControlStateNormal)];
+        [btn setTitleColor:selectedColor forState:(UIControlStateSelected)];
+    }];
+}
+/**
+ *  重置标题普通状态、选中状态下文字颜色及指示器颜色方法
+ *
+ *  @param color       普通状态下标题文字颜色
+ *  @param selectedColor       选中状态下标题文字颜色
+ *  @param indicatorColor      指示器颜色
+ */
+- (void)resetTitleColor:(UIColor *)color titleSelectedColor:(UIColor *)selectedColor indicatorColor:(UIColor *)indicatorColor {
+    [self resetTitleColor:color titleSelectedColor:selectedColor];
+    [self resetIndicatorColor:indicatorColor];
+}
+
 /**
  *  根据标题下标值设置标题的 attributedTitle 属性
  *
@@ -537,8 +566,8 @@
 /**
  *  设置标题图片及位置样式
  *
- *  @param images       默认图片数组
- *  @param selectedImages       选中时图片数组
+ *  @param images       默认图片名数组
+ *  @param selectedImages       选中图片名数组
  *  @param imagePositionType       图片位置样式
  *  @param spacing      图片与标题文字之间的间距
  */
@@ -579,6 +608,31 @@
             [self P_btn:btn imageName:selectedImages[idx] imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateSelected)];
         }];
     }
+}
+/**
+ *  根据标题下标设置标题图片及位置样式
+ *
+ *  @param image       默认图片名
+ *  @param selectedImage       选中时图片名
+ *  @param imagePositionType       图片位置样式
+ *  @param spacing      图片与标题文字之间的间距
+ *  @param index        标题对应下标值
+ */
+- (void)setImage:(NSString *)image selectedImage:(NSString *)selectedImage imagePositionType:(SGImagePositionType)imagePositionType spacing:(CGFloat)spacing forIndex:(NSInteger)index {
+    UIFont *configureTitleFont = self.configure.titleFont;
+    UIFont *configureTitleSelectedFont = self.configure.titleSelectedFont;
+    if ([configureTitleFont.fontName isEqualToString:configureTitleSelectedFont.fontName] && configureTitleFont.pointSize == configureTitleSelectedFont.pointSize) {
+        UIButton *btn = self.btnMArr[index];
+        if (image != nil) {
+            [self P_btn:btn imageName:image imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateNormal)];
+        }
+        if (selectedImage != nil) {
+            [self P_btn:btn imageName:selectedImage imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateSelected)];
+        }
+        return;
+    }
+    
+    NSLog(@"配置属性 titleFont 必须与配置属性 titleSelectedFont 一致，否则 setImage:selectedImage:imagePositionType:spacing:forIndex 方法将不起任何作用");
 }
 
 /// imagePositionType 样式设置方法抽取

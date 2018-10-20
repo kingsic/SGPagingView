@@ -1,6 +1,6 @@
 //
 //  SGPagingView.h
-//  Version 1.5.5
+//  Version 1.5.6
 //  GitHub：https://github.com/kingsic/SGPagingView
 //
 //  Created by kingsic on 2016/10/6.
