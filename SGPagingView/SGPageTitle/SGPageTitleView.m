@@ -404,16 +404,16 @@
     [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
         if (self.configure.indicatorStyle == SGIndicatorStyleFixed) {
             if (self.configure.showIndicator) {
-                _indicatorView.SG_width = self.configure.indicatorFixedWidth;
-                _indicatorView.SG_centerX = button.SG_centerX;
+                self.indicatorView.SG_width = self.configure.indicatorFixedWidth;
+                self.indicatorView.SG_centerX = button.SG_centerX;
             }
             return;
         }
         
         if (self.configure.indicatorStyle == SGIndicatorStyleDynamic) {
             if (self.configure.showIndicator) {
-                _indicatorView.SG_width = self.configure.indicatorDynamicWidth;
-                _indicatorView.SG_centerX = button.SG_centerX;
+                self.indicatorView.SG_width = self.configure.indicatorDynamicWidth;
+                self.indicatorView.SG_centerX = button.SG_centerX;
             }
             return;
         }
@@ -424,8 +424,8 @@
             tempIndicatorWidth = button.SG_width;
         }
         if (self.configure.showIndicator) {
-            _indicatorView.SG_width = tempIndicatorWidth;
-            _indicatorView.SG_centerX = button.SG_centerX;
+            self.indicatorView.SG_width = tempIndicatorWidth;
+            self.indicatorView.SG_centerX = button.SG_centerX;
         }
     }];
 }
@@ -880,14 +880,14 @@
             if (progress >= 0.5) {
                 [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_centerX = targetBtn.SG_centerX;
+                        self.indicatorView.SG_centerX = targetBtn.SG_centerX;
                     }
                     [self P_changeSelectedButton:targetBtn];
                 }];
             } else {
                 [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_centerX = originalBtn.SG_centerX;
+                        self.indicatorView.SG_centerX = originalBtn.SG_centerX;
                     }
                     [self P_changeSelectedButton:originalBtn];
                 }];
@@ -902,15 +902,15 @@
             [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                 if (tempIndicatorWidth >= targetBtn.SG_width) {
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_width = targetBtn.SG_width;
+                        self.indicatorView.SG_width = targetBtn.SG_width;
                     }
                 } else {
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_width = tempIndicatorWidth;
+                        self.indicatorView.SG_width = tempIndicatorWidth;
                     }
                 }
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_centerX = targetBtn.SG_centerX;
+                    self.indicatorView.SG_centerX = targetBtn.SG_centerX;
                 }
                 [self P_changeSelectedButton:targetBtn];
             }];
@@ -920,15 +920,15 @@
             [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                 if (tempIndicatorWidth >= targetBtn.SG_width) {
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_width = originalBtn.SG_width;
+                        self.indicatorView.SG_width = originalBtn.SG_width;
                     }
                 } else {
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_width = tempIndicatorWidth;
+                        self.indicatorView.SG_width = tempIndicatorWidth;
                     }
                 }
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_centerX = originalBtn.SG_centerX;
+                    self.indicatorView.SG_centerX = originalBtn.SG_centerX;
                 }
                 [self P_changeSelectedButton:originalBtn];
             }];
@@ -943,14 +943,14 @@
             if (progress == 1.0) {
                 [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_centerX = targetBtn.SG_centerX;
+                        self.indicatorView.SG_centerX = targetBtn.SG_centerX;
                     }
                     [self P_changeSelectedButton:targetBtn];
                 }];
             } else {
                 [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_centerX = originalBtn.SG_centerX;
+                        self.indicatorView.SG_centerX = originalBtn.SG_centerX;
                     }
                     [self P_changeSelectedButton:originalBtn];
                 }];
@@ -965,15 +965,15 @@
         [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
             if (tempIndicatorWidth >= targetBtn.SG_width) {
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_width = targetBtn.SG_width;
+                    self.indicatorView.SG_width = targetBtn.SG_width;
                 }
             } else {
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_width = tempIndicatorWidth;
+                    self.indicatorView.SG_width = tempIndicatorWidth;
                 }
             }
             if (self.configure.showIndicator) {
-                _indicatorView.SG_centerX = targetBtn.SG_centerX;
+                self.indicatorView.SG_centerX = targetBtn.SG_centerX;
             }
             [self P_changeSelectedButton:targetBtn];
         }];
@@ -983,15 +983,15 @@
         [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
             if (tempIndicatorWidth >= targetBtn.SG_width) {
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_width = originalBtn.SG_width;
+                    self.indicatorView.SG_width = originalBtn.SG_width;
                 }
             } else {
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_width = tempIndicatorWidth;
+                    self.indicatorView.SG_width = tempIndicatorWidth;
                 }
             }
             if (self.configure.showIndicator) {
-                _indicatorView.SG_centerX = originalBtn.SG_centerX;
+                self.indicatorView.SG_centerX = originalBtn.SG_centerX;
             }
             [self P_changeSelectedButton:originalBtn];
         }];
@@ -1007,14 +1007,14 @@
             if (progress >= 0.5) {
                 [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_centerX = targetBtn.SG_centerX;
+                        self.indicatorView.SG_centerX = targetBtn.SG_centerX;
                     }
                     [self P_changeSelectedButton:targetBtn];
                 }];
             } else {
                 [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_centerX = originalBtn.SG_centerX;
+                        self.indicatorView.SG_centerX = originalBtn.SG_centerX;
                     }
                     [self P_changeSelectedButton:originalBtn];
                 }];
@@ -1029,15 +1029,15 @@
             [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                 if (tempIndicatorWidth >= targetBtn.SG_width) {
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_width = targetBtn.SG_width;
+                        self.indicatorView.SG_width = targetBtn.SG_width;
                     }
                 } else {
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_width = tempIndicatorWidth;
+                        self.indicatorView.SG_width = tempIndicatorWidth;
                     }
                 }
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_centerX = targetBtn.SG_centerX;
+                    self.indicatorView.SG_centerX = targetBtn.SG_centerX;
                 }
                 [self P_changeSelectedButton:targetBtn];
             }];
@@ -1047,15 +1047,15 @@
             [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                 if (tempIndicatorWidth >= originalBtn.SG_width) {
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_width = originalBtn.SG_width;
+                        self.indicatorView.SG_width = originalBtn.SG_width;
                     }
                 } else {
                     if (self.configure.showIndicator) {
-                        _indicatorView.SG_width = tempIndicatorWidth;
+                        self.indicatorView.SG_width = tempIndicatorWidth;
                     }
                 }
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_centerX = originalBtn.SG_centerX;
+                    self.indicatorView.SG_centerX = originalBtn.SG_centerX;
                 }
                 [self P_changeSelectedButton:originalBtn];
             }];
@@ -1070,14 +1070,14 @@
         if (progress == 1.0) {
             [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_centerX = targetBtn.SG_centerX;
+                    self.indicatorView.SG_centerX = targetBtn.SG_centerX;
                 }
                 [self P_changeSelectedButton:targetBtn];
             }];
         } else {
             [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_centerX = originalBtn.SG_centerX;
+                    self.indicatorView.SG_centerX = originalBtn.SG_centerX;
                 }
                 [self P_changeSelectedButton:originalBtn];
             }];
@@ -1092,15 +1092,15 @@
         [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
             if (tempIndicatorWidth >= targetBtn.SG_width) {
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_width = targetBtn.SG_width;
+                    self.indicatorView.SG_width = targetBtn.SG_width;
                 }
             } else {
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_width = tempIndicatorWidth;
+                    self.indicatorView.SG_width = tempIndicatorWidth;
                 }
             }
             if (self.configure.showIndicator) {
-                _indicatorView.SG_centerX = targetBtn.SG_centerX;
+                self.indicatorView.SG_centerX = targetBtn.SG_centerX;
             }
             [self P_changeSelectedButton:targetBtn];
         }];
@@ -1111,15 +1111,15 @@
         [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
             if (tempIndicatorWidth >= originalBtn.SG_width) {
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_width = originalBtn.SG_width;
+                    self.indicatorView.SG_width = originalBtn.SG_width;
                 }
             } else {
                 if (self.configure.showIndicator) {
-                    _indicatorView.SG_width = tempIndicatorWidth;
+                    self.indicatorView.SG_width = tempIndicatorWidth;
                 }
             }
             if (self.configure.showIndicator) {
-                _indicatorView.SG_centerX = originalBtn.SG_centerX;
+                self.indicatorView.SG_centerX = originalBtn.SG_centerX;
             }
             [self P_changeSelectedButton:originalBtn];
         }];
