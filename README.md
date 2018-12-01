@@ -45,7 +45,7 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 
 
 ## Installation
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.5.5'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.5.6'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -151,6 +151,8 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 * 2018-09-01 ：v1.5.3 SGPageTitleView 内部代码优化以及新增 SGPagingViewPopGestureVC 用于解决侧滑返回手势
 
 * 2018-09-26 ：v1.5.5 标题文字缩放效果由文字缩放调整为控件缩放
+
+* 2018-12-01 ：v1.5.6 SGPageTitleView 新增重置标题、指示器颜色方法
 
 
 ## Author

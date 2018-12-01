@@ -529,12 +529,12 @@
     }
 }
 
-/** 重置指示器颜色 */
+/** 重置指示器颜色方法 */
 - (void)resetIndicatorColor:(UIColor *)color {
     _indicatorView.backgroundColor = color;
 }
 /**
- *  重置标题普通状态、选中状态下文字颜色及指示器颜色方法
+ *  重置标题普通状态、选中状态下文字颜色方法
  *
  *  @param color       普通状态下标题文字颜色
  *  @param selectedColor       选中状态下标题文字颜色
