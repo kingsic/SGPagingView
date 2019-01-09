@@ -2,9 +2,9 @@
 # SGPagingView
 
 
-* `QQ群：429899752`
+* QQ群：429899752
 
-* `[Swift Version](https://github.com/kingsic/SGPagingView-Swift)`
+* [Swift Version](https://github.com/kingsic/SGPagingView-Swift)
 
 
 ## 结构图
@@ -47,7 +47,7 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 
 
 ## Installation
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.5.6'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.6.0'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
