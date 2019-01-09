@@ -62,17 +62,27 @@
     [self addSubview:self.scrollView];
 }
 
+#pragma mark - - - layoutSubviews
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    [self P_layoutSubviews];
+}
+
+- (void)P_layoutSubviews {
+    _scrollView.frame = self.bounds;
+    CGFloat contentWidth = self.childViewControllers.count * _scrollView.SG_width;
+    _scrollView.contentSize = CGSizeMake(contentWidth, 0);
+}
+
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
-        _scrollView.frame = self.bounds;
         _scrollView.bounces = NO;
         _scrollView.delegate = self;
         _scrollView.pagingEnabled = YES;
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
-        CGFloat contentWidth = self.childViewControllers.count * _scrollView.SG_width;
-        _scrollView.contentSize = CGSizeMake(contentWidth, 0);
     }
     return _scrollView;
 }
@@ -248,6 +258,5 @@
 - (void)setIsAnimated:(BOOL)isAnimated {
     _isAnimated = isAnimated;
 }
-
 
 @end

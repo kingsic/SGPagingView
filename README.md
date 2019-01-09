@@ -2,7 +2,9 @@
 # SGPagingView
 
 
-#### [Swift Version](https://github.com/kingsic/SGPagingView-Swift)
+* `QQ群：429899752`
+
+* `[Swift Version](https://github.com/kingsic/SGPagingView-Swift)`
 
 
 ## 结构图
@@ -154,13 +156,7 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 * 2018-12-01 ：v1.5.6 SGPageTitleView 新增重置标题、指示器颜色方法
 
-
-## Author
-
-* Email：kingsic@126.com
-
-* QQ群：(付费群)<br>
-![](https://github.com/kingsic/Kar98k/blob/master/Source/QQGroup_qrcode.png)
+* 2019-01-09 ：v1.6.0 支持 autolayout 创建
 
 
 ## License

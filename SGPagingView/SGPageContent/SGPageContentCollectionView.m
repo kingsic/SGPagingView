@@ -14,6 +14,8 @@
 @property (nonatomic, weak) UIViewController *parentViewController;
 /// 存储子控制器
 @property (nonatomic, strong) NSArray *childViewControllers;
+/// flowLayout
+@property (nonatomic, weak) UICollectionViewFlowLayout *flowLayout;
 /// collectionView
 @property (nonatomic, strong) UICollectionView *collectionView;
 /// 记录刚开始时的偏移量
@@ -62,18 +64,27 @@ static NSString *const cellID = @"cellID";
     [self addSubview:self.collectionView];
 }
 
+#pragma mark - - - layoutSubviews
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    [self P_layoutSubviews];
+}
+
+- (void)P_layoutSubviews {
+    _flowLayout.itemSize = self.frame.size;
+    _collectionView.frame = self.bounds;
+}
+
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = self.bounds.size;
         flowLayout.minimumLineSpacing = 0;
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        CGFloat collectionViewX = 0;
-        CGFloat collectionViewY = 0;
-        CGFloat collectionViewW = self.SG_width;
-        CGFloat collectionViewH = self.SG_height;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(collectionViewX, collectionViewY, collectionViewW, collectionViewH) collectionViewLayout:flowLayout];
+        _flowLayout = flowLayout;
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.pagingEnabled = YES;
@@ -200,6 +211,5 @@ static NSString *const cellID = @"cellID";
 - (void)setIsAnimated:(BOOL)isAnimated {
     _isAnimated = isAnimated;
 }
-
 
 @end
