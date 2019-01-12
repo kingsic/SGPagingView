@@ -6,6 +6,8 @@
 
 * [Swift Version](https://github.com/kingsic/SGPagingView-Swift)
 
+* [SGRichView](https://github.com/kingsic/SGRichView) 是 SGPageTitleView 的衍生视图
+
 
 ## 结构图
 ![](https://github.com/kingsic/Kar98k/blob/master/SGPagingView/SGPagingView.png)
