@@ -60,7 +60,10 @@
     /// pageContentScrollView
     self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) parentVC:self childVCs:childArr];
     _pageContentScrollView.delegatePageContentScrollView = self;
-    [self.view insertSubview:_pageContentScrollView atIndex:0];
+    [self.view addSubview:_pageContentScrollView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.view insertSubview:self.pageContentScrollView atIndex:0];
+    });
 }
 
 - (void)pageTitleView:(SGPageTitleView *)pageTitleView selectedIndex:(NSInteger)selectedIndex {

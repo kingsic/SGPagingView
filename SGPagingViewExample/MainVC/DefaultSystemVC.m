@@ -40,7 +40,7 @@
     }
     CGFloat pageTitleViewW = self.view.frame.size.width * 4 / 5;
     CGFloat pageTitleViewX = 0.5 * (self.view.frame.size.width - pageTitleViewW);
-    NSArray *titleArr = @[@"新建", @"QQGroup", @"429899752"];
+    NSArray *titleArr = @[@"新建", @"电影", @"电视剧"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configure.titleSelectedColor = [UIColor whiteColor];
     configure.titleFont = [UIFont systemFontOfSize:12];

@@ -42,7 +42,7 @@
         pageTitleViewY = 88;
     }
     
-    NSArray *titleArr = @[@"精选", @"请等待2s", @"QQGroup", @"429899752"];
+    NSArray *titleArr = @[@"精选", @"请等待2s", @"电视剧", @"综艺"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configure.titleFont = [UIFont systemFontOfSize:12];
     configure.indicatorHeight = 5;

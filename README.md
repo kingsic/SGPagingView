@@ -6,8 +6,6 @@
 
 * [Swift Version](https://github.com/kingsic/SGPagingView-Swift)
 
-* [SGRichView](https://github.com/kingsic/SGRichView) 是 SGPageTitleView 的衍生视图
-
 
 ## 结构图
 ![](https://github.com/kingsic/Kar98k/blob/master/SGPagingView/SGPagingView.png)
@@ -128,6 +126,19 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 #### 3、issues [关于返回手势](https://github.com/kingsic/SGPagingView/issues/25) 已有开发者提供了解决方案，仅供参看
 ***
+
+
+### 四、只有 PageContent 为 SGPageContentScrollView 且 selectedIndex != 0 与 insertSubview 方法同时出现时造成程序崩溃
+* 第一种解决方案：更换 SGPageContentScrollView 为 SGPageContentCollectionView 即可
+* 第一种解决方案：默认子控制器为0，即 selectedIndex 不设置
+* 第三种解决方案：代码如下处理
+```
+    [self.view addSubview:_pageContentScrollView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.view insertSubview:self.pageContentScrollView atIndex:0];
+    });
+```
+* 如不需要 autolayout 创建，导入 v1.5.6（无需考虑上述问题）
 
 
 ## 版本介绍

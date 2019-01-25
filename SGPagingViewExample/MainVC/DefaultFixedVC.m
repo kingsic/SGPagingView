@@ -42,7 +42,7 @@
         pageTitleViewY = 88;
     }
     
-    NSArray *titleArr = @[@"精选", @"新建", @"QQGroup", @"429899752"];
+    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configure.indicatorStyle = SGIndicatorStyleFixed;
 //    configure.indicatorScrollStyle = SGIndicatorScrollStyleHalf;
