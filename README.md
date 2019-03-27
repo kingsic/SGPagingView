@@ -86,13 +86,16 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 * 若在使用 CocoaPods 安装 SGPagingView 时，出现 [!] Unable to find a specification for SGPagingView 提示时，打开终端先输入 pod repo remove master；执行完毕后再输入 pod setup 即可 (可能会等待一段时间)
 ***
 
-### 二、关于父子控制器的说明（SGPageContentScrollView 与 SGPageContentCollectionView）
+### 二、标题文字缩放属性与指示器关系
+* 标题文字缩放属性与指示器下划线、遮盖样式不兼容，但固定及动态样式兼容
+
+### 三、关于父子控制器的说明（SGPageContentScrollView 与 SGPageContentCollectionView）
 ###### 参考链接
 * [添加子视图控制器时，子视图控制器的 viewWillAppear 方法不调用](https://blog.csdn.net/u012907783/article/details/78972227)
 * [addChildViewController 与 viewWillAppear、viewDidAppear 关系说明](https://blog.csdn.net/zhaoxy_thu/article/details/50826190)
 ***
 
-### 三、关于侧滑返回手势（请参考 DefaultVCPopGesture 类以及点击子控制器对下一界面所做的处理）
+### 四、关于侧滑返回手势（请参考 DefaultVCPopGesture 类以及点击子控制器对下一界面所做的处理）
 #### 1、如果是系统默认返回 item ；只需实现 SGPageContentScrollView 的 pageContentScrollView:offsetX:代理方法或 SGPageContentCollectionView 的 pageContentCollectionView:offsetX:代理方法，并在此方法实现以下代码即可，如：
 ```
 - (void)pageContentScrollView:(SGPageContentScrollView *)pageContentScrollView index:(NSInteger)index {
@@ -127,8 +130,7 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 #### 3、issues [关于返回手势](https://github.com/kingsic/SGPagingView/issues/25) 已有开发者提供了解决方案，仅供参看
 ***
 
-
-### 四、只有 PageContent 为 SGPageContentScrollView 且 selectedIndex != 0 与 insertSubview 方法同时出现时造成程序崩溃
+### 五、只有 PageContent 为 SGPageContentScrollView 且 selectedIndex != 0 与 insertSubview 方法同时出现时造成程序崩溃
 * 第一种解决方案：更换 SGPageContentScrollView 为 SGPageContentCollectionView 即可
 * 第一种解决方案：默认子控制器为0，即 selectedIndex 不设置
 * 第三种解决方案：代码如下处理
@@ -151,13 +153,7 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 * 2017-10-17 ：v1.3.0 版本升级（新增 SGPageTitleViewConfigure 类并提供更多属性设置以及支持指示器遮盖样式）
 
-* 2018-05-08 ：v1.3.7 修复 v1.3.6 选中标题重复点击恢复默认状态以及 SGPageTitleViewConfigure 新增配置属性
-
-* 2018-05-09 ：v1.4.0 版本升级（SGPageTitleView.h 中的部分属性调整到 SGPageTitleViewConfigure.h）
-
-* 2018-06-01 ：v1.4.2 新增标题间分割线属性、根据下标设置标题的 attributedTitle 方法以及设置标题图片位置样式方法
-
-* 2018-07-01 ：v1.4.3 优化标题首次点击居中问题以及修复标题文字缩放切换到后台再返回时存在的标题字号问题
+* 2018-05-08 ：v1.3.7 修复 1.3.6 版本选中标题重复点击恢复默认状态以及 SGPageTitleViewConfigure 新增配置属性
 
 * 2018-07-09 ：v1.5.0 版本升级（具体相关信息请查看 [releases](https://github.com/kingsic/SGPagingView/releases) 中版本介绍）
 
@@ -170,6 +166,8 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 * 2018-12-01 ：v1.5.6 SGPageTitleView 新增重置标题、指示器颜色方法
 
 * 2019-01-09 ：v1.6.0 支持 autolayout 创建
+
+* 2019-03-27 ：v1.6.1 修复 1.6.0 版本 addBadgeForIndex 方法内 badge 布局问题
 
 
 ## License

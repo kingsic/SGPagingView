@@ -514,25 +514,31 @@
 
 /** 根据下标值添加 badge */
 - (void)addBadgeForIndex:(NSInteger)index {
-    UIButton *btn = self.btnMArr[index];
-    UIView *badge = [[UIView alloc] init];
-    CGFloat btnTextWidth = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].width;
-    CGFloat btnTextHeight = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].height;
-    CGFloat badgeX = 0.5 * (btn.SG_width - btnTextWidth) + btnTextWidth + self.configure.badgeOff.x;
-    CGFloat badgeY = 0.5 * (btn.SG_height - btnTextHeight) + self.configure.badgeOff.y - self.configure.badgeSize;
-    CGFloat badgeWidth = self.configure.badgeSize;
-    CGFloat badgeHeight = badgeWidth;
-    badge.frame = CGRectMake(badgeX, badgeY, badgeWidth, badgeHeight);
-    badge.layer.backgroundColor = self.configure.badgeColor.CGColor;
-    badge.layer.cornerRadius = 0.5 * self.configure.badgeSize;
-    badge.tag = 2018 + index;
-    [btn addSubview:badge];
+    /// 这里使用GCD延迟函数的目的：是将 addBadgeForIndex 方法内部的 badge 布局在 layoutSubviews 之后调用，这里的 badge 是添加在标题（按钮），badge 的布局也可在 layoutSubviews 中在标题（按钮）布局之后布局。这里采取了GCD延迟函数
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UIButton *btn = self.btnMArr[index];
+        UIView *badge = [[UIView alloc] init];
+        CGFloat btnTextWidth = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].width;
+        CGFloat btnTextHeight = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].height;
+        CGFloat badgeX = 0.5 * (btn.SG_width - btnTextWidth) + btnTextWidth + self.configure.badgeOff.x;
+        CGFloat badgeY = 0.5 * (btn.SG_height - btnTextHeight) + self.configure.badgeOff.y - self.configure.badgeSize;
+        CGFloat badgeWidth = self.configure.badgeSize;
+        CGFloat badgeHeight = badgeWidth;
+        badge.frame = CGRectMake(badgeX, badgeY, badgeWidth, badgeHeight);
+        badge.layer.backgroundColor = self.configure.badgeColor.CGColor;
+        badge.layer.cornerRadius = 0.5 * self.configure.badgeSize;
+//        badge.tag = 2018 + index;
+        [btn addSubview:badge];
+    });
 }
 /** 根据下标值移除 badge */
 - (void)removeBadgeForIndex:(NSInteger)index {
     UIButton *btn = self.btnMArr[index];
     [btn.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.tag != 0) {
+//        if (obj.tag != 0) {
+        /// 之前使用 tag 进行 btn 内部子视图区分（UIImageView、UIButtonLabel的 tag 值都是 0）
+        /// isMemberOfClass 这个方法明确某个类
+        if ([obj isMemberOfClass:[UIView class]]) {
             [obj removeFromSuperview];
             obj = nil;
         }
@@ -872,7 +878,7 @@
     
     /// 处理指示器下划线、遮盖样式
     if (self.configure.titleTextZoom && self.configure.showIndicator) {
-        NSLog(@"标题文字缩放属性与指示器下划线、遮盖样式下不兼容，但固定及动态样式下兼容");
+//        NSLog(@"标题文字缩放属性与指示器下划线、遮盖样式下不兼容，但固定及动态样式下兼容");
         return;
     }
 
