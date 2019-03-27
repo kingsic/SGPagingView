@@ -88,6 +88,7 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 
 ### 二、标题文字缩放属性与指示器关系
 * 标题文字缩放属性与指示器下划线、遮盖样式不兼容，但固定及动态样式兼容
+***
 
 ### 三、关于父子控制器的说明（SGPageContentScrollView 与 SGPageContentCollectionView）
 ###### 参考链接
