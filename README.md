@@ -2,9 +2,13 @@
 # SGPagingView
 
 
+* [Swift Version](https://github.com/kingsic/SGPagingView-Swift)
+
 * QQ群：429899752
 
-* [Swift Version](https://github.com/kingsic/SGPagingView-Swift)
+* 1.6.0 开始支持 autolayout 创建
+
+* [SGTagsView 是本框架中的 SGPageTitleView 的衍生视图](https://github.com/kingsic/SGRichView.git)
 
 
 ## 结构图
