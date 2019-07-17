@@ -4,11 +4,11 @@
 
 * [Swift Version](https://github.com/kingsic/SGPagingView-Swift)
 
-* QQ群：429899752
+* QQ群：825339547
 
 * 1.6.0 开始支持 autolayout 创建
 
-* [SGTagsView 是本框架中的 SGPageTitleView 的衍生视图](https://github.com/kingsic/SGRichView.git)
+* [SGTagsView 设计来源于本框架中的 SGPageTitleView](https://github.com/kingsic/SGCrayfish)
 
 
 ## 结构图
@@ -51,12 +51,12 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 
 
 ## Installation
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.6.0'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.6.2'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
 ## 代码介绍
-#### SGPagingView 的使用（详细使用, 请参考 Demo）
+#### SGPagingView 的使用（详细使用，请参考 API 及 Demo）
 ``` 
     /// pageTitleViewConfigure
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
@@ -173,6 +173,8 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 * 2019-01-09 ：v1.6.0 支持 autolayout 创建
 
 * 2019-03-27 ：v1.6.1 修复 1.6.0 版本 addBadgeForIndex 方法内 badge 布局问题
+
+* 2019-07-17 ：v1.6.2 滚动样式下 titleTextZoom 属性支持指示器下划线以及遮盖样式下的滚动
 
 
 ## License

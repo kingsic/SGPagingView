@@ -29,12 +29,12 @@ typedef enum : NSUInteger {
 } SGIndicatorScrollStyle;
 
 @interface SGPageTitleViewConfigure : NSObject
-/** 类方法创建 */
+/** 类方法创建 SGPageTitleViewConfigure */
 + (instancetype)pageTitleViewConfigure;
 
 #pragma mark - - SGPageTitleView 属性
 /** SGPageTitleView 是否需要弹性效果，默认为 YES */
-@property (nonatomic, assign) BOOL needBounces;
+@property (nonatomic, assign) BOOL bounces;
 /** 是否显示底部分割线，默认为 YES */
 @property (nonatomic, assign) BOOL showBottomSeparator;
 /* SGPageTitleView 底部分割线颜色，默认为 lightGrayColor */
@@ -52,9 +52,11 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIColor *titleSelectedColor;
 /** 是否让标题文字具有渐变效果，默认为 NO */
 @property (nonatomic, assign) BOOL titleGradientEffect;
-/** 是否让标题文字具有缩放效果，默认为 NO */
+/** 是否让标题文字具有缩放效果，默认为 NO。
+  * 为 YES 时，请与 titleTextZoomRatio 结合使用，否则不起任何作用 */
 @property (nonatomic, assign) BOOL titleTextZoom;
-/** 标题文字缩放比，默认为 0.1f，取值范围 0.0 ～ 1.0f */
+/** 标题文字缩放比，默认为 0.0f，取值范围 0.0 ～ 1.0f。
+  * 请与 titleTextZoom = YES 时结合使用，否则不起任何作用 */
 @property (nonatomic, assign) CGFloat titleTextZoomRatio;
 /** 标题额外增加的宽度，默认为 20.0f */
 @property (nonatomic, assign) CGFloat titleAdditionalWidth;
@@ -70,7 +72,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat indicatorAnimationTime;
 /** 指示器样式，默认为 SGIndicatorStyleDefault */
 @property (nonatomic, assign) SGIndicatorStyle indicatorStyle;
-/** 指示器圆角大小，默认为 0f */
+/** 指示器圆角大小，默认为 0.0f */
 @property (nonatomic, assign) CGFloat indicatorCornerRadius;
 /** 指示器遮盖样式外的其他样式下指示器与底部之间的距离，默认为 0f */
 @property (nonatomic, assign) CGFloat indicatorToBottomDistance;

@@ -263,7 +263,7 @@
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.alwaysBounceHorizontal = YES;
-        if (_configure.needBounces == NO) {
+        if (_configure.bounces == NO) {
             _scrollView.bounces = NO;
         }
     }
@@ -452,14 +452,40 @@
             return;
         }
         
-        CGSize tempSize = [self P_sizeWithString:button.currentTitle font:self.configure.titleFont];
-        CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
-        if (tempIndicatorWidth > button.SG_width) {
-            tempIndicatorWidth = button.SG_width;
-        }
-        if (self.configure.showIndicator) {
-            self.indicatorView.SG_width = tempIndicatorWidth;
-            self.indicatorView.SG_centerX = button.SG_centerX;
+        UIFont *configureTitleSelectedFont = self.configure.titleSelectedFont;
+        UIFont *defaultTitleFont = [UIFont systemFontOfSize:15];
+        if ([configureTitleSelectedFont.fontName isEqualToString:defaultTitleFont.fontName] && configureTitleSelectedFont.pointSize == defaultTitleFont.pointSize) {
+            if (self.configure.titleTextZoom) {
+                CGSize tempSize = [self P_sizeWithString:button.currentTitle font:self.configure.titleFont];
+                CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width + tempSize.width * self.configure.titleTextZoomRatio;
+                if (tempIndicatorWidth > button.SG_width) {
+                    tempIndicatorWidth = button.SG_width;
+                }
+                if (self.configure.showIndicator) {
+                    self.indicatorView.SG_width = tempIndicatorWidth;
+                    self.indicatorView.SG_centerX = button.SG_centerX;
+                }
+            } else {
+                CGSize tempSize = [self P_sizeWithString:button.currentTitle font:self.configure.titleFont];
+                CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
+                if (tempIndicatorWidth > button.SG_width) {
+                    tempIndicatorWidth = button.SG_width;
+                }
+                if (self.configure.showIndicator) {
+                    self.indicatorView.SG_width = tempIndicatorWidth;
+                    self.indicatorView.SG_centerX = button.SG_centerX;
+                }
+            }
+        } else {
+            CGSize tempSize = [self P_sizeWithString:button.currentTitle font:self.configure.titleFont];
+            CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
+            if (tempIndicatorWidth > button.SG_width) {
+                tempIndicatorWidth = button.SG_width;
+            }
+            if (self.configure.showIndicator) {
+                self.indicatorView.SG_width = tempIndicatorWidth;
+                self.indicatorView.SG_centerX = button.SG_centerX;
+            }
         }
     }];
 }
@@ -876,11 +902,11 @@
         return;
     }
     
-    /// 处理指示器下划线、遮盖样式
-    if (self.configure.titleTextZoom && self.configure.showIndicator) {
-//        NSLog(@"标题文字缩放属性与指示器下划线、遮盖样式下不兼容，但固定及动态样式下兼容");
-        return;
-    }
+    /// 处理指示器下划线、遮盖样式（1.6.2 版本起已支持）
+//    if (self.configure.titleTextZoom && self.configure.showIndicator) {
+//        NSLog(@"【SGPageTitleView 滚动样式下】标题文字缩放属性与指示器下划线、遮盖样式下不兼容，但固定及动态样式下兼容");
+//        return;
+//    }
 
     // 1、计算 targetBtn 与 originalBtn 之间的 x 差值
     CGFloat totalOffsetX = targetBtn.SG_x - originalBtn.SG_x;
