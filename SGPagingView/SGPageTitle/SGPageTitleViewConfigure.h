@@ -53,10 +53,10 @@ typedef enum : NSUInteger {
 /** 是否让标题文字具有渐变效果，默认为 NO */
 @property (nonatomic, assign) BOOL titleGradientEffect;
 /** 是否让标题文字具有缩放效果，默认为 NO。
-  * 为 YES 时，请与 titleTextZoomRatio 结合使用，否则不起任何作用 */
+  * 为 YES 时，请与 titleTextZoomRatio 结合使用，否则不起作用 */
 @property (nonatomic, assign) BOOL titleTextZoom;
 /** 标题文字缩放比，默认为 0.0f，取值范围 0.0 ～ 1.0f。
-  * 请与 titleTextZoom = YES 时结合使用，否则不起任何作用 */
+  * 请与 titleTextZoom = YES 时结合使用，否则不起作用 */
 @property (nonatomic, assign) CGFloat titleTextZoomRatio;
 /** 标题额外增加的宽度，默认为 20.0f */
 @property (nonatomic, assign) CGFloat titleAdditionalWidth;

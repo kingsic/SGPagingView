@@ -51,7 +51,7 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 
 
 ## Installation
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.6.2'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.6.3'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -174,7 +174,7 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 * 2019-03-27 ：v1.6.1 修复 1.6.0 版本 addBadgeForIndex 方法内 badge 布局问题
 
-* 2019-07-17 ：v1.6.2 滚动样式下 titleTextZoom 属性支持指示器下划线以及遮盖样式下的滚动
+* 2019-07-17 ：v1.6.3 修复设置图片样式下图片布局问题以及对内部代码的优化处理
 
 
 ## License
