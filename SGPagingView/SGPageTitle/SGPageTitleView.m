@@ -382,8 +382,30 @@
                 UIButton *btn = obj;
                 btn.transform = CGAffineTransformIdentity;
             }];
+            
+            // 1.记录按钮缩放前的宽度
+            CGFloat zoomFrontBtnWidth = button.SG_width;
+            
+            /// 处理按钮缩放
             CGFloat afterZoomRatio = 1 + self.configure.titleTextZoomRatio;
             button.transform = CGAffineTransformMakeScale(afterZoomRatio, afterZoomRatio);
+            
+            // 2.记录按钮缩放后的宽度
+            CGFloat zoomAfterBtnWidth = button.SG_width;
+            // 缩放后与缩放前之间的差值
+            CGFloat diffForntAfter = zoomAfterBtnWidth - zoomFrontBtnWidth;
+            
+            /// 处理指示器
+            if (self.configure.indicatorAdditionalWidth >= diffForntAfter) {
+                self.configure.indicatorAdditionalWidth = diffForntAfter;
+            }
+            CGSize tempSize = [self P_sizeWithString:button.currentTitle font:self.configure.titleFont];
+            CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width + self.configure.titleTextZoomRatio * tempSize.width;
+            if (tempIndicatorWidth > button.SG_width) {
+                tempIndicatorWidth = button.SG_width -  self.configure.titleTextZoomRatio * tempSize.width;
+            }
+            self.indicatorView.SG_width = tempIndicatorWidth;
+            self.indicatorView.SG_centerX = button.SG_centerX;
         }
         
         // 此处作用：避免滚动过程中点击标题手指不离开屏幕的前提下再次滚动造成的误差（由于文字渐变效果导致未选中标题的不准确处理）
@@ -441,13 +463,16 @@
             return;
         }
 
-        CGSize tempSize = [self P_sizeWithString:button.currentTitle font:self.configure.titleFont];
-        CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
-        if (tempIndicatorWidth > button.SG_width) {
-            tempIndicatorWidth = button.SG_width;
+        if (self.configure.titleTextZoom == NO) {
+            CGSize tempSize = [self P_sizeWithString:button.currentTitle font:self.configure.titleFont];
+            CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
+            if (tempIndicatorWidth > button.SG_width) {
+                tempIndicatorWidth = button.SG_width;
+            }
+            self.indicatorView.SG_width = tempIndicatorWidth;
+            self.indicatorView.SG_centerX = button.SG_centerX;
         }
-        self.indicatorView.SG_width = tempIndicatorWidth;
-        self.indicatorView.SG_centerX = button.SG_centerX;
+
     }];
 }
 
@@ -845,9 +870,29 @@
     }
     
     
-    /// 处理指示器下划线、遮盖样式
+    /// 处理指示器下划线、遮盖样式 (1.6.5 版本起标题文字缩放属性与指示器下划线、遮盖样式已兼容)
     if (self.configure.titleTextZoom && self.configure.showIndicator) {
-        NSLog(@"温馨提示：[SGPageTitleView 滚动样式下] 标题文字缩放属性与指示器下划线及遮盖样式不兼容，但固定及动态样式兼容");
+//        NSLog(@"温馨提示：[SGPageTitleView 滚动样式下] 标题文字缩放属性与指示器下划线及遮盖样式不兼容，但固定及动态样式兼容");
+        CGFloat originalBtnTextWidth = [self P_sizeWithString:originalBtn.currentTitle font:self.configure.titleFont].width;
+        CGFloat targetBtnTextWidth = [self P_sizeWithString:targetBtn.currentTitle font:self.configure.titleFont].width;
+        // 文字距离差
+        CGFloat diffText = targetBtnTextWidth - originalBtnTextWidth;
+        // 中心点距离差
+        CGFloat distanceCenter = targetBtn.SG_centerX - originalBtn.SG_centerX;
+        CGFloat offsetCX = 0.0;
+        
+        CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + targetBtnTextWidth + self.configure.titleTextZoomRatio * targetBtnTextWidth;
+        if (tempIndicatorWidth >= targetBtn.SG_width) {
+            offsetCX = distanceCenter * progress;
+            _indicatorView.SG_centerX = originalBtn.SG_centerX + offsetCX;
+            CGFloat tempIndicatorW = originalBtnTextWidth + diffText * progress;
+            _indicatorView.SG_width = targetBtn.SG_width - self.configure.titleTextZoomRatio * tempIndicatorW;
+        } else {
+            offsetCX = distanceCenter * progress;
+            _indicatorView.SG_centerX = originalBtn.SG_centerX + offsetCX;
+            CGFloat tempIndicatorW = originalBtnTextWidth + diffText * progress;
+            _indicatorView.SG_width = tempIndicatorW + self.configure.titleTextZoomRatio * tempIndicatorW + self.configure.indicatorAdditionalWidth;
+        }
         return;
     }
 
