@@ -33,11 +33,13 @@ typedef enum : NSUInteger {
 + (instancetype)pageTitleViewConfigure;
 
 #pragma mark - - SGPageTitleView 属性
-/** SGPageTitleView 是否需要弹性效果，默认为 YES */
+/** SGPageTitleView 是否需要弹性效果，默认为 NO */
 @property (nonatomic, assign) BOOL bounces;
-/** 是否显示底部分割线，默认为 YES */
+/** SGPageTitleView 静止样式下标题是否均分布局，默认为 YES */
+@property (nonatomic, assign) BOOL equivalence;
+/** SGPageTitleView 是否显示底部分割线，默认为 YES */
 @property (nonatomic, assign) BOOL showBottomSeparator;
-/* SGPageTitleView 底部分割线颜色，默认为 lightGrayColor */
+/** SGPageTitleView 底部分割线颜色，默认为 lightGrayColor */
 @property (nonatomic, strong) UIColor *bottomSeparatorColor;
 
 #pragma mark - - 标题属性

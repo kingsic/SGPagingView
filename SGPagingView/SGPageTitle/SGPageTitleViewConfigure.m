@@ -20,6 +20,7 @@
 - (void)initialization {
     _showBottomSeparator = YES;
     _showIndicator = YES;
+    _equivalence = YES;
 }
 
 + (instancetype)pageTitleViewConfigure {

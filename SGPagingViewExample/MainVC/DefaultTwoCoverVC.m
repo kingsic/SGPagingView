@@ -46,9 +46,11 @@
     configure.indicatorBorderColor = [UIColor lightGrayColor];
     configure.indicatorCornerRadius = 20;
     configure.indicatorHeight = 25;
+    configure.equivalence = NO;
+    configure.titleAdditionalWidth = 50;
     
     /// pageTitleView
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width / 2, 44) delegate:self titleNames:titleArr configure:configure];
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];

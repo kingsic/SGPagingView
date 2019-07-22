@@ -61,6 +61,19 @@
 }
 
 - (void)setupPageView {
+    NSArray *titleArr = @[@"精选", @"电影"];
+    SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
+    configure.indicatorStyle = SGIndicatorStyleCover;
+    configure.indicatorCornerRadius = 15;
+    configure.indicatorHeight = 30;
+    configure.indicatorAdditionalWidth = 120;
+    configure.titleSelectedColor = [UIColor whiteColor];
+    /// pageTitleView
+    SGPageTitleView *pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, 0, 150, 30) delegate:self titleNames:titleArr configure:configure];
+    pageTitleView.layer.cornerRadius = 15;
+    pageTitleView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
+    self.navigationItem.titleView = pageTitleView;
+    
     NSArray *titleArrS = @[@"精选", @"电影", @"OC", @"Swift"];
     SGPageTitleViewConfigure *configureS = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configureS.indicatorAdditionalWidth = 20;

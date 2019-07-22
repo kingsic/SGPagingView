@@ -111,7 +111,6 @@
     
     // 布局子控制器的 frame
     [self P_layoutSubviews];
-    
     // 选中按钮下标初始值
     [self P_btn_action:self.btnMArr[_selectedIndex]];
 }
@@ -124,69 +123,41 @@
     // 2、布局标题按钮的 frame
     NSInteger titleCount = self.titleArr.count;
     if (self.allBtnWidth <= self.bounds.size.width) { // SGPageTitleView 静止样式
-        CGFloat btnY = 0;
-        CGFloat btnW = self.frame.size.width / titleCount;
-        CGFloat btnH = 0;
-        if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
-            btnH = selfHeight - self.configure.indicatorHeight;
-        } else {
-            btnH = selfHeight;
-        }
-        [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            CGFloat btnX = btnW * idx;
-            UIButton *btn = obj;
-            btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
-        }];
-        self.scrollView.contentSize = CGSizeMake(self.frame.size.width, selfHeight);
-        // 2.2、布局标题间分割线的 frame
-        if (self.configure.showVerticalSeparator) {
-            CGFloat VSeparatorW = 1;
-            CGFloat VSeparatorH = selfHeight - self.configure.verticalSeparatorReduceHeight;
-            if (VSeparatorH <= 0) {
-                VSeparatorH = selfHeight;
+        if (self.configure.equivalence) {
+            CGFloat btnY = 0;
+            CGFloat btnW = self.frame.size.width / titleCount;
+            CGFloat btnH = 0;
+            if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
+                btnH = selfHeight - self.configure.indicatorHeight;
+            } else {
+                btnH = selfHeight;
             }
-            CGFloat VSeparatorY = 0.5 * (selfHeight - VSeparatorH);
-            [self.VSeparatorMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                CGFloat VSeparatorX = btnW * (idx + 1) - 0.5 * VSeparatorW;
-                UIView *VSeparator = obj;
-                VSeparator.frame = CGRectMake(VSeparatorX, VSeparatorY, VSeparatorW, VSeparatorH);
+            [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                CGFloat btnX = btnW * idx;
+                UIButton *btn = obj;
+                btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
             }];
+            self.scrollView.contentSize = CGSizeMake(self.frame.size.width, selfHeight);
+            // 2.2、布局标题间分割线的 frame
+            if (self.configure.showVerticalSeparator) {
+                CGFloat VSeparatorW = 1;
+                CGFloat VSeparatorH = selfHeight - self.configure.verticalSeparatorReduceHeight;
+                if (VSeparatorH <= 0) {
+                    VSeparatorH = selfHeight;
+                }
+                CGFloat VSeparatorY = 0.5 * (selfHeight - VSeparatorH);
+                [self.VSeparatorMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    CGFloat VSeparatorX = btnW * (idx + 1) - 0.5 * VSeparatorW;
+                    UIView *VSeparator = obj;
+                    VSeparator.frame = CGRectMake(VSeparatorX, VSeparatorY, VSeparatorW, VSeparatorH);
+                }];
+            }
+            
+        } else {
+            [self P_fromLeftToRightLayoutTitle];
         }
-        
     } else { // SGPageTitleView 滚动样式
-        __block CGFloat btnX = 0;
-        CGFloat btnY = 0;
-        CGFloat btnH = 0;
-        if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
-            btnH = selfHeight - self.configure.indicatorHeight;
-        } else {
-            btnH = selfHeight;
-        }
-        [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            CGSize tempSize = [self P_sizeWithString:self.titleArr[idx] font:self.configure.titleFont];
-            CGFloat btnW = tempSize.width + self.configure.titleAdditionalWidth;
-            UIButton *btn = obj;
-            btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
-            btnX = btnX + btnW;
-        }];
-        UIButton *lastBtn = self.btnMArr.lastObject;
-        CGFloat scrollViewWidth = CGRectGetMaxX(lastBtn.frame);
-        self.scrollView.contentSize = CGSizeMake(scrollViewWidth, selfHeight);
-        // 2.2、布局标题间分割线的 frame
-        if (self.configure.showVerticalSeparator) {
-            CGFloat VSeparatorW = 1;
-            CGFloat VSeparatorH = selfHeight - self.configure.verticalSeparatorReduceHeight;
-            if (VSeparatorH <= 0) {
-                VSeparatorH = selfHeight;
-            }
-            CGFloat VSeparatorY = 0.5 * (selfHeight - VSeparatorH);
-            [self.VSeparatorMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                UIButton *btn = self.btnMArr[idx];
-                CGFloat VSeparatorX = CGRectGetMaxX(btn.frame) - 0.5 * VSeparatorW;
-                UIView *VSeparator = obj;
-                VSeparator.frame = CGRectMake(VSeparatorX, VSeparatorY, VSeparatorW, VSeparatorH);
-            }];
-        }
+        [self P_fromLeftToRightLayoutTitle];
     }
     // 3、布局底部分割线的 frame
     if (self.configure.showBottomSeparator) {
@@ -224,11 +195,42 @@
         }
     }
 }
+- (void)P_fromLeftToRightLayoutTitle {
+    CGFloat selfHeight = self.frame.size.height;
 
-#pragma mark - - - 计算字符串尺寸
-- (CGSize)P_sizeWithString:(NSString *)string font:(UIFont *)font {
-    NSDictionary *attrs = @{NSFontAttributeName : font};
-    return [string boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+    __block CGFloat btnX = 0;
+    CGFloat btnY = 0;
+    CGFloat btnH = 0;
+    if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
+        btnH = selfHeight - self.configure.indicatorHeight;
+    } else {
+        btnH = selfHeight;
+    }
+    [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        CGSize tempSize = [self P_sizeWithString:self.titleArr[idx] font:self.configure.titleFont];
+        CGFloat btnW = tempSize.width + self.configure.titleAdditionalWidth;
+        UIButton *btn = obj;
+        btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
+        btnX = btnX + btnW;
+    }];
+    UIButton *lastBtn = self.btnMArr.lastObject;
+    CGFloat scrollViewWidth = CGRectGetMaxX(lastBtn.frame);
+    self.scrollView.contentSize = CGSizeMake(scrollViewWidth, selfHeight);
+    // 2.2、布局标题间分割线的 frame
+    if (self.configure.showVerticalSeparator) {
+        CGFloat VSeparatorW = 1;
+        CGFloat VSeparatorH = selfHeight - self.configure.verticalSeparatorReduceHeight;
+        if (VSeparatorH <= 0) {
+            VSeparatorH = selfHeight;
+        }
+        CGFloat VSeparatorY = 0.5 * (selfHeight - VSeparatorH);
+        [self.VSeparatorMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            UIButton *btn = self.btnMArr[idx];
+            CGFloat VSeparatorX = CGRectGetMaxX(btn.frame) - 0.5 * VSeparatorW;
+            UIView *VSeparator = obj;
+            VSeparator.frame = CGRectMake(VSeparatorX, VSeparatorY, VSeparatorW, VSeparatorH);
+        }];
+    }
 }
 
 #pragma mark - - - 懒加载
@@ -295,32 +297,18 @@
     // 所有按钮文字宽度 ＋ 所有按钮额外增加的宽度
     self.allBtnWidth = self.allBtnTextWidth + self.configure.titleAdditionalWidth * titleCount;
     self.allBtnWidth = ceilf(self.allBtnWidth);
-    if (self.allBtnWidth <= self.bounds.size.width) { // SGPageTitleView 静止样式
-        for (NSInteger index = 0; index < titleCount; index++) {
-            SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
-            btn.tag = index;
-            btn.titleLabel.font = self.configure.titleFont;
-            [btn setTitle:self.titleArr[index] forState:(UIControlStateNormal)];
-            [btn setTitleColor:self.configure.titleColor forState:(UIControlStateNormal)];
-            [btn setTitleColor:self.configure.titleSelectedColor forState:(UIControlStateSelected)];
-            [btn addTarget:self action:@selector(P_btn_action:) forControlEvents:(UIControlEventTouchUpInside)];
-            [self.btnMArr addObject:btn];
-            [self.scrollView addSubview:btn];
-        }
-
-    } else { // SGPageTitleView 滚动样式
-        for (NSInteger index = 0; index < titleCount; index++) {
-            // 1、添加按钮
-            SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
-            btn.tag = index;
-            btn.titleLabel.font = self.configure.titleFont;
-            [btn setTitle:self.titleArr[index] forState:(UIControlStateNormal)];
-            [btn setTitleColor:self.configure.titleColor forState:(UIControlStateNormal)];
-            [btn setTitleColor:self.configure.titleSelectedColor forState:(UIControlStateSelected)];
-            [btn addTarget:self action:@selector(P_btn_action:) forControlEvents:(UIControlEventTouchUpInside)];
-            [self.btnMArr addObject:btn];
-            [self.scrollView addSubview:btn];
-        }
+    
+    // 创建标题按钮
+    for (NSInteger index = 0; index < titleCount; index++) {
+        SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
+        btn.tag = index;
+        btn.titleLabel.font = self.configure.titleFont;
+        [btn setTitle:self.titleArr[index] forState:(UIControlStateNormal)];
+        [btn setTitleColor:self.configure.titleColor forState:(UIControlStateNormal)];
+        [btn setTitleColor:self.configure.titleSelectedColor forState:(UIControlStateSelected)];
+        [btn addTarget:self action:@selector(P_btn_action:) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.btnMArr addObject:btn];
+        [self.scrollView addSubview:btn];
     }
     // 标题文字渐变效果下对标题文字默认、选中状态下颜色的记录
     if (self.configure.titleGradientEffect) {
@@ -472,7 +460,6 @@
             self.indicatorView.SG_width = tempIndicatorWidth;
             self.indicatorView.SG_centerX = button.SG_centerX;
         }
-
     }];
 }
 
@@ -492,10 +479,18 @@
     // 3、处理指示器的逻辑
     if (self.configure.showIndicator) {
         if (self.allBtnWidth <= self.bounds.size.width) { /// SGPageTitleView 静止样式
-            if (self.configure.indicatorScrollStyle == SGIndicatorScrollStyleDefault) {
-                [self P_staticIndicatorScrollStyleDefaultWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
+            if (self.configure.equivalence) {
+                if (self.configure.indicatorScrollStyle == SGIndicatorScrollStyleDefault) {
+                    [self P_staticIndicatorScrollStyleDefaultWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
+                } else {
+                    [self P_staticIndicatorScrollStyleHalfEndWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
+                }
             } else {
-                [self P_staticIndicatorScrollStyleHalfEndWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
+                if (self.configure.indicatorScrollStyle == SGIndicatorScrollStyleDefault) {
+                    [self P_indicatorScrollStyleDefaultWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
+                } else {
+                    [self P_indicatorScrollStyleHalfEndWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
+                }
             }
             
         } else { /// SGPageTitleView 可滚动
@@ -1136,6 +1131,12 @@
 - (void)setResetSelectedIndex:(NSInteger)resetSelectedIndex {
     _resetSelectedIndex = resetSelectedIndex;
     [self P_btn_action:self.btnMArr[resetSelectedIndex]];
+}
+
+#pragma mark - - - 计算字符串尺寸
+- (CGSize)P_sizeWithString:(NSString *)string font:(UIFont *)font {
+    NSDictionary *attrs = @{NSFontAttributeName : font};
+    return [string boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
 }
 
 #pragma mark - - - 颜色设置的计算
