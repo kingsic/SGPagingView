@@ -303,6 +303,8 @@
         SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
         btn.tag = index;
         btn.titleLabel.font = self.configure.titleFont;
+        btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        btn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [btn setTitle:self.titleArr[index] forState:(UIControlStateNormal)];
         [btn setTitleColor:self.configure.titleColor forState:(UIControlStateNormal)];
         [btn setTitleColor:self.configure.titleSelectedColor forState:(UIControlStateSelected)];
@@ -365,7 +367,7 @@
     UIFont *defaultTitleFont = [UIFont systemFontOfSize:15];
     if ([configureTitleSelectedFont.fontName isEqualToString:defaultTitleFont.fontName] && configureTitleSelectedFont.pointSize == defaultTitleFont.pointSize) {
         // 标题文字缩放属性(开启 titleSelectedFont 属性将不起作用)
-        if (self.configure.titleTextZoom == YES) {
+        if (self.configure.titleTextZoom) {
             [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *btn = obj;
                 btn.transform = CGAffineTransformIdentity;
@@ -397,7 +399,7 @@
         }
         
         // 此处作用：避免滚动过程中点击标题手指不离开屏幕的前提下再次滚动造成的误差（由于文字渐变效果导致未选中标题的不准确处理）
-        if (self.configure.titleGradientEffect == YES) {
+        if (self.configure.titleGradientEffect) {
             [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *btn = obj;
                 btn.titleLabel.textColor = self.configure.titleColor;
@@ -406,7 +408,7 @@
         }
     } else {
         // 此处作用：避免滚动过程中点击标题手指不离开屏幕的前提下再次滚动造成的误差（由于文字渐变效果导致未选中标题的不准确处理）
-        if (self.configure.titleGradientEffect == YES) {
+        if (self.configure.titleGradientEffect) {
             [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIButton *btn = obj;
                 btn.titleLabel.textColor = self.configure.titleColor;
@@ -502,7 +504,7 @@
         }
     }
     // 4、颜色的渐变(复杂)
-    if (self.configure.titleGradientEffect == YES) {
+    if (self.configure.titleGradientEffect) {
         [self P_isTitleGradientEffectWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
     }
     
@@ -510,7 +512,7 @@
     UIFont *configureTitleSelectedFont = self.configure.titleSelectedFont;
     UIFont *defaultTitleFont = [UIFont systemFontOfSize:15];
     if ([configureTitleSelectedFont.fontName isEqualToString:defaultTitleFont.fontName] && configureTitleSelectedFont.pointSize == defaultTitleFont.pointSize) {
-        if (self.configure.titleTextZoom == YES) {
+        if (self.configure.titleTextZoom) {
             // originalBtn 缩放
             CGFloat originalBtnZoomRatio = (1 - progress) * self.configure.titleTextZoomRatio;
             originalBtn.transform = CGAffineTransformMakeScale(originalBtnZoomRatio + 1, originalBtnZoomRatio + 1);
@@ -593,6 +595,13 @@
         [btn setTitleColor:color forState:(UIControlStateNormal)];
         [btn setTitleColor:selectedColor forState:(UIControlStateSelected)];
     }];
+    
+    if (self.configure.titleGradientEffect) {
+        self.configure.titleColor = color;
+        self.configure.titleSelectedColor = selectedColor;
+        [self setupStartColor:self.configure.titleColor];
+        [self setupEndColor:self.configure.titleSelectedColor];
+    }
 }
 /**
  *  重置标题普通状态、选中状态下文字颜色及指示器颜色方法
@@ -782,7 +791,7 @@
     CGFloat originalBtnMaxX = 0.0;
     /// 这里的缩放是标题按钮缩放，按钮的 frame 会发生变化，开启缩放性后，如果指示器还使用 CGRectGetMaxX 获取按钮的最大 X 值是会比之前的值大，这样会导致指示器的位置相对按钮位置不对应（存在一定的偏移）；所以这里根据按钮下标计算原本的 CGRectGetMaxX 的值，缩放后的不去理会，这样指示器位置会与按钮位置保持一致。
     /// 在缩放属性关闭情况下，下面的计算结果一样的，所以可以省略判断，直接采用第一种计算结果（这个只是做个记录对指示器位置与按钮保持一致的方法）
-    if (self.configure.titleTextZoom == YES) {
+    if (self.configure.titleTextZoom) {
         targetBtnMaxX = (targetBtn.tag + 1) * btnWidth;
         originalBtnMaxX = (originalBtn.tag + 1) * btnWidth;
     } else {

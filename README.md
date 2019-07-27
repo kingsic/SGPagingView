@@ -43,15 +43,17 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 
 * `指示器长度自定义`<br>
 
+* `多种指示器滚动样式`<br>
+
 * `标题文字渐显效果`<br>
 
 * `标题文字缩放效果`<br>
 
-* `多种指示器滚动样式`<br>
+* `标题文字富文本样式`<br>
 
 
 ## Installation
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.6.6'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.6.7'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -179,6 +181,8 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 * 2019-07-20 ：v1.6.5 滚动样式下 titleTextZoom 属性支持指示器下划线及遮盖样式下的滚动
 
 * 2019-07-22 ：v1.6.6 SGPageTitleViewConfigure 新增 equivalence 属性支持静止样式下标题从左到右自动布局
+
+* 2019-07-27 ：v1.6.7 支持标题文字上下行样式以及 titleGradientEffect 属性与 resetTitleColor:titleSelectedColor: 方法的兼容
 
 
 ## License
