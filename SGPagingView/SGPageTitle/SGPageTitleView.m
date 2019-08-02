@@ -152,12 +152,19 @@
                     VSeparator.frame = CGRectMake(VSeparatorX, VSeparatorY, VSeparatorW, VSeparatorH);
                 }];
             }
-            
         } else {
             [self P_fromLeftToRightLayoutTitle];
         }
+        
+        if (_configure.bounce == NO) {
+            _scrollView.bounces = NO;
+        }
+        
     } else { // SGPageTitleView 滚动样式
         [self P_fromLeftToRightLayoutTitle];
+        if (_configure.bounces == NO) {
+            _scrollView.bounces = NO;
+        }
     }
     // 3、布局底部分割线的 frame
     if (self.configure.showBottomSeparator) {
@@ -259,9 +266,6 @@
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.alwaysBounceHorizontal = YES;
-        if (_configure.bounces == NO) {
-            _scrollView.bounces = NO;
-        }
     }
     return _scrollView;
 }

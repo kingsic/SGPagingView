@@ -33,7 +33,9 @@ typedef enum : NSUInteger {
 + (instancetype)pageTitleViewConfigure;
 
 #pragma mark - - SGPageTitleView 属性
-/** SGPageTitleView 是否需要弹性效果，默认为 NO */
+/** SGPageTitleView 标题未超出屏幕时，是否需要弹性效果，默认为 NO */
+@property (nonatomic, assign) BOOL bounce;
+/** SGPageTitleView 标题超出屏幕时，是否需要弹性效果，默认为 YES */
 @property (nonatomic, assign) BOOL bounces;
 /** SGPageTitleView 静止样式下标题是否均分布局，默认为 YES */
 @property (nonatomic, assign) BOOL equivalence;

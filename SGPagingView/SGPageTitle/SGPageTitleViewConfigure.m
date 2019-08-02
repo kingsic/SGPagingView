@@ -21,6 +21,7 @@
     _showBottomSeparator = YES;
     _showIndicator = YES;
     _equivalence = YES;
+    _bounces = YES;
 }
 
 + (instancetype)pageTitleViewConfigure {
