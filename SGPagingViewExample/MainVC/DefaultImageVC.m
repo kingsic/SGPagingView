@@ -37,12 +37,14 @@
         pageTitleViewY = 88;
     }
     
-    NSArray *titleArr = @[@"精选", @"搜索", @"笔记", @"最新版本"];
+    NSArray *titleArr = @[@"精选", @"搜索", @"笔记", @"最新版本", @"精选1", @"搜索1", @"笔记1", @"最新版本1"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configure.titleFont = [UIFont systemFontOfSize:12];
     configure.indicatorStyle = SGIndicatorStyleDefault;
     configure.showVerticalSeparator = YES;
     configure.verticalSeparatorReduceHeight = 24;
+    configure.titleAdditionalWidth = 50;
+    configure.titleViewScrollStyle = SGTitleViewScrollStyleProgressScroll;
     
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 64) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
@@ -50,9 +52,17 @@
     NSArray *images = @[@"SGPagingView_image_calendar_normal",
                         @"SGPagingView_image_search_normal",
                         @"SGPagingView_image_pencil_normal",
+                        @"SGPagingView_image_recovery_normal",
+                        @"SGPagingView_image_calendar_normal",
+                        @"SGPagingView_image_search_normal",
+                        @"SGPagingView_image_pencil_normal",
                         @"SGPagingView_image_recovery_normal"
                         ];
     NSArray *selectedImages = @[@"SGPagingView_image_calendar_selected",
+                                @"SGPagingView_image_search_selected",
+                                @"SGPagingView_image_pencil_selected",
+                                @"SGPagingView_image_recovery_selected",
+                                @"SGPagingView_image_calendar_selected",
                                 @"SGPagingView_image_search_selected",
                                 @"SGPagingView_image_pencil_selected",
                                 @"SGPagingView_image_recovery_selected"
@@ -63,7 +73,11 @@
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
     ChildVCThree *threeVC = [[ChildVCThree alloc] init];
     ChildVCFour *fourVC = [[ChildVCFour alloc] init];
-    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC];
+    ChildVCOne *fiveVC = [[ChildVCOne alloc] init];
+    ChildVCTwo *sixVC = [[ChildVCTwo alloc] init];
+    ChildVCThree *sevenVC = [[ChildVCThree alloc] init];
+    ChildVCFour *eightVC = [[ChildVCFour alloc] init];
+    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC];
     /// pageContentScrollView
     CGFloat contentViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
     self.pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, contentViewHeight) parentVC:self childVCs:childArr];

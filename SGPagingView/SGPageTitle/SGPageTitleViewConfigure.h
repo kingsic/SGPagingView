@@ -28,6 +28,12 @@ typedef enum : NSUInteger {
     SGIndicatorScrollStyleEnd
 } SGIndicatorScrollStyle;
 
+typedef NS_ENUM(NSUInteger, SGTitleViewScrollStyle)
+{
+    SGTitleViewScrollStyleDefault = 0, //默认样式
+    SGTitleViewScrollStyleProgressScroll, //跟随contentView一起滚动
+};
+
 @interface SGPageTitleViewConfigure : NSObject
 /** 类方法创建 SGPageTitleViewConfigure */
 + (instancetype)pageTitleViewConfigure;
@@ -64,6 +70,9 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat titleTextZoomRatio;
 /** 标题额外增加的宽度，默认为 20.0f */
 @property (nonatomic, assign) CGFloat titleAdditionalWidth;
+/** 标题view的滚动样式 默认SGTitleViewScrollStyleDefault */
+@property (nonatomic, assign) SGTitleViewScrollStyle titleViewScrollStyle;
+
 
 #pragma mark - - 指示器属性
 /** 是否显示指示器，默认为 YES */

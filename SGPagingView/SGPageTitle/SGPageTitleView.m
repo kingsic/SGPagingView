@@ -475,10 +475,11 @@
     UIButton *originalBtn = self.btnMArr[originalIndex];
     UIButton *targetBtn = self.btnMArr[targetIndex];
     _signBtnIndex = targetBtn.tag;
-    // 2、标题滚动样式下选中标题居中处理
+    // 2、标题滚动样式下titleView的滚动样式处理
     if (self.allBtnWidth > self.frame.size.width) {
+        
         if (_signBtnClick == NO) {
-            [self P_selectedBtnCenter:targetBtn];
+            [self P_pageTitleViewScrollWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
         }
         _signBtnClick = NO;
     }
@@ -1120,6 +1121,49 @@
             [self P_changeSelectedButton:originalBtn];
         }];
     }
+}
+
+#pragma mark - - - SGPageTitleView的滚动样式 SGTitleViewScrollStyle
+- (void)P_pageTitleViewScrollWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex
+{
+    if (self.allBtnWidth <= self.frame.size.width)
+    {
+        return ;
+    }
+    
+    //标题滚动样式下选中标题居中处理
+    if (self.configure.titleViewScrollStyle == SGTitleViewScrollStyleDefault)
+    {
+        UIButton *targetBtn = self.btnMArr[targetIndex];
+        [self P_selectedBtnCenter:targetBtn];
+        return ;
+    }
+    
+
+    // 1、取出 originalBtn、targetBtn
+    UIButton *originalBtn = self.btnMArr[originalIndex];
+    UIButton *targetBtn = self.btnMArr[targetIndex];
+    
+    // 2、计算偏移量
+    CGFloat offsetX = 0;
+    
+    CGFloat totalOffsetX = targetBtn.center.x - originalBtn.center.x;
+    CGFloat addOffsetX = totalOffsetX * progress;
+    
+    //original按钮默认居中
+    offsetX = originalBtn.center.x - self.frame.size.width * 0.5  + addOffsetX;
+    offsetX = MAX(offsetX, 0);
+    
+    // 获取最大滚动范围
+    CGFloat maxOffsetX = self.scrollView.contentSize.width - self.frame.size.width;
+    offsetX = MIN(offsetX, maxOffsetX);
+    
+//    NSLog(@"offsetX:%lf", offsetX);
+    
+    // 3、滚动标题滚动条
+    [self.scrollView setContentOffset:CGPointMake(offsetX, 0)];
+    
+    
 }
 
 #pragma mark - - - 颜色渐变方法抽取

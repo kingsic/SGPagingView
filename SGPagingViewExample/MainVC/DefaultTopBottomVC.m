@@ -42,6 +42,7 @@
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configure.titleFont = [UIFont systemFontOfSize:17];
     configure.indicatorStyle = SGIndicatorStyleFixed;
+    configure.titleViewScrollStyle = SGTitleViewScrollStyleProgressScroll;
     
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 60) delegate:self titleNames:self.titles configure:configure];
