@@ -38,9 +38,12 @@
 @property (nonatomic, strong) NSMutableArray *VSeparatorMArr;
 /// tempBtn
 @property (nonatomic, strong) UIButton *tempBtn;
-/// 记录所有按钮文字宽度
+/// 记录所有按钮文字的总宽度
 @property (nonatomic, assign) CGFloat allBtnTextWidth;
-/// 记录所有子控件的宽度
+// MARK: 当font改变或者title改变时，需要修改buttonTextWidthDictionary
+/// 存储每个按钮文字的宽度
+@property (nonatomic, strong) NSMutableDictionary *buttonTextWidthDictionary;
+/// 记录所有子控件的总宽度
 @property (nonatomic, assign) CGFloat allBtnWidth;
 /// 标记按钮下标
 @property (nonatomic, assign) NSInteger signBtnIndex;
@@ -259,6 +262,12 @@
     }
     return _VSeparatorMArr;
 }
+- (NSMutableDictionary *)buttonTextWidthDictionary {
+    if (!_buttonTextWidthDictionary) {
+        _buttonTextWidthDictionary = [[NSMutableDictionary alloc] initWithCapacity:[self.titleArr count]];
+    }
+    return _buttonTextWidthDictionary;
+}
 
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
@@ -439,7 +448,11 @@
     CGFloat maxOffsetX = self.scrollView.contentSize.width - self.frame.size.width;
     if (offsetX > maxOffsetX) offsetX = maxOffsetX;
     // 滚动标题滚动条
-    [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
+    // 修复scrollView的滑动动画结束前不能滑动的问题
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.scrollView setContentOffset:CGPointMake(offsetX, 0)];
+    }];
+    
 }
 
 #pragma mark - - - 改变有关指示器的相关操作
@@ -568,6 +581,9 @@
  */
 - (void)resetTitle:(NSString *)title forIndex:(NSInteger)index {
     UIButton *button = (UIButton *)self.btnMArr[index];
+    // 移除按钮标题文字的尺寸
+    [self.buttonTextWidthDictionary removeObjectForKey:button.currentTitle];
+    
     [button setTitle:title forState:UIControlStateNormal];
     
     if (self.configure.showIndicator && _signBtnIndex == index) {
@@ -1148,8 +1164,15 @@
 
 #pragma mark - - - 计算字符串尺寸
 - (CGSize)P_sizeWithString:(NSString *)string font:(UIFont *)font {
-    NSDictionary *attrs = @{NSFontAttributeName : font};
-    return [string boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+    // 避免重复计算导致性能浪费的问题
+    if (self.buttonTextWidthDictionary[string]) {
+        return [self.buttonTextWidthDictionary[string] CGSizeValue];
+    }
+    
+    CGSize size = [string boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : font} context:nil].size;
+    self.buttonTextWidthDictionary[string] = [NSValue valueWithCGSize:size];
+    return size;
+    
 }
 
 #pragma mark - - - 颜色设置的计算

@@ -20,6 +20,7 @@
 		182513E91F21D1600039F4A2 /* UIView+SGPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513DD1F21D1600039F4A2 /* UIView+SGPagingView.m */; };
 		182513EA1F21D1600039F4A2 /* SGPageContentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182513E01F21D1600039F4A2 /* SGPageContentScrollView.m */; };
 		18B036D21F21D835004C7DE7 /* SGPageTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B036D11F21D835004C7DE7 /* SGPageTitleView.m */; };
+		4A0C2F1C234A1BBA00179305 /* DefaultIndicatorAutoFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0C2F1B234A1BBA00179305 /* DefaultIndicatorAutoFollowViewController.m */; };
 		8D0F8E311FD95DE300F30426 /* DefaultCoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E1E1FD95DE300F30426 /* DefaultCoverVC.m */; };
 		8D0F8E321FD95DE300F30426 /* DefaultFixedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E201FD95DE300F30426 /* DefaultFixedVC.m */; };
 		8D0F8E331FD95DE300F30426 /* DefaultGradientEffectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F8E221FD95DE300F30426 /* DefaultGradientEffectVC.m */; };
@@ -108,6 +109,8 @@
 		182513EE1F21D2C90039F4A2 /* SGPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPagingView.h; sourceTree = "<group>"; };
 		18B036D01F21D835004C7DE7 /* SGPageTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPageTitleView.h; sourceTree = "<group>"; };
 		18B036D11F21D835004C7DE7 /* SGPageTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPageTitleView.m; sourceTree = "<group>"; };
+		4A0C2F1A234A1BBA00179305 /* DefaultIndicatorAutoFollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultIndicatorAutoFollowViewController.h; sourceTree = "<group>"; };
+		4A0C2F1B234A1BBA00179305 /* DefaultIndicatorAutoFollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultIndicatorAutoFollowViewController.m; sourceTree = "<group>"; };
 		8D0F8E1D1FD95DE300F30426 /* DefaultCoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultCoverVC.h; sourceTree = "<group>"; };
 		8D0F8E1E1FD95DE300F30426 /* DefaultCoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultCoverVC.m; sourceTree = "<group>"; };
 		8D0F8E1F1FD95DE300F30426 /* DefaultFixedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultFixedVC.h; sourceTree = "<group>"; };
@@ -381,6 +384,8 @@
 				8D5E68CE20F2FA140068044C /* DefaultAnimatedVC.m */,
 				8D1A05F620B441B800743EAD /* DefaultAttributedTitleVC.h */,
 				8D1A05F720B441B800743EAD /* DefaultAttributedTitleVC.m */,
+				4A0C2F1A234A1BBA00179305 /* DefaultIndicatorAutoFollowViewController.h */,
+				4A0C2F1B234A1BBA00179305 /* DefaultIndicatorAutoFollowViewController.m */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
@@ -612,6 +617,7 @@
 				8DF628F720A94CBA00B7B85A /* DefaultSystemVC.m in Sources */,
 				182513481F21CAC30039F4A2 /* AppDelegate.m in Sources */,
 				8D0F8E361FD95DE300F30426 /* DefaultScrollVC.m in Sources */,
+				4A0C2F1C234A1BBA00179305 /* DefaultIndicatorAutoFollowViewController.m in Sources */,
 				182513E91F21D1600039F4A2 /* UIView+SGPagingView.m in Sources */,
 				8D0F8E321FD95DE300F30426 /* DefaultFixedVC.m in Sources */,
 				182513451F21CAC30039F4A2 /* main.m in Sources */,
