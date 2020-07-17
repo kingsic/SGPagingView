@@ -92,8 +92,8 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 * 若在使用 CocoaPods 安装 SGPagingView 时，出现 [!] Unable to find a specification for SGPagingView 提示时，打开终端先输入 pod repo remove master；执行完毕后再输入 pod setup 即可 (可能会等待一段时间)
 ***
 
-### 二、标题文字缩放属性与指示器关系
-* 标题文字缩放属性与指示器下划线、遮盖样式不兼容，但固定及动态样式兼容
+### 二、父子视图 autolayout 及 frame
+* 父视图使用 autolayout 约束，子视图也需使用 autolayout 去约束；父视图使用 frame 布局，子视图也需使用 frame 去布局
 ***
 
 ### 三、关于父子控制器的说明（SGPageContentScrollView 与 SGPageContentCollectionView）
@@ -183,6 +183,8 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 * 2019-07-22 ：v1.6.6 SGPageTitleViewConfigure 新增 equivalence 属性支持静止样式下标题从左到右自动布局
 
 * 2019-07-27 ：v1.6.7 支持标题文字上下行样式以及 titleGradientEffect 属性与 resetTitleColor:titleSelectedColor: 方法的兼容
+
+* 2019-07-27 ：v1.6.8 SGPageTitleViewConfigure 添加 bounce 属性
 
 
 ## License
