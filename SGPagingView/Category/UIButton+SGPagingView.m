@@ -61,4 +61,19 @@
     }
 }
 
+/** 加载网络图片 */
+- (void)SG_loadImageWithUrlString:(NSString *)urlString complete:(LoadImageCompleteBlock)complete {
+    NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
+       NSURL *url = [NSURL URLWithString:urlString];
+       NSData *imageData = [NSData dataWithContentsOfURL:url];
+       UIImage *image = [UIImage imageWithData:imageData];
+       [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+           if (complete) {
+               complete(image);
+           }
+       }];
+    }];
+    [[[NSOperationQueue alloc] init] addOperation:blockOperation];
+}
+
 @end

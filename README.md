@@ -6,8 +6,6 @@
 
 * QQ群：825339547
 
-* 1.6.0 开始支持 autolayout 创建
-
 * [SGTagsView 设计来源于本框架中的 SGPageTitleView](https://github.com/kingsic/SGCrayfish)
 
 
@@ -53,7 +51,7 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 
 
 ## Installation
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.6.7'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.6.9'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -154,37 +152,35 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 * 2016-10-07 ：初始版本的创建
 
-* 2017-04-13 ：版本升级（根据标题内容自动识别 SGPageTitleView 是静止还是滚动样式）
+* 2017-07-21 ：v1.1.7 加入 CocoaPods 管理及新增 SGPageContentScrollView 类
 
-* 2017-07-21 ：v1.1.7 加入 CocoaPods 管理以及新增 SGPageContentScrollView 类
+* 2017-10-17 ：v1.3.0 版本升级：新增 SGPageTitleViewConfigure 类及支持指示器遮盖样式
 
-* 2017-10-17 ：v1.3.0 版本升级（新增 SGPageTitleViewConfigure 类并提供更多属性设置以及支持指示器遮盖样式）
+* 2018-05-08 ：v1.3.7 修复 1.3.6 版本选中标题重复点击恢复默认状态及新增相关配置属性
 
-* 2018-05-08 ：v1.3.7 修复 1.3.6 版本选中标题重复点击恢复默认状态以及 SGPageTitleViewConfigure 新增配置属性
-
-* 2018-07-09 ：v1.5.0 版本升级（具体相关信息请查看 [releases](https://github.com/kingsic/SGPagingView/releases) 中版本介绍）
+* 2018-07-09 ：v1.5.0 版本升级：具体相关信息请查看 [releases](https://github.com/kingsic/SGPagingView/releases) 中版本介绍
 
 * 2018-08-28 ：v1.5.2 SGPageContentScrollView 内部代码优化处理（感谢 [petyou](https://github.com/petyou) 提供的优化方案）
 
-* 2018-09-01 ：v1.5.3 SGPageTitleView 内部代码优化以及新增 SGPagingViewPopGestureVC 用于解决侧滑返回手势
+* 2018-09-01 ：v1.5.3 新增 SGPagingViewPopGestureVC 用于解决侧滑返回手势
 
 * 2018-09-26 ：v1.5.5 标题文字缩放效果由文字缩放调整为控件缩放
 
 * 2018-12-01 ：v1.5.6 SGPageTitleView 新增重置标题、指示器颜色方法
 
-* 2019-01-09 ：v1.6.0 支持 autolayout 创建
+* 2019-01-09 ：v1.6.0 版本升级：支持 autolayout 布局
 
-* 2019-03-27 ：v1.6.1 修复 1.6.0 版本 addBadgeForIndex 方法内 badge 布局问题
+* 2019-03-27 ：v1.6.1 修复 addBadgeForIndex 方法内 badge 布局问题
 
-* 2019-07-17 ：v1.6.3 修复设置图片样式下图片布局问题以及对内部代码的优化处理
+* 2019-07-17 ：v1.6.3 修复设置图片样式下图片布局问题及内部代码优化处理
 
-* 2019-07-20 ：v1.6.5 滚动样式下 titleTextZoom 属性支持指示器下划线及遮盖样式下的滚动
+* 2019-07-20 ：v1.6.5 滚动样式下 titleTextZoom 属性支持指示器下划线及遮盖样式的滚动
 
 * 2019-07-22 ：v1.6.6 SGPageTitleViewConfigure 新增 equivalence 属性支持静止样式下标题从左到右自动布局
 
-* 2019-07-27 ：v1.6.7 支持标题文字上下行样式以及 titleGradientEffect 属性与 resetTitleColor:titleSelectedColor: 方法的兼容
+* 2019-07-27 ：v1.6.7 标题支持上下行及 titleGradientEffect 属性与 resetTitleColor:titleSelectedColor: 方法兼容
 
-* 2019-07-27 ：v1.6.8 SGPageTitleViewConfigure 添加 bounce 属性
+* 2020-11-01 ：v1.6.9 Badge 新增配置属性，支持网络图片，修复无指示器滚动内容视图时标题文字不切换
 
 
 ## License

@@ -49,7 +49,11 @@
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
-    
+    configure.badgeHeight = 12;
+    configure.badgeOff = CGPointMake(- 5, 5);
+    [_pageTitleView addBadgeWithText:@"2" forIndex:1];
+    [_pageTitleView addBadgeWithText:@"新版本" forIndex:2];
+
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
     ChildVCThree *threeVC = [[ChildVCThree alloc] init];
@@ -68,6 +72,12 @@
 
 - (void)pageContentCollectionView:(SGPageContentCollectionView *)pageContentCollectionView progress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     [self.pageTitleView setPageTitleViewWithProgress:progress originalIndex:originalIndex targetIndex:targetIndex];
+}
+
+- (void)pageContentCollectionView:(SGPageContentScrollView *)pageContentScrollView index:(NSInteger)index {
+    if (index == 1 || index == 2) {
+        [_pageTitleView removeBadgeForIndex:index];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

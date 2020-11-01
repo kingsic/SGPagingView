@@ -19,6 +19,8 @@ typedef enum : NSUInteger {
     SGImagePositionStyleBottom,
 } SGImagePositionStyle;
 
+typedef void(^LoadImageCompleteBlock)(UIImage *image);
+
 @interface UIButton (SGPagingView)
 /**
  *  设置图片与文字样式
@@ -28,5 +30,8 @@ typedef enum : NSUInteger {
  *  @param imagePositionBlock     在此 Block 中设置按钮的图片、文字以及 contentHorizontalAlignment 属性
  */
 - (void)SG_imagePositionStyle:(SGImagePositionStyle)imagePositionStyle spacing:(CGFloat)spacing imagePositionBlock:(void (^)(UIButton *button))imagePositionBlock;
+
+/** 加载网络图片 */
+- (void)SG_loadImageWithUrlString:(NSString *)urlString complete:(LoadImageCompleteBlock)complete;
 
 @end

@@ -12,7 +12,7 @@
 @protocol SGPageContentScrollViewDelegate <NSObject>
 @optional
 /**
- *  联动 SGPageTitleView 的方法
+ *  联动 SGPageTitleView 的 setPageTitleViewWithProgress:originalIndex:targetIndex: 方法使用
  *
  *  @param pageContentScrollView      SGPageContentScrollView
  *  @param progress                   SGPageContentScrollView 内部视图滚动时的偏移量
@@ -58,7 +58,7 @@
 /** 点击标题触发动画切换滚动内容，默认为 NO */
 @property (nonatomic, assign) BOOL isAnimated;
 
-/** 给外界提供的方法，根据 SGPageTitleView 标题选中时的下标并显示相应的子控制器 */
+/** 联动 SGPageTitleView 的代理方法 pageTitleView:selectedIndex: 一起使用 */
 - (void)setPageContentScrollViewCurrentIndex:(NSInteger)currentIndex;
 
 @end

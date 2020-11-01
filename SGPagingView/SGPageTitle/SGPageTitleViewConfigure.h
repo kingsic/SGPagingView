@@ -44,7 +44,7 @@ typedef enum : NSUInteger {
 /** SGPageTitleView 底部分割线颜色，默认为 lightGrayColor */
 @property (nonatomic, strong) UIColor *bottomSeparatorColor;
 
-#pragma mark - - 标题属性
+#pragma mark - - SGPageTitleView 标题属性
 /** 标题文字字号大小，默认 15 号字体 */
 @property (nonatomic, strong) UIFont *titleFont;
 /** 标题文字选中字号大小，默认 15 号字体。
@@ -62,23 +62,24 @@ typedef enum : NSUInteger {
 /** 标题文字缩放比，默认为 0.0f，取值范围 0.0 ～ 1.0f。
   * 请与 titleTextZoom = YES 时结合使用，否则不起作用 */
 @property (nonatomic, assign) CGFloat titleTextZoomRatio;
-/** 标题额外增加的宽度，默认为 20.0f */
+/** 标题额外需要增加的宽度，默认为 20.0f */
 @property (nonatomic, assign) CGFloat titleAdditionalWidth;
 
-#pragma mark - - 指示器属性
-/** 是否显示指示器，默认为 YES */
+#pragma mark - - SGPageTitleView 指示器属性
+/** 是否显示指示器，默认为 YES。
+  * 为 NO 时，可与 SGIndicatorScrollStyle = SGIndicatorScrollStyleHalf 一起使用 */
 @property (nonatomic, assign) BOOL showIndicator;
 /** 指示器颜色，默认为红色 */
 @property (nonatomic, strong) UIColor *indicatorColor;
 /** 指示器高度，默认为 2.0f */
 @property (nonatomic, assign) CGFloat indicatorHeight;
-/** 指示器动画时间，默认为 0.1f，取值范围 0 ～ 0.3f */
+/** 指示器动画时间，默认为 0.1f，取值范围 0.0 ～ 0.3f */
 @property (nonatomic, assign) CGFloat indicatorAnimationTime;
 /** 指示器样式，默认为 SGIndicatorStyleDefault */
 @property (nonatomic, assign) SGIndicatorStyle indicatorStyle;
 /** 指示器圆角大小，默认为 0.0f */
 @property (nonatomic, assign) CGFloat indicatorCornerRadius;
-/** 指示器遮盖样式外的其他样式下指示器与底部之间的距离，默认为 0f */
+/** 指示器遮盖样式外的其他样式下指示器与底部之间的距离，默认为 0.0f */
 @property (nonatomic, assign) CGFloat indicatorToBottomDistance;
 /** 指示器遮盖样式下的边框宽度，默认为 0.0f */
 @property (nonatomic, assign) CGFloat indicatorBorderWidth;
@@ -86,14 +87,14 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIColor *indicatorBorderColor;
 /** 指示器遮盖、下划线样式下额外增加的宽度，默认为 0.0f；介于标题文字宽度与按钮宽度之间 */
 @property (nonatomic, assign) CGFloat indicatorAdditionalWidth;
-/** 指示器固定样式下宽度，默认为 20.0f；最大宽度并没有做限制，请根据实际情况妥善设置 */
+/** 固定样式下指示器的宽度，默认为 20.0f；最大宽度并没有做限制，请根据实际情况妥善设置 */
 @property (nonatomic, assign) CGFloat indicatorFixedWidth;
-/** 指示器动态样式下宽度，默认为 20.0f；最大宽度并没有做限制，请根据实际情况妥善设置 */
+/** 动态样式下指示器的宽度，默认为 20.0f；最大宽度并没有做限制，请根据实际情况妥善设置 */
 @property (nonatomic, assign) CGFloat indicatorDynamicWidth;
-/** 指示器滚动位置改变样式，默认为 SGIndicatorScrollStyleDefault */
+/** 滚动内容视图时，指示器位置改变样式，默认为 SGIndicatorScrollStyleDefault */
 @property (nonatomic, assign) SGIndicatorScrollStyle indicatorScrollStyle;
 
-#pragma mark - - 标题间分割线属性
+#pragma mark - - SGPageTitleView 标题间分割线属性
 /** 是否显示标题间分割线，默认为 NO */
 @property (nonatomic, assign) BOOL showVerticalSeparator;
 /** 标题间分割线颜色，默认为红色 */
@@ -101,12 +102,24 @@ typedef enum : NSUInteger {
 /** 标题间分割线额外减少的高度，默认为 0.0f */
 @property (nonatomic, assign) CGFloat verticalSeparatorReduceHeight;
 
-#pragma mark - - badge 相关属性
+#pragma mark - - SGPageTitleView badge 属性，默认所在位置以标题文字右上角为起点
 /** badge 颜色，默认红色 */
 @property (nonatomic, strong) UIColor *badgeColor;
-/** badge 尺寸大小，默认为 7.0f */
-@property (nonatomic, assign) CGFloat badgeSize;
-/** badge 偏移量，默认（0，0）*/
+/** badge 的高，默认为 7.0f */
+@property (nonatomic, assign) CGFloat badgeHeight;
+/** badge 的偏移量，默认为 CGPointZero */
 @property (nonatomic, assign) CGPoint badgeOff;
+/** badge 的字体颜色，默认为 whiteColor（只针对：addBadgeWithText:forIndex: 方法有效）*/
+@property (nonatomic, strong) UIColor *badgeTextColor;
+/** badge 的字体大小，默认为 [UIFont systemFontOfSize:10]（只针对：addBadgeWithText:forIndex: 方法有效）*/
+@property (nonatomic, strong) UIFont *badgeTextFont;
+/** badge 额外需要增加的宽度，默认为 10.0f（只针对：addBadgeWithText:forIndex: 方法有效）*/
+@property (nonatomic, assign) CGFloat badgeAdditionalWidth;
+/** badge 边框的宽度，默认为 nil（只针对：addBadgeWithText:forIndex: 方法有效）*/
+@property (nonatomic, assign) CGFloat badgeBorderWidth;
+/** badge 边框的颜色，默认为 nil（只针对：addBadgeWithText:forIndex: 方法有效）*/
+@property (nonatomic, strong) UIColor *badgeBorderColor;
+/** badge 圆角设置，默认为 5.0f（只针对：addBadgeWithText:forIndex: 方法有效）*/
+@property (nonatomic, assign) CGFloat badgeCornerRadius;
 
 @end

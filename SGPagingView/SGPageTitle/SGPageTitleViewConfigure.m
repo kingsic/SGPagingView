@@ -177,18 +177,38 @@
     return _badgeColor;
 }
 
-- (CGFloat)badgeSize {
-    if (!_badgeSize) {
-        _badgeSize = 7.0f;
+- (CGFloat)badgeHeight {
+    if (!_badgeHeight) {
+        _badgeHeight = 7.0f;
     }
-    return _badgeSize;
+    return _badgeHeight;
 }
 
-- (CGPoint)badgeOff {
-    if (!_badgeOff.x && !_badgeOff.y) {
-        _badgeOff = CGPointMake(0, 0);
+- (UIColor *)badgeTextColor {
+    if (!_badgeTextColor) {
+        _badgeTextColor = [UIColor whiteColor];
     }
-    return _badgeOff;
+    return _badgeTextColor;
+}
+- (UIFont *)badgeTextFont {
+    if (!_badgeTextFont) {
+        _badgeTextFont = [UIFont systemFontOfSize:10];
+    }
+    return _badgeTextFont;
+}
+
+- (CGFloat)badgeAdditionalWidth {
+    if (_badgeAdditionalWidth <= 0) {
+        _badgeAdditionalWidth = 10.0f;
+    }
+    return _badgeAdditionalWidth;
+}
+
+- (CGFloat)badgeCornerRadius {
+    if (!_badgeCornerRadius) {
+        _badgeCornerRadius = 5.0f;
+    }
+    return _badgeCornerRadius;
 }
 
 @end

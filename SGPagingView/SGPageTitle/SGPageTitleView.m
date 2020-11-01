@@ -58,6 +58,7 @@
 @end
 
 @implementation SGPageTitleView
+
 - (instancetype)initWithFrame:(CGRect)frame delegate:(id<SGPageTitleViewDelegate>)delegate titleNames:(NSArray *)titleNames configure:(SGPageTitleViewConfigure *)configure {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.77];
@@ -469,7 +470,7 @@
     }];
 }
 
-#pragma mark - - - 给外界提供的方法
+#pragma mark - - - 给 SGPageContentView 的代理方法 pageContentScrollView:progress:originalIndex:targetIndex: 使用
 - (void)setPageTitleViewWithProgress:(CGFloat)progress originalIndex:(NSInteger)originalIndex targetIndex:(NSInteger)targetIndex {
     // 1、取出 originalBtn、targetBtn
     UIButton *originalBtn = self.btnMArr[originalIndex];
@@ -506,6 +507,12 @@
                 [self P_indicatorScrollStyleHalfEndWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
             }
         }
+    } else {
+        if (self.configure.indicatorScrollStyle == SGIndicatorScrollStyleHalf) {
+            [self P_indicatorScrollStyleHalfWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
+        } else {
+            [self P_indicatorScrollStyleOtherWithProgress:progress originalBtn:originalBtn targetBtn:targetBtn];
+        }
     }
     // 4、颜色的渐变(复杂)
     if (self.configure.titleGradientEffect) {
@@ -527,210 +534,26 @@
     };
 }
 
-/** 根据下标值添加 badge */
-- (void)addBadgeForIndex:(NSInteger)index {
-    /// 这里使用GCD延迟函数的目的：是将 addBadgeForIndex 方法内部的 badge 布局在 layoutSubviews 之后调用，这里的 badge 是添加在标题（按钮），badge 的布局也可在 layoutSubviews 中在标题（按钮）布局之后布局。这里采取了GCD延迟函数
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        UIButton *btn = self.btnMArr[index];
-        UIView *badge = [[UIView alloc] init];
-        CGFloat btnTextWidth = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].width;
-        CGFloat btnTextHeight = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].height;
-        CGFloat badgeX = 0.5 * (btn.SG_width - btnTextWidth) + btnTextWidth + self.configure.badgeOff.x;
-        CGFloat badgeY = 0.5 * (btn.SG_height - btnTextHeight) + self.configure.badgeOff.y - self.configure.badgeSize;
-        CGFloat badgeWidth = self.configure.badgeSize;
-        CGFloat badgeHeight = badgeWidth;
-        badge.frame = CGRectMake(badgeX, badgeY, badgeWidth, badgeHeight);
-        badge.layer.backgroundColor = self.configure.badgeColor.CGColor;
-        badge.layer.cornerRadius = 0.5 * self.configure.badgeSize;
-//        badge.tag = 2018 + index;
-        [btn addSubview:badge];
-    });
-}
-/** 根据下标值移除 badge */
-- (void)removeBadgeForIndex:(NSInteger)index {
-    UIButton *btn = self.btnMArr[index];
-    [btn.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if (obj.tag != 0) {
-        /// 之前使用 tag 进行 btn 内部子视图区分（UIImageView、UIButtonLabel的 tag 值都是 0）
-        /// isMemberOfClass 这个方法明确某个类
-        if ([obj isMemberOfClass:[UIView class]]) {
-            [obj removeFromSuperview];
-            obj = nil;
-        }
-    }];
-}
-
-/**
- *  根据标题下标值重置标题文字
- *
- *  @param title    标题名
- *  @param index    标题所对应的下标
- */
-- (void)resetTitle:(NSString *)title forIndex:(NSInteger)index {
-    UIButton *button = (UIButton *)self.btnMArr[index];
-    [button setTitle:title forState:UIControlStateNormal];
-    
-    if (self.configure.showIndicator && _signBtnIndex == index) {
-        if (self.configure.indicatorStyle == SGIndicatorStyleDefault || self.configure.indicatorStyle == SGIndicatorStyleCover) {
-            CGSize tempSize = [self P_sizeWithString:button.currentTitle font:self.configure.titleFont];
-            CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
-            if (tempIndicatorWidth > button.SG_width) {
-                tempIndicatorWidth = button.SG_width;
-            }
-            _indicatorView.SG_width = tempIndicatorWidth;
-            _indicatorView.SG_centerX = button.SG_centerX;
-        }
-    }
-}
-
-/** 重置指示器颜色方法 */
-- (void)resetIndicatorColor:(UIColor *)color {
-    _indicatorView.backgroundColor = color;
-}
-/**
- *  重置标题普通状态、选中状态下文字颜色方法
- *
- *  @param color       普通状态下标题文字颜色
- *  @param selectedColor       选中状态下标题文字颜色
- */
-- (void)resetTitleColor:(UIColor *)color titleSelectedColor:(UIColor *)selectedColor {
-    [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIButton *btn = obj;
-        [btn setTitleColor:color forState:(UIControlStateNormal)];
-        [btn setTitleColor:selectedColor forState:(UIControlStateSelected)];
-    }];
-    
-    if (self.configure.titleGradientEffect) {
-        self.configure.titleColor = color;
-        self.configure.titleSelectedColor = selectedColor;
-        [self setupStartColor:self.configure.titleColor];
-        [self setupEndColor:self.configure.titleSelectedColor];
-    }
-}
-/**
- *  重置标题普通状态、选中状态下文字颜色及指示器颜色方法
- *
- *  @param color       普通状态下标题文字颜色
- *  @param selectedColor       选中状态下标题文字颜色
- *  @param indicatorColor      指示器颜色
- */
-- (void)resetTitleColor:(UIColor *)color titleSelectedColor:(UIColor *)selectedColor indicatorColor:(UIColor *)indicatorColor {
-    [self resetTitleColor:color titleSelectedColor:selectedColor];
-    [self resetIndicatorColor:indicatorColor];
-}
-
-/**
- *  根据标题下标值设置标题的 attributedTitle 属性
- *
- *  @param attributedTitle      attributedTitle 属性
- *  @param selectedAttributedTitle      选中状态下 attributedTitle 属性
- *  @param index     标题所对应的下标
- */
-- (void)setAttributedTitle:(NSMutableAttributedString *)attributedTitle selectedAttributedTitle:(NSMutableAttributedString *)selectedAttributedTitle forIndex:(NSInteger)index {
-    UIButton *button = (UIButton *)self.btnMArr[index];
-    [button setAttributedTitle:attributedTitle forState:(UIControlStateNormal)];
-    [button setAttributedTitle:selectedAttributedTitle forState:(UIControlStateSelected)];
-}
-
-/**
- *  设置标题图片及位置样式
- *
- *  @param images       默认图片名数组
- *  @param selectedImages       选中图片名数组
- *  @param imagePositionType       图片位置样式
- *  @param spacing      图片与标题文字之间的间距
- */
-- (void)setImages:(NSArray *)images selectedImages:(NSArray *)selectedImages imagePositionType:(SGImagePositionType)imagePositionType spacing:(CGFloat)spacing {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSInteger imagesCount = images.count;
-        NSInteger selectedImagesCount = selectedImages.count;
-        NSInteger titlesCount = self.titleArr.count;
-        if (imagesCount < selectedImagesCount) {
-            NSLog(@"温馨提示：SGPageTitleView -> [setImages:selectedImages:imagePositionType:spacing] 方法中 images 必须大于或者等于selectedImages，否则 imagePositionTypeDefault 以外的其他样式图片及文字布局将会出现问题");
-        }
-        
-        if (imagesCount < titlesCount) {
-            [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                UIButton *btn = obj;
-                if (idx >= imagesCount - 1) {
-                    *stop = YES;
-                }
-                [self P_btn:btn imageName:images[idx] imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateNormal)];
-            }];
-        } else {
-            [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                UIButton *btn = obj;
-                [self P_btn:btn imageName:images[idx] imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateNormal)];
-            }];
-        }
-        
-        if (selectedImagesCount < titlesCount) {
-            [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                UIButton *btn = obj;
-                if (idx >= selectedImagesCount - 1) {
-                    *stop = YES;
-                }
-                [self P_btn:btn imageName:selectedImages[idx] imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateSelected)];
-            }];
-        } else {
-            [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                UIButton *btn = obj;
-                [self P_btn:btn imageName:selectedImages[idx] imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateSelected)];
-            }];
-        }
-    });
-}
-/**
- *  根据标题下标设置标题图片及位置样式
- *
- *  @param image       默认图片名
- *  @param selectedImage       选中时图片名
- *  @param imagePositionType       图片位置样式
- *  @param spacing      图片与标题文字之间的间距
- *  @param index        标题对应下标值
- */
-- (void)setImage:(NSString *)image selectedImage:(NSString *)selectedImage imagePositionType:(SGImagePositionType)imagePositionType spacing:(CGFloat)spacing forIndex:(NSInteger)index {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        UIFont *configureTitleFont = self.configure.titleFont;
-        UIFont *configureTitleSelectedFont = self.configure.titleSelectedFont;
-        if ([configureTitleFont.fontName isEqualToString:configureTitleSelectedFont.fontName] && configureTitleFont.pointSize == configureTitleSelectedFont.pointSize) {
-            UIButton *btn = self.btnMArr[index];
-            if (image != nil) {
-                [self P_btn:btn imageName:image imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateNormal)];
-            }
-            if (selectedImage != nil) {
-                [self P_btn:btn imageName:selectedImage imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateSelected)];
-            }
-            return;
-        }
-        
-        NSLog(@"配置属性 titleFont 必须与配置属性 titleSelectedFont 一致，否则 setImage:selectedImage:imagePositionType:spacing:forIndex 方法将不起任何作用");
-    });
-}
-
-/// imagePositionType 样式设置方法抽取
-- (void)P_btn:(UIButton *)btn imageName:(NSString *)imageName imagePositionType:(SGImagePositionType)imagePositionType spacing:(CGFloat)spacing btnControlState:(UIControlState)btnControlState {
-    if (imagePositionType == SGImagePositionTypeDefault) {
-        [btn SG_imagePositionStyle:SGImagePositionStyleDefault spacing:spacing imagePositionBlock:^(UIButton *button) {
-            [btn setImage:[UIImage imageNamed:imageName] forState:btnControlState];
+#pragma mark - - - 隐藏指示器时，处理标题颜色改变
+- (void)P_indicatorScrollStyleHalfWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
+    if (progress >= 0.5) {
+        [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
+            [self P_changeSelectedButton:targetBtn];
         }];
-        return;
-    }
-    if (imagePositionType == SGImagePositionTypeRight) {
-        [btn SG_imagePositionStyle:SGImagePositionStyleRight spacing:spacing imagePositionBlock:^(UIButton *button) {
-            [btn setImage:[UIImage imageNamed:imageName] forState:btnControlState];
+    } else {
+        [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
+            [self P_changeSelectedButton:originalBtn];
         }];
-        return;
     }
-    if (imagePositionType == SGImagePositionTypeTop) {
-        [btn SG_imagePositionStyle:SGImagePositionStyleTop spacing:spacing imagePositionBlock:^(UIButton *button) {
-            [btn setImage:[UIImage imageNamed:imageName] forState:btnControlState];
+}
+- (void)P_indicatorScrollStyleOtherWithProgress:(CGFloat)progress originalBtn:(UIButton *)originalBtn targetBtn:(UIButton *)targetBtn {
+    if (progress == 1.0) {
+        [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
+            [self P_changeSelectedButton:targetBtn];
         }];
-        return;
-    }
-    if (imagePositionType == SGImagePositionTypeBottom) {
-        [btn SG_imagePositionStyle:SGImagePositionStyleBottom spacing:spacing imagePositionBlock:^(UIButton *button) {
-            [btn setImage:[UIImage imageNamed:imageName] forState:btnControlState];
+    } else {
+        [UIView animateWithDuration:self.configure.indicatorAnimationTime animations:^{
+            [self P_changeSelectedButton:originalBtn];
         }];
     }
 }
@@ -1140,18 +963,6 @@
     targetBtn.titleLabel.textColor = targetColor;
 }
 
-#pragma mark - - - set
-- (void)setResetSelectedIndex:(NSInteger)resetSelectedIndex {
-    _resetSelectedIndex = resetSelectedIndex;
-    [self P_btn_action:self.btnMArr[resetSelectedIndex]];
-}
-
-#pragma mark - - - 计算字符串尺寸
-- (CGSize)P_sizeWithString:(NSString *)string font:(UIFont *)font {
-    NSDictionary *attrs = @{NSFontAttributeName : font};
-    return [string boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
-}
-
 #pragma mark - - - 颜色设置的计算
 /// 开始颜色设置
 - (void)setupStartColor:(UIColor *)color {
@@ -1187,6 +998,283 @@
     for (int component = 0; component < 3; component++) {
         components[component] = resultingPixel[component] / 255.0f;
     }
+}
+
+#pragma mark - - - - - - - >> 给外界提供的相关属性及方法的实现 BEGIN<< - - - - - - -
+#pragma mark - - - set
+- (void)setResetSelectedIndex:(NSInteger)resetSelectedIndex {
+    _resetSelectedIndex = resetSelectedIndex;
+    [self P_btn_action:self.btnMArr[resetSelectedIndex]];
+}
+
+#pragma mark - - - 设置标题相关方法的实现
+/**
+ *  根据标题下标值重置标题文字
+ *
+ *  @param title    标题名
+ *  @param index    标题所对应的下标
+ */
+- (void)resetTitle:(NSString *)title forIndex:(NSInteger)index {
+    UIButton *button = (UIButton *)self.btnMArr[index];
+    [button setTitle:title forState:UIControlStateNormal];
+    
+    if (self.configure.showIndicator && _signBtnIndex == index) {
+        if (self.configure.indicatorStyle == SGIndicatorStyleDefault || self.configure.indicatorStyle == SGIndicatorStyleCover) {
+            CGSize tempSize = [self P_sizeWithString:button.currentTitle font:self.configure.titleFont];
+            CGFloat tempIndicatorWidth = self.configure.indicatorAdditionalWidth + tempSize.width;
+            if (tempIndicatorWidth > button.SG_width) {
+                tempIndicatorWidth = button.SG_width;
+            }
+            _indicatorView.SG_width = tempIndicatorWidth;
+            _indicatorView.SG_centerX = button.SG_centerX;
+        }
+    }
+}
+/**
+ *  根据标题下标值设置标题的 attributedTitle 属性
+ *
+ *  @param attributedTitle      attributedTitle 属性
+ *  @param selectedAttributedTitle      选中状态下 attributedTitle 属性
+ *  @param index     标题所对应的下标
+ */
+- (void)setAttributedTitle:(NSMutableAttributedString *)attributedTitle selectedAttributedTitle:(NSMutableAttributedString *)selectedAttributedTitle forIndex:(NSInteger)index {
+    UIButton *button = (UIButton *)self.btnMArr[index];
+    [button setAttributedTitle:attributedTitle forState:(UIControlStateNormal)];
+    [button setAttributedTitle:selectedAttributedTitle forState:(UIControlStateSelected)];
+}
+
+
+#pragma mark - - - 设置标题图片及位置样式相关方法的实现
+/**
+ *  设置标题图片及位置样式
+ *
+ *  @param images                   默认图片名数组
+ *  @param selectedImages           选中图片名数组
+ *  @param imagePositionType        图片位置样式
+ *  @param spacing                  图片与标题文字之间的间距
+ */
+- (void)setImages:(NSArray *)images selectedImages:(NSArray *)selectedImages imagePositionType:(SGImagePositionType)imagePositionType spacing:(CGFloat)spacing {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSInteger imagesCount = images.count;
+        NSInteger selectedImagesCount = selectedImages.count;
+        NSInteger titlesCount = self.titleArr.count;
+        if (imagesCount < selectedImagesCount) {
+            NSLog(@"温馨提示：SGPageTitleView -> [setImages:selectedImages:imagePositionType:spacing] 方法中 images 必须大于或者等于selectedImages，否则 imagePositionTypeDefault 以外的其他样式图片及文字布局将会出现问题");
+        }
+        
+        if (imagesCount < titlesCount) {
+            [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                UIButton *btn = obj;
+                if (idx >= imagesCount - 1) {
+                    *stop = YES;
+                }
+                [self P_btn:btn imageName:images[idx] imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateNormal)];
+            }];
+        } else {
+            [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                UIButton *btn = obj;
+                [self P_btn:btn imageName:images[idx] imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateNormal)];
+            }];
+        }
+        
+        if (selectedImagesCount < titlesCount) {
+            [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                UIButton *btn = obj;
+                if (idx >= selectedImagesCount - 1) {
+                    *stop = YES;
+                }
+                [self P_btn:btn imageName:selectedImages[idx] imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateSelected)];
+            }];
+        } else {
+            [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                UIButton *btn = obj;
+                [self P_btn:btn imageName:selectedImages[idx] imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateSelected)];
+            }];
+        }
+    });
+}
+/** 根据标题下标设置标题图片及位置样式 */
+- (void)setImage:(NSString *)image selectedImage:(NSString *)selectedImage imagePositionType:(SGImagePositionType)imagePositionType spacing:(CGFloat)spacing forIndex:(NSInteger)index {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UIFont *configureTitleFont = self.configure.titleFont;
+        UIFont *configureTitleSelectedFont = self.configure.titleSelectedFont;
+        if ([configureTitleFont.fontName isEqualToString:configureTitleSelectedFont.fontName] && configureTitleFont.pointSize == configureTitleSelectedFont.pointSize) {
+            UIButton *btn = self.btnMArr[index];
+            if (image != nil) {
+                [self P_btn:btn imageName:image imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateNormal)];
+            }
+            if (selectedImage != nil) {
+                [self P_btn:btn imageName:selectedImage imagePositionType:imagePositionType spacing:spacing btnControlState:(UIControlStateSelected)];
+            }
+            return;
+        }
+        
+        NSLog(@"配置属性 titleFont 必须与配置属性 titleSelectedFont 一致，否则 setImage:selectedImage:imagePositionType:spacing:forIndex 方法将不起任何作用");
+    });
+}
+
+/// imagePositionType 样式设置方法抽取
+- (void)P_btn:(UIButton *)btn imageName:(NSString *)imageName imagePositionType:(SGImagePositionType)imagePositionType spacing:(CGFloat)spacing btnControlState:(UIControlState)btnControlState {
+    if (imagePositionType == SGImagePositionTypeDefault) {
+        [btn SG_imagePositionStyle:SGImagePositionStyleDefault spacing:spacing imagePositionBlock:^(UIButton *button) {
+            if ([imageName hasPrefix:@"http"]) {
+                [btn SG_loadImageWithUrlString:imageName complete:^(UIImage *image) {
+                    [btn setImage:image forState:btnControlState];
+                }];
+            } else {
+                [btn setImage:[UIImage imageNamed:imageName] forState:btnControlState];
+            }
+        }];
+        return;
+    }
+    if (imagePositionType == SGImagePositionTypeRight) {
+        [btn SG_imagePositionStyle:SGImagePositionStyleRight spacing:spacing imagePositionBlock:^(UIButton *button) {
+            if ([imageName hasPrefix:@"http"]) {
+                [btn SG_loadImageWithUrlString:imageName complete:^(UIImage *image) {
+                    [btn setImage:image forState:btnControlState];
+                }];
+            } else {
+                [btn setImage:[UIImage imageNamed:imageName] forState:btnControlState];
+            }
+        }];
+        return;
+    }
+    if (imagePositionType == SGImagePositionTypeTop) {
+        [btn SG_imagePositionStyle:SGImagePositionStyleTop spacing:spacing imagePositionBlock:^(UIButton *button) {
+            if ([imageName hasPrefix:@"http"]) {
+                [btn SG_loadImageWithUrlString:imageName complete:^(UIImage *image) {
+                    [btn setImage:image forState:btnControlState];
+                }];
+            } else {
+                [btn setImage:[UIImage imageNamed:imageName] forState:btnControlState];
+            }
+        }];
+        return;
+    }
+    if (imagePositionType == SGImagePositionTypeBottom) {
+        [btn SG_imagePositionStyle:SGImagePositionStyleBottom spacing:spacing imagePositionBlock:^(UIButton *button) {
+            if ([imageName hasPrefix:@"http"]) {
+                [btn SG_loadImageWithUrlString:imageName complete:^(UIImage *image) {
+                    [btn setImage:image forState:btnControlState];
+                }];
+            } else {
+                [btn setImage:[UIImage imageNamed:imageName] forState:btnControlState];
+            }
+        }];
+    }
+}
+
+
+#pragma mark - - - badge 相关方法的实现
+/** 根据下标值添加 badge */
+- (void)addBadgeForIndex:(NSInteger)index {
+    /// 这里使用GCD延迟函数的目的：是将 addBadgeForIndex 方法内部的 badge 布局在 layoutSubviews 方法之后调用， badge 的布局也可在 layoutSubviews 方法中标题（按钮）布局完成之后布局，这里只是为了方便采取了GCD延迟函数
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UIButton *btn = self.btnMArr[index];
+
+        CGFloat btnTextWidth = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].width;
+        CGFloat btnTextHeight = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].height;
+        CGFloat badgeX = 0.5 * (btn.SG_width - btnTextWidth) + btnTextWidth + self.configure.badgeOff.x;
+        CGFloat badgeY = 0.5 * (btn.SG_height - btnTextHeight) + self.configure.badgeOff.y - self.configure.badgeHeight;
+        CGFloat badgeWidth = self.configure.badgeHeight;
+        CGFloat badgeHeight = badgeWidth;
+        
+        UIView *badge = [[UIView alloc] init];
+        badge.frame = CGRectMake(badgeX, badgeY, badgeWidth, badgeHeight);
+        badge.layer.backgroundColor = self.configure.badgeColor.CGColor;
+        badge.layer.cornerRadius = 0.5 * self.configure.badgeHeight;
+//        badge.tag = 2018 + index;
+        [btn addSubview:badge];
+    });
+}
+/** 根据标题下标值添加 badge */
+- (void)addBadgeWithText:(NSString *)text forIndex:(NSInteger)index {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UIButton *btn = self.btnMArr[index];
+        
+        CGFloat btnTextWidth = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].width;
+        CGFloat btnTextHeight = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].height;
+        
+        CGFloat badgeX = 0.5 * (btn.SG_width - btnTextWidth) + btnTextWidth + self.configure.badgeOff.x;
+        CGFloat badgeY = 0.5 * (btn.SG_height - btnTextHeight) + self.configure.badgeOff.y - self.configure.badgeHeight;
+        CGFloat badgeWidth = [self P_sizeWithString:text font:self.configure.badgeTextFont].width + self.configure.badgeAdditionalWidth;
+        CGFloat badgeHeight = self.configure.badgeHeight;
+        
+        UILabel *badge = [[UILabel alloc] init];
+        badge.frame = CGRectMake(badgeX, badgeY, badgeWidth, badgeHeight);
+        if ([text isEqualToString:@"0"]) {
+            badge.text = @"";
+        } else {
+            badge.text = text;
+        }
+        badge.textColor = self.configure.badgeTextColor;
+        badge.font = self.configure.badgeTextFont;
+        badge.textAlignment = NSTextAlignmentCenter;
+        badge.layer.cornerRadius = self.configure.badgeCornerRadius;
+        badge.layer.backgroundColor = self.configure.badgeColor.CGColor;
+        badge.layer.borderWidth = self.configure.badgeBorderWidth;
+        badge.layer.borderColor = self.configure.badgeBorderColor.CGColor;
+        [btn addSubview:badge];
+    });
+}
+/** 根据下标值移除 badge */
+- (void)removeBadgeForIndex:(NSInteger)index {
+    UIButton *btn = self.btnMArr[index];
+    [btn.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if (obj.tag != 0) {
+        /// 之前使用 tag 进行 btn 内部子视图区分（UIImageView、UIButtonLabel的 tag 值都是 0）
+        /// isMemberOfClass 这个方法明确某个类
+        if ([obj isMemberOfClass:[UILabel class]] || [obj isMemberOfClass:[UIView class]]) {
+            [obj removeFromSuperview];
+            obj = nil;
+        }
+    }];
+}
+
+
+#pragma mark - - - 指示器相关方法的实现
+/** 重置指示器颜色方法 */
+- (void)resetIndicatorColor:(UIColor *)color {
+    _indicatorView.backgroundColor = color;
+}
+/**
+ *  重置标题普通状态、选中状态下文字颜色方法
+ *
+ *  @param color       普通状态下标题文字颜色
+ *  @param selectedColor       选中状态下标题文字颜色
+ */
+- (void)resetTitleColor:(UIColor *)color titleSelectedColor:(UIColor *)selectedColor {
+    [self.btnMArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIButton *btn = obj;
+        [btn setTitleColor:color forState:(UIControlStateNormal)];
+        [btn setTitleColor:selectedColor forState:(UIControlStateSelected)];
+    }];
+    
+    if (self.configure.titleGradientEffect) {
+        self.configure.titleColor = color;
+        self.configure.titleSelectedColor = selectedColor;
+        [self setupStartColor:self.configure.titleColor];
+        [self setupEndColor:self.configure.titleSelectedColor];
+    }
+}
+/**
+ *  重置标题普通状态、选中状态下文字颜色及指示器颜色方法
+ *
+ *  @param color       普通状态下标题文字颜色
+ *  @param selectedColor       选中状态下标题文字颜色
+ *  @param indicatorColor      指示器颜色
+ */
+- (void)resetTitleColor:(UIColor *)color titleSelectedColor:(UIColor *)selectedColor indicatorColor:(UIColor *)indicatorColor {
+    [self resetTitleColor:color titleSelectedColor:selectedColor];
+    [self resetIndicatorColor:indicatorColor];
+}
+
+#pragma mark - - - - - - - >> 给外界提供的相关属性及方法的实现 END << - - - - - - -
+
+#pragma mark - - - 计算字符串尺寸
+- (CGSize)P_sizeWithString:(NSString *)string font:(UIFont *)font {
+    NSDictionary *attrs = @{NSFontAttributeName : font};
+    return [string boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
 }
 
 @end
