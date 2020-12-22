@@ -51,7 +51,7 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 
 
 ## Installation
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.6.9'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.7.0'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -181,6 +181,8 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 * 2019-07-27 ：v1.6.7 标题支持上下行及 titleGradientEffect 属性与 resetTitleColor:titleSelectedColor: 方法兼容
 
 * 2020-11-01 ：v1.6.9 Badge 新增配置属性，支持网络图片，修复无指示器滚动内容视图时标题文字不切换
+
+* 2020-12-22 ：v1.7.0 标题不支持换行（极端情况出现的标题换行效果）
 
 
 ## License

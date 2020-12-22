@@ -308,8 +308,6 @@
         SGPageTitleButton *btn = [[SGPageTitleButton alloc] init];
         btn.tag = index;
         btn.titleLabel.font = self.configure.titleFont;
-        btn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        btn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [btn setTitle:self.titleArr[index] forState:(UIControlStateNormal)];
         [btn setTitleColor:self.configure.titleColor forState:(UIControlStateNormal)];
         [btn setTitleColor:self.configure.titleSelectedColor forState:(UIControlStateSelected)];

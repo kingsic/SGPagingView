@@ -11,7 +11,6 @@
 #import "DefaultScrollVC.h"
 #import "DefaultSystemVC.h"
 #import "DefaultImageVC.h"
-#import "DefaultTopBottomVC.h"
 #import "DefaultGradientEffectVC.h"
 #import "DefaultZoomVC.h"
 #import "DefaultFixedVC.h"
@@ -35,7 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.TitleDataList = @[@"静止样式", @"滚动样式", @"系统样式", @"图片样式", @"文字上下样式（富文本）", @"文字渐变效果（badge）", @"文字缩放效果", @"指示器固定样式", @"指示器动态样式", @"指示器遮盖样式一", @"指示器遮盖样式二（从左到右自动布局）", @"指示器遮盖样式三", @"侧滑返回手势案例", @"滚动内容动画案例", @"富文本案例", @"导航栏样式案例"];
+    self.TitleDataList = @[@"静止样式", @"滚动样式", @"系统样式", @"图片样式", @"文字渐变效果（badge）", @"文字缩放效果", @"指示器固定样式", @"指示器动态样式", @"指示器遮盖样式一（百度网盘传输界面）", @"指示器遮盖样式二（从左到右自动布局）", @"指示器遮盖样式三", @"侧滑返回手势案例", @"滚动内容动画案例", @"富文本案例", @"导航栏样式案例"];
     
     [self foundTableView];
 }
@@ -76,46 +75,42 @@
         [self.navigationController pushViewController:imageVC animated:YES];
         
     } else if (indexPath.row == 4) {
-        DefaultTopBottomVC *tbVC = [[DefaultTopBottomVC alloc] init];
-        [self.navigationController pushViewController:tbVC animated:YES];
-        
-    } else if (indexPath.row == 5) {
         DefaultGradientEffectVC *gradientEffectVC = [[DefaultGradientEffectVC alloc] init];
         [self.navigationController pushViewController:gradientEffectVC animated:YES];
         
-    } else if (indexPath.row == 6) {
+    } else if (indexPath.row == 5) {
         DefaultZoomVC *zoomVC = [[DefaultZoomVC alloc] init];
         [self.navigationController pushViewController:zoomVC animated:YES];
         
-    } else if (indexPath.row == 7) {
+    } else if (indexPath.row == 6) {
         DefaultFixedVC *fixedVC = [[DefaultFixedVC alloc] init];
         [self.navigationController pushViewController:fixedVC animated:YES];
         
-    } else if (indexPath.row == 8) {
+    } else if (indexPath.row == 7) {
         DefaultDynamicVC *dynamicVC = [[DefaultDynamicVC alloc] init];
         [self.navigationController pushViewController:dynamicVC animated:YES];
 
-    } else if (indexPath.row == 9) {
+    } else if (indexPath.row == 8) {
         DefaultCoverVC *coverVC = [[DefaultCoverVC alloc] init];
         [self.navigationController pushViewController:coverVC animated:YES];
         
-    } else if (indexPath.row == 10) {
+    } else if (indexPath.row == 9) {
         DefaultTwoCoverVC *twoCoverVC = [[DefaultTwoCoverVC alloc] init];
         [self.navigationController pushViewController:twoCoverVC animated:YES];
         
-    } else if (indexPath.row == 11) {
+    } else if (indexPath.row == 10) {
         DefaultThreeCoverVC *threeCoverVC = [[DefaultThreeCoverVC alloc] init];
         [self.navigationController pushViewController:threeCoverVC animated:YES];
         
-    } else if (indexPath.row == 12) {
+    } else if (indexPath.row == 11) {
         DefaultPopGestureVC *popGestureVC = [[DefaultPopGestureVC alloc] init];
         [self.navigationController pushViewController:popGestureVC animated:YES];
 
-    } else if (indexPath.row == 13) {
+    } else if (indexPath.row == 12) {
         DefaultAnimatedVC *animatedVC = [[DefaultAnimatedVC alloc] init];
         [self.navigationController pushViewController:animatedVC animated:YES];
         
-    } else if (indexPath.row == 14) {
+    } else if (indexPath.row == 13) {
         DefaultAttributedTitleVC *attributedTitleVC = [[DefaultAttributedTitleVC alloc] init];
         [self.navigationController pushViewController:attributedTitleVC animated:YES];
       

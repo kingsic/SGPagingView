@@ -11,12 +11,6 @@
 #import "ChildVCOne.h"
 #import "ChildVCTwo.h"
 #import "ChildVCThree.h"
-#import "ChildVCFour.h"
-#import "ChildVCFive.h"
-#import "ChildVCSix.h"
-#import "ChildVCSeven.h"
-#import "ChildVCEight.h"
-#import "ChildVCNine.h"
 
 @interface DefaultCoverVC () <SGPageTitleViewDelegate, SGPageContentCollectionViewDelegate>
 @property (nonatomic, strong) SGPageTitleView *pageTitleView;
@@ -43,29 +37,34 @@
         pageTitleViewY = 88;
     }
     
-    NSArray *titleArr = @[@"精选", @"电影", @"电视剧", @"综艺", @"NBA", @"娱乐", @"动漫", @"演唱会", @"VIP会员"];
+    NSArray *titleArr = @[@"下载列表", @"上传列表", @"保存至手机"];
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-    configure.titleSelectedColor = [UIColor whiteColor];
-    configure.indicatorStyle = SGIndicatorStyleCover;
-    configure.indicatorColor = [UIColor blackColor];
-    configure.indicatorAdditionalWidth = 100; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
-    configure.indicatorHeight = 122; // 说明：不设置，遮盖样式下，默认高度为文字高度 + 5；若设置无限大，则高度为 PageTitleView 高度
+    configure.titleColor = [UIColor lightGrayColor];
+    configure.titleSelectedColor = [UIColor blackColor];
+//    configure.indicatorStyle = SGIndicatorStyleCover;
+    CGFloat indicatorWidth = (self.view.frame.size.width - 60)/3 - 5;
+//    configure.indicatorAdditionalWidth = indicatorWidth;
+    configure.indicatorColor = [UIColor whiteColor];
+    configure.indicatorHeight = 38;
+    configure.indicatorCornerRadius = 10;
     configure.titleGradientEffect = YES;
+    configure.showBottomSeparator = NO;
+    // 由于指示器是固定长度，而 SGIndicatorStyleCover 样式下额外宽度是在标题文字的基础上再增加的，不满足需求。故这里使用 SGIndicatorStyleFixed 样式，并配置相关属性
+    configure.indicatorStyle = SGIndicatorStyleFixed;
+    configure.indicatorFixedWidth = indicatorWidth;
+    configure.indicatorToBottomDistance = 0.5 * (44 - 38);
+    configure.indicatorAnimationTime = 0.05;
     
     /// pageTitleView
-    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
+    self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(30, pageTitleViewY, self.view.frame.size.width - 60, 44) delegate:self titleNames:titleArr configure:configure];
+    self.pageTitleView.layer.cornerRadius = 10;
+    self.pageTitleView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.07];
     [self.view addSubview:_pageTitleView];
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
     ChildVCThree *threeVC = [[ChildVCThree alloc] init];
-    ChildVCFour *fourVC = [[ChildVCFour alloc] init];
-    ChildVCFive *fiveVC = [[ChildVCFive alloc] init];
-    ChildVCSix *sixVC = [[ChildVCSix alloc] init];
-    ChildVCSeven *sevenVC = [[ChildVCSeven alloc] init];
-    ChildVCEight *eightVC = [[ChildVCEight alloc] init];
-    ChildVCNine *nineVC = [[ChildVCNine alloc] init];
-    NSArray *childArr = @[oneVC, twoVC, threeVC, fourVC, fiveVC, sixVC, sevenVC, eightVC, nineVC];
+    NSArray *childArr = @[oneVC, twoVC, threeVC];
     /// pageContentCollectionView
     CGFloat ContentCollectionViewHeight = self.view.frame.size.height - CGRectGetMaxY(_pageTitleView.frame);
     self.pageContentCollectionView = [[SGPageContentCollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_pageTitleView.frame), self.view.frame.size.width, ContentCollectionViewHeight) parentVC:self childVCs:childArr];
