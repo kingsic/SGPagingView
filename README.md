@@ -2,15 +2,14 @@
 # SGPagingView
 
 
-* [Swift Version](https://github.com/kingsic/SGPagingView-Swift)
+* [Swift 版本](https://github.com/kingsic/PagingViewKit)
 
 * QQ群：825339547
 
-* [SGTagsView 设计来源于本框架中的 SGPageTitleView](https://github.com/kingsic/SGCrayfish)
+* [SGTagsView 设计来源于本框架中的 SGPageTitleView](https://github.com/kingsic/SGFastfish)
 
 
 ## 结构图
-![](https://github.com/kingsic/Kar98k/blob/master/SGPagingView/SGPagingView.png)
 ``` 
 SGPageTitleViewConfigure（SGPageTitleView 初始化配置信息）
 
@@ -51,12 +50,12 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 
 
 ## Installation
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.7.0'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.7.1'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
 ## 代码介绍
-#### SGPagingView 的使用（详细使用，请参考 API 及 Demo）
+* 初始化方法
 ``` 
     /// pageTitleViewConfigure
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
@@ -183,6 +182,8 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 * 2020-11-01 ：v1.6.9 Badge 新增配置属性，支持网络图片，修复无指示器滚动内容视图时标题文字不切换
 
 * 2020-12-22 ：v1.7.0 标题不支持换行（极端情况出现的标题换行效果）
+
+* 2020-01-05 ：v1.7.1 修复退至到后台，标题重新默认选中Bug
 
 
 ## License

@@ -366,6 +366,8 @@
         self.tempBtn = button;
     }
     
+    _selectedIndex = button.tag;
+    
     UIFont *configureTitleSelectedFont = self.configure.titleSelectedFont;
     UIFont *defaultTitleFont = [UIFont systemFontOfSize:15];
     if ([configureTitleSelectedFont.fontName isEqualToString:defaultTitleFont.fontName] && configureTitleSelectedFont.pointSize == defaultTitleFont.pointSize) {
