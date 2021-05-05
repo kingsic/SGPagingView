@@ -43,6 +43,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) BOOL showBottomSeparator;
 /** SGPageTitleView 底部分割线颜色，默认为 lightGrayColor */
 @property (nonatomic, strong) UIColor *bottomSeparatorColor;
+/** SGPageTitleView 左右内边距，默认为 0.0f。静止样式下标题均分布局不起作用 */
+@property (nonatomic, assign) CGFloat contentInsetSpacing;
 
 #pragma mark - - SGPageTitleView 标题属性
 /** 标题文字字号大小，默认 15 号字体 */

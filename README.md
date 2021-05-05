@@ -50,7 +50,7 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 
 
 ## Installation
-* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.7.1'
+* 1、CocoaPods 导入 pod 'SGPagingView', '~> 1.7.2'
 * 2、下载、拖拽 “SGPagingView” 文件夹到工程中
 
 
@@ -183,7 +183,9 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 * 2020-12-22 ：v1.7.0 标题不支持换行（极端情况出现的标题换行效果）
 
-* 2020-01-05 ：v1.7.1 修复退至到后台，标题重新默认选中Bug
+* 2021-01-05 ：v1.7.1 修复退至到后台，标题重新默认选中Bug
+
+* 2021-05-05 ：v1.7.2 新增 SGPageTitleView 左右内边距属性
 
 
 ## License

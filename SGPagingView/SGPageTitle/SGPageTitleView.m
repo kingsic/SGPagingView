@@ -206,7 +206,7 @@
 - (void)P_fromLeftToRightLayoutTitle {
     CGFloat selfHeight = self.frame.size.height;
 
-    __block CGFloat btnX = 0;
+    __block CGFloat btnX = self.configure.contentInsetSpacing;
     CGFloat btnY = 0;
     CGFloat btnH = 0;
     if (self.configure.indicatorStyle == SGIndicatorStyleDefault) {
@@ -222,7 +222,7 @@
         btnX = btnX + btnW;
     }];
     UIButton *lastBtn = self.btnMArr.lastObject;
-    CGFloat scrollViewWidth = CGRectGetMaxX(lastBtn.frame);
+    CGFloat scrollViewWidth = CGRectGetMaxX(lastBtn.frame) + self.configure.contentInsetSpacing;
     self.scrollView.contentSize = CGSizeMake(scrollViewWidth, selfHeight);
     // 2.2、布局标题间分割线的 frame
     if (self.configure.showVerticalSeparator) {

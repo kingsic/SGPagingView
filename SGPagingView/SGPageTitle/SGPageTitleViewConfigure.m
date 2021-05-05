@@ -35,6 +35,12 @@
     }
     return _bottomSeparatorColor;
 }
+- (CGFloat)contentInsetSpacing {
+    if (_contentInsetSpacing < 0) {
+        _contentInsetSpacing = 0;
+    }
+    return _contentInsetSpacing;
+}
 
 #pragma mark - - 标题属性
 - (UIFont *)titleFont {
