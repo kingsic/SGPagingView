@@ -27,7 +27,7 @@ class FixedTwoVC: UIViewController, SGPagingTitleViewDelegate, SGPagingContentVi
         let configure = SGPagingTitleViewConfigure()
 
         let frame = CGRect.init(x: 0, y: UIScreen.navBarHeight, width: UIScreen.width, height: 44)
-        let titles = ["关注", "推荐", "热榜", "免费小说"]
+        let titles = ["点击", "标题", "内容", "动画切换"]
         let pagingTitle = SGPagingTitleView(frame: frame, titles: titles, configure: configure)
         pagingTitle.delegate = self
         return pagingTitle

@@ -1,7 +1,9 @@
 
 ## 前言
-* 从2.0.0版本起，Swift 语言将代替之前的 Objective-C 语言
-* Objective-C 语言最后的版本号是：[1.7.2](https://github.com/kingsic/SGPagingView/releases/tag/1.7.2)，且不在给予维护
+* 从 2.0.0 版本起，升级为 Swift 编程语言
+* 从 2.1.0 版本起，已兼容 Objective-C 语义
+* Objective-C 编程语言最后的版本是 [1.7.2](https://github.com/kingsic/SGPagingView/releases/tag/1.7.2)，且不在给予维护
+
 
 ## 结构图
 ``` 
@@ -23,13 +25,14 @@ SGPageContentCollectionView（内部由 UICollectionView 实现）
 ## 代码介绍
 * 初始化方法
 ``` 
-/// pageTitleViewConfigure
+// 配置类
 SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
-/// pageTitleView
+
+// 标题视图
 SGPageTitleView *pageTitleView = [SGPageTitleView pageTitleViewWithFrame:frame delegate:self titleNames:titleNames configure:configure];
 [self.view addSubview:pageTitleView];
     
-/// pageContent
+// 内容视图
 SGPageContentScrollView *pageContentScrollView = [[SGPageContentScrollView alloc] initWithFrame:frame parentVC:self childVCs:childVCs];
 pageContentScrollView.delegatePageContentScrollView = self;
 [self.view addSubview:pageContentScrollView];
@@ -121,25 +124,9 @@ b. 实现 SGPageContentScrollView 的 pageContentScrollView:index:代理方法�
 
 * 2017-10-17 ：v1.3.0 版本升级：新增 SGPageTitleViewConfigure 类及支持指示器遮盖样式
 
-* 2018-05-08 ：v1.3.7 修复 1.3.6 版本选中标题重复点击恢复默认状态及新增相关配置属性
-
 * 2018-07-09 ：v1.5.0 版本升级：具体相关信息请查看 [releases](https://github.com/kingsic/SGPagingView/releases) 中版本介绍
 
-* 2018-08-28 ：v1.5.2 SGPageContentScrollView 内部代码优化处理（感谢 [petyou](https://github.com/petyou) 提供的优化方案）
-
-* 2018-09-01 ：v1.5.3 新增 SGPagingViewPopGestureVC 用于解决侧滑返回手势
-
-* 2018-09-26 ：v1.5.5 标题文字缩放效果由文字缩放调整为控件缩放
-
-* 2018-12-01 ：v1.5.6 SGPageTitleView 新增重置标题、指示器颜色方法
-
 * 2019-01-09 ：v1.6.0 版本升级：支持 autolayout 布局
-
-* 2019-03-27 ：v1.6.1 修复 addBadgeForIndex 方法内 badge 布局问题
-
-* 2019-07-17 ：v1.6.3 修复设置图片样式下图片布局问题及内部代码优化处理
-
-* 2019-07-20 ：v1.6.5 滚动样式下 titleTextZoom 属性支持指示器下划线及遮盖样式的滚动
 
 * 2019-07-22 ：v1.6.6 SGPageTitleViewConfigure 新增 equivalence 属性支持静止样式下标题从左到右自动布局
 

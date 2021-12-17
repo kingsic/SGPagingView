@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AttributedVC: UIViewController, SGPagingTitleViewDelegate {
+class AttributedVC: UIViewController {
     
     deinit {
         print("AttributedVC - deinit")
@@ -21,6 +21,8 @@ class AttributedVC: UIViewController, SGPagingTitleViewDelegate {
         view.backgroundColor = .green
         
         HY()
+        
+        addPagingView()
     }
     
     func HY() {
@@ -67,10 +69,11 @@ class AttributedVC: UIViewController, SGPagingTitleViewDelegate {
         rightBtn.backgroundColor = .orange
         rightBtn.setTitleColor(.white, for: .normal)
         rightBtn.titleLabel!.lineBreakMode = .byWordWrapping
+        rightBtn.titleLabel?.textAlignment = .center
         rightBtn.titleLabel!.font = UIFont.systemFont(ofSize: 12)
         view.addSubview(rightBtn)
         
-        let rightBtnText = "订阅\n  520"
+        let rightBtnText = "订阅\n520"
         let attriStr = NSMutableAttributedString(string: rightBtnText)
         let dict = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.white]
         let range = NSMakeRange(0, 2)
@@ -78,4 +81,73 @@ class AttributedVC: UIViewController, SGPagingTitleViewDelegate {
         rightBtn.setAttributedTitle(attriStr, for: .normal)
     }
 
+    
+    func addPagingView() {
+        view.addSubview(pagingTitleView)
+        view.addSubview(pagingContentView)
+    }
+    
+    lazy var pagingTitleView: SGPagingTitleView = {
+        let configure = SGPagingTitleViewConfigure()
+        configure.indicatorLocation = .Top
+        configure.indicatorHeight = 5
+        
+        let frame = CGRect.init(x: 0, y: 220, width: UIScreen.width, height: 44)
+        let titles = ["聊天", "主播", "排行", "贵宾"]
+        let pagingTitle = SGPagingTitleView(frame: frame, titles: titles, configure: configure)
+        pagingTitle.delegate = self
+
+        let text = "订阅\n520"
+        let attriStr = NSMutableAttributedString(string: text)
+        let dict = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.black]
+        let range = NSMakeRange(0, 2)
+        attriStr.addAttributes(dict, range: range)
+        let dict2 = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.black]
+        let range2 = NSMakeRange(text.count - 3, 3)
+        attriStr.addAttributes(dict2, range: range2)
+        
+        let selectedAttriStr = NSMutableAttributedString(string: text)
+        let selectedDict = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.red]
+        let selectedRange = NSMakeRange(0, 2)
+        selectedAttriStr.addAttributes(selectedDict, range: selectedRange)
+        let selectedDict2 = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.red]
+        let selectedRange2 = NSMakeRange(text.count - 3, 3)
+        selectedAttriStr.addAttributes(selectedDict2, range: selectedRange2)
+        
+        pagingTitle.setTitle(attributed: attriStr, selectedAttributed: selectedAttriStr, index: 3)
+        
+        let imageUrl = "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"
+        pagingTitle.setBackgroundImage(name: imageUrl, selectedName: nil, index: 1)
+        return pagingTitle
+    }()
+    
+    lazy var pagingContentView: SGPagingContentScrollView = {
+        let vc1 = UIViewController()
+        vc1.view.backgroundColor = .orange
+        let vc2 = UIViewController()
+        vc2.view.backgroundColor = .purple
+        let vc3 = UIViewController()
+        vc3.view.backgroundColor = .blue
+        let vc4 = UIViewController()
+        vc4.view.backgroundColor = .brown
+        let vcs = [vc1, vc2, vc3, vc4]
+        
+        let y: CGFloat = pagingTitleView.frame.maxY + 20
+        let tempRect: CGRect = CGRect.init(x: 0, y: y, width: UIScreen.width, height: 200)
+        let pagingContent = SGPagingContentScrollView(frame: tempRect, parentVC: self, childVCs: vcs)
+        pagingContent.delegate = self
+        pagingContent.isAnimated = true
+        pagingContent.isBounces = true
+        return pagingContent
+    }()
+}
+
+extension AttributedVC: SGPagingTitleViewDelegate, SGPagingContentViewDelegate {
+    func pagingTitleView(titleView: SGPagingTitleView, index: Int) {
+        pagingContentView.setPagingContentView(index: index)
+    }
+    
+    func pagingContentView(contentView: SGPagingContentView, progress: CGFloat, currentIndex: Int, targetIndex: Int) {
+        pagingTitleView.setPagingTitleView(progress: progress, currentIndex: currentIndex, targetIndex: targetIndex)
+    }
 }

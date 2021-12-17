@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum ImageLocation {
+@objc public enum ImageLocation: Int {
     case left, right, top, bottom
 }
 
@@ -20,7 +20,7 @@ public extension UIButton {
     /// - parameter location: location of image relative to title
     /// - parameter space: space between image and title
     /// - parameter completion: set image and title
-    func setImage(location: ImageLocation, space: CGFloat, completion: (UIButton) -> ()) {
+    @objc func setImage(location: ImageLocation, space: CGFloat, completion: (UIButton) -> ()) {
         completion(self)
         setImage(location: location, space: space)
     }
@@ -31,7 +31,7 @@ public extension UIButton {
     ///
     /// - parameter location: Location of image relative to title
     /// - parameter space: Space between image and title
-    func setImage(location: ImageLocation, space: CGFloat) {
+    @objc func setImage(location: ImageLocation, space: CGFloat) {
         
         let imageView_Width = imageView?.frame.size.width
         let imageView_Height = imageView?.frame.size.height

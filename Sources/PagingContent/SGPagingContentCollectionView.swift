@@ -9,11 +9,12 @@
 import UIKit
 
 public class SGPagingContentCollectionView: SGPagingContentView {
-    public init(frame: CGRect, parentVC: UIViewController, childVCs: [UIViewController]) {
+    @objc public init(frame: CGRect, parentVC: UIViewController, childVCs: [UIViewController]) {
         super.init(frame: frame)
         
         parentViewController = parentVC
         childViewControllers = childVCs
+        
         addSubview(collectionView)
     }
     required init?(coder: NSCoder) {
@@ -21,13 +22,13 @@ public class SGPagingContentCollectionView: SGPagingContentView {
     }
 
     public override var isScrollEnabled: Bool {
-        willSet{
+        willSet {
             collectionView.isScrollEnabled = newValue
         }
     }
     
     public override var isBounces: Bool {
-        willSet{
+        willSet {
             collectionView.bounces = newValue
         }
     }
@@ -46,18 +47,17 @@ public class SGPagingContentCollectionView: SGPagingContentView {
 
     private lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = self.bounds.size
+        flowLayout.itemSize = bounds.size
         flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.scrollDirection = .horizontal
         
-        let rect = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
-        let tempCollectionView = UICollectionView(frame: rect, collectionViewLayout: flowLayout)
+        let tempCollectionView = UICollectionView(frame: bounds, collectionViewLayout: flowLayout)
         tempCollectionView.showsVerticalScrollIndicator = false
         tempCollectionView.showsHorizontalScrollIndicator = false
         tempCollectionView.isPagingEnabled = true
         tempCollectionView.bounces = isBounces
-        tempCollectionView.backgroundColor = UIColor.white
+        tempCollectionView.backgroundColor = .white
         tempCollectionView.delegate = self
         tempCollectionView.dataSource = self
         tempCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)

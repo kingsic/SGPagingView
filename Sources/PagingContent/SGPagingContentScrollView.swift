@@ -9,11 +9,12 @@
 import UIKit
 
 public class SGPagingContentScrollView: SGPagingContentView {
-    public init(frame: CGRect, parentVC: UIViewController, childVCs: [UIViewController]) {
+    @objc public init(frame: CGRect, parentVC: UIViewController, childVCs: [UIViewController]) {
         super.init(frame: frame)
         
         parentViewController = parentVC
         childViewControllers = childVCs
+        
         addSubview(scrollView)
     }
     required init?(coder: NSCoder) {
@@ -21,13 +22,13 @@ public class SGPagingContentScrollView: SGPagingContentView {
     }
     
     public override var isScrollEnabled: Bool {
-        willSet{
+        willSet {
             scrollView.isScrollEnabled = newValue
         }
     }
     
     public override var isBounces: Bool {
-        willSet{
+        willSet {
             scrollView.bounces = newValue
         }
     }
@@ -46,7 +47,7 @@ public class SGPagingContentScrollView: SGPagingContentView {
     
     private lazy var scrollView: UIScrollView = {
         let tempScrollView = UIScrollView()
-        tempScrollView.frame = self.bounds
+        tempScrollView.frame = bounds
         tempScrollView.bounces = isBounces
         tempScrollView.delegate = self
         tempScrollView.isPagingEnabled = true

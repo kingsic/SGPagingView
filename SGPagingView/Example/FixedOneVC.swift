@@ -34,7 +34,7 @@ class FixedOneVC: UIViewController, SGPagingTitleViewDelegate, SGPagingContentVi
         
         let frame = CGRect.init(x: 0, y: UIScreen.navBarHeight, width: UIScreen
                                     .width, height: 44)
-        let titles = ["关注", "推荐", "热榜", "免费小说"]
+        let titles = ["滚动", "内容视图", "最左或最右", "回弹"]
         let pagingTitle = SGPagingTitleView(frame: frame, titles: titles, configure: configure)
         pagingTitle.delegate = self
         view.addSubview(pagingTitle)

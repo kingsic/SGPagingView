@@ -8,20 +8,13 @@
 
 import UIKit
 
-private class PagingTitleButton: UIButton {
-    override var isHighlighted: Bool {
-        set {}
-        get {return false}
-    }
-}
-
 @objc public protocol SGPagingTitleViewDelegate: NSObjectProtocol {
     /// 获取当前选中标题下标值
     @objc optional func pagingTitleView(titleView: SGPagingTitleView, index: Int)
 }
 
 public class SGPagingTitleView: UIView {
-    public init(frame: CGRect, titles:[String], configure: SGPagingTitleViewConfigure) {
+    @objc public init(frame: CGRect, titles:[String], configure: SGPagingTitleViewConfigure) {
         super.init(frame: frame)
         
         backgroundColor = UIColor.white.withAlphaComponent(0.77)
@@ -38,16 +31,14 @@ public class SGPagingTitleView: UIView {
     }
     
     /// SGPagingTitleView 的代理
-    public weak var delegate: SGPagingTitleViewDelegate?
+    @objc public weak var delegate: SGPagingTitleViewDelegate?
 
     /// 选中标题的下标，默认为 0
-    public var index: Int = 0
+    @objc public var index: Int = 0
     
     /// 重置选中标题的下标
-    public var resetIndex: Int? {
-        willSet {
-            btn_action(button: tempBtns[newValue!])
-        }
+    @objc public func reset(index: Int) {
+        btn_action(button: tempBtns[index])
     }
     
 
@@ -56,7 +47,7 @@ public class SGPagingTitleView: UIView {
     private var configure: SGPagingTitleViewConfigure!
     private var allBtnTextWidth: CGFloat = 0.0
     private var allBtnWidth: CGFloat = 0.0
-    private var tempBtns = [PagingTitleButton]()
+    private var tempBtns = [SGPagingTitleButton]()
     private var tempBtn: UIButton?
     private var separators = [UIView]()
     private var previousIndexValue: Int?
@@ -93,32 +84,7 @@ public class SGPagingTitleView: UIView {
     private lazy var indicator: UIView = {
         let tempIndicator = UIView()
         tempIndicator.backgroundColor = configure.indicatorColor
-
-        if configure.indicatorType == .Cover {
-            if configure.indicatorHeight >= frame.size.height {
-                tempIndicator.frame.origin.y = 0
-                tempIndicator.frame.size.height = frame.size.height
-            } else {
-                tempIndicator.frame.origin.y = 0.5 * (frame.size.height - configure.indicatorHeight)
-                tempIndicator.frame.size.height = configure.indicatorHeight
-            }
-            tempIndicator.layer.borderWidth = configure.indicatorBorderWidth
-            tempIndicator.layer.borderColor = configure.indicatorBorderColor.cgColor
-        } else {
-            if configure.indicatorHeight >= frame.size.height {
-                tempIndicator.frame.origin.y = 0
-                tempIndicator.frame.size.height = frame.size.height
-            } else {
-                tempIndicator.frame.origin.y = frame.size.height - configure.indicatorToBottomDistance - configure.indicatorHeight
-                tempIndicator.frame.size.height = configure.indicatorHeight
-            }
-        }
-        
-        if configure.indicatorCornerRadius > 0.5 * tempIndicator.frame.size.height {
-            tempIndicator.layer.cornerRadius = 0.5 * tempIndicator.frame.size.height
-        } else {
-            tempIndicator.layer.cornerRadius = configure.indicatorCornerRadius
-        }
+        P_layoutIndicator(tempIndicator: tempIndicator)
         return tempIndicator
     }()
     
@@ -129,61 +95,68 @@ public class SGPagingTitleView: UIView {
     }
 }
 
+
 // MARK: 外部方法
 public extension SGPagingTitleView {
-    /// 根据 SGPagingContentView 子视图滚动去修改标题选中样式
-    func setPagingTitleView(progress: CGFloat, currentIndex: Int, targetIndex: Int) {
+    /// 根据 SGPagingContentView 子视图的滚动而去修改标题选中样式
+    @objc func setPagingTitleView(progress: CGFloat, currentIndex: Int, targetIndex: Int) {
         p_setPagingTitleView(progress: progress, currentIndex: currentIndex, targetIndex: targetIndex)
     }
     
     /// 根据标题下标值重置标题文字
-    func resetTitle(text: String, index: Int) {
+    @objc func resetTitle(text: String, index: Int) {
         p_resetTitle(text: text, index: index)
     }
     
     /// 根据标题下标值设置标题的 attributed 属性
-    func setTitle(attributed: NSAttributedString, selectedAttributed: NSAttributedString, index: Int) {
+    @objc func setTitle(attributed: NSAttributedString, selectedAttributed: NSAttributedString, index: Int) {
         p_setTitle(attributed: attributed, selectedAttributed: selectedAttributed, index: index)
     }
     
     /// 重置指示器颜色
-    func resetIndicator(color: UIColor) {
+    @objc func resetIndicator(color: UIColor) {
         p_resetIndicator(color: color)
     }
     
     /// 重置标题颜色(color：普通状态下标题颜色、selectedColor：选中状态下标题颜色)
-    func resetTitle(color: UIColor, selectedColor: UIColor) {
+    @objc func resetTitle(color: UIColor, selectedColor: UIColor) {
         p_resetTitle(color: color, selectedColor: selectedColor)
     }
     
     /// 根据标题下标值添加对应的 badge
-    func addBadge(index: Int) {
+    @objc func addBadge(index: Int) {
         p_addBadge(index: index)
     }
     
     /// 根据标题下标值添加对应的 badge 及其文字
-    func addBadge(text: String, index: Int) {
+    @objc func addBadge(text: String, index: Int) {
         p_addBadge(text: text, index: index)
     }
     
     /// 根据标题下标值移除对应的 badge
-    func removeBadge(index: Int) {
+    @objc func removeBadge(index: Int) {
         p_removeBadge(index: index)
     }
     
-    /// 设置标题图片和位置（支持本地和网络图片）
-    func setImage(names: Array<String>, location: ImageLocation, spacing: CGFloat) {
+    /// 设置标题图片及相对文字的位置（支持本地和网络图片）
+    @objc func setImage(names: Array<String>, location: ImageLocation, spacing: CGFloat) {
         p_setImage(names: names, location: location, spacing: spacing)
     }
     
-    /// 根据标题下标值设置标题图片和位置（支持本地和网络图片）
-    func setImage(name: String, location: ImageLocation, spacing: CGFloat, index: Int) {
+    /// 根据标题下标值设置标题图片及相对文字的位置（支持本地和网络图片）
+    @objc func setImage(name: String, location: ImageLocation, spacing: CGFloat, index: Int) {
         p_setImage(name: name, location: location, spacing: spacing, index: index)
+    }
+    
+    /// 根据标题下标值设置标题背景图片（支持本地和网络图片）
+    @objc func setBackgroundImage(name: String, selectedName: String?, index: Int) {
+        P_setBackgroundImage(name: name, selectedName: selectedName, index: index)
     }
 }
 
+
 // MARK: 修改指示器颜色、标题颜色、标题文字相关方法
-extension SGPagingTitleView {
+private extension SGPagingTitleView {
     /// 根据标题下标值重置标题文字
     func p_resetTitle(text: String, index: Int) {
         let btn: UIButton = tempBtns[index]
@@ -202,6 +175,8 @@ extension SGPagingTitleView {
     /// 根据标题下标值设置标题的 attributed 属性
     func p_setTitle(attributed: NSAttributedString, selectedAttributed: NSAttributedString, index: Int) {
         let btn: UIButton = tempBtns[index]
+        btn.titleLabel?.lineBreakMode = .byCharWrapping
+        btn.titleLabel?.textAlignment = .center
         btn.setAttributedTitle(attributed, for: .normal)
         btn.setAttributedTitle(selectedAttributed, for: .selected)
     }
@@ -226,7 +201,7 @@ extension SGPagingTitleView {
 }
 
 // MARK: 设置标题图片相关方法
-extension SGPagingTitleView {
+private extension SGPagingTitleView {
     /// Set title image
     ///
     /// Support local and network images
@@ -267,10 +242,35 @@ extension SGPagingTitleView {
         let btn = tempBtns[index]
         setImage(btn: btn, imageName: name, location: location, spacing: spacing)
     }
+    
+    /// 设置标题背景图片
+    func P_setBackgroundImage(name: String, selectedName: String?, index: Int) {
+        let btn: UIButton = tempBtns[index]
+        btn.setTitleColor(.clear, for: .normal)
+        btn.setTitleColor(.clear, for: .selected)
+        
+        if name.hasPrefix("http") {
+            loadImage(urlString: name) { (image) in
+                btn.setBackgroundImage(image, for: .normal)
+            }
+        } else {
+            btn.setBackgroundImage(UIImage.init(named: name), for: .normal)
+        }
+        
+        if let tempSelectedName = selectedName {
+            if tempSelectedName.hasPrefix("http") {
+                loadImage(urlString: tempSelectedName) { (image) in
+                    btn.setBackgroundImage(image, for: .selected)
+                }
+            } else {
+                btn.setBackgroundImage(UIImage.init(named: tempSelectedName), for: .selected)
+            }
+        }
+    }
 }
 
 // MARK：添加、移除 Badge 相关方法
-extension SGPagingTitleView {
+private extension SGPagingTitleView {
     /// 根据标题下标添加对应的 badge
     func p_addBadge(index: Int) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
@@ -322,7 +322,7 @@ extension SGPagingTitleView {
     }
 }
 // MARK: 用于修改标题选中样式
-extension SGPagingTitleView {
+private extension SGPagingTitleView {
     /// 修改标题选中样式
     func p_setPagingTitleView(progress: CGFloat, currentIndex: Int, targetIndex: Int) {
         let currentBtn = tempBtns[currentIndex]
@@ -945,7 +945,11 @@ private extension SGPagingTitleView {
         }
         addTitleBtns()
         if configure.showIndicator {
-            scrollView.insertSubview(indicator, at: 0)
+            if configure.indicatorLocation == .Default {
+                scrollView.insertSubview(indicator, at: 0)
+            } else {
+                scrollView.addSubview(indicator)
+            }
         }
     }
     
@@ -959,7 +963,7 @@ private extension SGPagingTitleView {
         allBtnWidth = CGFloat(ceilf(Float(allBtnWidth)))
         
         for idx in 0..<titleCount {
-            let btn = PagingTitleButton()
+            let btn = SGPagingTitleButton()
             btn.tag = idx
             btn.titleLabel?.font = configure.font
             btn.setTitle(titles[idx], for: .normal)
@@ -1201,6 +1205,37 @@ private extension SGPagingTitleView {
     }
 }
 
+// MARK: Indicator 布局及相关属性处理
+extension SGPagingTitleView {
+    func P_layoutIndicator(tempIndicator: UIView) {
+        if configure.indicatorType == .Cover {
+            if configure.indicatorHeight >= frame.size.height {
+                tempIndicator.frame.origin.y = 0
+                tempIndicator.frame.size.height = frame.size.height
+            } else {
+                tempIndicator.frame.origin.y = 0.5 * (frame.size.height - configure.indicatorHeight)
+                tempIndicator.frame.size.height = configure.indicatorHeight
+            }
+            tempIndicator.layer.borderWidth = configure.indicatorBorderWidth
+            tempIndicator.layer.borderColor = configure.indicatorBorderColor.cgColor
+        } else {
+            if configure.indicatorHeight >= frame.size.height {
+                tempIndicator.frame.origin.y = 0
+                tempIndicator.frame.size.height = frame.size.height
+            } else {
+                tempIndicator.frame.origin.y = frame.size.height - configure.indicatorToBottomDistance - configure.indicatorHeight
+                tempIndicator.frame.size.height = configure.indicatorHeight
+            }
+        }
+        
+        if configure.indicatorCornerRadius > 0.5 * tempIndicator.frame.size.height {
+            tempIndicator.layer.cornerRadius = 0.5 * tempIndicator.frame.size.height
+        } else {
+            tempIndicator.layer.cornerRadius = configure.indicatorCornerRadius
+        }
+    }
+}
+
 
 // MARK: 内部公共方法抽取
 private extension SGPagingTitleView {
@@ -1278,3 +1313,9 @@ private extension SGPagingTitleView {
 }
 
 
+private class SGPagingTitleButton: UIButton {
+    override var isHighlighted: Bool {
+        set {}
+        get {return false}
+    }
+}

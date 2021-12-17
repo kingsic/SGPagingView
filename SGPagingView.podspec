@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "SGPagingView"
-  spec.version      = "2.0.0"
+  spec.version      = "2.1.0"
   spec.summary      = "A powerful and easy to use segment view"
   spec.homepage     = "https://github.com/kingsic/SGPagingView"
   spec.license      = "MIT"

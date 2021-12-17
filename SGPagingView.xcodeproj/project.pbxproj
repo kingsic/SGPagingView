@@ -207,10 +207,10 @@
 		8D173CFE2763A90B00B59F4D /* PagingContent */ = {
 			isa = PBXGroup;
 			children = (
-				8D173CFF2763A90B00B59F4D /* SGPagingContentView.swift */,
-				8D173D012763A90B00B59F4D /* SGPagingContentViewDelegate.swift */,
 				8D173D022763A90B00B59F4D /* SGPagingContentCollectionView.swift */,
 				8D173D002763A90B00B59F4D /* SGPagingContentScrollView.swift */,
+				8D173CFF2763A90B00B59F4D /* SGPagingContentView.swift */,
+				8D173D012763A90B00B59F4D /* SGPagingContentViewDelegate.swift */,
 			);
 			path = PagingContent;
 			sourceTree = "<group>";
@@ -231,9 +231,9 @@
 				8D173D192763A92600B59F4D /* FixedTwoVC.swift */,
 				8D173D102763A92600B59F4D /* ScrollVC.swift */,
 				8D173D232763A92600B59F4D /* AttributedVC.swift */,
-				8D173D172763A92600B59F4D /* BadgeVC.swift */,
 				8D173D242763A92600B59F4D /* GradientEffectVC.swift */,
 				8D173D182763A92600B59F4D /* ZoomVC.swift */,
+				8D173D172763A92600B59F4D /* BadgeVC.swift */,
 				8D173D1B2763A92600B59F4D /* IFixedVC.swift */,
 				8D173D1A2763A92600B59F4D /* IDynamicVC.swift */,
 				8D173D162763A92600B59F4D /* CoverOneVC.swift */,
